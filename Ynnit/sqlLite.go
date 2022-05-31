@@ -73,7 +73,7 @@ func DeleteUser(db *sql.DB, email string) {
 	db.Exec(`DELETE FROM users WHERE email = ?`, email)
 }
 
-func DbtoStruct(db *sql.DB) []Users {
+func DbtoStructUser(db *sql.DB) []Users {
 	rows, _ := db.Query("SELECT* FROM users")
 	var temptab []Users
 
