@@ -10,22 +10,17 @@ import (
 	"github.com/gorilla/mux"
 )
 
-var users = []Users{
-	{Id: 1, Name: "riojaneiro", Email: "riojaneiro@gmx.com", Password: "Ouais"},
-	{Id: 2, Name: "bocmacfrite", Email: "bocmacfrite@gmx.com", Password: "Nope"},
-}
+var users = []Users{}
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Hello Home!")
 }
 
 func UsersHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello Users!")
 	json.NewEncoder(w).Encode(users)
 }
 
 func UserHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello User!")
 	vars := mux.Vars(r)
 
 	id := vars["id"]
@@ -38,10 +33,14 @@ func UserHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func Handler() {
+	db := InitDatabase("./Ynnit.db")
+	defer db.Close()
+	users = DbtoStruct(db)
+
 	r := mux.NewRouter()
 	r.HandleFunc("/", HomeHandler)
-	r.HandleFunc("/users", UsersHandler)
-	r.HandleFunc("/users/{id}", UserHandler)
+	r.HandleFunc("/apiusers", UsersHandler)
+	r.HandleFunc("/apiusers/{id}", UserHandler)
 	http.Handle("/", r)
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
