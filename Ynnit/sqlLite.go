@@ -69,6 +69,10 @@ func UpdateNameUser(db *sql.DB, name string, email string) {
 	db.Exec(`UPDATE users SET name = ? WHERE email = ?`, name, email)
 }
 
+func DeleteUser(db *sql.DB, email string) {
+	db.Exec(`DELETE FROM users WHERE email = ?`, email)
+}
+
 func DbtoStruct(db *sql.DB) []Users {
 	rows, _ := db.Query("SELECT* FROM users")
 	var temptab []Users

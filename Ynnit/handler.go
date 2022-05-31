@@ -39,6 +39,7 @@ func Handler() {
 	// UpdatePassUser(db, "PaseeeeeeeeeeeeeesChang", "bc@gmail.om")
 	// UpdateMailUser(db, "azertyuiop@yahoo.ch", "jenei@gmail.com")
 	// UpdateNameUser(db, "rio", "azertyuiop@yahoo.ch")
+	// DeleteUser(db, "boc@gmail.com")
 	users = DbtoStruct(db)
 
 	r := mux.NewRouter()
