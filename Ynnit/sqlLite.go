@@ -57,6 +57,18 @@ func InsertIntoUsers(db *sql.DB, name string, email string, password string) (in
 	return result.LastInsertId()
 }
 
+func UpdatePassUser(db *sql.DB, password string, email string) {
+	db.Exec(`UPDATE users SET password = ? WHERE email = ?`, password, email)
+}
+
+func UpdateMailUser(db *sql.DB, emailnew string, emailact string) {
+	db.Exec(`UPDATE users SET email = ? WHERE email = ?`, emailnew, emailact)
+}
+
+func UpdateNameUser(db *sql.DB, name string, email string) {
+	db.Exec(`UPDATE users SET name = ? WHERE email = ?`, name, email)
+}
+
 func DbtoStruct(db *sql.DB) []Users {
 	rows, _ := db.Query("SELECT* FROM users")
 	var temptab []Users

@@ -35,6 +35,10 @@ func UserHandler(w http.ResponseWriter, r *http.Request) {
 func Handler() {
 	db := InitDatabase("./Ynnit.db")
 	defer db.Close()
+	// InsertIntoUsers(db, "jeinero", "jenei@gmail.com", "ImRio69")
+	// UpdatePassUser(db, "PaseeeeeeeeeeeeeesChang", "bc@gmail.om")
+	// UpdateMailUser(db, "azertyuiop@yahoo.ch", "jenei@gmail.com")
+	// UpdateNameUser(db, "rio", "azertyuiop@yahoo.ch")
 	users = DbtoStruct(db)
 
 	r := mux.NewRouter()
