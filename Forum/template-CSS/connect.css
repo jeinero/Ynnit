@@ -1,0 +1,74 @@
+body {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+}
+#template {
+    margin-top: 140px;
+    text-align: center;
+    color:gray;
+}
+#centerTop {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 250px;
+}
+#centerBottom {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    width: 250px;
+    height: 40px;
+    font-size: xx-large;
+    margin-left: 42.5%;  
+}
+#form {
+    display: flex;
+
+    flex-direction: column;
+}
+#email {
+    margin-left: 230%;
+    background-color: rgb(222, 222, 222);
+    border-radius: 10px;
+    font-weight: bold;
+    width: 360px;
+    height: 50px;
+    font-size: x-large;
+}
+#password {
+    margin-left: 230%;
+    background-color: rgb(222, 222, 222);
+    border-radius: 10px;
+    font-weight: bold;
+    width: 360px;
+    height: 50px;
+    font-size: x-large;
+}
+
+input[type=text] {
+    margin-left: 20px;
+}
+input[type=button] {
+    margin-left: 20px;
+}
+
+.button {
+    text-align: center;
+    margin-left: 30%;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    width: 250px;
+}
+img {
+    width: 50%;
+}
+#button {
+    background: #0b7dda;
+    border-radius: 10px;
+    font-weight: bold;
+}
+#button:hover {
+    background: #d6d6d6;
+}
+
