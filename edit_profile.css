@@ -1,0 +1,29 @@
+#container {
+    text-align: center;
+    align-items: center;
+    border-radius: 30px;
+    border: 5px solid black;
+    width: 500px;
+    height: 400px;
+    /* position: absolute; */
+
+}
+textarea {
+
+    
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    border-radius: 10px;
+}
+
+.button {
+    border-radius: 10px;
+}
+
