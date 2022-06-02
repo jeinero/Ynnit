@@ -131,8 +131,7 @@ func NewUser(w http.ResponseWriter, r *http.Request) {
 	var newUser User
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &newUser)
-	fmt.Println(newUser)
-	goodOrFalse := InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Name)
+	goodOrFalse := InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Password)
 	if !goodOrFalse {
 		w.Write([]byte("{\"error\": \"Sorry\"}"))
 	} else {
