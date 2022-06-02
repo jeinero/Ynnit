@@ -3,13 +3,12 @@ package YnnitPackage
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"strconv"
-	"text/template"
 
 	"github.com/gorilla/mux"
-	"golang.org/x/crypto/bcrypt"
 )
 
 var AllApi AllStructs
@@ -23,6 +22,13 @@ func ApiAllHandler(w http.ResponseWriter, r *http.Request) {
 
 func UsersHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(AllApi.UsersAll)
+}
+
+func Checksignin(w http.ResponseWriter, r *http.Request) {
+	var temptab User
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &temptab)
+	UserExists(AllApi.db, temptab.Email)
 }
 
 func UserHandler(w http.ResponseWriter, r *http.Request) {
@@ -105,8 +111,7 @@ func CommentHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func Signin(w http.ResponseWriter, r *http.Request) {
-	var templateshtml = template.Must(template.ParseGlob("./templates/*.html"))
-	templateshtml.ExecuteTemplate(w, "Signin.html", 0)
+	http.ServeFile(w, r, "./templates/Signin.html")
 }
 
 func Profile(w http.ResponseWriter, r *http.Request) {
@@ -115,16 +120,6 @@ func Profile(w http.ResponseWriter, r *http.Request) {
 
 func Joinus(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Hello Join Us!")
-}
-
-func HashPassword(password string) (string, error) {
-	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
-	return string(bytes), err
-}
-
-func CheckPasswordHash(password, hash string) bool {
-	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
-	return err == nil
 }
 
 func Handler() {
@@ -158,6 +153,7 @@ func Handler() {
 
 	r.HandleFunc("/apiusers", UsersHandler)
 	r.HandleFunc("/apiusers/{id}", UserHandler)
+	r.HandleFunc("/checksignin", Checksignin)
 
 	r.HandleFunc("/apiposts", PostsHandler)
 	r.HandleFunc("/apiposts/{id}", PostHandler)

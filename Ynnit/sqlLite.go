@@ -2,6 +2,7 @@ package YnnitPackage
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 
 	_ "github.com/mattn/go-sqlite3"
@@ -88,6 +89,18 @@ func UpdateNameUser(db *sql.DB, name string, email string) {
 
 func DeleteUser(db *sql.DB, email string) {
 	db.Exec(`DELETE FROM user WHERE email = ?`, email)
+}
+
+func UserExists(db *sql.DB, email string) bool {
+	var verif int
+	sqlStmt := `SELECT id FROM user WHERE email = ?`
+	err := db.QueryRow(sqlStmt, email).Scan(&verif)
+	if err != nil {
+		fmt.Println("err", err)
+		return false
+	}
+	fmt.Println("verif", verif)
+	return true
 }
 
 func DbtoStructComment(db *sql.DB) []Comment {
