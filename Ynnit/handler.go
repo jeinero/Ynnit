@@ -46,11 +46,18 @@ func PostsHandler(w http.ResponseWriter, r *http.Request) {
 func PostHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
+	var temptab AllStruct
 	for _, post := range AllApi.PostAll {
 		if strconv.Itoa(post.Id) == id {
-			json.NewEncoder(w).Encode(post)
+			temptab.PostAll = append(temptab.PostAll, post)
 		}
 	}
+	for _, comment := range AllApi.CommentAll {
+		if strconv.Itoa(comment.PostLink) == id {
+			temptab.CommentAll = append(temptab.CommentAll, comment)
+		}
+	}
+	json.NewEncoder(w).Encode(temptab)
 }
 
 func CommunautersHandler(w http.ResponseWriter, r *http.Request) {
@@ -60,11 +67,19 @@ func CommunautersHandler(w http.ResponseWriter, r *http.Request) {
 func CommunauterHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
+	var temptab AllStruct
 	for _, communauter := range AllApi.CommunauterAll {
 		if strconv.Itoa(communauter.Id) == id {
-			json.NewEncoder(w).Encode(communauter)
+			temptab.CommunauterAll = append(temptab.CommunauterAll, communauter)
 		}
 	}
+	for _, post := range AllApi.PostAll {
+		if strconv.Itoa(post.CommuLink) == id {
+			temptab.PostAll = append(temptab.PostAll, post)
+		}
+	}
+	json.NewEncoder(w).Encode(temptab)
+
 }
 
 func CommentsHandler(w http.ResponseWriter, r *http.Request) {
@@ -83,14 +98,15 @@ func CommentHandler(w http.ResponseWriter, r *http.Request) {
 
 func Handler() {
 	db := InitDatabase("./Ynnit.db")
+	AllApi.db = db
 	defer db.Close()
-	InsertIntoUsers(db, "jeinero", "jenei@gmail.com", "ImRio69")
-	InsertIntoUsers(db, "qsdlqsd", "jeazenei@gmail.com", "ImRio69")
-	InsertIntoUsers(db, "MARTINMATIN", "JsuisunePute@gmail.com", "ImRio69")
-	InsertIntoCommunauter(db, "Golang")
-	InsertIntoPost(db, 1, "Golang Basic", "Golang suck lmao", 3)
-	InsertIntoComment(db, "Menteur", 2, 1)
-	InsertIntoComment(db, "gros bouffon", 2, 1)
+	// InsertIntoUsers(db, "jeinero", "jenei@gmail.com", "ImRio69")
+	// InsertIntoUsers(db, "qsdlqsd", "jeazenei@gmail.com", "ImRio69")
+	// InsertIntoUsers(db, "MARTINMATIN", "JsuisunePute@gmail.com", "ImRio69")
+	// InsertIntoCommunauter(db, "Golang")
+	// InsertIntoPost(db, 1, "Golang Basic", "Golang suck lmao", 3)
+	// InsertIntoComment(db, "Menteur", 2, 1)
+	// InsertIntoComment(db, "gros bouffon", 2, 1)
 	// InsertIntoComment(db, "hihahmldDou", 2)
 	// InsertIntoComment(db, "hidazdazhahou", 3)
 	// InsertIntoComment(db, "hihazadazdhou", 3)

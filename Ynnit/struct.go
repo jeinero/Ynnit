@@ -1,9 +1,12 @@
 package YnnitPackage
 
+import "database/sql"
+
 type AllStruct struct {
+	db             *sql.DB
 	UsersAll       []Users
-	PostAll        []Post
 	CommunauterAll []Communauter
+	PostAll        []Post
 	CommentAll     []Comment
 }
 
