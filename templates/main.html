@@ -66,7 +66,7 @@
 
         .Searchbutton:hover {
                 color: white;
-                background: blue;
+                background: red;
         }
 
         .searchhead {
@@ -85,22 +85,9 @@
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                width: 600px;
+                width: 800px;
                 height: auto;
                 margin-left: 300px;
-        }
-
-        .Login {
-                background: none;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                border: none;
-                font-size: 25px;
-                width: 150px;
-                border: 2px solid black;
-                border-radius: 40px;
-                height: 40px;
         }
 
         .Register {
@@ -208,7 +195,47 @@
                 justify-content: center;
         }
 
+        .lien {
+        display: flex;
+        width: 150px;
+        height: 40px;
+        font-size: 25px;
+        align-items: center;
+        color: black;
+        text-shadow: 1px 1px 1px #000;
+        border-radius: 40px;
+        border: 2px solid black;
+        justify-content: center;
+        text-decoration: none;
+        }
 
+.lien:hover {
+    background-color: rgba(255, 0, 0, 1);
+}
+
+.lien:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+                inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
+
+.user {
+        display: flex;
+        width: 45px;
+        height: 40px;
+        font-size: 25px;
+        align-items: center;
+        text-shadow: 1px 1px 1px #000;
+        border-radius: 40px;
+        border: 2px solid black;
+        justify-content: center;
+        text-decoration: none;
+        color: black;
+}
+
+.user:hover {
+        background-color: black;
+        color: white;
+}
 </style>
 
 <header>
@@ -247,16 +274,16 @@
 
 
         <div class="Log">
-                <div class="Login"><a href="/">
-                        <input id="case1" type="radio" name="Mode" class="radio1 isHidden" value="words.txt"
-                        checked>
-                         <label class="label" for="case1">Login</label>
-                </div>
+                <div><a class="lien" href="https://www.google.fr/">Login</a></div>
+        
 
-                <button class="Register"><a href="/">Register</button></a>
+                <div><a class="lien" href="https://www.google.fr/">Register</a></div>
 
-                <button class="Ico"><a href="/">Register</button></a>
+                <div><a class="user" href="https://www.google.fr/"><i class="fa fa-user"></i></a></div>
+                        
         </div>
+
+       
 </header>
 
 <body>
@@ -288,6 +315,8 @@
 
 </div>  
 </div>
+
+
 </body>
 
 <!--
