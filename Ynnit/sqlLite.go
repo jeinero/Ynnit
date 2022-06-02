@@ -155,5 +155,3 @@ func InsertIntoPost(db *sql.DB, CommuLink int, Titlte string, Content string, Us
 	}
 	return result.LastInsertId()
 }
-
-// func DbtoStructPost(db *sql.DB)
