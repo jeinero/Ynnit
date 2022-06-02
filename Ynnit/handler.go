@@ -3,6 +3,7 @@ package YnnitPackage
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"strconv"
@@ -18,14 +19,17 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Hello Home!")
 }
 func ApiAllHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
 	json.NewEncoder(w).Encode(AllApi)
 }
 
 func UsersHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
 	json.NewEncoder(w).Encode(AllApi.UsersAll)
 }
 
 func UserHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
 	vars := mux.Vars(r)
 	id := vars["id"]
 	var temptab AllStructs
@@ -48,10 +52,12 @@ func UserHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func PostsHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
 	json.NewEncoder(w).Encode(AllApi.PostsAll)
 }
 
 func PostHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
 	vars := mux.Vars(r)
 	id := vars["id"]
 	var temptab AllStructs
@@ -69,10 +75,12 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func CommunautersHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
 	json.NewEncoder(w).Encode(AllApi.CommunautersAll)
 }
 
 func CommunauterHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
 	vars := mux.Vars(r)
 	id := vars["id"]
 	var temptab AllStructs
@@ -91,9 +99,11 @@ func CommunauterHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func CommentsHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
 	json.NewEncoder(w).Encode(AllApi.CommentsAll)
 }
 func CommentHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
 	vars := mux.Vars(r)
 
 	id := vars["id"]
@@ -114,7 +124,37 @@ func Profile(w http.ResponseWriter, r *http.Request) {
 }
 
 func Joinus(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello Join Us!")
+	http.ServeFile(w, r, "./templates/joinus.html")
+}
+
+func NewUser(w http.ResponseWriter, r *http.Request) {
+	var newUser User
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &newUser)
+	fmt.Println(newUser)
+	goodOrFalse := InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Name)
+	if !goodOrFalse {
+		w.Write([]byte("{\"error\": \"Sorry\"}"))
+	} else {
+
+	}
+
+}
+
+func PostsPage(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/post.html")
+}
+
+func Posts(w http.ResponseWriter, r *http.Request) {
+	var newPost Post
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &newPost)
+	goodOrFalse := InsertIntoPost(AllApi.db, newPost.Title, newPost.Content, 1, 2)
+	if !goodOrFalse {
+		w.Write([]byte("{\"error\": \"Sorry\"}"))
+	} else {
+
+	}
 }
 
 func HashPassword(password string) (string, error) {
@@ -171,14 +211,20 @@ func Handler() {
 	r.HandleFunc("/signin", Signin)
 
 	r.HandleFunc("/joinus", Joinus)
+	r.HandleFunc("/newUser", NewUser)
 
 	r.HandleFunc("/profile", Profile)
 
-	http.Handle("/", r)
+	r.HandleFunc("/postpage", PostsPage)
+	r.HandleFunc("/post", Posts)
 
-	AllApi.UsersAll = DbtoStructUser(db)
-	AllApi.CommunautersAll = DbtoStructCommunauter(db)
-	AllApi.PostsAll = DbtoStructPost(db)
-	AllApi.CommentsAll = DbtoStructComment(db)
+	http.Handle("/", r)
 	log.Fatal(http.ListenAndServe(":8080", r))
+}
+
+func reloadApi() {
+	AllApi.UsersAll = DbtoStructUser(AllApi.db)
+	AllApi.CommunautersAll = DbtoStructCommunauter(AllApi.db)
+	AllApi.PostsAll = DbtoStructPost(AllApi.db)
+	AllApi.CommentsAll = DbtoStructComment(AllApi.db)
 }
