@@ -2,15 +2,15 @@ package YnnitPackage
 
 import "database/sql"
 
-type AllStruct struct {
-	db             *sql.DB
-	UsersAll       []Users
-	CommunauterAll []Communauter
-	PostAll        []Post
-	CommentAll     []Comment
+type AllStructs struct {
+	db              *sql.DB
+	UsersAll        []User
+	CommunautersAll []Communauter
+	PostsAll        []Post
+	CommentsAll     []Comment
 }
 
-type Users struct {
+type User struct {
 	Id       int    `json: "id"`
 	Name     string `json: "name"`
 	Email    string `json: "email"`
