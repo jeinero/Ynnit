@@ -6,10 +6,8 @@ import (
 	"log"
 	"net/http"
 	"strconv"
-	"text/template"
 
 	"github.com/gorilla/mux"
-	"golang.org/x/crypto/bcrypt"
 )
 
 var AllApi AllStructs
@@ -105,8 +103,8 @@ func CommentHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func Signin(w http.ResponseWriter, r *http.Request) {
-	var templateshtml = template.Must(template.ParseGlob("./templates/*.html"))
-	templateshtml.ExecuteTemplate(w, "Signin.html", 0)
+	// var templateshtml = template.Must(template.ParseGlob("./templates/*.html"))
+	// templateshtml.ExecuteTemplate(w, "Signin.html", 0)
 }
 
 func Profile(w http.ResponseWriter, r *http.Request) {
@@ -117,15 +115,18 @@ func Joinus(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Hello Join Us!")
 }
 
-func HashPassword(password string) (string, error) {
-	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
-	return string(bytes), err
+func Createcommunity(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/communityCreate.html")
 }
 
-func CheckPasswordHash(password, hash string) bool {
-	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
-	return err == nil
+/*
+func connect(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/connect.html")
 }
+func register(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/register.html")
+}
+*/
 
 func Handler() {
 
@@ -173,6 +174,14 @@ func Handler() {
 	r.HandleFunc("/joinus", Joinus)
 
 	r.HandleFunc("/profile", Profile)
+
+	r.HandleFunc("/createcommunity", Createcommunity)
+
+	/*
+		r.HandleFunc("/connect", connect)
+
+		r.HandleFunc("/register", register)
+	*/
 
 	http.Handle("/", r)
 
