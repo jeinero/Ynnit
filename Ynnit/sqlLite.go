@@ -108,10 +108,8 @@ func UserExists(db *sql.DB, email string, password string) bool {
 			return false
 		} else {
 			if password == pass {
-				fmt.Println("YES")
 				return true
 			} else {
-				fmt.Println("NOP")
 				return false
 			}
 		}

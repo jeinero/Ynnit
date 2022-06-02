@@ -1,4 +1,9 @@
-document.getElementById("form").onsubmit = function() {joinus()};
+document.getElementById("button").onclick = function(){
+    if (document.getElementById("pwd").value.length >= 8 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById("email").value)) {
+        joinus()
+    }
+};
+
 
 function joinus() {
     if (document.getElementById("pwd").value == document.getElementById("pwd2").value) {
@@ -14,6 +19,14 @@ function joinus() {
                 password: document.getElementById("pwd").value
             })
         })
+        .then((res) => res.json())
+        .then((data) => {
+        console.log(data)
+        if (!!data.error) {
+            document.getElementById("error").innerText = data.error
+            return;
+        }
+    })
     }
 }
 

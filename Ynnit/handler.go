@@ -30,7 +30,11 @@ func Checksignin(w http.ResponseWriter, r *http.Request) {
 	var temptab User
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &temptab)
-	UserExists(AllApi.db, temptab.Email, temptab.Password)
+	if UserExists(AllApi.db, temptab.Email, temptab.Password) {
+
+	} else {
+		w.Write([]byte("{\"error\": \"Your email or password was entered incorrectly\"}"))
+	}
 }
 
 func UserHandler(w http.ResponseWriter, r *http.Request) {
@@ -135,7 +139,11 @@ func Newuser(w http.ResponseWriter, r *http.Request) {
 	var newUser User
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &newUser)
-	InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Password)
+	if InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Password) {
+
+	} else {
+		w.Write([]byte("{\"error\": \"Your email or password was entered incorrectly\"}"))
+	}
 }
 
 func Handler() {
