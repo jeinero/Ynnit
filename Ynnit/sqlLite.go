@@ -2,6 +2,7 @@ package YnnitPackage
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 
 	_ "github.com/mattn/go-sqlite3"
@@ -66,12 +67,13 @@ func DbtoStructUser(db *sql.DB) []User {
 	return temptab
 }
 
-func InsertIntoUser(db *sql.DB, name string, email string, password string) (int64, error) {
-	result, err := db.Exec(`INSERT INTO user (name, email, password) VALUES (?, ?, ?)`, name, email, password)
+func InsertIntoUser(db *sql.DB, name string, email string, password string) bool {
+	_, err := db.Exec(`INSERT INTO user (name, email, password) VALUES (?, ?, ?)`, name, email, password)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
+		return false
 	}
-	return result.LastInsertId()
+	return true
 }
 
 func UpdatePassUser(db *sql.DB, password string, email string) {
@@ -148,10 +150,11 @@ func DbtoStructPost(db *sql.DB) []Post {
 	}
 	return temptab
 }
-func InsertIntoPost(db *sql.DB, CommuLink int, Titlte string, Content string, UsersID int) (int64, error) {
-	result, err := db.Exec(`INSERT INTO post (commuLink, title, contentPost, user_id) VALUES (?,?,?,?)`, CommuLink, Titlte, Content, UsersID)
+func InsertIntoPost(db *sql.DB, Title string, Content string, CommuLink int, user_id int) bool {
+	_, err := db.Exec(`INSERT INTO post (title, contentPost, commuLink,user_id) VALUES (?,?,?,?)`, Title, Content, CommuLink, user_id)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
+		return false
 	}
-	return result.LastInsertId()
+	return true
 }

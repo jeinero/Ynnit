@@ -9,4 +9,6 @@ export function onClickPost() {
             content: document.getElementById("content").value,
         })
     })
+    .then((resp) => resp.json())
+    .then((data) => {})
 }
