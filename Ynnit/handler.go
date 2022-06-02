@@ -3,6 +3,7 @@ package YnnitPackage
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"strconv"
@@ -117,6 +118,18 @@ func Joinus(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Hello Join Us!")
 }
 
+func PostsPage(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/post.html")
+}
+
+func Posts(w http.ResponseWriter, r *http.Request) {
+	var p Post
+
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &p)
+	fmt.Println(p)
+}
+
 func HashPassword(password string) (string, error) {
 	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
 	return string(bytes), err
@@ -173,6 +186,9 @@ func Handler() {
 	r.HandleFunc("/joinus", Joinus)
 
 	r.HandleFunc("/profile", Profile)
+
+	r.HandleFunc("/postpage", PostsPage)
+	r.HandleFunc("/post", Posts)
 
 	http.Handle("/", r)
 

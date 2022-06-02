@@ -140,7 +140,7 @@ func DbtoStructPost(db *sql.DB) []Post {
 
 	for rowsUsers.Next() {
 		var u Post
-		err := rowsUsers.Scan(&u.Id, &u.CommuLink, &u.Titlte, &u.Content, &u.UsersID)
+		err := rowsUsers.Scan(&u.Id, &u.CommuLink, &u.Title, &u.Content, &u.UsersID)
 		if err != nil {
 			log.Fatal(err)
 		}
