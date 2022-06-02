@@ -92,16 +92,30 @@ func DeleteUser(db *sql.DB, email string) {
 	db.Exec(`DELETE FROM user WHERE email = ?`, email)
 }
 
-func UserExists(db *sql.DB, email string) bool {
-	var verif int
+func UserExists(db *sql.DB, email string, password string) bool {
+	var id int
+	var pass string
 	sqlStmt := `SELECT id FROM user WHERE email = ?`
-	err := db.QueryRow(sqlStmt, email).Scan(&verif)
+	err := db.QueryRow(sqlStmt, email).Scan(&id)
 	if err != nil {
 		fmt.Println("err", err)
 		return false
+	} else {
+		sqlStmt := `SELECT password FROM user WHERE id = ?`
+		err := db.QueryRow(sqlStmt, id).Scan(&pass)
+		if err != nil {
+			fmt.Println("err", err)
+			return false
+		} else {
+			if password == pass {
+				fmt.Println("YES")
+				return true
+			} else {
+				fmt.Println("NOP")
+				return false
+			}
+		}
 	}
-	fmt.Println("verif", verif)
-	return true
 }
 
 func DbtoStructComment(db *sql.DB) []Comment {

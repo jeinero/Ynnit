@@ -30,7 +30,7 @@ func Checksignin(w http.ResponseWriter, r *http.Request) {
 	var temptab User
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &temptab)
-	UserExists(AllApi.db, temptab.Email)
+	UserExists(AllApi.db, temptab.Email, temptab.Password)
 }
 
 func UserHandler(w http.ResponseWriter, r *http.Request) {
@@ -131,18 +131,11 @@ func Joinus(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/joinus.html")
 }
 
-func NewUser(w http.ResponseWriter, r *http.Request) {
+func Newuser(w http.ResponseWriter, r *http.Request) {
 	var newUser User
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &newUser)
-	fmt.Println(newUser)
-	goodOrFalse := InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Name)
-	if !goodOrFalse {
-		w.Write([]byte("{\"error\": \"Sorry\"}"))
-	} else {
-
-	}
-
+	InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Password)
 }
 
 func Handler() {
@@ -190,7 +183,7 @@ func Handler() {
 	r.HandleFunc("/signin", Signin)
 
 	r.HandleFunc("/joinus", Joinus)
-	r.HandleFunc("/newUser", NewUser)
+	r.HandleFunc("/newuser", Newuser)
 
 	r.HandleFunc("/profile", Profile)
 	reloadApi()
