@@ -1,13 +1,13 @@
 package YnnitPackage
 
-type AllStruct struct {
-	UsersAll       []Users
-	PostAll        []Post
-	CommunauterAll []Communauter
-	CommentAll     []Comment
+type AllStructs struct {
+	UsersAll        []User
+	PostsAll        []Post
+	CommunautersAll []Communauter
+	CommentsAll     []Comment
 }
 
-type Users struct {
+type User struct {
 	Id       int    `json: "id"`
 	Name     string `json: "name"`
 	Email    string `json: "email"`
