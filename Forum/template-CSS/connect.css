@@ -19,11 +19,10 @@ body {
     width: 250px;
     height: 40px;
     font-size: xx-large;
-    margin-left: 42.5%;  
+    margin-left: 45%;  
 }
 #form {
     display: flex;
-
     flex-direction: column;
 }
 #email {
@@ -44,14 +43,12 @@ body {
     height: 50px;
     font-size: x-large;
 }
-
-input[type=text] {
-    margin-left: 20px;
+#template > img {
+    width: 10%;
 }
-input[type=button] {
-    margin-left: 20px;
+button > img {
+    width: 50%;
 }
-
 .button {
     text-align: center;
     margin-left: 30%;
@@ -67,8 +64,9 @@ img {
     background: #0b7dda;
     border-radius: 10px;
     font-weight: bold;
+    font-size: large;
+    height: 120%;
 }
 #button:hover {
     background: #d6d6d6;
 }
-
