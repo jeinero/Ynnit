@@ -87,7 +87,7 @@
                 justify-content: space-between;
                 width: 800px;
                 height: auto;
-                margin-left: 300px;
+                margin-left: 100px;
         }
 
         .Register {
@@ -169,8 +169,9 @@
                 width: 30%;
                 align-items: center;
                 flex-direction: column;
-                border: 2px solid black;
                 border-radius: 40px;
+                border: 1px solid black;
+                font-size: 20px;
         }
 
         .createpost{
@@ -182,6 +183,18 @@
                 border-top-right-radius: 40px;
                 align-items: center;
                 justify-content: center;
+                text-decoration: none;
+        }
+        
+        a.createpost{
+                height: 100%;
+                border: none;
+                color: black;
+        }
+        
+        .createpost:hover {
+                background-color: black;
+                color: white;
         }
 
         .createcommunity {
@@ -193,8 +206,21 @@
                 border-bottom-right-radius: 40px;
                 align-items: center;
                 justify-content: center;
+                background-color: white;
+                text-decoration: none;
+        }
+        a.createcommunity {
+                height:100%;
+                border: none;
+                color: black;
+                
         }
 
+        .createcommunity:hover {
+                background-color: black;
+                color: white;
+        }
+        
         .lien {
         display: flex;
         width: 150px;
@@ -250,7 +276,6 @@
                 </a>
         </div>
 
-
         <div class="searchdiv">
                 <form class="formheader" method="get" action="/" autocomplete="off">
                         <input class="searchhead" type="search" name="search" placeholder="Type to search"
@@ -270,8 +295,6 @@
                         </button>
                 </form>
         </div>
-        </div>
-
 
         <div class="Log">
                 <div><a class="lien" href="https://www.google.fr/">Login</a></div>
@@ -304,11 +327,25 @@
         </div>
 
         <div class="Filter2">
-                <div class="choosecommunity"> Choose Community</div>
+                <div class="searchdiv">
+                        <form class="formheader" method="get" action="/" autocomplete="off">
+                                <input onchange="submit()" class="searchhead" type="search" name="search" placeholder="Choose a Community" class="searchartist" list="Artists">
+                                <datalist id="Artists">
+                                        {{range .GroupeArt}}
+                                        <option value="{{.Name}}">{{.Name}} - Artist/Band</option>
+                                        <option value="{{.Name}}">{{.CreationDate}} - Creation Date</option>
+                                        {{range .Members}}
+                                        <option value="{{.}}">Member</option>
+                                        {{end}}
+                                        <option value={{.Name}}>{{.FirstAlbum}} - First Album Release Date</option>
+                                        {{end}}
+                                </datalist>
+                        </form>
+                </div>
         </div>
         <div class="Filter3">
-                <div class="createpost"> Create a Post</div>
-                <div class="createcommunity">Create a community</div>
+                <div class="createpost"><a class="createpost" href="/"><i class="fa fa-file"></i>&emsp;Create a Post</a></div>
+                <div class="createcommunity"><a class="createcommunity" href="/"><i class="fa fa-folder"></i>&emsp;Create a Community</a></div>
         </div>
 
 

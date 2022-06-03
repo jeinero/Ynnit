@@ -1,0 +1,8 @@
+* {
+    background-color: grey;
+}
+
+::placeholder { 
+    color: black;
+    opacity: 1;
+  }
