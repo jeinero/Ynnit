@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<link href="/css/communityCreate.css" rel="stylesheet">
+		<link href="communityCreate.css" rel="stylesheet">
         <link href="/css/font-button.css" rel="stylesheet">
 		<title>CommunityTemplate</title>
 </head>
@@ -15,19 +15,22 @@
         
             <div id="template">
                 <h1 id="templatecolor">Create your community :</h1>
-                
-                    <form id="form">
-                        Name (2 to 16 characters):
-                        <input type="text" id="input" required minlength="2" maxlength="16" size="10" >
-                    </form>
-                    
-                    <form id="form" >
+                <div id="flex-form">
+                    <table>
+                            <tr id="form">
+                                Name (2 to 16 characters):
+                                <input type="text" id="input" required minlength="2" maxlength="16" size="10" >
+                            </tr>
+                            <tr id="form">Name (2 to 16 characters):
+                                
+                            </tr>
+                    </table>
+                </div>                  
+                    <div id="form" >
                         Description (3000 characters max.):
-                        <input type="text" id="formDescription" required minlength="2" maxlength="3000" size="10" list="10" >
-                    </form>
-                
+                        <textarea type="text" id="formDescription" required minlength="2" maxlength="3000" size="10" list="10"></textarea>
+                    </div>
             </div>
-
         <script type="text/javascript" src="/js/font-button.js" ></script>
     </body>
 </html>

@@ -3,8 +3,7 @@ package YnnitPackage
 import (
 	"encoding/json"
 	"fmt"
-	"html/template"
-	"log"
+	"io/ioutil"
 	"net/http"
 	"strconv"
 
@@ -12,6 +11,21 @@ import (
 )
 
 var AllApi AllStructs
+
+type ApiPosts struct {
+	Post     Post
+	Comments []Comment
+	like     int
+}
+type ApiUsers struct {
+	User     User
+	Post     []Post
+	Comments []Comment
+}
+type ApiCommunauter struct {
+	Communauter Communauter
+	Post        []Post
+}
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Hello Home!")
@@ -24,23 +38,34 @@ func UsersHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(AllApi.UsersAll)
 }
 
+func Checksignin(w http.ResponseWriter, r *http.Request) {
+	var temptab User
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &temptab)
+	if UserExists(AllApi.db, temptab.Email, temptab.Password) {
+		w.Write([]byte("{\"msg\": \"Success\"}"))
+	} else {
+		http.Error(w, "{\"error\": \"Your email or password was entered incorrectly\"}", http.StatusUnauthorized)
+	}
+}
+
 func UserHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
-	var temptab AllStructs
+	var temptab ApiUsers
 	for _, user := range AllApi.UsersAll {
 		if strconv.Itoa(user.Id) == id {
-			temptab.UsersAll = append(temptab.UsersAll, user)
+			temptab.User = user
 		}
 	}
 	for _, post := range AllApi.PostsAll {
 		if strconv.Itoa(post.UsersID) == id {
-			temptab.PostsAll = append(temptab.PostsAll, post)
+			temptab.Post = append(temptab.Post, post)
 		}
 	}
 	for _, comment := range AllApi.CommentsAll {
 		if strconv.Itoa(comment.UsersID) == id {
-			temptab.CommentsAll = append(temptab.CommentsAll, comment)
+			temptab.Comments = append(temptab.Comments, comment)
 		}
 	}
 	json.NewEncoder(w).Encode(temptab)
@@ -53,17 +78,19 @@ func PostsHandler(w http.ResponseWriter, r *http.Request) {
 func PostHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
-	var temptab AllStructs
+	var temptab ApiPosts
 	for _, post := range AllApi.PostsAll {
 		if strconv.Itoa(post.Id) == id {
-			temptab.PostsAll = append(temptab.PostsAll, post)
+			temptab.Post = post
 		}
 	}
 	for _, comment := range AllApi.CommentsAll {
 		if strconv.Itoa(comment.PostLink) == id {
-			temptab.CommentsAll = append(temptab.CommentsAll, comment)
+			temptab.Comments = append(temptab.Comments, comment)
 		}
 	}
+	idInt, _ := strconv.Atoi((id))
+	temptab.like = countLike(AllApi.db, "likedpost", "postLike", idInt)
 	json.NewEncoder(w).Encode(temptab)
 }
 
@@ -74,15 +101,15 @@ func CommunautersHandler(w http.ResponseWriter, r *http.Request) {
 func CommunauterHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
-	var temptab AllStructs
+	var temptab ApiCommunauter
 	for _, communauter := range AllApi.CommunautersAll {
 		if strconv.Itoa(communauter.Id) == id {
-			temptab.CommunautersAll = append(temptab.CommunautersAll, communauter)
+			temptab.Communauter = communauter
 		}
 	}
 	for _, post := range AllApi.PostsAll {
 		if strconv.Itoa(post.CommuLink) == id {
-			temptab.PostsAll = append(temptab.PostsAll, post)
+			temptab.Post = append(temptab.Post, post)
 		}
 	}
 	json.NewEncoder(w).Encode(temptab)
@@ -103,14 +130,8 @@ func CommentHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func Home(w http.ResponseWriter, r *http.Request) {
-	var templateshtml = template.Must(template.ParseGlob("./templates/*.html"))
-	templateshtml.ExecuteTemplate(w, "home.html", 0)
-}
-
 func Signin(w http.ResponseWriter, r *http.Request) {
-	// var templateshtml = template.Must(template.ParseGlob("./templates/*.html"))
-	// templateshtml.ExecuteTemplate(w, "Signin.html", 0)
+	http.ServeFile(w, r, "./templates/Signin.html")
 }
 
 func Profile(w http.ResponseWriter, r *http.Request) {
@@ -166,6 +187,7 @@ func Handler() {
 
 	r.HandleFunc("/apiusers", UsersHandler)
 	r.HandleFunc("/apiusers/{id}", UserHandler)
+	r.HandleFunc("/checksignin", Checksignin)
 
 	r.HandleFunc("/apiposts", PostsHandler)
 	r.HandleFunc("/apiposts/{id}", PostHandler)
@@ -195,11 +217,19 @@ func Handler() {
 
 		r.HandleFunc("/home", Home)
 	*/
-	http.Handle("/", r)
+	//r.HandleFunc("/newuser", Newuser)
 
-	AllApi.UsersAll = DbtoStructUser(db)
-	AllApi.CommunautersAll = DbtoStructCommunauter(db)
-	AllApi.PostsAll = DbtoStructPost(db)
-	AllApi.CommentsAll = DbtoStructComment(db)
-	log.Fatal(http.ListenAndServe(":8080", r))
+	r.HandleFunc("/profile", Profile)
+
+	reloadApi()
+
+	http.Handle("/", r)
+}
+
+// countLike(AllApi.db, "comment", "postLink", 1)
+func reloadApi() {
+	AllApi.UsersAll = DbtoStructUser(AllApi.db)
+	AllApi.CommunautersAll = DbtoStructCommunauter(AllApi.db)
+	AllApi.PostsAll = DbtoStructPost(AllApi.db)
+	AllApi.CommentsAll = DbtoStructComment(AllApi.db)
 }

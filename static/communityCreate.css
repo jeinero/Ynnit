@@ -22,10 +22,11 @@ body {
 /* INPUT COLOR AND COLORTEXT ----------------------------------------------------- */
 #form {
     margin-top: 2%;
-    font-weight: bold;
-    font-size: x-large;
     display: flex;
     flex-direction: column;
+    font-size: x-large;
+    font-weight: bold;
+    text-decoration: underline;
 }
 input:hover{
     border:solid black 3px;
@@ -48,7 +49,13 @@ input:hover{
     height: 350px;
     font-size: x-large;
 }
-
+#flex-form{
+    display: flex;
+    background-color: rgb(91, 91, 91);
+    color: aliceblue;
+    grid-row: 10;
+    row-gap: 10px;
+}
 /* 
 .button :active {
     border-radius: 9px;
