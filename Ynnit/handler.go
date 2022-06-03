@@ -114,6 +114,12 @@ func CommentHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func Home(w http.ResponseWriter, r *http.Request) {
+	var templateshtml = template.Must(template.ParseGlob("./templates/*.html"))
+	templateshtml.ExecuteTemplate(w, "home.html", 0)
+
+}
+
 func Signin(w http.ResponseWriter, r *http.Request) {
 	var templateshtml = template.Must(template.ParseGlob("./templates/*.html"))
 	templateshtml.ExecuteTemplate(w, "Signin.html", 0)
@@ -194,7 +200,7 @@ func Handler() {
 	r.HandleFunc("/", HomeHandler)
 
 	r.HandleFunc("/", HomeHandler)
-	r.HandleFunc("/apiall", ApiAllHandler)
+	r.HandleFunc("/ ", ApiAllHandler)
 
 	r.HandleFunc("/apiusers", UsersHandler)
 	r.HandleFunc("/apiusers/{id}", UserHandler)
@@ -217,6 +223,7 @@ func Handler() {
 
 	r.HandleFunc("/postpage", PostsPage)
 	r.HandleFunc("/post", Posts)
+	r.HandleFunc("/home", Home)
 
 	http.Handle("/", r)
 	log.Fatal(http.ListenAndServe(":8080", r))
