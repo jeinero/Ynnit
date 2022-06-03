@@ -92,6 +92,30 @@ func DeleteUser(db *sql.DB, email string) {
 	db.Exec(`DELETE FROM user WHERE email = ?`, email)
 }
 
+func UserExists(db *sql.DB, email string, password string) bool {
+	var id int
+	var pass string
+	sqlStmt := `SELECT id FROM user WHERE email = ?`
+	err := db.QueryRow(sqlStmt, email).Scan(&id)
+	if err != nil {
+		fmt.Println("err", err)
+		return false
+	} else {
+		sqlStmt := `SELECT password FROM user WHERE id = ?`
+		err := db.QueryRow(sqlStmt, id).Scan(&pass)
+		if err != nil {
+			fmt.Println("err", err)
+			return false
+		} else {
+			if password == pass {
+				return true
+			} else {
+				return false
+			}
+		}
+	}
+}
+
 func DbtoStructComment(db *sql.DB) []Comment {
 	rowsUsers, _ := db.Query("SELECT * FROM comment")
 	var temptab []Comment

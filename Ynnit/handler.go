@@ -7,10 +7,8 @@ import (
 	"log"
 	"net/http"
 	"strconv"
-	"text/template"
 
 	"github.com/gorilla/mux"
-	"golang.org/x/crypto/bcrypt"
 )
 
 var AllApi AllStructs
@@ -26,6 +24,17 @@ func ApiAllHandler(w http.ResponseWriter, r *http.Request) {
 func UsersHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	json.NewEncoder(w).Encode(AllApi.UsersAll)
+}
+
+func Checksignin(w http.ResponseWriter, r *http.Request) {
+	var temptab User
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &temptab)
+	if UserExists(AllApi.db, temptab.Email, temptab.Password) {
+		http.Redirect(w, r, "/profile", http.StatusFound)
+	} else {
+		w.Write([]byte("{\"error\": \"Your email or password was entered incorrectly\"}"))
+	}
 }
 
 func UserHandler(w http.ResponseWriter, r *http.Request) {
@@ -115,8 +124,7 @@ func CommentHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func Signin(w http.ResponseWriter, r *http.Request) {
-	var templateshtml = template.Must(template.ParseGlob("./templates/*.html"))
-	templateshtml.ExecuteTemplate(w, "Signin.html", 0)
+	http.ServeFile(w, r, "./templates/Signin.html")
 }
 
 func Profile(w http.ResponseWriter, r *http.Request) {
@@ -127,27 +135,15 @@ func Joinus(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/joinus.html")
 }
 
-func NewUser(w http.ResponseWriter, r *http.Request) {
+func Newuser(w http.ResponseWriter, r *http.Request) {
 	var newUser User
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &newUser)
-	goodOrFalse := InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Password)
-	if !goodOrFalse {
-		w.Write([]byte("{\"error\": \"Sorry\"}"))
+	if InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Password) {
+		http.Redirect(w, r, "/signin", http.StatusFound)
 	} else {
-
+		w.Write([]byte("{\"error\": \"enter a unique email and name\"}"))
 	}
-
-}
-
-func HashPassword(password string) (string, error) {
-	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
-	return string(bytes), err
-}
-
-func CheckPasswordHash(password, hash string) bool {
-	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
-	return err == nil
 }
 
 func Handler() {
@@ -181,6 +177,7 @@ func Handler() {
 
 	r.HandleFunc("/apiusers", UsersHandler)
 	r.HandleFunc("/apiusers/{id}", UserHandler)
+	r.HandleFunc("/checksignin", Checksignin)
 
 	r.HandleFunc("/apiposts", PostsHandler)
 	r.HandleFunc("/apiposts/{id}", PostHandler)
@@ -194,9 +191,10 @@ func Handler() {
 	r.HandleFunc("/signin", Signin)
 
 	r.HandleFunc("/joinus", Joinus)
-	r.HandleFunc("/newUser", NewUser)
+	r.HandleFunc("/newuser", Newuser)
 
 	r.HandleFunc("/profile", Profile)
+
 	reloadApi()
 	http.Handle("/", r)
 	log.Fatal(http.ListenAndServe(":8080", r))
