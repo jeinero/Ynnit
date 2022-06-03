@@ -3,17 +3,31 @@ package YnnitPackage
 import (
 	"encoding/json"
 	"fmt"
+	"html/template"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"strconv"
-	"text/template"
 
 	"github.com/gorilla/mux"
-	"golang.org/x/crypto/bcrypt"
 )
 
 var AllApi AllStructs
+
+type ApiPosts struct {
+	Post     Post
+	Comments []Comment
+	like     int
+}
+type ApiUsers struct {
+	User     User
+	Post     []Post
+	Comments []Comment
+}
+type ApiCommunauter struct {
+	Communauter Communauter
+	Post        []Post
+}
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Hello Home!")
@@ -28,24 +42,35 @@ func UsersHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(AllApi.UsersAll)
 }
 
+func Checksignin(w http.ResponseWriter, r *http.Request) {
+	var temptab User
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &temptab)
+	if UserExists(AllApi.db, temptab.Email, temptab.Password) {
+		w.Write([]byte("{\"msg\": \"Success\"}"))
+	} else {
+		http.Error(w, "{\"error\": \"Your email or password was entered incorrectly\"}", http.StatusUnauthorized)
+	}
+}
+
 func UserHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	vars := mux.Vars(r)
 	id := vars["id"]
-	var temptab AllStructs
+	var temptab ApiUsers
 	for _, user := range AllApi.UsersAll {
 		if strconv.Itoa(user.Id) == id {
-			temptab.UsersAll = append(temptab.UsersAll, user)
+			temptab.User = user
 		}
 	}
 	for _, post := range AllApi.PostsAll {
 		if strconv.Itoa(post.UsersID) == id {
-			temptab.PostsAll = append(temptab.PostsAll, post)
+			temptab.Post = append(temptab.Post, post)
 		}
 	}
 	for _, comment := range AllApi.CommentsAll {
 		if strconv.Itoa(comment.UsersID) == id {
-			temptab.CommentsAll = append(temptab.CommentsAll, comment)
+			temptab.Comments = append(temptab.Comments, comment)
 		}
 	}
 	json.NewEncoder(w).Encode(temptab)
@@ -60,17 +85,19 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	vars := mux.Vars(r)
 	id := vars["id"]
-	var temptab AllStructs
+	var temptab ApiPosts
 	for _, post := range AllApi.PostsAll {
 		if strconv.Itoa(post.Id) == id {
-			temptab.PostsAll = append(temptab.PostsAll, post)
+			temptab.Post = post
 		}
 	}
 	for _, comment := range AllApi.CommentsAll {
 		if strconv.Itoa(comment.PostLink) == id {
-			temptab.CommentsAll = append(temptab.CommentsAll, comment)
+			temptab.Comments = append(temptab.Comments, comment)
 		}
 	}
+	idInt, _ := strconv.Atoi((id))
+	temptab.like = countLike(AllApi.db, "likedpost", "postLike", idInt)
 	json.NewEncoder(w).Encode(temptab)
 }
 
@@ -83,15 +110,15 @@ func CommunauterHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	vars := mux.Vars(r)
 	id := vars["id"]
-	var temptab AllStructs
+	var temptab ApiCommunauter
 	for _, communauter := range AllApi.CommunautersAll {
 		if strconv.Itoa(communauter.Id) == id {
-			temptab.CommunautersAll = append(temptab.CommunautersAll, communauter)
+			temptab.Communauter = communauter
 		}
 	}
 	for _, post := range AllApi.PostsAll {
 		if strconv.Itoa(post.CommuLink) == id {
-			temptab.PostsAll = append(temptab.PostsAll, post)
+			temptab.Post = append(temptab.Post, post)
 		}
 	}
 	json.NewEncoder(w).Encode(temptab)
@@ -121,8 +148,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 }
 
 func Signin(w http.ResponseWriter, r *http.Request) {
-	var templateshtml = template.Must(template.ParseGlob("./templates/*.html"))
-	templateshtml.ExecuteTemplate(w, "Signin.html", 0)
+	http.ServeFile(w, r, "./templates/Signin.html")
 }
 
 func Profile(w http.ResponseWriter, r *http.Request) {
@@ -133,58 +159,15 @@ func Joinus(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/joinus.html")
 }
 
-func NewUser(w http.ResponseWriter, r *http.Request) {
+func Newuser(w http.ResponseWriter, r *http.Request) {
 	var newUser User
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &newUser)
-	fmt.Println(newUser)
-	goodOrFalse := InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Name)
-	if !goodOrFalse {
-		w.Write([]byte("{\"error\": \"Sorry\"}"))
+	if InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Password) {
+		w.Write([]byte("{\"msg\": \"Success\"}"))
 	} else {
-
+		http.Error(w, "{\"error\": \"Enter a unique email and name\"}", http.StatusUnauthorized)
 	}
-
-}
-
-func PostsPage(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "./templates/post.html")
-}
-
-func Posts(w http.ResponseWriter, r *http.Request) {
-	var newPost Post
-	body, _ := ioutil.ReadAll(r.Body)
-	json.Unmarshal(body, &newPost)
-	goodOrFalse := InsertIntoPost(AllApi.db, newPost.Title, newPost.Content, 1, 2)
-	if !goodOrFalse {
-		w.Write([]byte("{\"error\": \"Sorry\"}"))
-	} else {
-
-	}
-}
-
-func ViewPost(w http.ResponseWriter, r *http.Request) {
-	var templateshtml = template.Must(template.ParseFiles("./templates/viewpost.html"))
-	a := getPost(id)
-	err := templateshtml.Execute(w, a)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-}
-
-func getPost(id int) {
-
-	resp, err := http.Get("/apiposts/" + id)
-}
-
-func HashPassword(password string) (string, error) {
-	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
-	return string(bytes), err
-}
-
-func CheckPasswordHash(password, hash string) bool {
-	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
-	return err == nil
 }
 
 func Handler() {
@@ -218,6 +201,7 @@ func Handler() {
 
 	r.HandleFunc("/apiusers", UsersHandler)
 	r.HandleFunc("/apiusers/{id}", UserHandler)
+	r.HandleFunc("/checksignin", Checksignin)
 
 	r.HandleFunc("/apiposts", PostsHandler)
 	r.HandleFunc("/apiposts/{id}", PostHandler)
@@ -231,19 +215,16 @@ func Handler() {
 	r.HandleFunc("/signin", Signin)
 
 	r.HandleFunc("/joinus", Joinus)
-	r.HandleFunc("/newUser", NewUser)
+	r.HandleFunc("/newuser", Newuser)
 
 	r.HandleFunc("/profile", Profile)
 
-	r.HandleFunc("/postpage", PostsPage)
-	r.HandleFunc("/post", Posts)
-	r.HandleFunc("/home", Home)
-	r.HandleFunc("/viewpost/{id}", ViewPost)
-
+	reloadApi()
 	http.Handle("/", r)
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
 
+// countLike(AllApi.db, "comment", "postLink", 1)
 func reloadApi() {
 	AllApi.UsersAll = DbtoStructUser(AllApi.db)
 	AllApi.CommunautersAll = DbtoStructCommunauter(AllApi.db)

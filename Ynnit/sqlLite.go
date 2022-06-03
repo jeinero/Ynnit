@@ -31,18 +31,32 @@ func InitDatabase(database string) *sql.DB {
 			commulink INTEGER NOT NULL,
 			title TEXT NOT NULL,
 			contentPost TEXT NOT NULL,
-			user_id INTEGET NOT NULL,
+			user_id INTEGER NOT NULL,
 			FOREIGN KEY (commulink) REFERENCES communauter(id),
 			FOREIGN KEY (user_id) REFERENCES user(id) 
 		);
 		CREATE TABLE IF NOT EXISTS comment (
 			id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 			contentComment TEXT NOT NULL,
-			userid INTEGET NOT NULL,
+			userid INTEGER NOT NULL,
 			postLink INT,
 			FOREIGN KEY (postLink) REFERENCES post(id),
 			FOREIGN KEY (userid) REFERENCES user(id) 
-		)
+		);
+		CREATE TABLE IF NOT EXISTS likedpost (
+			id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+			postLike INTEGER NOT NULL,
+			userid INTEGER NOT NULL,
+			FOREIGN KEY (postLike) REFERENCES post(id),
+			FOREIGN KEY (userid) REFERENCES user(id) 
+		);
+		CREATE TABLE IF NOT EXISTS likedcomment (
+			id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+			commentLike INTEGER NOT NULL,
+			userid INTEGER NOT NULL,
+			FOREIGN KEY (commentLike) REFERENCES comment(id),
+			FOREIGN KEY (userid) REFERENCES user(id) 
+		);
 		`
 	_, err = db.Exec(sqlStmt)
 	if err != nil {
@@ -92,6 +106,30 @@ func DeleteUser(db *sql.DB, email string) {
 	db.Exec(`DELETE FROM user WHERE email = ?`, email)
 }
 
+func UserExists(db *sql.DB, email string, password string) bool {
+	var id int
+	var pass string
+	sqlStmt := `SELECT id FROM user WHERE email = ?`
+	err := db.QueryRow(sqlStmt, email).Scan(&id)
+	if err != nil {
+		fmt.Println("err", err)
+		return false
+	} else {
+		sqlStmt := `SELECT password FROM user WHERE id = ?`
+		err := db.QueryRow(sqlStmt, id).Scan(&pass)
+		if err != nil {
+			fmt.Println("err", err)
+			return false
+		} else {
+			if password == pass {
+				return true
+			} else {
+				return false
+			}
+		}
+	}
+}
+
 func DbtoStructComment(db *sql.DB) []Comment {
 	rowsUsers, _ := db.Query("SELECT * FROM comment")
 	var temptab []Comment
@@ -102,6 +140,7 @@ func DbtoStructComment(db *sql.DB) []Comment {
 		if err != nil {
 			log.Fatal(err)
 		}
+		u.Like = countLike(db, "likedcomment", "commentLike", u.Id)
 		temptab = append(temptab, u)
 	}
 	return temptab
@@ -146,6 +185,7 @@ func DbtoStructPost(db *sql.DB) []Post {
 		if err != nil {
 			log.Fatal(err)
 		}
+		u.Like = countLike(db, "likedpost", "postLike", u.Id)
 		temptab = append(temptab, u)
 	}
 	return temptab
@@ -157,4 +197,13 @@ func InsertIntoPost(db *sql.DB, Title string, Content string, CommuLink int, use
 		return false
 	}
 	return true
+}
+
+func countLike(db *sql.DB, table string, tableRow string, whereID int) int {
+	var count int
+	err := db.QueryRow("SELECT COUNT(*) FROM "+table+" WHERE "+tableRow+" = ?", whereID).Scan(&count)
+	if err != nil {
+		fmt.Println(err)
+	}
+	return count
 }
