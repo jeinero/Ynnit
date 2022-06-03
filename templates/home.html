@@ -43,76 +43,87 @@
 
         <div class="Log">
                 <div><a class="lien" href="https://www.google.fr/">Login</a></div>
-        
+
 
                 <div><a class="lien" href="https://www.google.fr/">Register</a></div>
 
                 <div><a class="user" href="https://www.google.fr/"><i class="fa fa-user"></i></a></div>
-                        
+
         </div>
 
-       
+
 </header>
 
 <body>
         <div class="container">
-<div class="choose">
-        <div class="Filter1">
-                <form action ="/">
-                <label for="filterby">Filter by :</label>
-                <select id="filterby" multiple>
-                        <option value>Categories</option>
-                        <option value>Number of comments</option>
-                        <option value>Publication Date</option>
-                        <option value>Number of likes</option>
-                        
-                    </select>
+                <div class="choose">
+                        <div class="Filter1">
+                                <form action="/">
+                                        <label for="filterby">Filter by :</label>
+                                        <select id="filterby" multiple>
+                                                <option value>Categories</option>
+                                                <option value>Number of comments</option>
+                                                <option value>Publication Date</option>
+                                                <option value>Number of likes</option>
 
-                </form>
-        </div>
+                                        </select>
 
-        <div class="Filter2">
-                <div class="searchdiv">
-                        <form class="formheader" method="get" action="/" autocomplete="off">
-                                <input onchange="submit()" class="searchhead" type="search" name="search" placeholder="Choose a Community" class="searchartist" list="Artists">
-                                <datalist id="Artists">
-                                        {{range .GroupeArt}}
-                                        <option value="{{.Name}}">{{.Name}} - Artist/Band</option>
-                                        <option value="{{.Name}}">{{.CreationDate}} - Creation Date</option>
-                                        {{range .Members}}
-                                        <option value="{{.}}">Member</option>
-                                        {{end}}
-                                        <option value={{.Name}}>{{.FirstAlbum}} - First Album Release Date</option>
-                                        {{end}}
-                                </datalist>
-                        </form>
+                                </form>
+                        </div>
+
+                        <div class="Filter2">
+                                <div class="searchdiv">
+                                        <form class="formheader" method="get" action="/" autocomplete="off">
+                                                <input onchange="submit()" class="searchhead" type="search"
+                                                        name="search" placeholder="Choose a Community"
+                                                        class="searchartist" list="Artists">
+                                                <datalist id="Artists">
+                                                        {{range .GroupeArt}}
+                                                        <option value="{{.Name}}">{{.Name}} - Artist/Band</option>
+                                                        <option value="{{.Name}}">{{.CreationDate}} - Creation Date
+                                                        </option>
+                                                        {{range .Members}}
+                                                        <option value="{{.}}">Member</option>
+                                                        {{end}}
+                                                        <option value={{.Name}}>{{.FirstAlbum}} - First Album Release
+                                                                Date</option>
+                                                        {{end}}
+                                                </datalist>
+                                        </form>
+                                </div>
+                        </div>
+                        <div class="Filter3">
+                                <div class="createpost"><a class="createpost" href="/"><i
+                                                        class="fa fa-file"></i>&emsp;Create a Post</a></div>
+                                <div class="createcommunity"><a class="createcommunity" href="/"><i
+                                                        class="fa fa-folder"></i>&emsp;Create a Community</a></div>
+                        </div>
+
+
+
                 </div>
         </div>
-        <div class="Filter3">
-                <div class="createpost"><a class="createpost" href="/"><i class="fa fa-file"></i>&emsp;Create a Post</a></div>
-                <div class="createcommunity"><a class="createcommunity" href="/"><i class="fa fa-folder"></i>&emsp;Create a Community</a></div>
+
+
+        <div class="bigcard">
+
         </div>
-
-
-
-</div>  
-</div>
-
-
-<label for="email">Identifiant/Email</label>
-<input id="email" name="email" type="email" placeholder="Email">
-<label for="password">Mot de passe</label>
-<input id="password" name="password" type="password">
-
-<script>
-        fetch("/home")
-        .then((res) => {
-                console.log(res);
-                return res.json();
-        })
-        .then((data) => {
-                console.log(data)
-        })
-</script>
 </body>
+
+        <script>
+                fetch("/apiposts")
+                        .then((response) => response.json())
+                        .then(function newCard(posts) {
+                                posts.forEach(element => {
+                                        console.log(element)
+                                        const newcard = document.createElement('div')
+                                        newcard.classList = 'card'
+                                        const integrate = document.querySelector('.bigcard')
+                                        newcard.innerHTML = element.Title
+                                        integrate.appendChild(newcard)
+                                });
+                        })
+        </script>
+
+
 </html>

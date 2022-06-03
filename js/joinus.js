@@ -1,5 +1,6 @@
 document.getElementById("button").onclick = function(){
     if (document.getElementById("name").value.length >=1 && document.getElementById("pwd").value.length >= 8 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById("email").value)) {
+        document.getElementById("error").innerText = ""
         joinus()
     } else {
         document.getElementById("error").innerText = "enter a valide email and name and a password of at least 8 characters"
@@ -21,15 +22,19 @@ function joinus() {
                 password: document.getElementById("pwd").value
             })
         })
-        .then((res) => res.json())
+        .then(async (res) => {
+            if (!res.ok)
+                throw await res.json()
+           return res.json()
+        })
         .then((data) => {
-        console.log(data)
-        if (!!data.error) {
-            document.getElementById("error").innerText = data.error
-            return;
-        }
-    })
+            location.href = "/signin"
+        }).catch((err) => {
+            document.getElementById("error").innerText = err.error
+        })
     }
+    document.getElementById("pwd").value = ""
+    document.getElementById("pwd2").value = ""
 }
 
 
