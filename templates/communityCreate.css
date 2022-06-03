@@ -44,35 +44,19 @@ body {
     height: 50px;
     font-size: x-large;
 }
-#verify {
-    margin-left: 230%;
-    background-color: rgb(222, 222, 222);
-    border-radius: 10px;
-    font-weight: bold;
-    width: 360px;
-    height: 50px;
-    font-size: x-large;
-}
-
-#template > img {
-    width: 10%;
-}
-button > img {
-    width: 45%;
-}
 
 
-
-/* .button :active {
+/* 
+.button :active {
     border-radius: 9px;
     background: #333333;
     box-shadow: inset -17px 17px 30px #1a1a1a,
                 inset 17px -17px 30px #4d4d4d;
 } 
-
+#id {
     border-radius: 9px;
     background: #3d3d3d;
     box-shadow: inset -17px 17px 33px #131313;
     border:#131313 solid 1px;  
-
+}
 */

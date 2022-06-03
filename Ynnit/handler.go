@@ -182,7 +182,6 @@ func Handler() {
 
 		r.HandleFunc("/register", register)
 	*/
-
 	http.Handle("/", r)
 
 	AllApi.UsersAll = DbtoStructUser(db)
