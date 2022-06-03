@@ -3,42 +3,32 @@
 
 <head>
     <title>{{.}}</title>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./viewpost.css">
 </head>
 
 <body>
     <div class="container">
-        <div class="CreatePost">
+        <div class="viewPost">
             <p><strong>View the post</strong> </p>
-            <!-- <form action="" id="ContainPost"> -->
                 <h1 id="titre">{{.TitreDuPoste}}</h1>
                 <h2 id="content">{{.ContenuDuPost}}</h2>
-                <!-- <textarea id="content"name="" cols="30" rows="10" placeholder="Text (optional)"></textarea> -->
-            <!-- </form>
-                <form action=""> -->
-                      <input type="checkbox" id="btnControl" />
-            <label for="btnControl">
-                <div id="colored">
-                    + informatique
-                </div>
-            </label>
-                <!-- </form> -->
-          
-
-            <div class="PosterContain">
-
-                <div class="Poster">
-                    <button class="btn" id="submitPost" value="Submit" form="ContainPost">Post
-                        <button class="btn">Delete</button>
-                </div>
-
+        </div>        
+        <div class="viewComments">
+            {{range .}}
+            <div id="comment">
+                <p id=name><strong>{{.Comment}}</strong></p>
             </div>
-
+            {{end}}
         </div>
 
+        <div class="viewLikes">
+            <p>Likes : </p> <p id="likesNumber">0</p> 
+        </div>
     </div>
-    </div>
+    
+
+    
 </body>
 <script type="module" src='/js/post.js'></script>
 <script type="module"> 
