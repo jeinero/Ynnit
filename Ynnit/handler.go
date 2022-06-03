@@ -13,6 +13,21 @@ import (
 
 var AllApi AllStructs
 
+type ApiPosts struct {
+	Post     Post
+	Comments []Comment
+	like     int
+}
+type ApiUsers struct {
+	User     User
+	Post     []Post
+	Comments []Comment
+}
+type ApiCommunauter struct {
+	Communauter Communauter
+	Post        []Post
+}
+
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Hello Home!")
 }
@@ -41,20 +56,20 @@ func UserHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	vars := mux.Vars(r)
 	id := vars["id"]
-	var temptab AllStructs
+	var temptab ApiUsers
 	for _, user := range AllApi.UsersAll {
 		if strconv.Itoa(user.Id) == id {
-			temptab.UsersAll = append(temptab.UsersAll, user)
+			temptab.User = user
 		}
 	}
 	for _, post := range AllApi.PostsAll {
 		if strconv.Itoa(post.UsersID) == id {
-			temptab.PostsAll = append(temptab.PostsAll, post)
+			temptab.Post = append(temptab.Post, post)
 		}
 	}
 	for _, comment := range AllApi.CommentsAll {
 		if strconv.Itoa(comment.UsersID) == id {
-			temptab.CommentsAll = append(temptab.CommentsAll, comment)
+			temptab.Comments = append(temptab.Comments, comment)
 		}
 	}
 	json.NewEncoder(w).Encode(temptab)
@@ -69,17 +84,19 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	vars := mux.Vars(r)
 	id := vars["id"]
-	var temptab AllStructs
+	var temptab ApiPosts
 	for _, post := range AllApi.PostsAll {
 		if strconv.Itoa(post.Id) == id {
-			temptab.PostsAll = append(temptab.PostsAll, post)
+			temptab.Post = post
 		}
 	}
 	for _, comment := range AllApi.CommentsAll {
 		if strconv.Itoa(comment.PostLink) == id {
-			temptab.CommentsAll = append(temptab.CommentsAll, comment)
+			temptab.Comments = append(temptab.Comments, comment)
 		}
 	}
+	idInt, _ := strconv.Atoi((id))
+	temptab.like = countLike(AllApi.db, "likedpost", "postLike", idInt)
 	json.NewEncoder(w).Encode(temptab)
 }
 
@@ -92,15 +109,15 @@ func CommunauterHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	vars := mux.Vars(r)
 	id := vars["id"]
-	var temptab AllStructs
+	var temptab ApiCommunauter
 	for _, communauter := range AllApi.CommunautersAll {
 		if strconv.Itoa(communauter.Id) == id {
-			temptab.CommunautersAll = append(temptab.CommunautersAll, communauter)
+			temptab.Communauter = communauter
 		}
 	}
 	for _, post := range AllApi.PostsAll {
 		if strconv.Itoa(post.CommuLink) == id {
-			temptab.PostsAll = append(temptab.PostsAll, post)
+			temptab.Post = append(temptab.Post, post)
 		}
 	}
 	json.NewEncoder(w).Encode(temptab)
@@ -200,6 +217,7 @@ func Handler() {
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
 
+// countLike(AllApi.db, "comment", "postLink", 1)
 func reloadApi() {
 	AllApi.UsersAll = DbtoStructUser(AllApi.db)
 	AllApi.CommunautersAll = DbtoStructCommunauter(AllApi.db)
