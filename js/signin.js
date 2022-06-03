@@ -1,6 +1,9 @@
 document.getElementById("button").onclick = function(){
     if (document.getElementById("pwd").value.length >= 8 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById("email").value)) {
+        document.getElementById("error").innerText = ""
         signin()
+    } else {
+        document.getElementById("error").innerText = "enter a valide email and a password of at least 8 characters"
     }
 };
 

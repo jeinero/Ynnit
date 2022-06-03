@@ -1,6 +1,8 @@
 document.getElementById("button").onclick = function(){
-    if (document.getElementById("pwd").value.length >= 8 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById("email").value)) {
+    if (document.getElementById("name").value.length >=1 && document.getElementById("pwd").value.length >= 8 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById("email").value)) {
         joinus()
+    } else {
+        document.getElementById("error").innerText = "enter a valide email and name and a password of at least 8 characters"
     }
 };
 
