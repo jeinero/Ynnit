@@ -17,6 +17,7 @@ var AllApi AllStructs
 type ApiPosts struct {
 	Post     Post
 	Comments []Comment
+	like     int
 }
 type ApiUsers struct {
 	User     User
@@ -46,9 +47,9 @@ func Checksignin(w http.ResponseWriter, r *http.Request) {
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &temptab)
 	if UserExists(AllApi.db, temptab.Email, temptab.Password) {
-		http.Redirect(w, r, "/profile", http.StatusFound)
+		w.Write([]byte("{\"msg\": \"Success\"}"))
 	} else {
-		w.Write([]byte("{\"error\": \"Your email or password was entered incorrectly\"}"))
+		http.Error(w, "{\"error\": \"Your email or password was entered incorrectly\"}", http.StatusUnauthorized)
 	}
 }
 
@@ -95,6 +96,8 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 			temptab.Comments = append(temptab.Comments, comment)
 		}
 	}
+	idInt, _ := strconv.Atoi((id))
+	temptab.like = countLike(AllApi.db, "likedpost", "postLike", idInt)
 	json.NewEncoder(w).Encode(temptab)
 }
 
@@ -161,9 +164,9 @@ func Newuser(w http.ResponseWriter, r *http.Request) {
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &newUser)
 	if InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Password) {
-		http.Redirect(w, r, "/signin", http.StatusFound)
+		w.Write([]byte("{\"msg\": \"Success\"}"))
 	} else {
-		w.Write([]byte("{\"error\": \"enter a unique email and name\"}"))
+		http.Error(w, "{\"error\": \"Enter a unique email and name\"}", http.StatusUnauthorized)
 	}
 }
 
@@ -240,6 +243,7 @@ func Handler() {
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
 
+// countLike(AllApi.db, "comment", "postLink", 1)
 func reloadApi() {
 	AllApi.UsersAll = DbtoStructUser(AllApi.db)
 	AllApi.CommunautersAll = DbtoStructCommunauter(AllApi.db)
