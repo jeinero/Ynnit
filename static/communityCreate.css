@@ -1,52 +1,65 @@
+/* POLICE ----------------------------------------------------- */
 body {
     font-family: 'Tiro Devanagari Sanskrit', serif;
 }
 #template {
     margin-top: 100px;
+    margin-left: 5%;
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+}
+/* templateTitle ----------------------------------------------------- */
+#templatecolor{
+    border-radius: 10px;
+    width:50%;
     text-align: center;
-    color:gray;
+    color:black;
+    border:solid black 3px;
+    text-decoration: overline underline;
+    background-color: rgb(153, 153, 153);
+    margin-right: 75%;
 }
-#top {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    width: 250px;
-}
-#bottom {
-    display: flex;
-    flex-direction: row;
-    gap: 25px;
-    width: 125px;
-    height: 40px;
-    font-size: xx-large;
-    margin-left: 45%;  
-}
+
+/* INPUT COLOR AND COLORTEXT ----------------------------------------------------- */
 #form {
+    margin-top: 2%;
+    font-weight: bold;
+    font-size: x-large;
     display: flex;
     flex-direction: column;
+}
+input:hover{
+    border:solid black 3px;
 }
 #input {
-    margin-left: 230%;
-    background-color: rgb(222, 222, 222);
+    color:rgb(255, 255, 255);
+    background-color: rgb(201, 201, 201);
     border-radius: 10px;
     font-weight: bold;
     width: 360px;
     height: 50px;
     font-size: x-large;
 }
+#formDescription {
+    color:rgb(255, 255, 255);
+    background-color: rgb(201, 201, 201);
+    border-radius: 10px;
+    font-weight: bold;
+    width: 720px;
+    height: 350px;
+    font-size: x-large;
+}
 
-
-
-/* .button :active {
+/* 
+.button :active {
     border-radius: 9px;
     background: #333333;
     box-shadow: inset -17px 17px 30px #1a1a1a,
                 inset 17px -17px 30px #4d4d4d;
 } 
-
+#id {
     border-radius: 9px;
     background: #3d3d3d;
     box-shadow: inset -17px 17px 33px #131313;
     border:#131313 solid 1px;  
-
+}
 */

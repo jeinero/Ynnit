@@ -3,6 +3,7 @@ package YnnitPackage
 import (
 	"encoding/json"
 	"fmt"
+	"html/template"
 	"log"
 	"net/http"
 	"strconv"
@@ -102,6 +103,11 @@ func CommentHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func Home(w http.ResponseWriter, r *http.Request) {
+	var templateshtml = template.Must(template.ParseGlob("./templates/*.html"))
+	templateshtml.ExecuteTemplate(w, "home.html", 0)
+}
+
 func Signin(w http.ResponseWriter, r *http.Request) {
 	// var templateshtml = template.Must(template.ParseGlob("./templates/*.html"))
 	// templateshtml.ExecuteTemplate(w, "Signin.html", 0)
@@ -115,18 +121,20 @@ func Joinus(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Hello Join Us!")
 }
 
-func Createcommunity(w http.ResponseWriter, r *http.Request) {
+func communityCreate(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/communityCreate.html")
 }
 
-/*
+func Posts(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/post.html")
+}
+
 func connect(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/connect.html")
 }
 func register(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/register.html")
 }
-*/
 
 func Handler() {
 
@@ -154,8 +162,7 @@ func Handler() {
 
 	r.HandleFunc("/", HomeHandler)
 
-	r.HandleFunc("/", HomeHandler)
-	r.HandleFunc("/apiall", ApiAllHandler)
+	r.HandleFunc("/ ", ApiAllHandler)
 
 	r.HandleFunc("/apiusers", UsersHandler)
 	r.HandleFunc("/apiusers/{id}", UserHandler)
@@ -175,12 +182,18 @@ func Handler() {
 
 	r.HandleFunc("/profile", Profile)
 
-	r.HandleFunc("/createcommunity", Createcommunity)
+	r.HandleFunc("/communitycreate", communityCreate)
+
+	r.HandleFunc("/post", Posts)
+
+	r.HandleFunc("/connect", connect)
+
+	r.HandleFunc("/register", register)
 
 	/*
-		r.HandleFunc("/connect", connect)
+		r.HandleFunc("/postpage", PostsPage)
 
-		r.HandleFunc("/register", register)
+		r.HandleFunc("/home", Home)
 	*/
 	http.Handle("/", r)
 
