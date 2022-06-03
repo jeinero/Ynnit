@@ -16,6 +16,7 @@ var AllApi AllStructs
 type ApiPosts struct {
 	Post     Post
 	Comments []Comment
+	like     int
 }
 type ApiUsers struct {
 	User     User
@@ -94,6 +95,8 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 			temptab.Comments = append(temptab.Comments, comment)
 		}
 	}
+	idInt, _ := strconv.Atoi((id))
+	temptab.like = countLike(AllApi.db, "likedpost", "postLike", idInt)
 	json.NewEncoder(w).Encode(temptab)
 }
 
@@ -214,6 +217,7 @@ func Handler() {
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
 
+// countLike(AllApi.db, "comment", "postLink", 1)
 func reloadApi() {
 	AllApi.UsersAll = DbtoStructUser(AllApi.db)
 	AllApi.CommunautersAll = DbtoStructCommunauter(AllApi.db)
