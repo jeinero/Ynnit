@@ -1,5 +1,6 @@
 document.getElementById("btn").onclick = function () {
     if (document.getElementById("titre").value.length >= 1) {
+
         onClickPost()
     } else {
         document.getElementById("error").innerText = "enter a title"
@@ -18,8 +19,8 @@ function onClickPost() {
             content: document.getElementById("content").value,
         })
     })
-    .then((data) => {
-            document.getElementById("error").innerText = data.error
+    .catch((err) => {
+        document.getElementById("error").innerText = err.error
 
         })
 }
