@@ -178,10 +178,7 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 	var newPost Post
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &newPost)
-	goodOrFalse := InsertIntoPost(AllApi.db, newPost.Title, newPost.Content, 1, 2)
-	if !goodOrFalse {
-		w.Write([]byte("{\"error\": \"Sorry\"}"))
-	}
+	InsertIntoPost(AllApi.db, newPost.Title, newPost.Content, 1, 2)
 }
 
 func Handler() {
