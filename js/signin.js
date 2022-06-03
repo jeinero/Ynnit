@@ -20,14 +20,17 @@ function signin() {
             password: document.getElementById("pwd").value
         })
     })
-    .then((res) => res.json())
-    .then((data) => {
-        console.log(data)
-        if (!!data.error) {
-            document.getElementById("error").innerText = data.error
-            return;
-        }
+    .then(async (res) => {
+        if (!res.ok)
+            throw await res.json()
+       return res.json()
     })
+    .then((data) => {
+        location.href = "/profile"
+    }).catch((err) => {
+        document.getElementById("error").innerText = err.error
+    })
+    document.getElementById("pwd").value = ""
 }
 
 function hashpass() {

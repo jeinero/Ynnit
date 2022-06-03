@@ -31,9 +31,9 @@ func Checksignin(w http.ResponseWriter, r *http.Request) {
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &temptab)
 	if UserExists(AllApi.db, temptab.Email, temptab.Password) {
-		http.Redirect(w, r, "/profile", http.StatusFound)
+		w.Write([]byte("{\"msg\": \"Success\"}"))
 	} else {
-		w.Write([]byte("{\"error\": \"Your email or password was entered incorrectly\"}"))
+		http.Error(w, "{\"error\": \"Your email or password was entered incorrectly\"}", http.StatusUnauthorized)
 	}
 }
 
@@ -140,9 +140,9 @@ func Newuser(w http.ResponseWriter, r *http.Request) {
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &newUser)
 	if InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Password) {
-		http.Redirect(w, r, "/signin", http.StatusFound)
+		w.Write([]byte("{\"msg\": \"Success\"}"))
 	} else {
-		w.Write([]byte("{\"error\": \"enter a unique email and name\"}"))
+		http.Error(w, "{\"error\": \"Enter a unique email and name\"}", http.StatusUnauthorized)
 	}
 }
 
