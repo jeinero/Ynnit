@@ -166,7 +166,7 @@ func DbtoStructPost(db *sql.DB) []Post {
 
 	for rowsUsers.Next() {
 		var u Post
-		err := rowsUsers.Scan(&u.Id, &u.CommuLink, &u.Titlte, &u.Content, &u.UsersID)
+		err := rowsUsers.Scan(&u.Id, &u.CommuLink, &u.Title, &u.Content, &u.UsersID)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -174,10 +174,11 @@ func DbtoStructPost(db *sql.DB) []Post {
 	}
 	return temptab
 }
-func InsertIntoPost(db *sql.DB, CommuLink int, Titlte string, Content string, UsersID int) (int64, error) {
-	result, err := db.Exec(`INSERT INTO post (commuLink, title, contentPost, user_id) VALUES (?,?,?,?)`, CommuLink, Titlte, Content, UsersID)
+func InsertIntoPost(db *sql.DB, Title string, Content string, CommuLink int, user_id int) bool {
+	_, err := db.Exec(`INSERT INTO post (title, contentPost, commuLink,user_id) VALUES (?,?,?,?)`, Title, Content, CommuLink, user_id)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
+		return false
 	}
-	return result.LastInsertId()
+	return true
 }

@@ -23,8 +23,8 @@ type Communauter struct {
 type Post struct {
 	Id        int    `json: "id"`
 	CommuLink int    `json: "commuLink"`
-	Titlte    string `json: "title"`
-	Content   string `json: "email"`
+	Title     string `json: "title"`
+	Content   string `json: "content"`
 	UsersID   int    `json: "idUser"`
 }
 type Comment struct {

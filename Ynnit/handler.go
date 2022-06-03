@@ -9,13 +9,11 @@ import (
 	"strconv"
 
 	"github.com/gorilla/mux"
+	"golang.org/x/crypto/bcrypt"
 )
 
 var AllApi AllStructs
 
-func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello Home!")
-}
 func ApiAllHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	json.NewEncoder(w).Encode(AllApi)
@@ -123,8 +121,17 @@ func CommentHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func HomeHandler(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/home.html")
+}
+
+func Caca(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("{\"test\": \"toto\"}"))
+}
+
 func Signin(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/Signin.html")
+
 }
 
 func Profile(w http.ResponseWriter, r *http.Request) {
@@ -144,6 +151,33 @@ func Newuser(w http.ResponseWriter, r *http.Request) {
 	} else {
 		w.Write([]byte("{\"error\": \"enter a unique email and name\"}"))
 	}
+
+}
+
+func PostsPage(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/post.html")
+}
+
+func Posts(w http.ResponseWriter, r *http.Request) {
+	var newPost Post
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &newPost)
+	goodOrFalse := InsertIntoPost(AllApi.db, newPost.Title, newPost.Content, 1, 2)
+	if !goodOrFalse {
+		w.Write([]byte("{\"error\": \"Sorry\"}"))
+	} else {
+
+	}
+}
+
+func HashPassword(password string) (string, error) {
+	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
+	return string(bytes), err
+}
+
+func CheckPasswordHash(password, hash string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
+	return err == nil
 }
 
 func Handler() {
@@ -195,7 +229,10 @@ func Handler() {
 
 	r.HandleFunc("/profile", Profile)
 
-	reloadApi()
+	r.HandleFunc("/postpage", PostsPage)
+	r.HandleFunc("/post", Posts)
+
+	r.HandleFunc("/caca", Caca)
 	http.Handle("/", r)
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
