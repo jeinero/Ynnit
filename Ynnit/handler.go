@@ -10,10 +10,23 @@ import (
 	"text/template"
 
 	"github.com/gorilla/mux"
-	"golang.org/x/crypto/bcrypt"
 )
 
 var AllApi AllStructs
+
+type ApiPosts struct {
+	Post     Post
+	Comments []Comment
+}
+type ApiUsers struct {
+	User     User
+	Post     []Post
+	Comments []Comment
+}
+type ApiCommunauter struct {
+	Communauter Communauter
+	Post        []Post
+}
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Hello Home!")
@@ -28,24 +41,35 @@ func UsersHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(AllApi.UsersAll)
 }
 
+func Checksignin(w http.ResponseWriter, r *http.Request) {
+	var temptab User
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &temptab)
+	if UserExists(AllApi.db, temptab.Email, temptab.Password) {
+		http.Redirect(w, r, "/profile", http.StatusFound)
+	} else {
+		w.Write([]byte("{\"error\": \"Your email or password was entered incorrectly\"}"))
+	}
+}
+
 func UserHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	vars := mux.Vars(r)
 	id := vars["id"]
-	var temptab AllStructs
+	var temptab ApiUsers
 	for _, user := range AllApi.UsersAll {
 		if strconv.Itoa(user.Id) == id {
-			temptab.UsersAll = append(temptab.UsersAll, user)
+			temptab.User = user
 		}
 	}
 	for _, post := range AllApi.PostsAll {
 		if strconv.Itoa(post.UsersID) == id {
-			temptab.PostsAll = append(temptab.PostsAll, post)
+			temptab.Post = append(temptab.Post, post)
 		}
 	}
 	for _, comment := range AllApi.CommentsAll {
 		if strconv.Itoa(comment.UsersID) == id {
-			temptab.CommentsAll = append(temptab.CommentsAll, comment)
+			temptab.Comments = append(temptab.Comments, comment)
 		}
 	}
 	json.NewEncoder(w).Encode(temptab)
@@ -60,15 +84,15 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	vars := mux.Vars(r)
 	id := vars["id"]
-	var temptab AllStructs
+	var temptab ApiPosts
 	for _, post := range AllApi.PostsAll {
 		if strconv.Itoa(post.Id) == id {
-			temptab.PostsAll = append(temptab.PostsAll, post)
+			temptab.Post = post
 		}
 	}
 	for _, comment := range AllApi.CommentsAll {
 		if strconv.Itoa(comment.PostLink) == id {
-			temptab.CommentsAll = append(temptab.CommentsAll, comment)
+			temptab.Comments = append(temptab.Comments, comment)
 		}
 	}
 	json.NewEncoder(w).Encode(temptab)
@@ -83,15 +107,15 @@ func CommunauterHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	vars := mux.Vars(r)
 	id := vars["id"]
-	var temptab AllStructs
+	var temptab ApiCommunauter
 	for _, communauter := range AllApi.CommunautersAll {
 		if strconv.Itoa(communauter.Id) == id {
-			temptab.CommunautersAll = append(temptab.CommunautersAll, communauter)
+			temptab.Communauter = communauter
 		}
 	}
 	for _, post := range AllApi.PostsAll {
 		if strconv.Itoa(post.CommuLink) == id {
-			temptab.PostsAll = append(temptab.PostsAll, post)
+			temptab.Post = append(temptab.Post, post)
 		}
 	}
 	json.NewEncoder(w).Encode(temptab)
@@ -121,8 +145,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 }
 
 func Signin(w http.ResponseWriter, r *http.Request) {
-	var templateshtml = template.Must(template.ParseGlob("./templates/*.html"))
-	templateshtml.ExecuteTemplate(w, "Signin.html", 0)
+	http.ServeFile(w, r, "./templates/Signin.html")
 }
 
 func Profile(w http.ResponseWriter, r *http.Request) {
@@ -133,16 +156,15 @@ func Joinus(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/joinus.html")
 }
 
-func NewUser(w http.ResponseWriter, r *http.Request) {
+func Newuser(w http.ResponseWriter, r *http.Request) {
 	var newUser User
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &newUser)
-	fmt.Println(newUser)
-	goodOrFalse := InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Name)
-	if !goodOrFalse {
-		w.Write([]byte("{\"error\": \"Sorry\"}"))
+	if InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Password) {
+		http.Redirect(w, r, "/signin", http.StatusFound)
+	} else {
+		w.Write([]byte("{\"error\": \"enter a unique email and name\"}"))
 	}
-
 }
 
 func PostsPage(w http.ResponseWriter, r *http.Request) {
@@ -157,16 +179,6 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 	if !goodOrFalse {
 		w.Write([]byte("{\"error\": \"Sorry\"}"))
 	}
-}
-
-func HashPassword(password string) (string, error) {
-	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
-	return string(bytes), err
-}
-
-func CheckPasswordHash(password, hash string) bool {
-	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
-	return err == nil
 }
 
 func Handler() {
@@ -200,6 +212,7 @@ func Handler() {
 
 	r.HandleFunc("/apiusers", UsersHandler)
 	r.HandleFunc("/apiusers/{id}", UserHandler)
+	r.HandleFunc("/checksignin", Checksignin)
 
 	r.HandleFunc("/apiposts", PostsHandler)
 	r.HandleFunc("/apiposts/{id}", PostHandler)
@@ -213,7 +226,7 @@ func Handler() {
 	r.HandleFunc("/signin", Signin)
 
 	r.HandleFunc("/joinus", Joinus)
-	r.HandleFunc("/newUser", NewUser)
+	r.HandleFunc("/newuser", Newuser)
 
 	r.HandleFunc("/profile", Profile)
 
@@ -222,6 +235,7 @@ func Handler() {
 
 	r.HandleFunc("/home", Home)
 
+	reloadApi()
 	http.Handle("/", r)
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
