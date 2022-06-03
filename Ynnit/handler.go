@@ -163,6 +163,20 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func ViewPost(w http.ResponseWriter, r *http.Request) {
+	var templateshtml = template.Must(template.ParseFiles("./templates/viewpost.html"))
+	a := getPost(id)
+	err := templateshtml.Execute(w, a)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+func getPost(id int) {
+
+	resp, err := http.Get("/apiposts/" + id)
+}
+
 func HashPassword(password string) (string, error) {
 	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
 	return string(bytes), err
@@ -224,6 +238,7 @@ func Handler() {
 	r.HandleFunc("/postpage", PostsPage)
 	r.HandleFunc("/post", Posts)
 	r.HandleFunc("/home", Home)
+	r.HandleFunc("/viewpost/{id}", ViewPost)
 
 	http.Handle("/", r)
 	log.Fatal(http.ListenAndServe(":8080", r))

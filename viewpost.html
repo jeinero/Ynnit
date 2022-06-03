@@ -2,26 +2,19 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="./css/post.css">
+    <title>{{.}}</title>
+
+    <link rel="stylesheet" href="./viewpost.css">
 </head>
 
 <body>
     <div class="container">
-
-
-        <select name="communité" class="selectcomm">
-            <option value="">Choose the community</option>
-            <option value="">test</option>
-            <option value="">test</option>
-            <option value="">test</option>
-        </select>
-
-
         <div class="CreatePost">
-            <p><strong>Create a Post:</strong> </p>
+            <p><strong>View the post</strong> </p>
             <!-- <form action="" id="ContainPost"> -->
-                <input id="titre" type="text" required="required" maxlength="300" size="50" placeholder="Title">
-                <textarea id="content"name="" cols="30" rows="10" placeholder="Text (optional)"></textarea>
+                <h1 id="titre">{{.TitreDuPoste}}</h1>
+                <h2 id="content">{{.ContenuDuPost}}</h2>
+                <!-- <textarea id="content"name="" cols="30" rows="10" placeholder="Text (optional)"></textarea> -->
             <!-- </form>
                 <form action=""> -->
                       <input type="checkbox" id="btnControl" />
