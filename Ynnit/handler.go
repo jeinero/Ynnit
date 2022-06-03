@@ -141,8 +141,6 @@ func NewUser(w http.ResponseWriter, r *http.Request) {
 	goodOrFalse := InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Name)
 	if !goodOrFalse {
 		w.Write([]byte("{\"error\": \"Sorry\"}"))
-	} else {
-
 	}
 
 }
@@ -158,8 +156,6 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 	goodOrFalse := InsertIntoPost(AllApi.db, newPost.Title, newPost.Content, 1, 2)
 	if !goodOrFalse {
 		w.Write([]byte("{\"error\": \"Sorry\"}"))
-	} else {
-
 	}
 }
 
@@ -223,6 +219,7 @@ func Handler() {
 
 	r.HandleFunc("/postpage", PostsPage)
 	r.HandleFunc("/post", Posts)
+
 	r.HandleFunc("/home", Home)
 
 	http.Handle("/", r)
