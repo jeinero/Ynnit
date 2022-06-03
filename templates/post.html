@@ -19,25 +19,24 @@
 
         <div class="CreatePost">
             <p><strong>Create a Post:</strong> </p>
-            <!-- <form action="" id="ContainPost"> -->
-                <input id="titre" type="text" required="required" maxlength="300" size="50" placeholder="Title">
+           
+                <input  id="titre" type="text" maxlength="300" size="50" placeholder="Title" required>
                 <textarea id="content"name="" cols="30" rows="10" placeholder="Text (optional)"></textarea>
-            <!-- </form>
-                <form action=""> -->
+            
                       <input type="checkbox" id="btnControl" />
             <label for="btnControl">
                 <div id="colored">
                     + informatique
                 </div>
             </label>
-                <!-- </form> -->
           
+            <p id="error" style="color: red"></p>
 
             <div class="PosterContain">
 
                 <div class="Poster">
-                    <button class="btn" id="submitPost" value="Submit" form="ContainPost">Post
-                        <button class="btn">Delete</button>
+                    <button id="btn" type="submit"> test</button>
+                        <button class="test">Delete</button>
                 </div>
 
             </div>
@@ -48,9 +47,5 @@
     </div>
 </body>
 <script type="module" src='/js/post.js'></script>
-<script type="module"> 
-    import {onClickPost} from '/js/post.js'
 
-    document.querySelector("#submitPost").addEventListener('click', onClickPost)
-</script>
 </html>

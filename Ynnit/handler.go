@@ -8,6 +8,7 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"text/template"
 
 	"github.com/gorilla/mux"
 )
@@ -170,6 +171,17 @@ func Newuser(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func PostsPage(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/post.html")
+}
+
+func Posts(w http.ResponseWriter, r *http.Request) {
+	var newPost Post
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &newPost)
+	InsertIntoPost(AllApi.db, newPost.Title, newPost.Content, 1, 2)
+}
+
 func Handler() {
 
 	db := InitDatabase("./Ynnit.db")
@@ -218,6 +230,11 @@ func Handler() {
 	r.HandleFunc("/newuser", Newuser)
 
 	r.HandleFunc("/profile", Profile)
+
+	r.HandleFunc("/postpage", PostsPage)
+	r.HandleFunc("/post", Posts)
+
+	r.HandleFunc("/home", Home)
 
 	reloadApi()
 	http.Handle("/", r)
