@@ -1,8 +1,15 @@
-/*      MODIF DE MAXIME     BOUTON-theme-noir/blanc     */
+/* POLICE ----------------------------------------------------- */
+body {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+}
 #template {
     margin-top: 80px;
     margin-left: 16%;
+    font-family: 'Tiro Devanagari Sanskrit', serif;
 }
+
+/*      MODIF DE MAXIME     BOUTON-theme-noir/     */
+
 #templatecolor{
     border-radius: 10px;
     width:50%;
