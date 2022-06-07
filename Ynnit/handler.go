@@ -3,7 +3,6 @@ package YnnitPackage
 import (
 	"encoding/json"
 	"fmt"
-	"html/template"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -156,6 +155,10 @@ func Joinus(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/joinus.html")
 }
 
+func ViewPost(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/viewpost.html")
+}
+
 func Newuser(w http.ResponseWriter, r *http.Request) {
 	var newUser User
 	body, _ := ioutil.ReadAll(r.Body)
@@ -244,6 +247,8 @@ func Handler() {
 
 	r.HandleFunc("/postpage", PostsPage)
 	r.HandleFunc("/post", Posts)
+	r.HandleFunc("/viewpost", ViewPost)
+
 	http.Handle("/", r)
 	log.Fatal(http.ListenAndServe(":8080", r))
 }

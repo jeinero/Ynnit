@@ -117,6 +117,11 @@
                                 posts.forEach(element => {
                                         console.log(element)
                                         const newcard = document.createElement('div')
+                                        const a = document.createElement('a')
+                                        const lien = document.createTextNode('voici le lien')
+                                        a.append(lien)
+                                        a.href = "/viewpost?id="+element.Id
+                                        newcard.append(a)
                                         newcard.classList = 'card'
 
                                         const divhaut = document.createElement('div')
@@ -131,8 +136,7 @@
                                         community.innerHTML = "community"
 
                                        const date = document.createElement('div')
-                                        // let today = new Date()
-                                        // console.log(today.getHours()+":" + today.getMinutes()+"-"+ today.getDate())
+
                                         date.classList = 'date'
                                         date.innerHTML = "date de publication"
 
