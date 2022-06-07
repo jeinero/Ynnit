@@ -251,22 +251,33 @@ color: white;
 }
 
 .bigcard {
-    margin: 0px 3%;
+    margin:1% 10%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around 12px;
     border: 2px solid red;
     height: 100%;
-
 }
 
 .card {
     background: #FFFFFF 0% 0% no-repeat padding-box;
-    border-radius: 10px;
+    border-radius: 40px;
     padding: 10px;
-    height: 100%;
     width: 100%;
     border: solid 3px black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0.5%;
+}
+
+.divhaut {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    border: 2px solid green;
+    height: 50px;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .content {
@@ -274,7 +285,7 @@ color: white;
     justify-content: center;
     border: 2px solid blue;
     height: 70px;
-    width: 100%;
+    width: 80%;
     align-items: center;
 }
 
@@ -286,12 +297,39 @@ color: white;
     height: 100%
 }
 
-.divhaut {
+
+.divbas {
     display: flex;
     flex-direction: row;
     width: 100%;
     border: 2px solid green;
     height: 50px;
     align-items: center;
-    justify-content: space-around;
+}
+
+.like {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;   
+    height: 100%;
+    border: 2px solid red;
+}
+
+.dislike {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;   
+    height: 100%;
+    border: 2px solid red;
+}
+
+.comments {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;   
+    height: 100%;
+    border: 2px solid red;
 }
