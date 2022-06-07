@@ -256,15 +256,42 @@ color: white;
     flex-wrap: wrap;
     justify-content: space-around 12px;
     border: 2px solid red;
-    height: 500px;
+    height: 100%;
 
 }
 
 .card {
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border-radius: 10px;
-    padding: 5px;
-    height: 20%;
+    padding: 10px;
+    height: 100%;
     width: 100%;
     border: solid 3px black;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    border: 2px solid blue;
+    height: 70px;
+    width: 100%;
+    align-items: center;
+}
+
+.community {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;   
+    height: 100%
+}
+
+.divhaut {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    border: 2px solid green;
+    height: 50px;
+    align-items: center;
+    justify-content: space-around;
 }
