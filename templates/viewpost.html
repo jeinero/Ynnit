@@ -8,11 +8,43 @@
 </head>
 
 <body>
-    
-<div id="test">
+    <div class="container">
+        <div class="viewPost">
+            <p><strong>View the post</strong> </p>
+                <h1 id="titre">{{.Id}}</h1>
+                <h2 id="content">{{.ContenuDuPost}}</h2>
+        </div>        
+        <div class="viewComments">
+            {{range .}}
+            <div id="comment">
+                <p id=name><strong>{{.Comment}}</strong></p>
+            </div>
+            {{end}}
+        </div>
 
-</div>
+        <div class="viewLikes">
+            <p>Likes : </p> <p id="likesNumber">0</p> 
+        </div>
+    </div>
     
-</body>                  
-<script type="module" src='/js/viewPost.js'></script>
+
+    
+</body>
+<script type="module" src='/js/post.js'></script>
+<script type="module"> 
+    import {onClickPost} from '/js/post.js'
+
+    document.querySelector("#submitPost").addEventListener('click', onClickPost)
+
+
+    fetch("/apiposts/")
+                        .then((response) => response.json())
+                        .then(function newCard(posts) {
+                                posts.forEach(element => {
+                                        
+                                });
+                        })
+
+
+</script>
 </html>
