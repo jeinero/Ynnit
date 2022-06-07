@@ -173,21 +173,19 @@ func Newuser(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func login(w http.ResponseWriter, r *http.Request) {
+func Session(w http.ResponseWriter, r *http.Request) {
 	session, _ := store.Get(r, "cookie-name")
 	session.Values["authenticated"] = true
 	session.Save(r, w)
 	http.Redirect(w, r, "/profile", http.StatusFound)
 }
 
-func HandleLogout(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/logout" {
-		http.NotFound(w, r)
-		return
-	}
+func Logout(w http.ResponseWriter, r *http.Request) {
 	session, _ := store.Get(r, "cookie-name")
-	session.Values["authenticated"] = nil
+
+	session.Values["authenticated"] = false
 	session.Save(r, w)
+
 	http.Redirect(w, r, "/", http.StatusFound)
 }
 
@@ -237,10 +235,14 @@ func Handler() {
 
 	r.HandleFunc("/joinus", Joinus)
 	r.HandleFunc("/newuser", Newuser)
-	r.HandleFunc("/logout", HandleLogout)
-	r.HandleFunc("/login", login)
+	// r.HandleFunc("/logout", HandleLogout)
+	// r.HandleFunc("/login", login)
 
 	r.HandleFunc("/profile", Profile)
+
+	r.HandleFunc("/session", Session)
+
+	r.HandleFunc("/logout", Logout)
 
 	reloadApi()
 	http.Handle("/", r)
