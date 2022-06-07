@@ -2,35 +2,62 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<link href="communityCreate.css" rel="stylesheet">
+		<link href="/css/communityCreate.css" rel="stylesheet">
         <link href="/css/font-button.css" rel="stylesheet">
 		<title>CommunityTemplate</title>
 </head>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&display=swap');
 </style>
-	<body>
+	<body> 
         <button class="button" onclick = "changeColor('white');" >Mode Clair</button>
-        <button class="button" onclick = "returnChangeColor('black');" >Mode foncé</button>
+        <button class="button" onclick = "returnChangeColor('black');" >Mode foncé</button> 
         
             <div id="template">
-                <h1 id="templatecolor">Create your community :</h1>
-                <div id="flex-form">
-                    <table>
-                            <tr id="form">
-                                Name (2 to 16 characters):
-                                <input type="text" id="input" required minlength="2" maxlength="16" size="10" >
-                            </tr>
-                            <tr id="form">Name (2 to 16 characters):
-                                
-                            </tr>
-                    </table>
-                </div>                  
-                    <div id="form" >
-                        Description (3000 characters max.):
-                        <textarea type="text" id="formDescription" required minlength="2" maxlength="3000" size="10" list="10"></textarea>
+                <div class="container">
+                    <select name="communité" class="selectcomm">
+                        <option value="">Choose the community</option>
+                        <option value="">gaming</option>
+                        <option value="">music</option>
+                        <option value="">test ect..</option>
+                    </select>
+                    <div class="CreatePost">
+                        <h1 id="templatecolor">Create your community :</h1>
+                        <!-- <form action="" id="ContainPost"> -->
+                            <input id="titre" type="text" maxlength="300" size="50" placeholder="Title">
+                            <textarea id="content"name="" cols="30" rows="10" placeholder="Text (optional)"></textarea>
+                        <!-- </form>
+                            <form action=""> -->
+                                <input type="checkbox" id="btnControl" />
+                        <label for="btnControl">
+                            <div id="colored">
+                                + informatique
+                            </div>
+                        </label>
+                            <!-- </form> -->
+                        <div class="PosterContain">
+                            <div class="Poster">
+                                <button class="btn" id="submitPost" value="Submit" form="ContainPost">Post
+                                    <button class="btn">Delete</button>
+                            </div>
+                        </div>
                     </div>
-            </div>
-        <script type="text/javascript" src="/js/font-button.js" ></script>
+                </div>
+            </div>           
+    <!-- <span id="form">
+        Name (2 to 16 characters):
+        <input type="text" id="input" required minlength="2" maxlength="16" size="10" >
+    </span>
+
+<h1 id="templatecolor">Create your community :</h1>
+
+        <div id="form" >
+            Description (3000 characters max.):
+            <textarea type="text" id="formDescription" required minlength="2" maxlength="3000" size="10" list="10"></textarea>
+        </div>
+    </div> -->
+       
+    <script type="text/javascript" src="/js/font-button.js" ></script>
+    <script type="module" src='/js/post.js'></script>
     </body>
 </html>

@@ -3,8 +3,8 @@ body {
     font-family: 'Tiro Devanagari Sanskrit', serif;
 }
 #template {
-    margin-top: 100px;
-    margin-left: 5%;
+    margin-top: 80px;
+    margin-left: 16%;
     font-family: 'Tiro Devanagari Sanskrit', serif;
 }
 /* templateTitle ----------------------------------------------------- */
@@ -51,11 +51,105 @@ input:hover{
 }
 #flex-form{
     display: flex;
-    background-color: rgb(91, 91, 91);
+    /* background-color: rgb(91, 91, 91); */
     color: aliceblue;
     grid-row: 10;
     row-gap: 10px;
 }
+/*--------------------zone de contour POST.CSS DE ROMAIN-----------------------*/
+/* .center {
+    display: flex;
+    justify-content: center;
+} */
+.container {
+    display: flex;
+    height: 350px;
+    flex-direction: column;
+    padding: 10px;
+    width: auto;
+}
+.selectcomm {
+    display: flex;
+    text-align: center;
+    margin-bottom: 20px;
+    border-radius: 30px;
+    border: 2px solid black;
+    height: 60px;
+    width: 300px;
+}
+.CreatePost {
+    border-radius: 30px;
+    padding: 10px;
+    border: 2px solid black;
+    height: 430px;
+    display: flex;
+    width: 1000px;
+    flex-direction: column;
+    box-shadow: 15px 10px 10px grey;
+}
+#titre {
+    text-align: center;
+    border-radius: 10px;
+    background-color: #d6d6d6;
+    display: flex;
+    height: 50px;
+    width: 800px;
+    margin-left: 100px;
+    border: 3px solid black;
+}
+textarea {
+    border-radius: 10px;
+    background-color: #d6d6d6;
+    width: 800px;
+    margin-left: 100px;
+    margin-top: 30px;
+    resize: none;
+    border: 3px solid black;
+}
+.PosterContain {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+.Poster {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    width: 150px;
+}
+#btnControl {
+    display: none;
+}
+label {
+    margin-top: 20px;
+    justify-content: center;
+    border: 2px solid black;
+    background-color: #d6d6d6;
+    color: #0c86e9;
+    display: flex;
+    border-radius: 30px;
+    height: 50px;
+    width: 170px;
+}
+#btnControl:checked+label>div {
+    background-color: #0c86e9;
+    color: #d6d6d6;
+    /* border: 3px solid purple; */
+}
+#colored {
+    justify-content: center;
+    background-color: #d6d6d6;
+    color: black;
+    display: flex;
+    border-radius: 30px;
+    height: 50px;
+    width: 170px;
+}
+.btn {
+    border-radius: 30px;
+    background-color: #0b7dda
+}
+
 /* 
 .button :active {
     border-radius: 9px;
