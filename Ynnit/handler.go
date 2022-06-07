@@ -189,8 +189,6 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 	goodOrFalse := InsertIntoPost(AllApi.db, 1, newPost.Title, newPost.Content, "jeinero")
 	if !goodOrFalse {
 		w.Write([]byte("{\"error\": \"Sorry\"}"))
-	} else {
-
 	}
 }
 

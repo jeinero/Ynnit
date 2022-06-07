@@ -1,2 +1,0 @@
-# Ynnit
-Ynnit Forum (reddit)
