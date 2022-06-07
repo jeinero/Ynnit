@@ -2,7 +2,6 @@ package YnnitPackage
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -10,7 +9,10 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/gorilla/sessions"
+<<<<<<< HEAD
 	"golang.org/x/crypto/bcrypt"
+=======
+>>>>>>> 86e74b269eeee1f662c7e52e63066d4ae9991f2a
 )
 
 var (
@@ -58,7 +60,7 @@ func Checksignin(w http.ResponseWriter, r *http.Request) {
 func UserHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	vars := mux.Vars(r)
-	id := vars["id"]
+	id := vars["name"]
 	var temptab ApiUsers
 	for _, user := range AllApi.UsersAll {
 		if strconv.Itoa(user.Id) == id {
@@ -66,12 +68,12 @@ func UserHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	for _, post := range AllApi.PostsAll {
-		if strconv.Itoa(post.UsersID) == id {
+		if post.UsersName == id {
 			temptab.Post = append(temptab.Post, post)
 		}
 	}
 	for _, comment := range AllApi.CommentsAll {
-		if strconv.Itoa(comment.UsersID) == id {
+		if comment.UsersName == id {
 			temptab.Comments = append(temptab.Comments, comment)
 		}
 	}
@@ -153,16 +155,20 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 }
 
 func Profile(w http.ResponseWriter, r *http.Request) {
-	session, _ := store.Get(r, "cookie-name-id")
+	session, _ := store.Get(r, "cookie-name")
 	if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
-		http.Error(w, "Forbidden", http.StatusForbidden)
-		return
+	} else {
+		http.ServeFile(w, r, "./templates/profile.html")
 	}
-	fmt.Fprintln(w, "The cake is a lie!")
+	// fmt.Fprintln(w, "The cake is a lie!")
 }
 
 func Joinus(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/joinus.html")
+}
+
+func ViewPost(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/viewpost.html")
 }
 
 func Newuser(w http.ResponseWriter, r *http.Request) {
@@ -174,7 +180,6 @@ func Newuser(w http.ResponseWriter, r *http.Request) {
 	} else {
 		http.Error(w, "{\"error\": \"Enter a unique email and name\"}", http.StatusUnauthorized)
 	}
-
 }
 
 func PostsPage(w http.ResponseWriter, r *http.Request) {
@@ -185,7 +190,7 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 	var newPost Post
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &newPost)
-	goodOrFalse := InsertIntoPost(AllApi.db, newPost.Title, newPost.Content, 1, 2)
+	goodOrFalse := InsertIntoPost(AllApi.db, 1, newPost.Title, newPost.Content, "username")
 	if !goodOrFalse {
 		w.Write([]byte("{\"error\": \"Sorry\"}"))
 	} else {
@@ -193,35 +198,21 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func HashPassword(password string) (string, error) {
-	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
-	return string(bytes), err
-}
-
-func CheckPasswordHash(password, hash string) bool {
-	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
-	return err == nil
-}
-
-func login(w http.ResponseWriter, r *http.Request) {
-	session, _ := store.Get(r, "cookie-name-id")
+func Session(w http.ResponseWriter, r *http.Request) {
+	session, _ := store.Get(r, "cookie-name")
 	session.Values["authenticated"] = true
 	session.Save(r, w)
 	http.Redirect(w, r, "/profile", http.StatusFound)
 }
 
-// func secret(w http.ResponseWriter, r *http.Request) {
-// 	session, _ := store.Get(r, "cookie-name")
+func Logout(w http.ResponseWriter, r *http.Request) {
+	session, _ := store.Get(r, "cookie-name")
 
-// 	// Check if user is authenticated
-// 	if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
-// 		http.Error(w, "Forbidden", http.StatusForbidden)
-// 		return
-// 	}
+	session.Values["authenticated"] = false
+	session.Save(r, w)
 
-// 	// Print secret message
-// 	fmt.Fprintln(w, "The cake is a lie!")
-// }
+	http.Redirect(w, r, "/", http.StatusFound)
+}
 
 func Handler() {
 
@@ -269,14 +260,20 @@ func Handler() {
 
 	r.HandleFunc("/joinus", Joinus)
 	r.HandleFunc("/newuser", Newuser)
-	// r.HandleFunc("/secret", secret)
-	r.HandleFunc("/login", login)
+	// r.HandleFunc("/logout", HandleLogout)
+	// r.HandleFunc("/login", login)
 
 	r.HandleFunc("/profile", Profile)
 
 	r.HandleFunc("/postpage", PostsPage)
 	r.HandleFunc("/post", Posts)
+	r.HandleFunc("/viewpost", ViewPost)
 
+	r.HandleFunc("/session", Session)
+
+	r.HandleFunc("/logout", Logout)
+
+	reloadApi()
 	http.Handle("/", r)
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
