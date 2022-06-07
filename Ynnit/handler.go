@@ -8,9 +8,9 @@ import (
 	"log"
 	"net/http"
 	"strconv"
-	"text/template"
 
 	"github.com/gorilla/mux"
+	"golang.org/x/crypto/bcrypt"
 )
 
 var AllApi AllStructs
@@ -30,9 +30,6 @@ type ApiCommunauter struct {
 	Post        []Post
 }
 
-func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello Home!")
-}
 func ApiAllHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	json.NewEncoder(w).Encode(AllApi)
@@ -142,14 +139,13 @@ func CommentHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func Home(w http.ResponseWriter, r *http.Request) {
-	var templateshtml = template.Must(template.ParseGlob("./templates/*.html"))
-	templateshtml.ExecuteTemplate(w, "home.html", 0)
-
+func HomeHandler(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/home.html")
 }
 
 func Signin(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/Signin.html")
+
 }
 
 func Profile(w http.ResponseWriter, r *http.Request) {
@@ -179,7 +175,22 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 	var newPost Post
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &newPost)
-	InsertIntoPost(AllApi.db, newPost.Title, newPost.Content, 1, 2)
+	goodOrFalse := InsertIntoPost(AllApi.db, newPost.Title, newPost.Content, 1, 2)
+	if !goodOrFalse {
+		w.Write([]byte("{\"error\": \"Sorry\"}"))
+	} else {
+
+	}
+}
+
+func HashPassword(password string) (string, error) {
+	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
+	return string(bytes), err
+}
+
+func CheckPasswordHash(password, hash string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
+	return err == nil
 }
 
 func Handler() {
@@ -209,7 +220,7 @@ func Handler() {
 	r.HandleFunc("/", HomeHandler)
 
 	r.HandleFunc("/", HomeHandler)
-	r.HandleFunc("/ ", ApiAllHandler)
+	r.HandleFunc("/apiall", ApiAllHandler)
 
 	r.HandleFunc("/apiusers", UsersHandler)
 	r.HandleFunc("/apiusers/{id}", UserHandler)
@@ -233,10 +244,6 @@ func Handler() {
 
 	r.HandleFunc("/postpage", PostsPage)
 	r.HandleFunc("/post", Posts)
-
-	r.HandleFunc("/home", Home)
-
-	reloadApi()
 	http.Handle("/", r)
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
