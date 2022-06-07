@@ -1,43 +1,43 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <link rel="stylesheet" href="post.css">
-        <link rel="stylesheet" href="font-button.css">
-        <title>postTemplate</title>
-    </head>
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&display=swap');
-</style>
-    <body>
-        <button class="button" onclick = "changeColor('white');" >Mode Clair</button>
-        <button class="button" onclick = "returnChangeColor('black'); changeBorder('white');" >Mode foncé</button>
-        
-        <div id="template">
-            <div class="container">
-                <select name="communité" class="selectcomm">
-                    <option value="">Choose the community</option>
-                    <option value="">test</option>
-                    <option value="">test</option>
-                    <option value="">test</option>
-                </select>
-            <div class="CreatePost">
-                <h3 id="templatecolor">Create a Post :</h3>
-                    <input  id="titre" type="text" maxlength="300" size="50" placeholder="Title" required>
-                    <textarea id="content"name="" cols="30" rows="10" placeholder="Text (optional)"></textarea>
-                        <input type="checkbox" id="btnControl" />
-                        <label for="btnControl">
-                            <div id="colored">
-                                + informatique
-                            </div>
-                        </label>
-                <p id="error" style="color: red"></p>
-                    <div class="PosterContain">
-                        <div class="Poster">
-                            <button class="btn" type="submit"> test</button>
-                            <button class="btn">Delete</button>
-                        </div>
-                    </div>
+
+<head>
+    <link rel="stylesheet" href="./css/post.css">
+</head>
+
+<body>
+    <div class="container">
+
+
+        <select name="communité" class="selectcomm">
+            <option value="">Choose the community</option>
+            <option value="">test</option>
+            <option value="">test</option>
+            <option value="">test</option>
+        </select>
+
+
+        <div class="CreatePost">
+            <p><strong>Create a Post:</strong> </p>
+           
+                <input  id="titre" type="text" maxlength="300" size="50" placeholder="Title" required>
+                <textarea id="content"name="" cols="30" rows="10" placeholder="Text (optional)"></textarea>
+            
+                      <input type="checkbox" id="btnControl" />
+            <label for="btnControl">
+                <div id="colored">
+                    + informatique
+                </div>
+            </label>
+          
+            <p id="error" style="color: red"></p>
+
+            <div class="PosterContain">
+
+                <div class="Poster">
+                    <button id="btn" type="submit" href="/" > Post </button>
+                        <button class="test">Delete</button>
+                </div>
 
             </div>
         </div>
