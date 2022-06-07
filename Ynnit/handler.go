@@ -2,15 +2,18 @@ package YnnitPackage
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"strconv"
 
 	"github.com/gorilla/mux"
-	"golang.org/x/crypto/bcrypt"
+	"github.com/gorilla/sessions"
 )
 
+var (
+	key   = []byte("super-secret-key")
+	store = sessions.NewCookieStore(key)
+)
 var AllApi AllStructs
 
 type ApiPosts struct {
@@ -49,7 +52,7 @@ func Checksignin(w http.ResponseWriter, r *http.Request) {
 
 func UserHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	id := vars["id"]
+	id := vars["name"]
 	var temptab ApiUsers
 	for _, user := range AllApi.UsersAll {
 		if strconv.Itoa(user.Id) == id {
@@ -57,12 +60,12 @@ func UserHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	for _, post := range AllApi.PostsAll {
-		if strconv.Itoa(post.UsersID) == id {
+		if post.UsersName == id {
 			temptab.Post = append(temptab.Post, post)
 		}
 	}
 	for _, comment := range AllApi.CommentsAll {
-		if strconv.Itoa(comment.UsersID) == id {
+		if comment.UsersName == id {
 			temptab.Comments = append(temptab.Comments, comment)
 		}
 	}
@@ -128,30 +131,28 @@ func CommentHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-<<<<<<< HEAD
-=======
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/home.html")
 }
 
->>>>>>> 1d2ea53489f5154b32336eab7327fbf0cbe12733
 func Signin(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/Signin.html")
 
 }
 
 func Profile(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello Profile!")
+	session, _ := store.Get(r, "cookie-name")
+	if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
+	} else {
+		http.ServeFile(w, r, "./templates/profile.html")
+	}
+	// fmt.Fprintln(w, "The cake is a lie!")
 }
 
 func Joinus(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Hello Join Us!")
 }
 
-<<<<<<< HEAD
-func communityCreate(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "./templates/communityCreate.html")
-=======
 func ViewPost(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/viewpost.html")
 }
@@ -169,25 +170,42 @@ func Newuser(w http.ResponseWriter, r *http.Request) {
 
 func PostsPage(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/post.html")
->>>>>>> 1d2ea53489f5154b32336eab7327fbf0cbe12733
 }
 
 func Posts(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "./templates/post.html")
+	var newPost Post
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &newPost)
+	goodOrFalse := InsertIntoPost(AllApi.db, 1, newPost.Title, newPost.Content, "username")
+	if !goodOrFalse {
+		w.Write([]byte("{\"error\": \"Sorry\"}"))
+	} else {
+
+	}
 }
 
-func connect(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "./templates/connect.html")
+func Session(w http.ResponseWriter, r *http.Request) {
+	session, _ := store.Get(r, "cookie-name")
+	session.Values["authenticated"] = true
+	session.Save(r, w)
+	http.Redirect(w, r, "/profile", http.StatusFound)
 }
-<<<<<<< HEAD
+
 func register(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/register.html")
-=======
 
 func CheckPasswordHash(password, hash string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
 	return err == nil
->>>>>>> 1d2ea53489f5154b32336eab7327fbf0cbe12733
+
+func Logout(w http.ResponseWriter, r *http.Request) {
+	session, _ := store.Get(r, "cookie-name")
+
+	session.Values["authenticated"] = false
+	session.Save(r, w)
+
+	http.Redirect(w, r, "/", http.StatusFound)
+
 }
 
 func Handler() {
@@ -216,12 +234,8 @@ func Handler() {
 
 	r.HandleFunc("/", HomeHandler)
 
-<<<<<<< HEAD
-	r.HandleFunc("/ ", ApiAllHandler)
-=======
 	r.HandleFunc("/", HomeHandler)
 	r.HandleFunc("/apiall", ApiAllHandler)
->>>>>>> 1d2ea53489f5154b32336eab7327fbf0cbe12733
 
 	r.HandleFunc("/apiusers", UsersHandler)
 	r.HandleFunc("/apiusers/{id}", UserHandler)
@@ -239,35 +253,36 @@ func Handler() {
 	r.HandleFunc("/signin", Signin)
 
 	r.HandleFunc("/joinus", Joinus)
+	r.HandleFunc("/newuser", Newuser)
+	// r.HandleFunc("/logout", HandleLogout)
+	// r.HandleFunc("/login", login)
 
 	r.HandleFunc("/profile", Profile)
 
-<<<<<<< HEAD
 	r.HandleFunc("/communitycreate", communityCreate)
-
-	r.HandleFunc("/post", Posts)
 
 	r.HandleFunc("/connect", connect)
 
 	r.HandleFunc("/register", register)
 
 	/*
-		r.HandleFunc("/postpage", PostsPage)
 
 		r.HandleFunc("/home", Home)
 	*/
 	//r.HandleFunc("/newuser", Newuser)
 
-	r.HandleFunc("/profile", Profile)
-
 	reloadApi()
 
-=======
 	r.HandleFunc("/postpage", PostsPage)
 	r.HandleFunc("/post", Posts)
 	r.HandleFunc("/viewpost", ViewPost)
 
->>>>>>> 1d2ea53489f5154b32336eab7327fbf0cbe12733
+	r.HandleFunc("/session", Session)
+
+	r.HandleFunc("/logout", Logout)
+
+	reloadApi()
+
 	http.Handle("/", r)
 }
 
