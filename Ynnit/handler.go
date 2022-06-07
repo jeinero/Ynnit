@@ -9,8 +9,13 @@ import (
 	"strconv"
 
 	"github.com/gorilla/mux"
+	"github.com/gorilla/sessions"
 )
 
+var (
+	key   = []byte("super-secret-key")
+	store = sessions.NewCookieStore(key)
+)
 var AllApi AllStructs
 
 type ApiPosts struct {
@@ -145,7 +150,12 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 }
 
 func Profile(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello Profile!")
+	session, _ := store.Get(r, "cookie-name-id")
+	if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
+		http.Error(w, "Forbidden", http.StatusForbidden)
+		return
+	}
+	fmt.Fprintln(w, "The cake is a lie!")
 }
 
 func Joinus(w http.ResponseWriter, r *http.Request) {
@@ -162,6 +172,26 @@ func Newuser(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "{\"error\": \"Enter a unique email and name\"}", http.StatusUnauthorized)
 	}
 }
+
+func login(w http.ResponseWriter, r *http.Request) {
+	session, _ := store.Get(r, "cookie-name-id")
+	session.Values["authenticated"] = true
+	session.Save(r, w)
+	http.Redirect(w, r, "/profile", http.StatusFound)
+}
+
+// func secret(w http.ResponseWriter, r *http.Request) {
+// 	session, _ := store.Get(r, "cookie-name")
+
+// 	// Check if user is authenticated
+// 	if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
+// 		http.Error(w, "Forbidden", http.StatusForbidden)
+// 		return
+// 	}
+
+// 	// Print secret message
+// 	fmt.Fprintln(w, "The cake is a lie!")
+// }
 
 func Handler() {
 
@@ -209,6 +239,8 @@ func Handler() {
 
 	r.HandleFunc("/joinus", Joinus)
 	r.HandleFunc("/newuser", Newuser)
+	// r.HandleFunc("/secret", secret)
+	r.HandleFunc("/login", login)
 
 	r.HandleFunc("/profile", Profile)
 
