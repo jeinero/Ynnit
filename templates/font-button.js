@@ -10,3 +10,7 @@ function returnChangeColor(color) {
     document.body.style.background = color;
     document.body.style.color = "white";
 }
+
+document.getElementById("fName").className = document.getElementById("fName").className + " error";  //this adds the error class
+
+document.getElementById("fName").className = document.getElementById("fName").className.replace(" error", ""); //this removes the error class
