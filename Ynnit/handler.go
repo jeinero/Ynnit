@@ -3,7 +3,6 @@ package YnnitPackage
 import (
 	"encoding/json"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"strconv"
 
@@ -37,12 +36,10 @@ type ApiCommunauter struct {
 }
 
 func ApiAllHandler(w http.ResponseWriter, r *http.Request) {
-	reloadApi()
 	json.NewEncoder(w).Encode(AllApi)
 }
 
 func UsersHandler(w http.ResponseWriter, r *http.Request) {
-	reloadApi()
 	json.NewEncoder(w).Encode(AllApi.UsersAll)
 }
 
@@ -58,7 +55,6 @@ func Checksignin(w http.ResponseWriter, r *http.Request) {
 }
 
 func UserHandler(w http.ResponseWriter, r *http.Request) {
-	reloadApi()
 	vars := mux.Vars(r)
 	id := vars["name"]
 	var temptab ApiUsers
@@ -81,12 +77,10 @@ func UserHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func PostsHandler(w http.ResponseWriter, r *http.Request) {
-	reloadApi()
 	json.NewEncoder(w).Encode(AllApi.PostsAll)
 }
 
 func PostHandler(w http.ResponseWriter, r *http.Request) {
-	reloadApi()
 	vars := mux.Vars(r)
 	id := vars["id"]
 	var temptab ApiPosts
@@ -106,12 +100,10 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func CommunautersHandler(w http.ResponseWriter, r *http.Request) {
-	reloadApi()
 	json.NewEncoder(w).Encode(AllApi.CommunautersAll)
 }
 
 func CommunauterHandler(w http.ResponseWriter, r *http.Request) {
-	reloadApi()
 	vars := mux.Vars(r)
 	id := vars["id"]
 	var temptab ApiCommunauter
@@ -130,11 +122,9 @@ func CommunauterHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func CommentsHandler(w http.ResponseWriter, r *http.Request) {
-	reloadApi()
 	json.NewEncoder(w).Encode(AllApi.CommentsAll)
 }
 func CommentHandler(w http.ResponseWriter, r *http.Request) {
-	reloadApi()
 	vars := mux.Vars(r)
 
 	id := vars["id"]
@@ -164,9 +154,11 @@ func Profile(w http.ResponseWriter, r *http.Request) {
 }
 
 func Joinus(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "./templates/joinus.html")
+	fmt.Fprint(w, "Hello Join Us!")
 }
 
+func communityCreate(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/communityCreate.html")
 func ViewPost(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/viewpost.html")
 }
@@ -203,8 +195,18 @@ func Session(w http.ResponseWriter, r *http.Request) {
 	session.Values["authenticated"] = true
 	session.Save(r, w)
 	http.Redirect(w, r, "/profile", http.StatusFound)
+	http.ServeFile(w, r, "./templates/post.html")
 }
 
+func connect(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/connect.html")
+}
+<<<<<<< HEAD
+func register(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/register.html")
+=======
+
+<<<<<<< HEAD
 func Logout(w http.ResponseWriter, r *http.Request) {
 	session, _ := store.Get(r, "cookie-name")
 
@@ -212,6 +214,12 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 	session.Save(r, w)
 
 	http.Redirect(w, r, "/", http.StatusFound)
+=======
+func CheckPasswordHash(password, hash string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
+	return err == nil
+>>>>>>> 1d2ea53489f5154b32336eab7327fbf0cbe12733
+>>>>>>> ebfad62417c574c7e1bf82f06aab963a999f532b
 }
 
 func Handler() {
@@ -240,8 +248,12 @@ func Handler() {
 
 	r.HandleFunc("/", HomeHandler)
 
+<<<<<<< HEAD
+	r.HandleFunc("/ ", ApiAllHandler)
+=======
 	r.HandleFunc("/", HomeHandler)
 	r.HandleFunc("/apiall", ApiAllHandler)
+>>>>>>> 1d2ea53489f5154b32336eab7327fbf0cbe12733
 
 	r.HandleFunc("/apiusers", UsersHandler)
 	r.HandleFunc("/apiusers/{id}", UserHandler)
@@ -259,23 +271,50 @@ func Handler() {
 	r.HandleFunc("/signin", Signin)
 
 	r.HandleFunc("/joinus", Joinus)
+<<<<<<< HEAD
 	r.HandleFunc("/newuser", Newuser)
 	// r.HandleFunc("/logout", HandleLogout)
 	// r.HandleFunc("/login", login)
+=======
+>>>>>>> ebfad62417c574c7e1bf82f06aab963a999f532b
 
 	r.HandleFunc("/profile", Profile)
 
+<<<<<<< HEAD
+	r.HandleFunc("/communitycreate", communityCreate)
+
+	r.HandleFunc("/post", Posts)
+
+	r.HandleFunc("/connect", connect)
+
+	r.HandleFunc("/register", register)
+
+	/*
+		r.HandleFunc("/postpage", PostsPage)
+
+		r.HandleFunc("/home", Home)
+	*/
+	//r.HandleFunc("/newuser", Newuser)
+
+	r.HandleFunc("/profile", Profile)
+
+	reloadApi()
+
+=======
 	r.HandleFunc("/postpage", PostsPage)
 	r.HandleFunc("/post", Posts)
 	r.HandleFunc("/viewpost", ViewPost)
 
+<<<<<<< HEAD
 	r.HandleFunc("/session", Session)
 
 	r.HandleFunc("/logout", Logout)
 
 	reloadApi()
+=======
+>>>>>>> 1d2ea53489f5154b32336eab7327fbf0cbe12733
+>>>>>>> ebfad62417c574c7e1bf82f06aab963a999f532b
 	http.Handle("/", r)
-	log.Fatal(http.ListenAndServe(":8080", r))
 }
 
 // countLike(AllApi.db, "comment", "postLink", 1)
