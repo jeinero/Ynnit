@@ -31,17 +31,17 @@ func InitDatabase(database string) *sql.DB {
 			commulink INTEGER NOT NULL,
 			title TEXT NOT NULL,
 			contentPost TEXT NOT NULL,
-			user_id INTEGER NOT NULL,
+			username TEXT NOT NULL,
 			FOREIGN KEY (commulink) REFERENCES communauter(id),
-			FOREIGN KEY (user_id) REFERENCES user(id) 
+			FOREIGN KEY (user_id) REFERENCES user(name) 
 		);
 		CREATE TABLE IF NOT EXISTS comment (
 			id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 			contentComment TEXT NOT NULL,
-			userid INTEGER NOT NULL,
+			username TEXT NOT NULL,
 			postLink INT,
 			FOREIGN KEY (postLink) REFERENCES post(id),
-			FOREIGN KEY (userid) REFERENCES user(id) 
+			FOREIGN KEY (userid) REFERENCES user(name) 
 		);
 		CREATE TABLE IF NOT EXISTS likedpost (
 			id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -136,7 +136,7 @@ func DbtoStructComment(db *sql.DB) []Comment {
 
 	for rowsUsers.Next() {
 		var u Comment
-		err := rowsUsers.Scan(&u.Id, &u.Content, &u.UsersID, &u.PostLink)
+		err := rowsUsers.Scan(&u.Id, &u.Content, &u.UsersName, &u.PostLink)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -146,7 +146,7 @@ func DbtoStructComment(db *sql.DB) []Comment {
 	return temptab
 }
 
-func InsertIntoComment(db *sql.DB, content string, UserdId int, PostLink int) (int64, error) {
+func InsertIntoComment(db *sql.DB, content string, UserdId string, PostLink int) (int64, error) {
 	result, err := db.Exec(`INSERT INTO comment (contentComment, userid, postLink) VALUES (?, ?, ?)`, content, UserdId, PostLink)
 	if err != nil {
 		log.Fatal(err)
@@ -181,7 +181,7 @@ func DbtoStructPost(db *sql.DB) []Post {
 
 	for rowsUsers.Next() {
 		var u Post
-		err := rowsUsers.Scan(&u.Id, &u.CommuLink, &u.Titlte, &u.Content, &u.UsersID)
+		err := rowsUsers.Scan(&u.Id, &u.CommuLink, &u.Titlte, &u.Content, &u.UsersName)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -190,7 +190,7 @@ func DbtoStructPost(db *sql.DB) []Post {
 	}
 	return temptab
 }
-func InsertIntoPost(db *sql.DB, CommuLink int, Titlte string, Content string, UsersID int) (int64, error) {
+func InsertIntoPost(db *sql.DB, CommuLink int, Titlte string, Content string, UsersID string) (int64, error) {
 	result, err := db.Exec(`INSERT INTO post (commuLink, title, contentPost, user_id) VALUES (?,?,?,?)`, CommuLink, Titlte, Content, UsersID)
 	if err != nil {
 		log.Fatal(err)
