@@ -1,0 +1,297 @@
+body {
+    margin: 0px auto;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    display: flex;
+    top: 0;
+    height: 50px;
+    width: 100%;
+    background-color: #e9e9e9;
+    text-decoration: none;
+}
+
+.logo {
+    display: flex;
+    width: 100px;
+    justify-content: center;
+    align-items: center;
+    margin-right: 160px;
+}
+
+.searchdiv {
+    display: flex;
+    width: 850px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.formheader {
+    display: flex;
+    justify-content: center;
+    background: white;
+    border-radius: 40px;
+    width: 100%;
+    color: black;
+    border: 2px solid black;
+}
+
+.Searchbutton {
+    color: black;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border-color: black;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: grab;
+}
+
+.Searchbutton:hover {
+    color: white;
+    background: red;
+}
+
+.searchhead {
+    background: none;
+    border: none;
+    outline: none;
+    color: black;
+    font-size: 20px;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    font-family: 'Lobster', cursive;
+}
+
+.Log {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 800px;
+    height: auto;
+    margin-left: 100px;
+}
+
+.Register {
+    background: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    font-size: 25px;
+    width: 150px;
+    border: 2px solid black;
+    border-radius: 40px;
+    height: 40px;
+}
+
+.Register2 {
+    background: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    font-size: 25px;
+    width: 150px;
+    margin-left: 50px;
+    border: 2px solid black;
+    height: 40px;
+}
+
+.container {
+    display: flex;
+    width: auto;
+    height: auto;
+    border: 2px solid red;
+    justify-content: center;
+    padding-top: 20px;
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+.choose {
+    display: flex;
+    width: 100%;
+    height: 200px;
+    justify-content: space-between;
+    border: 3px solid yellow;
+}
+
+.Filter1 {
+    display: flex;
+    border: 2px solid black;
+    width: 20%;
+    border-radius: 40px;
+    padding-top: 10px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.Filter2 {
+    display: flex;
+    width: 40%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.choosecommunity{
+    display: flex;
+    border: 2px solid black;
+    height: 25%;
+    width: 100%;
+    border-radius: 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+.Filter3 {
+    display: flex;
+    width: 30%;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 40px;
+    border: 1px solid black;
+    font-size: 20px;
+}
+
+.createpost{
+    display: flex;
+    border-bottom: 1px solid black;
+    height: 50%;
+    width: 100%;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+a.createpost{
+    height: 100%;
+    border: none;
+    color: black;
+}
+
+.createpost:hover {
+    background-color: black;
+    color: white;
+}
+
+.createcommunity {
+    display: flex;
+    border-top: 1px solid black;
+    height: 50%;
+    width: 100%;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    text-decoration: none;
+}
+a.createcommunity {
+    height:100%;
+    border: none;
+    color: black;
+    
+}
+
+.createcommunity:hover {
+    background-color: black;
+    color: white;
+}
+
+.lien {
+display: flex;
+width: 150px;
+height: 40px;
+font-size: 25px;
+align-items: center;
+color: black;
+text-shadow: 1px 1px 1px #000;
+border-radius: 40px;
+border: 2px solid black;
+justify-content: center;
+text-decoration: none;
+}
+
+.lien:hover {
+background-color: rgba(255, 0, 0, 1);
+}
+
+.lien:active {
+box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+    inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
+
+.user {
+display: flex;
+width: 45px;
+height: 40px;
+font-size: 25px;
+align-items: center;
+text-shadow: 1px 1px 1px #000;
+border-radius: 40px;
+border: 2px solid black;
+justify-content: center;
+text-decoration: none;
+color: black;
+}
+
+.user:hover {
+background-color: black;
+color: white;
+}
+
+.bigcard {
+    margin: 0px 3%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around 12px;
+    border: 2px solid red;
+    height: 100%;
+
+}
+
+.card {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border-radius: 10px;
+    padding: 10px;
+    height: 100%;
+    width: 100%;
+    border: solid 3px black;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    border: 2px solid blue;
+    height: 70px;
+    width: 100%;
+    align-items: center;
+}
+
+.community {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;   
+    height: 100%
+}
+
+.divhaut {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    border: 2px solid green;
+    height: 50px;
+    align-items: center;
+    justify-content: space-around;
+}

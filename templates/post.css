@@ -22,7 +22,7 @@ body {
 .CreatePost {
     border-radius: 30px;
     padding: 10px;
-    border: 2px solid black;
+    border: 2px solid rgb(64, 64, 64);
     height: 430px;
     display: flex;
     width: 1000px;

@@ -8,6 +8,7 @@ import (
 	"strconv"
 
 	"github.com/gorilla/mux"
+	"golang.org/x/crypto/bcrypt"
 )
 
 var AllApi AllStructs
@@ -27,9 +28,6 @@ type ApiCommunauter struct {
 	Post        []Post
 }
 
-func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello Home!")
-}
 func ApiAllHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(AllApi)
 }
@@ -130,8 +128,16 @@ func CommentHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+<<<<<<< HEAD
+=======
+func HomeHandler(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/home.html")
+}
+
+>>>>>>> 1d2ea53489f5154b32336eab7327fbf0cbe12733
 func Signin(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/Signin.html")
+
 }
 
 func Profile(w http.ResponseWriter, r *http.Request) {
@@ -142,8 +148,28 @@ func Joinus(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Hello Join Us!")
 }
 
+<<<<<<< HEAD
 func communityCreate(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/communityCreate.html")
+=======
+func ViewPost(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/viewpost.html")
+}
+
+func Newuser(w http.ResponseWriter, r *http.Request) {
+	var newUser User
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &newUser)
+	if InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Password) {
+		w.Write([]byte("{\"msg\": \"Success\"}"))
+	} else {
+		http.Error(w, "{\"error\": \"Enter a unique email and name\"}", http.StatusUnauthorized)
+	}
+}
+
+func PostsPage(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/post.html")
+>>>>>>> 1d2ea53489f5154b32336eab7327fbf0cbe12733
 }
 
 func Posts(w http.ResponseWriter, r *http.Request) {
@@ -153,8 +179,15 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 func connect(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/connect.html")
 }
+<<<<<<< HEAD
 func register(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/register.html")
+=======
+
+func CheckPasswordHash(password, hash string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
+	return err == nil
+>>>>>>> 1d2ea53489f5154b32336eab7327fbf0cbe12733
 }
 
 func Handler() {
@@ -183,7 +216,12 @@ func Handler() {
 
 	r.HandleFunc("/", HomeHandler)
 
+<<<<<<< HEAD
 	r.HandleFunc("/ ", ApiAllHandler)
+=======
+	r.HandleFunc("/", HomeHandler)
+	r.HandleFunc("/apiall", ApiAllHandler)
+>>>>>>> 1d2ea53489f5154b32336eab7327fbf0cbe12733
 
 	r.HandleFunc("/apiusers", UsersHandler)
 	r.HandleFunc("/apiusers/{id}", UserHandler)
@@ -204,6 +242,7 @@ func Handler() {
 
 	r.HandleFunc("/profile", Profile)
 
+<<<<<<< HEAD
 	r.HandleFunc("/communitycreate", communityCreate)
 
 	r.HandleFunc("/post", Posts)
@@ -223,6 +262,12 @@ func Handler() {
 
 	reloadApi()
 
+=======
+	r.HandleFunc("/postpage", PostsPage)
+	r.HandleFunc("/post", Posts)
+	r.HandleFunc("/viewpost", ViewPost)
+
+>>>>>>> 1d2ea53489f5154b32336eab7327fbf0cbe12733
 	http.Handle("/", r)
 }
 

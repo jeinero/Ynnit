@@ -14,7 +14,7 @@ body {
     text-align: center;
     color:black;
     border:solid black 3px;
-    text-decoration: overline underline;
+    /* text-decoration: overline underline; */
     background-color: rgb(153, 153, 153);
     margin-right: 75%;
 }
@@ -112,10 +112,11 @@ textarea {
     margin-top: 10px;
 }
 .Poster {
+    margin-right: 20px;
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
-    width: 150px;
+    width: 130px;
 }
 #btnControl {
     display: none;

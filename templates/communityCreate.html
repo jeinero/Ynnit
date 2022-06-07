@@ -2,8 +2,8 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<link href="/css/communityCreate.css" rel="stylesheet">
-        <link href="/css/font-button.css" rel="stylesheet">
+		<link href="communityCreate.css" rel="stylesheet">
+        <link href="font-button.css" rel="stylesheet">
 		<title>CommunityTemplate</title>
 </head>
 <style>
@@ -11,7 +11,7 @@
 </style>
 	<body> 
         <button class="button" onclick = "changeColor('white');" >Mode Clair</button>
-        <button class="button" onclick = "returnChangeColor('black');" >Mode foncé</button> 
+        <button class="button" onclick = "returnChangeColor('rgb(64, 64, 64)');" >Mode foncé</button> 
         
             <div id="template">
                 <div class="container">
@@ -22,7 +22,7 @@
                         <option value="">test ect..</option>
                     </select>
                     <div class="CreatePost">
-                        <h1 id="templatecolor">Create your community :</h1>
+                        <h3 id="templatecolor">Create your community :</h3>
                         <!-- <form action="" id="ContainPost"> -->
                             <input id="titre" type="text" maxlength="300" size="50" placeholder="Title">
                             <textarea id="content"name="" cols="30" rows="10" placeholder="Text (optional)"></textarea>
@@ -37,8 +37,8 @@
                             <!-- </form> -->
                         <div class="PosterContain">
                             <div class="Poster">
-                                <button class="btn" id="submitPost" value="Submit" form="ContainPost">Post
-                                    <button class="btn">Delete</button>
+                                <button class="btn" id="submitPost" value="Submit" form="ContainPost">Create !
+                                    <button class="btn">Cancel</button>
                             </div>
                         </div>
                     </div>
@@ -57,7 +57,7 @@
         </div>
     </div> -->
        
-    <script type="text/javascript" src="/js/font-button.js" ></script>
+    <script type="text/javascript" src="font-button.js" ></script>
     <script type="module" src='/js/post.js'></script>
     </body>
 </html>
