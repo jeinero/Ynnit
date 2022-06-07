@@ -118,11 +118,40 @@
                                         console.log(element)
                                         const newcard = document.createElement('div')
                                         newcard.classList = 'card'
+
+                                        const divhaut = document.createElement('div')
+                                        divhaut.classList = 'divhaut'
+
+                                        const title = document.createElement('div')
+                                        title.classList = 'title'
+                                        title.innerHTML = element.Content
+                                        
+                                        const community= document.createElement('div')
+                                        community.classList = 'community'
+                                        community.innerHTML = "community"
+
+                                       const date = document.createElement('div')
+                                        // let today = new Date()
+                                        // console.log(today.getHours()+":" + today.getMinutes()+"-"+ today.getDate())
+                                        date.classList = 'date'
+                                        date.innerHTML = "date de publication"
+
+                                        const content= document.createElement('div')
+                                        content.classList = 'content'
+                                        content.innerHTML = element.Content
+                                        
+                                        
+                                        divhaut.append(title)
+                                        divhaut.append(community)
+                                        divhaut.append(date)
+                                        newcard.appendChild(divhaut)
+                                        newcard.append(content)
                                         const integrate = document.querySelector('.bigcard')
-                                        newcard.innerHTML = element.Title
                                         integrate.appendChild(newcard)
                                 });
                         })
+
+                        
         </script>
 
 
