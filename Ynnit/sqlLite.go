@@ -33,7 +33,7 @@ func InitDatabase(database string) *sql.DB {
 			contentPost TEXT NOT NULL,
 			username TEXT NOT NULL,
 			FOREIGN KEY (commulink) REFERENCES communauter(id),
-			FOREIGN KEY (user_id) REFERENCES user(name) 
+			FOREIGN KEY (username) REFERENCES user(name) 
 		);
 		CREATE TABLE IF NOT EXISTS comment (
 			id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -41,7 +41,7 @@ func InitDatabase(database string) *sql.DB {
 			username TEXT NOT NULL,
 			postLink INT,
 			FOREIGN KEY (postLink) REFERENCES post(id),
-			FOREIGN KEY (userid) REFERENCES user(name) 
+			FOREIGN KEY (username) REFERENCES user(name) 
 		);
 		CREATE TABLE IF NOT EXISTS likedpost (
 			id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
