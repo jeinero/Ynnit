@@ -23,4 +23,6 @@ function onClickPost() {
         document.getElementById("error").innerText = err.error
 
         })
+    window.location.assign("/");
+
 }
