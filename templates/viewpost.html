@@ -37,7 +37,7 @@
     document.querySelector("#submitPost").addEventListener('click', onClickPost)
 
 
-    fetch("/apiposts/"+element.Id)
+    fetch("/apiposts/")
                         .then((response) => response.json())
                         .then(function newCard(posts) {
                                 posts.forEach(element => {
