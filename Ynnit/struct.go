@@ -24,13 +24,13 @@ type Post struct {
 	Id        int    `json: "id"`
 	CommuLink int    `json: "commuLink"`
 	Titlte    string `json: "title"`
-	Content   string `json: "email"`
+	Content   string `json: "content"`
 	UsersID   int    `json: "idUser"`
 	Like      int    `json: "likeCount"`
 }
 type Comment struct {
 	Id       int    `json: "id"`
-	Content  string `json: "email"`
+	Content  string `json: "content"`
 	PostLink int    `json: "postLink"`
 	UsersID  int    `json: "idUser"`
 	Like     int    `json: "likeCount"`
