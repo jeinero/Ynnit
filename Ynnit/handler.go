@@ -150,12 +150,12 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 }
 
 func Profile(w http.ResponseWriter, r *http.Request) {
-	session, _ := store.Get(r, "cookie-name-id")
+	session, _ := store.Get(r, "cookie-name")
 	if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
-		http.Error(w, "Forbidden", http.StatusForbidden)
-		return
+	} else {
+		http.ServeFile(w, r, "./templates/profile.html")
 	}
-	fmt.Fprintln(w, "The cake is a lie!")
+	// fmt.Fprintln(w, "The cake is a lie!")
 }
 
 func Joinus(w http.ResponseWriter, r *http.Request) {
@@ -174,24 +174,22 @@ func Newuser(w http.ResponseWriter, r *http.Request) {
 }
 
 func login(w http.ResponseWriter, r *http.Request) {
-	session, _ := store.Get(r, "cookie-name-id")
+	session, _ := store.Get(r, "cookie-name")
 	session.Values["authenticated"] = true
 	session.Save(r, w)
 	http.Redirect(w, r, "/profile", http.StatusFound)
 }
 
-// func secret(w http.ResponseWriter, r *http.Request) {
-// 	session, _ := store.Get(r, "cookie-name")
-
-// 	// Check if user is authenticated
-// 	if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
-// 		http.Error(w, "Forbidden", http.StatusForbidden)
-// 		return
-// 	}
-
-// 	// Print secret message
-// 	fmt.Fprintln(w, "The cake is a lie!")
-// }
+func HandleLogout(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/logout" {
+		http.NotFound(w, r)
+		return
+	}
+	session, _ := store.Get(r, "cookie-name")
+	session.Values["authenticated"] = nil
+	session.Save(r, w)
+	http.Redirect(w, r, "/", http.StatusFound)
+}
 
 func Handler() {
 
@@ -239,7 +237,7 @@ func Handler() {
 
 	r.HandleFunc("/joinus", Joinus)
 	r.HandleFunc("/newuser", Newuser)
-	// r.HandleFunc("/secret", secret)
+	r.HandleFunc("/logout", HandleLogout)
 	r.HandleFunc("/login", login)
 
 	r.HandleFunc("/profile", Profile)
