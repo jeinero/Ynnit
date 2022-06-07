@@ -3,12 +3,14 @@ package YnnitPackage
 import (
 	"encoding/json"
 	"fmt"
+	"html/template"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"strconv"
 
 	"github.com/gorilla/mux"
+	"github.com/gorilla/sessions"
 )
 
 var AllApi AllStructs
@@ -27,6 +29,11 @@ type ApiCommunauter struct {
 	Communauter Communauter
 	Post        []Post
 }
+
+var (
+	key   = []byte("super-secret-key")
+	store = sessions.NewCookieStore(key)
+)
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Hello Home!")
@@ -145,7 +152,15 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 }
 
 func Profile(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello Profile!")
+	session, _ := store.Get(r, "cookie-name")
+
+	if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
+		http.Error(w, "Forbidden", http.StatusForbidden)
+		return
+	}
+
+	t, _ := template.ParseFiles("./templates/profile.html")
+	t.Execute(w, nil)
 }
 
 func Joinus(w http.ResponseWriter, r *http.Request) {
@@ -161,6 +176,22 @@ func Newuser(w http.ResponseWriter, r *http.Request) {
 	} else {
 		http.Error(w, "{\"error\": \"Enter a unique email and name\"}", http.StatusUnauthorized)
 	}
+}
+
+func Session(w http.ResponseWriter, r *http.Request) {
+	session, _ := store.Get(r, "cookie-name")
+	session.Values["authenticated"] = true
+	session.Save(r, w)
+	http.Redirect(w, r, "/profile", http.StatusFound)
+}
+
+func Logout(w http.ResponseWriter, r *http.Request) {
+	session, _ := store.Get(r, "cookie-name")
+
+	session.Values["authenticated"] = false
+	session.Save(r, w)
+
+	http.Redirect(w, r, "/", http.StatusFound)
 }
 
 func Handler() {
@@ -211,6 +242,10 @@ func Handler() {
 	r.HandleFunc("/newuser", Newuser)
 
 	r.HandleFunc("/profile", Profile)
+
+	r.HandleFunc("/session", Session)
+
+	r.HandleFunc("/logout", Logout)
 
 	reloadApi()
 	http.Handle("/", r)
