@@ -1,0 +1,96 @@
+/* POLICE ----------------------------------------------------- */
+body {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+}
+#template {
+    margin-top: 80px;
+    margin-left: 16%;
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+}
+/* templateTitle ----------------------------------------------------- */
+#templatecolor{
+    border-radius: 10px;
+    width:50%;
+    text-align: center;
+    color:black;
+    border:solid black 3px;
+    /* text-decoration: overline underline; */
+    background-color: rgb(153, 153, 153);
+    margin-right: 75%;
+}
+.container {
+    display: flex;
+    height: 350px;
+    flex-direction: column;
+    padding: 10px;
+    width: auto;
+}
+/*-----------------------------------------------------------*/
+.CreatePost {
+    border-radius: 30px;
+    padding: 10px;
+    border: 2px solid black;
+    height: 430px;
+    display: flex;
+    width: 1000px;
+    flex-direction: column;
+    box-shadow: 15px 10px 10px rgb(179, 179, 179);
+}
+
+label {
+    margin-top: 20px;
+    justify-content: center;
+    border: 2px solid black;
+    background-color: #d6d6d6;
+    /* color: #0c86e9; */
+    display: flex;
+    border-radius: 30px;
+    /* height: 50px; */
+    width: 170px;
+}
+
+#centerBottom {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    width: 450px;
+    font-size: x-large;
+    margin-left: 30%;  
+}
+/*--------------------------------------------------------------*/
+* {
+    /* background-color: grey; */
+}
+
+::placeholder { 
+    color: black;
+    opacity: 1;
+  }
+
+.name{
+    border-radius: 15px;
+    border: solid 4px black;
+    color: #d6d6d6;
+    width: 240px;
+}
+
+.email{
+    border-radius: 15px;
+    border: solid 4px black;
+    color: #d6d6d6;
+    width: 240px;
+}
+
+.pwd{
+    border-radius: 15px;
+    border: solid 4px black;
+    color: #d6d6d6;
+    width: 240px;
+}
+
+.pwd2{
+    border-radius: 15px;
+    border: solid 4px black;
+    color: #d6d6d6;
+    width: 240px;
+}

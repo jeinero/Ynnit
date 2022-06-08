@@ -71,8 +71,8 @@ input:hover{
 .selectcomm {
     display: flex;
     text-align: center;
-    margin-bottom: 20px;
-    border-radius: 30px;
+    margin-bottom: 16px;
+    border-radius: 20px;
     border: 2px solid black;
     height: 60px;
     width: 300px;
@@ -85,7 +85,7 @@ input:hover{
     display: flex;
     width: 1000px;
     flex-direction: column;
-    box-shadow: 15px 10px 10px grey;
+    box-shadow: 15px 10px 10px rgb(179, 179, 179);
 }
 #titre {
     text-align: center;

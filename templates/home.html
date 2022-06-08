@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<link rel="stylesheet" href="./css/home.css">
+<link rel="stylesheet" href="home.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <html>
 
@@ -19,6 +19,7 @@
                                         fill="black" />
                         </svg>
                 </a>
+                
         </div>
 
         <div class="searchdiv">
@@ -92,24 +93,17 @@
                                         </form>
                                 </div>
                         </div>
-                        <div class="Filter3">
-                                <div class="createpost"><a class="createpost" href="/"><i
-                                                        class="fa fa-file"></i>&emsp;Create a Post</a></div>
-                                <div class="createcommunity"><a class="createcommunity" href="/"><i
-                                                        class="fa fa-folder"></i>&emsp;Create a Community</a></div>
+                                <div class="Filter3">
+                                        <div class="createpost"><a class="createpost" href="/"><i
+                                                                class="fa fa-file"></i>&emsp;Create a Post</a></div>
+                                        <div class="createcommunity"><a class="createcommunity" href="/"><i
+                                                                class="fa fa-folder"></i>&emsp;Create a Community</a></div>
+                                </div>
                         </div>
-
-
-
                 </div>
-        </div>
-
-
-        <div class="bigcard">
-
+                <div class="bigcard">
         </div>
 </body>
-
         <script>
                 fetch("/apiposts")
                         .then((response) => response.json())
@@ -173,9 +167,5 @@
                                         integrate.appendChild(newcard)
                                 });
                         })
-
-                        
         </script>
-
-
 </html>

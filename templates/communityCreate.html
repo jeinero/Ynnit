@@ -2,8 +2,8 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<link href="/css/communityCreate.css" rel="stylesheet">
-        <link href="/css/font-button.css" rel="stylesheet">
+		<link href="communityCreate.css" rel="stylesheet">
+        <link href="font-button.css" rel="stylesheet">
 		<title>CommunityTemplate</title>
     </head>
 <style>
@@ -15,17 +15,20 @@
         
             <div id="template">
                 <div class="container">
-                    <select name="communité" class="selectcomm">
-                        <option value="">Choose the community</option>
-                        <option value="">gaming</option>
-                        <option value="">music</option>
-                        <option value="">test ect..</option>
-                    </select>
+
                     <div class="CreatePost">
-                        <h3 id="templatecolor">Create your community :</h3>
+                        <span>
+                            <h3 id="templatecolor">Create your community :</h3>
+                            <select name="communité" class="selectcomm">
+                                <option value="">Choose the community</option>
+                                <option value="">gaming</option>
+                                <option value="">music</option>
+                                <option value="">test ect..</option>
+                            </select>
+                        </span>
                         <!-- <form action="" id="ContainPost"> -->
-                            <input id="titre" type="text" maxlength="300" size="50" placeholder="Title">
-                            <textarea id="content"name="" cols="30" rows="10" placeholder="Text (optional)"></textarea>
+                            <input id="titre" type="text" maxlength="40" size="50" placeholder="Title (40 characters max)">
+                            <textarea id="content"name="" cols="30" rows="10" maxlength="3000" placeholder="Text (optional 3000 characters max)"></textarea>
                         <!-- </form>
                             <form action=""> -->
                                 <input type="checkbox" id="btnControl" />
@@ -37,7 +40,7 @@
                             <!-- </form> -->
                         <div class="PosterContain">
                             <div class="Poster">
-                                <button class="btn" id="submitPost" value="Submit" form="ContainPost">Create !
+                                <button class="btn" id="submitPost" value="Submit" form="ContainPost">Create
                                 <button class="btn">Cancel</button>
                             </div>
                         </div>
@@ -57,7 +60,6 @@
         </div>
     </div> -->
        
-    <script type="text/javascript" src="/js/font-button.js" ></script>
-    <script type="module" src='/js/post.js'></script>
+    <script type="text/javascript" src="font-button.js" ></script>
     </body>
 </html>
