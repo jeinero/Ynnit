@@ -191,7 +191,7 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 	var newPost Post
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &newPost)
-	goodOrFalse := InsertIntoPost(AllApi.db, 1, newPost.Title, newPost.Content, "jeinero")
+	goodOrFalse := InsertIntoPost(AllApi.db, 1, newPost.Title, newPost.Content, "rathor")
 	if !goodOrFalse {
 		w.Write([]byte("{\"error\": \"Sorry\"}"))
 	}
@@ -249,7 +249,7 @@ func Handler() {
 	defer db.Close()
 	// InsertIntoUser(db, "jeinero", "jenei@gmail.com", "ImRio6988", "guest", "")
 	// InsertIntoUser(db, "qsdlqsd", "jeazenei@yahoo.fr", "ImRio6988")
-	// InsertIntoCommunauter(db, "Golang")
+	// InsertIntoCommunauter(db, "Golang", "")
 	// InsertIntoPost(db, 1, "Golang Basic", "Golang suck lmao", "jeinero")
 	// InsertIntoComment(db, "Menteur", 1, 1)
 	// InsertIntoComment(db, "gros bouffon", 1, 1)
