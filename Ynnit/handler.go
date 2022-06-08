@@ -164,6 +164,7 @@ func Joinus(w http.ResponseWriter, r *http.Request) {
 }
 
 func ViewPost(w http.ResponseWriter, r *http.Request) {
+
 	http.ServeFile(w, r, "./templates/viewpost.html")
 }
 
