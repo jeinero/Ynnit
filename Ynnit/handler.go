@@ -3,6 +3,7 @@ package YnnitPackage
 import (
 	"encoding/json"
 	"fmt"
+	"html/template"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -154,9 +155,9 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 func Profile(w http.ResponseWriter, r *http.Request) {
 	session, _ := store.Get(r, "cookie-name")
 	if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
-	} else {
-		http.ServeFile(w, r, "./templates/profile.html")
 	}
+	t, _ := template.ParseFiles("./templates/profile.html")
+	t.Execute(w, nil)
 	// fmt.Fprintln(w, "The cake is a lie!")
 }
 
@@ -225,10 +226,10 @@ func Handler() {
 	db := InitDatabase("./Ynnit.db")
 	AllApi.db = db
 	defer db.Close()
-	// InsertIntoUser(db, "jeinero", "jenei@gmail.com", "ImRio6988")
+	// InsertIntoUser(db, "jeinero", "jenei@gmail.com", "ImRio6988", "guest", "")
 	// InsertIntoUser(db, "qsdlqsd", "jeazenei@yahoo.fr", "ImRio6988")
-	// InsertIntoCommunauter(db, "Golang")
-	// InsertIntoPost(db, 1, "Golang Basic", "Golang suck lmao", 2)
+	// InsertIntoCommunauter(db, "Golang", "dds")
+	// InsertIntoPost(db, 1, "Golang Basic", "Golang suck lmao", "jeinero")
 	// InsertIntoComment(db, "Menteur", 1, 1)
 	// InsertIntoComment(db, "gros bouffon", 1, 1)
 	// UpdatePassUser(db, "PaseeeeeeeeeeeeeesChang", "bc@gmail.om")

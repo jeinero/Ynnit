@@ -165,7 +165,7 @@ func DbtoStructCommunauter(db *sql.DB) []Communauter {
 
 	for rowsUsers.Next() {
 		var u Communauter
-		err := rowsUsers.Scan(&u.Id, &u.Name)
+		err := rowsUsers.Scan(&u.Id, &u.Name, &u.desc)
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -173,8 +173,8 @@ func DbtoStructCommunauter(db *sql.DB) []Communauter {
 	}
 	return temptab
 }
-func InsertIntoCommunauter(db *sql.DB, Name string) (int64, error) {
-	result, err := db.Exec(`INSERT INTO communauter (name) VALUES (?)`, Name)
+func InsertIntoCommunauter(db *sql.DB, Name string, Desc string) (int64, error) {
+	result, err := db.Exec(`INSERT INTO communauter (name, desc) VALUES (?, ?)`, Name, Desc)
 	if err != nil {
 		fmt.Println(err)
 	}
