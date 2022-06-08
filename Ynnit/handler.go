@@ -35,7 +35,7 @@ type ApiCommunauter struct {
 }
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello Home!")
+	http.ServeFile(w, r, "./templates/home.html")
 }
 func ApiAllHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
@@ -265,8 +265,6 @@ func Handler() {
 
 	r.Handle("/js/{rest}",
 		http.StripPrefix("/js/", http.FileServer(http.Dir("./js"))))
-
-	r.HandleFunc("/", HomeHandler)
 
 	r.HandleFunc("/", HomeHandler)
 	r.HandleFunc("/apiall", ApiAllHandler)
