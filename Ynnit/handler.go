@@ -35,8 +35,13 @@ type ApiCommunauter struct {
 }
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello Home!")
+	http.ServeFile(w, r, "./templates/home.html")
 }
+
+func CommunityHandler(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/community.html")
+}
+
 func ApiAllHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	json.NewEncoder(w).Encode(AllApi)
@@ -155,7 +160,7 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 func Profile(w http.ResponseWriter, r *http.Request) {
 	session, _ := store.Get(r, "cookie-name")
 	if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
-		http.Error(w, "Forbidden", http.StatusForbidden)
+		http.Error(w, "Please login", http.StatusForbidden)
 		return
 	}
 
@@ -249,7 +254,7 @@ func Handler() {
 	defer db.Close()
 	// InsertIntoUser(db, "jeinero", "jenei@gmail.com", "ImRio6988", "guest", "")
 	// InsertIntoUser(db, "qsdlqsd", "jeazenei@yahoo.fr", "ImRio6988")
-	// InsertIntoCommunauter(db, "Golang")
+	// InsertIntoCommunauter(db, "Golang", "")
 	// InsertIntoPost(db, 1, "Golang Basic", "Golang suck lmao", "jeinero")
 	// InsertIntoComment(db, "Menteur", 1, 1)
 	// InsertIntoComment(db, "gros bouffon", 1, 1)
@@ -268,7 +273,6 @@ func Handler() {
 
 	r.HandleFunc("/", HomeHandler)
 
-	r.HandleFunc("/", HomeHandler)
 	r.HandleFunc("/apiall", ApiAllHandler)
 
 	r.HandleFunc("/apiusers", UsersHandler)
@@ -290,6 +294,8 @@ func Handler() {
 	r.HandleFunc("/newuser", Newuser)
 
 	r.HandleFunc("/profile", Profile)
+
+	r.HandleFunc("/community", CommunityHandler)
 
 	r.HandleFunc("/postpage", PostsPage)
 	r.HandleFunc("/post", Posts)
