@@ -3,6 +3,7 @@ package YnnitPackage
 import (
 	"encoding/json"
 	"fmt"
+	"html/template"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -154,10 +155,12 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 func Profile(w http.ResponseWriter, r *http.Request) {
 	session, _ := store.Get(r, "cookie-name")
 	if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
-	} else {
-		http.ServeFile(w, r, "./templates/profile.html")
+		http.Error(w, "Forbidden", http.StatusForbidden)
+		return
 	}
-	// fmt.Fprintln(w, "The cake is a lie!")
+
+	t, _ := template.ParseFiles("./templates/profile.html")
+	t.Execute(w, nil)
 }
 
 func Joinus(w http.ResponseWriter, r *http.Request) {
@@ -266,8 +269,6 @@ func Handler() {
 
 	r.HandleFunc("/joinus", Joinus)
 	r.HandleFunc("/newuser", Newuser)
-	// r.HandleFunc("/logout", HandleLogout)
-	// r.HandleFunc("/login", login)
 
 	r.HandleFunc("/profile", Profile)
 
