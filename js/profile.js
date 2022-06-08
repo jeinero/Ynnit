@@ -2,6 +2,7 @@ document.getElementById("logout").onclick = function(){
     location.href = "/logout"
 }
 
+
 function getCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
@@ -12,5 +13,17 @@ function getCookie(name) {
     }
     return null;
 }
-console.log(getCookie("name"))
+let id = getCookie("id")
+
+ fetch("/apiusers/" + id)
+.then(resp => resp.json())
+.then(data => {
+    let name = document.createElement("h1")
+    name.innerText = data.User.Password
+    document.body.append(name)
+})
+
+
+// console.log(user)
+
 console.log(document.cookie.value)

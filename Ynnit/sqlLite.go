@@ -75,10 +75,11 @@ func DbtoStructUser(db *sql.DB) []User {
 
 	for rowsUsers.Next() {
 		var u User
-		err := rowsUsers.Scan(&u.Id, &u.Name, &u.Email, &u.Password, &u.desc, &u.UsersLevel)
+		err := rowsUsers.Scan(&u.Id, &u.Name, &u.Email, &u.desc, &u.UsersLevel, &u.Password)
 		if err != nil {
 			fmt.Println(err)
 		}
+		fmt.Print(temptab)
 		temptab = append(temptab, u)
 	}
 	return temptab
