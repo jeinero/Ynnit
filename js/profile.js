@@ -22,8 +22,3 @@ let id = getCookie("id")
     name.innerText = data.User.Name
     document.body.append(name)
 })
-
-
-// console.log(user)
-
-console.log(document.cookie.value)

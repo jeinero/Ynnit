@@ -35,7 +35,7 @@ type ApiCommunauter struct {
 }
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello Home!")
+	http.ServeFile(w, r, "./templates/home.html")
 }
 func ApiAllHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
@@ -168,7 +168,6 @@ func Joinus(w http.ResponseWriter, r *http.Request) {
 }
 
 func ViewPost(w http.ResponseWriter, r *http.Request) {
-
 	http.ServeFile(w, r, "./templates/viewpost.html")
 }
 
@@ -191,7 +190,7 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 	var newPost Post
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &newPost)
-	goodOrFalse := InsertIntoPost(AllApi.db, 1, newPost.Title, newPost.Content, "jeinero")
+	goodOrFalse := InsertIntoPost(AllApi.db, 1, newPost.Title, newPost.Content, "Bocmacfrite")
 	if !goodOrFalse {
 		w.Write([]byte("{\"error\": \"Sorry\"}"))
 	}
@@ -268,7 +267,6 @@ func Handler() {
 
 	r.HandleFunc("/", HomeHandler)
 
-	r.HandleFunc("/", HomeHandler)
 	r.HandleFunc("/apiall", ApiAllHandler)
 
 	r.HandleFunc("/apiusers", UsersHandler)
