@@ -109,25 +109,26 @@ func DeleteUser(db *sql.DB, email string) {
 	db.Exec(`DELETE FROM user WHERE email = ?`, email)
 }
 
-func UserExists(db *sql.DB, email string, password string) string {
+func UserExists(db *sql.DB, email string, password string) (string, int) {
 	var name string
+	var id int
 	var pass string
-	sqlStmt := `SELECT name FROM user WHERE email = ?`
-	err := db.QueryRow(sqlStmt, email).Scan(&name)
+	sqlStmt := `SELECT name, id FROM user WHERE email = ?`
+	err := db.QueryRow(sqlStmt, email).Scan(&name, &id)
 	if err != nil {
 		fmt.Println("err", err)
-		return ""
+		return "", 0
 	} else {
 		sqlStmt := `SELECT password FROM user WHERE name = ?`
 		err := db.QueryRow(sqlStmt, name).Scan(&pass)
 		if err != nil {
 			fmt.Println("err", err)
-			return ""
+			return "", 0
 		} else {
 			if password == pass {
-				return name
+				return name, id
 			} else {
-				return ""
+				return "", 0
 			}
 		}
 	}

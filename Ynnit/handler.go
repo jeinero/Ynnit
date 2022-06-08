@@ -50,9 +50,10 @@ func Checksignin(w http.ResponseWriter, r *http.Request) {
 	var temptab User
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &temptab)
-	if UserExists(AllApi.db, temptab.Email, temptab.Password) != "" {
-		name := UserExists(AllApi.db, temptab.Email, temptab.Password)
-		w.Write([]byte("{\"msg\": \"" + name + "\"}"))
+	var names, ids = UserExists(AllApi.db, temptab.Email, temptab.Password)
+	if names != "" && ids != 0 {
+		name, id := UserExists(AllApi.db, temptab.Email, temptab.Password)
+		w.Write([]byte("{\"msgname\": \"" + name + "\", \"msgid\": \"" + strconv.Itoa(id) + "\"}"))
 	} else {
 		http.Error(w, "{\"error\": \"Your email or password was entered incorrectly\"}", http.StatusUnauthorized)
 	}
@@ -179,14 +180,18 @@ func Session(w http.ResponseWriter, r *http.Request) {
 	names := r.URL.Query()["name"]
 	name := names[0]
 
-	c := http.Cookie{
+	ids := r.URL.Query()["id"]
+	id := ids[0]
+
+	n := http.Cookie{
 		Name:  "name",
 		Value: "" + name}
-	http.SetCookie(w, &c)
-	a := http.Cookie{
-		Name:  "name",
-		Value: "" + name}
-	http.SetCookie(w, &a)
+	http.SetCookie(w, &n)
+
+	i := http.Cookie{
+		Name:  "id",
+		Value: "" + id}
+	http.SetCookie(w, &i)
 
 	session, _ := store.Get(r, "cookie-name")
 	session.Values["authenticated"] = true
@@ -196,13 +201,16 @@ func Session(w http.ResponseWriter, r *http.Request) {
 
 func Logout(w http.ResponseWriter, r *http.Request) {
 
-	c, err := r.Cookie("name")
+	n, err := r.Cookie("name")
+	i, err := r.Cookie("id")
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	c.MaxAge = -1
-	http.SetCookie(w, c)
+	n.MaxAge = -1
+	i.MaxAge = -1
+	http.SetCookie(w, n)
+	http.SetCookie(w, i)
 
 	session, _ := store.Get(r, "cookie-name")
 
