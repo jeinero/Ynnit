@@ -19,7 +19,7 @@ let id = getCookie("id")
 .then(resp => resp.json())
 .then(data => {
     let name = document.createElement("h1")
-    name.innerText = data.User.Password
+    name.innerText = data.User.Name
     document.body.append(name)
 })
 

@@ -79,7 +79,6 @@ func DbtoStructUser(db *sql.DB) []User {
 		if err != nil {
 			fmt.Println(err)
 		}
-		fmt.Print(temptab)
 		temptab = append(temptab, u)
 	}
 	return temptab
