@@ -178,6 +178,20 @@ func Newuser(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func PostsPage(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/post.html")
+}
+
+func Posts(w http.ResponseWriter, r *http.Request) {
+	var newPost Post
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &newPost)
+	goodOrFalse := InsertIntoPost(AllApi.db, 1, newPost.Title, newPost.Content, "jeinero")
+	if !goodOrFalse {
+		w.Write([]byte("{\"error\": \"Sorry\"}"))
+	}
+}
+
 func Session(w http.ResponseWriter, r *http.Request) {
 
 	names := r.URL.Query()["name"]
@@ -230,7 +244,7 @@ func Handler() {
 	defer db.Close()
 	// InsertIntoUser(db, "jeinero", "jenei@gmail.com", "ImRio6988", "guest", "")
 	// InsertIntoUser(db, "qsdlqsd", "jeazenei@yahoo.fr", "ImRio6988")
-	// InsertIntoCommunauter(db, "Golang", "dds")
+	// InsertIntoCommunauter(db, "Golang")
 	// InsertIntoPost(db, 1, "Golang Basic", "Golang suck lmao", "jeinero")
 	// InsertIntoComment(db, "Menteur", 1, 1)
 	// InsertIntoComment(db, "gros bouffon", 1, 1)
@@ -271,6 +285,11 @@ func Handler() {
 	r.HandleFunc("/newuser", Newuser)
 
 	r.HandleFunc("/profile", Profile)
+
+	r.HandleFunc("/postpage", PostsPage)
+	r.HandleFunc("/post", Posts)
+
+	r.HandleFunc("/viewpost", ViewPost)
 
 	r.HandleFunc("/session", Session)
 
