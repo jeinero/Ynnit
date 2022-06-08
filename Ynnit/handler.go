@@ -216,7 +216,7 @@ func Handler() {
 	// InsertIntoUser(db, "jeinero", "jenei@gmail.com", "ImRio6988")
 	// InsertIntoUser(db, "qsdlqsd", "jeazenei@yahoo.fr", "ImRio6988")
 	// InsertIntoCommunauter(db, "Golang")
-	// InsertIntoPost(db, 1, "Golang Basic", "Golang suck lmao", 2)
+	// InsertIntoPost(db, 1, "Golang Basic", "Golang suck lmao", "jeinero")
 	// InsertIntoComment(db, "Menteur", 1, 1)
 	// InsertIntoComment(db, "gros bouffon", 1, 1)
 	// UpdatePassUser(db, "PaseeeeeeeeeeeeeesChang", "bc@gmail.om")

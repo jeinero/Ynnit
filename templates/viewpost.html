@@ -8,11 +8,28 @@
 </head>
 
 <body>
-    
-<div id="test">
+    <div class="container">
+        <div class="viewPost">
+            <p><strong>View the post</strong> </p>
+                <h1 id="titre">{{.Id}}</h1>
+                <h2 id="content">{{.ContenuDuPost}}</h2>
+        </div>        
+        <div class="viewComments">
+            {{range .}}
+            <div id="comment">
+                <p id=name><strong>{{.Comment}}</strong></p>
+            </div>
+            {{end}}
+        </div>
 
-</div>
+        <div class="viewLikes">
+            <p>Likes : </p> <p id="likesNumber">0</p> 
+        </div>
+    </div>
     
-</body>                  
+
+    
+</body>
 <script type="module" src='/js/viewPost.js'></script>
+
 </html>
