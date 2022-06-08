@@ -107,11 +107,8 @@ header {
     display: flex;
     width: auto;
     height: auto;
-    border: 2px solid red;
     justify-content: center;
-    padding-top: 20px;
-    padding-left: 80px;
-    padding-right: 80px;
+    padding: 1%;
 }
 
 .choose {
@@ -119,7 +116,6 @@ header {
     width: 100%;
     height: 200px;
     justify-content: space-between;
-    border: 3px solid yellow;
 }
 
 .Filter1 {
@@ -141,14 +137,15 @@ header {
     align-items: center;
 }
 
-.choosecommunity{
+.formheader2 {
     display: flex;
-    border: 2px solid black;
-    height: 25%;
-    width: 100%;
-    border-radius: 40px;
     justify-content: center;
-    align-items: center;
+    background: white;
+    border-radius: 40px;
+    width: 100%;
+    height: 50px;
+    color: black;
+    border: 2px solid black;
 }
 
 .Filter3 {
@@ -254,14 +251,13 @@ color: white;
     margin:1% 10%;
     display: flex;
     flex-wrap: wrap;
-    border: 2px solid red;
     height: 100%;
 }
 
 .card {
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border-radius: 40px;
-    padding: 10px;
+    padding: 1%;
     width: 100%;
     border: solid 3px black;
     display: flex;
@@ -274,36 +270,59 @@ color: white;
     display: flex;
     flex-direction: row;
     width: 100%;
-    border: 2px solid green;
-    height: 50px;
+    height: auto;
     align-items: center;
-    justify-content: space-around;
+    padding-bottom: 1%;
 }
 
-.content {
+.title {
     display: flex;
     justify-content: center;
-    border: 2px solid blue;
-    height: 70px;
-    width: 80%;
     align-items: center;
+    width: 30%;   
+    height: 100%;
 }
 
 .community {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: auto;   
-    height: 100%
+    width: 55%;   
+    height: 100%;
 }
 
+.date {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 15%;   
+    height: 100%;
+}
+
+.divmiddle {
+    display: flex;
+    width: auto;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    border: 2px solid black;
+    border-radius: 40px;
+    height: 100px;
+    width: 90%;
+    align-items: center;
+}
 
 .divbas {
     display: flex;
     flex-direction: row;
     width: 100%;
-    border: 2px solid green;
-    height: 50px;
+    padding-top: 1%;
+    height: auto;
     align-items: center;
 }
 
@@ -313,7 +332,6 @@ color: white;
     align-items: center;
     width: 10%;   
     height: 100%;
-    border: 2px solid red;
 }
 
 .dislike {
@@ -322,7 +340,6 @@ color: white;
     align-items: center;
     width: 10%;   
     height: 100%;
-    border: 2px solid red;
 }
 
 .comments {
@@ -331,5 +348,4 @@ color: white;
     align-items: center;
     width: 80%;   
     height: 100%;
-    border: 2px solid red;
 }
