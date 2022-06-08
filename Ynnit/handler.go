@@ -155,19 +155,12 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 func Profile(w http.ResponseWriter, r *http.Request) {
 	session, _ := store.Get(r, "cookie-name")
 	if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
-<<<<<<< HEAD
 		http.Error(w, "Forbidden", http.StatusForbidden)
 		return
 	}
 
 	t, _ := template.ParseFiles("./templates/profile.html")
 	t.Execute(w, nil)
-=======
-	}
-	t, _ := template.ParseFiles("./templates/profile.html")
-	t.Execute(w, nil)
-	// fmt.Fprintln(w, "The cake is a lie!")
->>>>>>> d71e64e10895832f6d6467a8b1492ecf5c8eac9e
 }
 
 func Joinus(w http.ResponseWriter, r *http.Request) {
