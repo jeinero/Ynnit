@@ -183,6 +183,10 @@ func Session(w http.ResponseWriter, r *http.Request) {
 		Name:  "name",
 		Value: "" + name}
 	http.SetCookie(w, &c)
+	a := http.Cookie{
+		Name:  "name",
+		Value: "" + name}
+	http.SetCookie(w, &a)
 
 	session, _ := store.Get(r, "cookie-name")
 	session.Values["authenticated"] = true
