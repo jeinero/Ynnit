@@ -37,6 +37,11 @@ type ApiCommunauter struct {
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/home.html")
 }
+
+func CommunityHandler(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/community.html")
+}
+
 func ApiAllHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	json.NewEncoder(w).Encode(AllApi)
@@ -155,7 +160,7 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 func Profile(w http.ResponseWriter, r *http.Request) {
 	session, _ := store.Get(r, "cookie-name")
 	if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
-		http.Error(w, "Forbidden", http.StatusForbidden)
+		http.Error(w, "Please login", http.StatusForbidden)
 		return
 	}
 
@@ -288,6 +293,8 @@ func Handler() {
 	r.HandleFunc("/newuser", Newuser)
 
 	r.HandleFunc("/profile", Profile)
+
+	r.HandleFunc("/community", CommunityHandler)
 
 	r.HandleFunc("/postpage", PostsPage)
 	r.HandleFunc("/post", Posts)
