@@ -20,10 +20,13 @@ func InitDatabase(database string) *sql.DB {
 			id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 			name TEXT NOT NULL UNIQUE,
 			email TEXT NOT NULL UNIQUE,
+			desc TEXT NOT NULL,
+			levelUser TEXT NOT NULL,			
 			password TEXT NOT NULL
 		);
 		CREATE TABLE IF NOT EXISTS communauter (
 			id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+			desc TEXT NOT NULL,			
 			name TEXT NOT NULL UNIQUE
 		);
 		CREATE TABLE IF NOT EXISTS post (
@@ -33,7 +36,7 @@ func InitDatabase(database string) *sql.DB {
 			contentPost TEXT NOT NULL,
 			username TEXT NOT NULL,
 			FOREIGN KEY (commulink) REFERENCES communauter(id),
-			FOREIGN KEY (user_id) REFERENCES user(name) 
+			FOREIGN KEY (username) REFERENCES user(name) 
 		);
 		CREATE TABLE IF NOT EXISTS comment (
 			id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -41,7 +44,7 @@ func InitDatabase(database string) *sql.DB {
 			username TEXT NOT NULL,
 			postLink INT,
 			FOREIGN KEY (postLink) REFERENCES post(id),
-			FOREIGN KEY (userid) REFERENCES user(name) 
+			FOREIGN KEY (username) REFERENCES user(name) 
 		);
 		CREATE TABLE IF NOT EXISTS likedpost (
 			id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -72,7 +75,7 @@ func DbtoStructUser(db *sql.DB) []User {
 
 	for rowsUsers.Next() {
 		var u User
-		err := rowsUsers.Scan(&u.Id, &u.Name, &u.Email, &u.Password)
+		err := rowsUsers.Scan(&u.Id, &u.Name, &u.Email, &u.Password, &u.desc, &u.UsersLevel)
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -81,8 +84,8 @@ func DbtoStructUser(db *sql.DB) []User {
 	return temptab
 }
 
-func InsertIntoUser(db *sql.DB, name string, email string, password string) bool {
-	_, err := db.Exec(`INSERT INTO user (name, email, password) VALUES (?, ?, ?)`, name, email, password)
+func InsertIntoUser(db *sql.DB, name string, email string, password string, desc string, levelUser string) bool {
+	_, err := db.Exec(`INSERT INTO user (name, email, password, desc, levelUser) VALUES (?, ?, ?, ?, ?)`, name, email, password, desc, levelUser)
 	if err != nil {
 		fmt.Println(err)
 		return false
@@ -146,8 +149,8 @@ func DbtoStructComment(db *sql.DB) []Comment {
 	return temptab
 }
 
-func InsertIntoComment(db *sql.DB, content string, UserdId string, PostLink int) (int64, error) {
-	result, err := db.Exec(`INSERT INTO comment (contentComment, username, postLink) VALUES (?, ?, ?)`, content, UserdId, PostLink)
+func InsertIntoComment(db *sql.DB, content string, Username string, PostLink int) (int64, error) {
+	result, err := db.Exec(`INSERT INTO comment (contentComment, username, postLink) VALUES (?, ?, ?)`, content, Username, PostLink)
 	if err != nil {
 		fmt.Println(err)
 	}

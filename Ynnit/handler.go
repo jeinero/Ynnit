@@ -2,6 +2,7 @@ package YnnitPackage
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -32,6 +33,9 @@ type ApiCommunauter struct {
 	Post        []Post
 }
 
+func HomeHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "Hello Home!")
+}
 func ApiAllHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	json.NewEncoder(w).Encode(AllApi)
@@ -56,7 +60,7 @@ func Checksignin(w http.ResponseWriter, r *http.Request) {
 func UserHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	vars := mux.Vars(r)
-	id := vars["name"]
+	id := vars["id"]
 	var temptab ApiUsers
 	for _, user := range AllApi.UsersAll {
 		if strconv.Itoa(user.Id) == id {
@@ -64,12 +68,12 @@ func UserHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	for _, post := range AllApi.PostsAll {
-		if post.UsersName == id {
+		if post.UsersName == temptab.User.Name {
 			temptab.Post = append(temptab.Post, post)
 		}
 	}
 	for _, comment := range AllApi.CommentsAll {
-		if comment.UsersName == id {
+		if comment.UsersName == temptab.User.Name {
 			temptab.Comments = append(temptab.Comments, comment)
 		}
 	}
@@ -141,13 +145,8 @@ func CommentHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "./templates/home.html")
-}
-
 func Signin(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/Signin.html")
-
 }
 
 func Profile(w http.ResponseWriter, r *http.Request) {
@@ -163,34 +162,14 @@ func Joinus(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/joinus.html")
 }
 
-func ViewPost(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "./templates/viewpost.html")
-}
-
 func Newuser(w http.ResponseWriter, r *http.Request) {
 	var newUser User
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &newUser)
-	if InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Password) {
+	if InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Password, "You can change the desc", "Guest") {
 		w.Write([]byte("{\"msg\": \"Success\"}"))
 	} else {
 		http.Error(w, "{\"error\": \"Enter a unique email and name\"}", http.StatusUnauthorized)
-	}
-}
-
-func PostsPage(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "./templates/post.html")
-}
-
-func Posts(w http.ResponseWriter, r *http.Request) {
-	var newPost Post
-	body, _ := ioutil.ReadAll(r.Body)
-	json.Unmarshal(body, &newPost)
-	goodOrFalse := InsertIntoPost(AllApi.db, 1, newPost.Title, newPost.Content, "username")
-	if !goodOrFalse {
-		w.Write([]byte("{\"error\": \"Sorry\"}"))
-	} else {
-
 	}
 }
 
@@ -260,10 +239,6 @@ func Handler() {
 	// r.HandleFunc("/login", login)
 
 	r.HandleFunc("/profile", Profile)
-
-	r.HandleFunc("/postpage", PostsPage)
-	r.HandleFunc("/post", Posts)
-	r.HandleFunc("/viewpost", ViewPost)
 
 	r.HandleFunc("/session", Session)
 
