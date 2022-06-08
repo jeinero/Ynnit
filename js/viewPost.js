@@ -6,6 +6,7 @@ fetch("/apiposts/"+id)
 .then((response) => response.json())
 .then(data => {
        console.log(data)
+
         const title = document.createElement('div')
         title.innerHTML = data.Post.Title
         title.classList = 'title'

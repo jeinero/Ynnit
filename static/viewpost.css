@@ -1,16 +1,23 @@
 #viewpost{
+    margin:1% 10%;
     display: flex;
-    border: 2px solid blue;
-    height: 100px;
-    justify-content: center;
-   
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+   border: 2px solid yellow;
 }
 
 .title{
-    display: flex;
     border: 2px solid red;
+    display: flex;
+    justify-content: center;
+    width: 30%;   
+    height: 100%;
 }
 .content{
+    justify-content: center;
+    width: 30%;   
+    height: 100%;
     display: flex;
     border: 2px solid green;
 }
