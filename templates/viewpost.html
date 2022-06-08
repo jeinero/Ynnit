@@ -13,21 +13,6 @@
     </div>
 
 </body>
-<script type="module" src='/js/post.js'></script>
-<script type="module"> 
-    import {onClickPost} from '/js/post.js'
+<script type="module" src='/js/viewPost.js'></script>
 
-    document.querySelector("#submitPost").addEventListener('click', onClickPost)
-
-
-    fetch("/apiposts/")
-                        .then((response) => response.json())
-                        .then(function newCard(posts) {
-                                posts.forEach(element => {
-                                        
-                                });
-                        })
-
-
-</script>
 </html>
