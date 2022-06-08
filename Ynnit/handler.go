@@ -56,7 +56,7 @@ func Checksignin(w http.ResponseWriter, r *http.Request) {
 func UserHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	vars := mux.Vars(r)
-	id := vars["id"]
+	id := vars["name"]
 	var temptab ApiUsers
 	for _, user := range AllApi.UsersAll {
 		if strconv.Itoa(user.Id) == id {
@@ -64,12 +64,12 @@ func UserHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	for _, post := range AllApi.PostsAll {
-		if post.UsersName == temptab.User.Name {
+		if post.UsersName == id {
 			temptab.Post = append(temptab.Post, post)
 		}
 	}
 	for _, comment := range AllApi.CommentsAll {
-		if comment.UsersName == temptab.User.Name {
+		if comment.UsersName == id {
 			temptab.Comments = append(temptab.Comments, comment)
 		}
 	}

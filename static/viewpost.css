@@ -4,20 +4,43 @@
     height: 100%;
     flex-direction: column;
     align-items: center;
-   border: 2px solid yellow;
+   border: 2px solid black;
+   border-radius: 40px;
+   padding:1%;
+}
+
+.divtop{
+    display: flex;
+    width: 100%;   
+    height: 100px;
 }
 
 .title{
-    border: 2px solid red;
     display: flex;
     justify-content: center;
-    width: 30%;   
-    height: 100%;
+    width: 85%;   
+    height: 100px;
+    font-size: 50px;
 }
+
 .content{
     justify-content: center;
-    width: 30%;   
-    height: 100%;
+    width: auto; 
+    height: auto;
     display: flex;
-    border: 2px solid green;
+    align-items: center;
+    font-size: 25px;
+    padding: 2%;
+    border: 2px solid black;
+    border-radius: 40px;
+}
+
+.username{
+    justify-content: center;
+    width: 15%;   
+    height: auto;
+    display: flex;
+    align-items: flex-start;
+    font-style: italic;
+    font-size: 20px;
 }
