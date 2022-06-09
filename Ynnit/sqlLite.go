@@ -26,8 +26,8 @@ func InitDatabase(database string) *sql.DB {
 		);
 		CREATE TABLE IF NOT EXISTS communauter (
 			id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-			desc TEXT NOT NULL,			
-			name TEXT NOT NULL UNIQUE
+			name TEXT NOT NULL UNIQUE,
+			desc TEXT NOT NULL	
 		);
 		CREATE TABLE IF NOT EXISTS post (
 			id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
