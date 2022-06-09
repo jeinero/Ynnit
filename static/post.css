@@ -93,8 +93,8 @@ label {
     width: 170px;
 }
 #btnControl:checked+label>div {
-    background-color: #0c86e9;
-    color: #d6d6d6;
+    background-color: #0b7dda;
+    color: #ffffff;
     /* border: 3px solid purple; */
 }
 #colored {

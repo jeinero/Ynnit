@@ -3,40 +3,40 @@
     <header>
         <title>Ynnit</title>
         <meta charset="utf-8"/>
-        <link rel="stylesheet" href="joinus.css">
-        <link rel="stylesheet" href="font-button.css">
+        <link rel="stylesheet" href="/css/joinus.css">
+        <link rel="stylesheet" href="/css/font-button.css">
         
     </header>
-
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&display=swap');
+</style>
     <body>
         <button class="button" onclick = "changeColor('white');" >Mode Clair</button>
-        <button class="button" onclick = "returnChangeColor('rgb(64, 64, 64)');" >Mode foncé</button>
+        <button class="button" onclick = "returnChangeColor('rgb(64, 64, 64)');" >Mode foncé</button> 
         
-        <div id="template">
-            <div class="container">
-                <div class="CreatePost">
-                    <div class="CenterPost">      
-                            <label for="name">Name:</label>
-                            <input type="name" id="name" class="name" name="name" placeholder="BocMacFrite" required>
-                        <br><br>
-                            <label for="email">Email:</label>
-                            <input type="email" id="email"  class="email" name="email" placeholder="john.doe@example.com" required>
-                        <br><br>
-                            <label for="pwd">Password:</label>
-                            <input type="password" id="pwd"  class="pwd" name="pwd" minlength="8" autocomplete="on" required>
-                        <br><br>
-                            <label for="pwd2">Password:</label>
-                            <input type="password" id="pwd2"  class="pwd2" name="pwd2" minlength="8" autocomplete="on" required>
-                            <br><br>
-                            <button class="button" type="submit">Join Us</button>
-                            <p id="error" style="color: red"></p> 
-                    </div>   
+        <h1 id="template">
+            <img src="/css/image/connected.png"><br/>
+            TO REGISTER
+        </h1>
+        <div>        
+            <div action="" method="get" id="form">
+                <div id="centerTop">
+                    <input type="name" name="name" class="name" placeholder="Name : " id="name" required>
+                    <input type="email" name="name" class="email" placeholder="john.doe@example.com" id="email" required>
+                    <input type="password" name="pwd" class="pwd" placeholder="Enter password : " id="password" minlength="8" autocomplete="on" required>
+                    <input type="password" name="pwd2" class="pwd2" placeholder="Verify password : " id="verify" minlength="8" autocomplete="on" required>
+                </div>
+                <br/>
+                <div id="centerBottom">
+                    <button id="button" >LOGIN <img src="/css/image/connexion.png"></button>
+                    <button id="button" type="submit">REGISTER</button>
+                    <p id="error" style="color: red"></p> 
                 </div>
             </div>
         </div>
-
+        
+        <script type="text/javascript" src="/css/font-button.js" ></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/2.0.2/sha.js"></script>
         <script type="module" src='/js/joinus.js'></script>
-        <script type="module" src='/js/font-button.js'></script>
     </body>
 </html>
