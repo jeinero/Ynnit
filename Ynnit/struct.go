@@ -14,15 +14,15 @@ type User struct {
 	Id         int    `json: "id"`
 	Name       string `json: "name"`
 	Email      string `json: "email"`
-	desc       string `json: "desc"`
+	Desc       string `json: "desc"`
 	pp         string `json: "pp"`
 	Password   string `json: "password"`
 	UsersLevel string `json: "usersLevel"`
 }
 type Communauter struct {
 	Id   int    `json: "id"`
-	desc string `json: "desc"`
 	Name string `json: "name"`
+	Desc string `json: "desc"`
 }
 type Post struct {
 	Id        int    `json: "id"`

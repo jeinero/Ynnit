@@ -26,8 +26,8 @@ func InitDatabase(database string) *sql.DB {
 		);
 		CREATE TABLE IF NOT EXISTS communauter (
 			id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-			desc TEXT NOT NULL,			
-			name TEXT NOT NULL UNIQUE
+			name TEXT NOT NULL UNIQUE,
+			desc TEXT NOT NULL	
 		);
 		CREATE TABLE IF NOT EXISTS post (
 			id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -75,7 +75,7 @@ func DbtoStructUser(db *sql.DB) []User {
 
 	for rowsUsers.Next() {
 		var u User
-		err := rowsUsers.Scan(&u.Id, &u.Name, &u.Email, &u.desc, &u.UsersLevel, &u.Password)
+		err := rowsUsers.Scan(&u.Id, &u.Name, &u.Email, &u.Desc, &u.UsersLevel, &u.Password)
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -164,7 +164,7 @@ func DbtoStructCommunauter(db *sql.DB) []Communauter {
 
 	for rowsUsers.Next() {
 		var u Communauter
-		err := rowsUsers.Scan(&u.Id, &u.Name, &u.desc)
+		err := rowsUsers.Scan(&u.Id, &u.Name, &u.Desc)
 		if err != nil {
 			fmt.Println(err)
 		}
