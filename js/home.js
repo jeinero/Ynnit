@@ -2,7 +2,6 @@ fetch("/apiposts")
     .then((response) => response.json())
     .then(function newCard(posts) {
         posts.forEach(element => {
-            console.log(element)
             const newcard = document.createElement('div')
             const a = document.createElement('a')
             const lien = document.createTextNode('voici le lien')
