@@ -195,7 +195,7 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 	var newPost Post
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &newPost)
-	goodOrFalse := InsertIntoPost(AllApi.db, 1, newPost.Title, newPost.Content, "Bocmacfrite")
+	goodOrFalse := InsertIntoPost(AllApi.db, 1, newPost.Title, newPost.Content, "test")
 	if !goodOrFalse {
 		w.Write([]byte("{\"error\": \"Sorry\"}"))
 	}
