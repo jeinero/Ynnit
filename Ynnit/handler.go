@@ -176,6 +176,17 @@ func ViewPost(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/viewpost.html")
 }
 
+func Comments(w http.ResponseWriter, r *http.Request) {
+	var newComments Comment
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &newComments)
+	goodOrFalse := InsertIntoComment(AllApi.db, newComments.Content, newComments.UsersName, 1)
+	w.Write([]byte("{\"msg\": \"Success\"}"))
+	if !goodOrFalse {
+		w.Write([]byte("{\"error\": \"Sorry\"}"))
+	}
+}
+
 func Newuser(w http.ResponseWriter, r *http.Request) {
 	var newUser User
 	body, _ := ioutil.ReadAll(r.Body)
@@ -299,6 +310,7 @@ func Handler() {
 	r.HandleFunc("/post", Posts)
 
 	r.HandleFunc("/viewpost", ViewPost)
+	r.HandleFunc("/comment", Comments)
 
 	r.HandleFunc("/session", Session)
 
