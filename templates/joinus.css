@@ -59,17 +59,18 @@ button > img {
 }
 
 /*------------------------------Taille des flexs Ect-------------------------------*/
+                    #content{
+                        display: flex;
+                        justify-content: center;
+                    }
                     /*------flex pour centrer le haut------*/
                     #form {
                         display: flex;
                         flex-direction: column;
-                        margin-left: 37%;
                     }
                     #flex-title {
                         display: flex;
-                        justify-content: center;
-                        padding-left: 9%;
-                        
+                        justify-content: center;                        
                     }
                     #centerTop {
                         display: flex;
@@ -81,7 +82,7 @@ button > img {
                         display: flex;
                         flex-direction: row;
                         gap: 25px;
-                        margin-left: 3%;  
+                        padding-left: 10%; 
                     }
 /*--------CONTENU DES BOUTONS-------*/
 #content-button {
