@@ -4,19 +4,23 @@
         <title>Ynnit</title>
         <meta charset="utf-8"/>
         <link rel="stylesheet" href="joinus.css">
-        <link rel="stylesheet" href="/css/font-button.css">
+        <link rel="stylesheet" href="font-button.css">
         
     </header>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&display=swap');
 </style>
     <body>
-        <button class="button" onclick = "changeColor('white');" >Mode Clair</button>
-        <button class="button" onclick = "returnChangeColor('rgb(64, 64, 64)');" >Mode foncé</button> 
+        <div id="content-button">
+            <button class="button" onclick = "changeColor('white');" >Mode Clair</button>
+            <button class="button" onclick = "returnChangeColor('rgb(64, 64, 64)');" >Mode foncé</button> 
+        </div>
+
         
         <div id="flex-title">
-            <h1 id="template">
-                <img src="/css/image/connected.png"><br/>
+            <h1 id="flex-title-image">
+                <img src="connected.png">
+            <br/>
                 TO REGISTER
             </h1>
         </div>
@@ -30,14 +34,14 @@
                 </div>
                 <br/>
                 <div id="centerBottom">
-                    <button id="button" >LOGIN <img src="/css/image/connexion.png"></button>
+                    <button id="button" >LOGIN <img src="connexion.png"></button>
                     <button id="button" type="submit">REGISTER</button>
                     <p id="error" style="color: red"></p> 
                 </div>
             </div>
         </div>
         
-        <script type="text/javascript" src="/css/font-button.js" ></script>
+        <script type="text/javascript" src="font-button.js" ></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/2.0.2/sha.js"></script>
         <script type="module" src='/js/joinus.js'></script>
     </body>

@@ -1,12 +1,11 @@
-/*--------POLICE--------*/
+/*--------------POLICE--------------*/
 body {
     font-family: 'Tiro Devanagari Sanskrit', serif;
 }
-#template {
-    margin-top: 30px;
+#flex-title {
+    display: flex;
     font-family: 'Tiro Devanagari Sanskrit', serif;
     text-align: center;
-    color:gray;
 }
 /*-------------BUTTON PAGE CONNECT ET JOINUS----------------------------------------------*/
 #button {
@@ -52,34 +51,41 @@ body {
 }
 /*-------------------------TAILLE IMAGE DE JOINUS--------------------------*/
 
-#template > img {
-    width: 10%;
+#flex-title-image > img {
+    width: 40%;
 }
 button > img {
     width: 11%;
 }
 
-/*------------------------------Taille des divs Ect-------------------------------*/
-#centerTop {
+/*------------------------------Taille des flexs Ect-------------------------------*/
+                    /*------flex pour centrer le haut------*/
+                    #form {
+                        display: flex;
+                        flex-direction: column;
+                        margin-left: 37%;
+                    }
+                    #flex-title {
+                        display: flex;
+                        justify-content: center;
+                        padding-left: 9%;
+                        
+                    }
+                    #centerTop {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 25px;
+                        width: 250px;
+                    }
+                    #centerBottom {
+                        display: flex;
+                        flex-direction: row;
+                        gap: 25px;
+                        margin-left: 3%;  
+                    }
+/*--------CONTENU DES BOUTONS-------*/
+#content-button {
     display: flex;
-    flex-direction: column;
-    gap: 25px;
-    width: 250px;
-}
-#centerBottom {
-    display: flex;
-    flex-direction: row;
-    gap: 25px;
-    margin-left: 3%;  
-}
-/*------flex centrée pour tout------*/
-#form {
-    display: flex;
-    flex-direction: column;
-    margin-left: 37%;
-}
-#flex-title{
-    display: flex;
-    flex-direction: row;
-    margin-left: 42%;
+    gap: 5px;
+    padding-left:5px;
 }
