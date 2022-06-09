@@ -21,8 +21,8 @@ type User struct {
 }
 type Communauter struct {
 	Id   int    `json: "id"`
-	Desc string `json: "desc"`
 	Name string `json: "name"`
+	Desc string `json: "desc"`
 }
 type Post struct {
 	Id        int    `json: "id"`

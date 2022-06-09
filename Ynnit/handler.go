@@ -246,6 +246,17 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/", http.StatusFound)
 }
 
+func NewcommunityHandler(w http.ResponseWriter, r *http.Request) {
+	var Newcommunauter Communauter
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &Newcommunauter)
+	if InsertIntoCommunauter(AllApi.db, Newcommunauter.Name, Newcommunauter.Desc) {
+		w.Write([]byte("{\"msg\": \"Success\"}"))
+	} else {
+		http.Error(w, "{\"error\": \"Enter a valide community\"}", http.StatusUnauthorized)
+	}
+}
+
 func Handler() {
 
 	db := InitDatabase("./Ynnit.db")
@@ -295,6 +306,7 @@ func Handler() {
 	r.HandleFunc("/profile", Profile)
 
 	r.HandleFunc("/community", CommunityHandler)
+	r.HandleFunc("/newcommunity", NewcommunityHandler)
 
 	r.HandleFunc("/postpage", PostsPage)
 	r.HandleFunc("/post", Posts)
