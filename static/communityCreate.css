@@ -146,18 +146,3 @@ label {
     height: 50px;
     width: 170px;
 }
-
-/* 
-.button :active {
-    border-radius: 9px;
-    background: #333333;
-    box-shadow: inset -17px 17px 30px #1a1a1a,
-                inset 17px -17px 30px #4d4d4d;
-} 
-#id {
-    border-radius: 9px;
-    background: #3d3d3d;
-    box-shadow: inset -17px 17px 33px #131313;
-    border:#131313 solid 1px;  
-}
-*/

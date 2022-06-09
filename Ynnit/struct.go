@@ -11,13 +11,17 @@ type AllStructs struct {
 }
 
 type User struct {
-	Id       int    `json: "id"`
-	Name     string `json: "name"`
-	Email    string `json: "email"`
-	Password string `json: "password"`
+	Id         int    `json: "id"`
+	Name       string `json: "name"`
+	Email      string `json: "email"`
+	Desc       string `json: "desc"`
+	Pp         string `json: "pp"`
+	Password   string `json: "password"`
+	UsersLevel string `json: "usersLevel"`
 }
 type Communauter struct {
 	Id   int    `json: "id"`
+	Desc string `json: "desc"`
 	Name string `json: "name"`
 }
 type Post struct {

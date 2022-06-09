@@ -19,7 +19,6 @@
                                         fill="black" />
                         </svg>
                 </a>
-                
         </div>
 
         <div class="searchdiv">
@@ -43,12 +42,12 @@
         </div>
 
         <div class="Log">
-                <div><a class="lien" href="https://www.google.fr/">Login</a></div>
+                <div><a class="lien" href="/signin">Sign In</a></div>
 
 
-                <div><a class="lien" href="https://www.google.fr/">Register</a></div>
+                <div><a class="lien" href="/joinus">Join Us</a></div>
 
-                <div><a class="user" href="https://www.google.fr/"><i class="fa fa-user"></i></a></div>
+                <div><a class="user" href="/profile"><i class="fa fa-user"></i></a></div>
 
         </div>
 
@@ -74,7 +73,7 @@
 
                         <div class="Filter2">
                                 <div class="searchdiv">
-                                        <form class="formheader" method="get" action="/" autocomplete="off">
+                                        <form class="formheader2" method="get" action="/" autocomplete="off">
                                                 <input onchange="submit()" class="searchhead" type="search"
                                                         name="search" placeholder="Choose a Community"
                                                         class="searchartist" list="Artists">
@@ -93,17 +92,26 @@
                                         </form>
                                 </div>
                         </div>
+<<<<<<< HEAD
                                 <div class="Filter3">
                                         <div class="createpost"><a class="createpost" href="/"><i
                                                                 class="fa fa-file"></i>&emsp;Create a Post</a></div>
                                         <div class="createcommunity"><a class="createcommunity" href="/"><i
                                                                 class="fa fa-folder"></i>&emsp;Create a Community</a></div>
                                 </div>
+=======
+                        <div class="Filter3">
+                                <div class="createpost"><a class="createpost" href="/postpage"><i
+                                                        class="fa fa-file"></i>&emsp;Create a Post</a></div>
+                                <div class="createcommunity"><a class="createcommunity" href="/community"><i
+                                                        class="fa fa-folder"></i>&emsp;Create a Community</a></div>
+>>>>>>> 32b2ca91284ab1b50e3ea52add125dd5d5684c5d
                         </div>
                 </div>
                 <div class="bigcard">
         </div>
 </body>
+<<<<<<< HEAD
         <script>
                 fetch("/apiposts")
                         .then((response) => response.json())
@@ -168,4 +176,8 @@
                                 });
                         })
         </script>
+=======
+<script type="module" src='/js/home.js'></script>
+
+>>>>>>> 32b2ca91284ab1b50e3ea52add125dd5d5684c5d
 </html>

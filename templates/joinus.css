@@ -19,7 +19,6 @@ body {
 }
 /*---------------LES INPUT DE CHAQUE ; Mail, Nom, Password-------------------------------*/
 #name {
-    margin-left: 230%;
     background-color: rgb(222, 222, 222);
     border-radius: 10px;
     font-weight: bold;
@@ -28,7 +27,6 @@ body {
     font-size: x-large;
 }
 #email {
-    margin-left: 230%;
     background-color: rgb(222, 222, 222);
     border-radius: 10px;
     font-weight: bold;
@@ -37,7 +35,6 @@ body {
     font-size: x-large;
 }
 #password {
-    margin-left: 230%;
     background-color: rgb(222, 222, 222);
     border-radius: 10px;
     font-weight: bold;
@@ -46,7 +43,6 @@ body {
     font-size: x-large;
 }
 #verify {
-    margin-left: 230%;
     background-color: rgb(222, 222, 222);
     border-radius: 10px;
     font-weight: bold;
@@ -74,10 +70,16 @@ button > img {
     display: flex;
     flex-direction: row;
     gap: 25px;
-    margin-left: 39%;  
+    margin-left: 3%;  
 }
-/*------Colonnes centrée pour tout------*/
+/*------flex centrée pour tout------*/
 #form {
     display: flex;
     flex-direction: column;
+    margin-left: 37%;
+}
+#flex-title{
+    display: flex;
+    flex-direction: row;
+    margin-left: 42%;
 }
