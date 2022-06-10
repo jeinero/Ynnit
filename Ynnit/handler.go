@@ -174,13 +174,16 @@ func Joinus(w http.ResponseWriter, r *http.Request) {
 
 func ViewPost(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/viewpost.html")
+	// println(r.URL.Query()["id"][0])
+
 }
 
 func Comments(w http.ResponseWriter, r *http.Request) {
 	var newComments Comment
+
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &newComments)
-	goodOrFalse := InsertIntoComment(AllApi.db, newComments.Content, newComments.UsersName, 1)
+	goodOrFalse := InsertIntoComment(AllApi.db, newComments.Content, newComments.UsersName, newComments.PostLink)
 	w.Write([]byte("{\"msg\": \"Success\"}"))
 	if !goodOrFalse {
 		w.Write([]byte("{\"error\": \"Sorry\"}"))

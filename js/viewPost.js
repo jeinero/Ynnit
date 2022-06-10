@@ -1,11 +1,22 @@
 const url = new URL(window.location.href)
-const id = url.searchParams.get('id')
+let id = url.searchParams.get('id')
 document.getElementById("btn").onclick = function () {
 
         onClickComment()
-        location.href = "/viewpost?id=" + element.Id
-        
+        location.reload().href = "/viewpost?id=" + element.Id
+
 }
+
+function getCookie(name) {
+        let nameEQ = name + "=";
+        let ca = document.cookie.split(';');
+        for(let i=0;i < ca.length;i++) {
+            let c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+    }
 
 function onClickComment() {
         fetch("/comment", {
@@ -14,14 +25,16 @@ function onClickComment() {
                         "content-type": "application/json"
                 },
                 body: JSON.stringify({
+                        UsersName: getCookie("name"),
+                        postLink : parseInt(id),
                         content: document.getElementById("content").value,
                 })
         })
                 .catch((err) => {
                         document.getElementById("error").innerText = err.error
                 })
-      
-}
+
+        }
 
 const viewpost = document.getElementById('viewpost')
 const viewcommentaire = document.getElementById('viewcommentaire')
@@ -49,7 +62,6 @@ fetch("/apiposts/" + id)
                 viewpost.appendChild(content)
 
                 data.Comments.forEach(element => {
-                        console.log(element)
                         const divtop = document.createElement('div')
                         divtop.classList = 'divtop'
                         viewcommentaire.appendChild(divtop)
@@ -58,15 +70,19 @@ fetch("/apiposts/" + id)
                         content.innerHTML = element.Content
                         content.classList = 'content'
                         viewcommentaire.appendChild(content)
+
+                        const username = document.createElement('div')
+                        username.innerHTML = "by&ensp;" + element.UsersName
+                        username.classList = 'username'
+                        viewcommentaire.appendChild(username)
+
                 })
 
 
         })
 
-      
-               
 
-     
+
 
 
 
