@@ -99,14 +99,23 @@ func UpdatePassUser(db *sql.DB, password string, email string) {
 	db.Exec(`UPDATE user SET password = ? WHERE email = ?`, password, email)
 }
 
-func UpdateMailUser(db *sql.DB, emailnew string, emailact string) {
-	db.Exec(`UPDATE user SET email = ? WHERE email = ?`, emailnew, emailact)
+func UpdateMailUser(db *sql.DB, id int, emailnew string) bool {
+	_, err := db.Exec(`UPDATE user SET email = ? WHERE id = ?`, emailnew, id)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+	return true
 }
 
-func UpdateNameUser(db *sql.DB, name string, id int) {
-	fmt.Println(name, id)
-	db.Exec(`UPDATE user SET name = ? WHERE id = ?`, name, id)
-}
+// func UpdateNameUser(db *sql.DB, id int, name string) bool {
+// 	_, err := db.Exec(`UPDATE user SET name = '?' WHERE id = ?`, name, id)
+// 	if err != nil {
+// 		fmt.Println(err)
+// 		return false
+// 	}
+// 	return true
+// }
 
 func DeleteUser(db *sql.DB, email string) {
 	db.Exec(`DELETE FROM user WHERE email = ?`, email)
@@ -175,12 +184,13 @@ func DbtoStructCommunauter(db *sql.DB) []Communauter {
 	}
 	return temptab
 }
-func InsertIntoCommunauter(db *sql.DB, Name string, Desc string) (int64, error) {
-	result, err := db.Exec(`INSERT INTO communauter (name, desc) VALUES (?, ?)`, Name, Desc)
+func InsertIntoCommunauter(db *sql.DB, Name string, Desc string) bool {
+	_, err := db.Exec(`INSERT INTO communauter (name, desc) VALUES (?, ?)`, Name, Desc)
 	if err != nil {
 		fmt.Println(err)
+		return false
 	}
-	return result.LastInsertId()
+	return true
 }
 func DbtoStructPost(db *sql.DB) []Post {
 	rowsUsers, _ := db.Query("SELECT * FROM post")

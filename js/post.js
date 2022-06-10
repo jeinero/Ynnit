@@ -1,9 +1,13 @@
 let linkCommu = 0
 let dates = ""
 document.getElementById("btn").onclick = function () {
-    if (document.getElementById("titre").value.length >= 1) {
+    if (document.getElementById("titre").value.length >= 1 ) {
         if (getCookie("name") != null ){
-        onClickPost()
+            if (linkCommu != 0) {
+                onClickPost()
+            } else {
+                document.getElementById("error").innerText = "choose a community"
+            }
          } else {
             document.getElementById("error").innerText = "Need a user, login or fuck off"
         }

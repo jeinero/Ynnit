@@ -1,11 +1,9 @@
 const url = new URL(window.location.href)
 const id = url.searchParams.get('id')
-// console.log(id)
 const viewpost = document.getElementById('viewpost')
 fetch("/apiposts/"+id)
 .then((response) => response.json())
 .then(data => {
-       console.log(data)
 
        const divtop = document.createElement('div')
        divtop.classList = 'divtop'

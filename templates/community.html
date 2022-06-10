@@ -10,15 +10,8 @@
     <button class="button" onclick = "changeColor('white');" >Mode Clair</button>
         <button class="button" onclick = "returnChangeColor('rgb(64, 64, 64)');" >Mode foncé</button>
     <div class="container">
-
-
-        <select name="communité" class="selectcomm" id="select">
-            <option value="0">Choose the community</option>
-        </select>
-
-
         <div class="CreatePost">
-            <p><strong>Create a Post:</strong> </p>
+            <p><strong>Create a Community:</strong> </p>
            
                 <input  id="titre" type="text" maxlength="300" size="50" placeholder="Title" required>
                 <textarea id="content"name="" cols="30" rows="10" placeholder="Text (optional)"></textarea>
@@ -35,7 +28,7 @@
             <div class="PosterContain">
 
                 <div class="Poster">
-                    <button id="btn" type="submit" href="/" > Post </button>
+                    <button id="btn" type="submit"> Post </button>
                         <button class="test">Delete</button>
                 </div>
 
@@ -46,7 +39,7 @@
     </div>
     </div>
 </body>
-<script type="module" src='/js/post.js'></script>
+<script type="module" src='/js/community.js'></script>
 <script type="text/javascript" src="/js/font-button.js" ></script>
 
 </html>
