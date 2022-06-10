@@ -21,7 +21,8 @@ func InitDatabase(database string) *sql.DB {
 			name TEXT NOT NULL UNIQUE,
 			email TEXT NOT NULL UNIQUE,
 			desc TEXT NOT NULL,
-			levelUser TEXT NOT NULL,			
+			levelUser TEXT NOT NULL,
+			date TEXT NOT NULL,		
 			password TEXT NOT NULL
 		);
 		CREATE TABLE IF NOT EXISTS communauter (
@@ -31,6 +32,7 @@ func InitDatabase(database string) *sql.DB {
 		);
 		CREATE TABLE IF NOT EXISTS post (
 			id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+			date INTEGER NOT NULL,
 			commulink INTEGER NOT NULL,
 			title TEXT NOT NULL,
 			contentPost TEXT NOT NULL,
@@ -75,7 +77,7 @@ func DbtoStructUser(db *sql.DB) []User {
 
 	for rowsUsers.Next() {
 		var u User
-		err := rowsUsers.Scan(&u.Id, &u.Name, &u.Email, &u.Desc, &u.UsersLevel, &u.Password)
+		err := rowsUsers.Scan(&u.Id, &u.Name, &u.Email, &u.Desc, &u.UsersLevel, &u.Date, &u.Password)
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -84,8 +86,8 @@ func DbtoStructUser(db *sql.DB) []User {
 	return temptab
 }
 
-func InsertIntoUser(db *sql.DB, name string, email string, password string, desc string, levelUser string) bool {
-	_, err := db.Exec(`INSERT INTO user (name, email, password, desc, levelUser) VALUES (?, ?, ?, ?, ?)`, name, email, password, desc, levelUser)
+func InsertIntoUser(db *sql.DB, name string, email string, password string, desc string, levelUser string, date string) bool {
+	_, err := db.Exec(`INSERT INTO user (name, email, password, desc, levelUser, date) VALUES (?, ?, ?, ?, ?, ?)`, name, email, password, desc, levelUser, date)
 	if err != nil {
 		fmt.Println(err)
 		return false
@@ -101,8 +103,9 @@ func UpdateMailUser(db *sql.DB, emailnew string, emailact string) {
 	db.Exec(`UPDATE user SET email = ? WHERE email = ?`, emailnew, emailact)
 }
 
-func UpdateNameUser(db *sql.DB, name string, email string) {
-	db.Exec(`UPDATE user SET name = ? WHERE email = ?`, name, email)
+func UpdateNameUser(db *sql.DB, name string, id int) {
+	fmt.Println(name, id)
+	db.Exec(`UPDATE user SET name = ? WHERE id = ?`, name, id)
 }
 
 func DeleteUser(db *sql.DB, email string) {
@@ -185,7 +188,7 @@ func DbtoStructPost(db *sql.DB) []Post {
 
 	for rowsUsers.Next() {
 		var u Post
-		err := rowsUsers.Scan(&u.Id, &u.CommuLink, &u.Title, &u.Content, &u.UsersName)
+		err := rowsUsers.Scan(&u.Id, &u.Date, &u.CommuLink, &u.Title, &u.Content, &u.UsersName)
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -194,8 +197,8 @@ func DbtoStructPost(db *sql.DB) []Post {
 	}
 	return temptab
 }
-func InsertIntoPost(db *sql.DB, CommuLink int, Title string, Content string, UsersName string) bool {
-	_, err := db.Exec(`INSERT INTO post (commuLink, title, contentPost, username) VALUES (?,?,?,?)`, CommuLink, Title, Content, UsersName)
+func InsertIntoPost(db *sql.DB, CommuLink int, Title string, Content string, UsersName string, Date int) bool {
+	_, err := db.Exec(`INSERT INTO post (commuLink, title, contentPost, username, date) VALUES (?,?,?,?,?)`, CommuLink, Title, Content, UsersName, Date)
 	if err != nil {
 		fmt.Println(err)
 		return false
