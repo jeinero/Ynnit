@@ -2,9 +2,13 @@ fetch("/apiposts")
     .then((response) => response.json())
     .then(function newCard(posts) {
         posts.forEach(element => {
-            const newcard = document.createElement('div')
-            newcard.id = element.Id
-            newcard.classList = "card"
+            console.log(element.CommuLink)
+            fetch("/apicommunauters/"+element.CommuLink)
+            .then(resp => resp.json())
+            .then(data => {
+                const newcard = document.createElement('div')
+                newcard.id = element.Id
+                newcard.classList = "card"
 
             const divhaut = document.createElement('div')
             divhaut.classList = 'divhaut'
@@ -58,13 +62,13 @@ fetch("/apiposts")
             divbas.append(comments)
             const integrate = document.querySelector('.bigcard')
             integrate.appendChild(newcard)
-
             document.getElementById(element.Id).onclick = function() {
-                location.href = "/viewpost?id=" + element.Id
-            } 
+              location.href = "/viewpost?id=" + element.Id
+          } 
+          } )
         });
-    })
-           
+      })
+      
 
 
     function timeSince(date) {
