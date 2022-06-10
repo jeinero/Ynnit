@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@900&display=swap');
+
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+}
+
+.display {
+    display: flex;
+    border: 2px solid black;
+    border-radius: 40px;
+    width: auto;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+}
+
+textarea {
+    max-width:90%;
+    max-height:50%;    
+}
+
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.form {
+    border-radius: 10px;
+    width: 250px;
+    height: 20px;
+}
+
+.button {
+    border-radius: 10px;
+}
+
+.titre1 {
+    font-size: 24px;
+    
+}
