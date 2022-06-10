@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <header>
+        <title>Community</title>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="communityPrint.css">
+        <link rel="stylesheet" href="/css/font-button.css">
+    </header>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&display=swap');
+</style>
+        <body>
+            <div id="content-button">
+                <button class="button" onclick = "changeColor('white');" >Mode Clair</button>
+                <button class="button" onclick = "returnChangeColor('rgb(64, 64, 64)');" >Mode foncé</button> 
+            </div>
+            
+            <div id="template">
+                <div class="container">
+                    <div class="CreatePost">
+                        <div id="flex-community">
+                            <h1 id="flex-title">
+                                Name of Community :
+                            </h1>
+                            <div id="centerTop">
+                                {{.name.community}}
+                            </div>
+                            <div id="centerBottom">   
+                                <p>{{.description.community}}</p>
+                            </div>
+
+                            <div class="PosterContain">
+                                <div class="Poster">
+                                    <button id="button" id="submitPost" type="Submit" form="ContainPost">Modify
+                                    <button id="button" type="Submit">Cancel</button>
+                                </div>
+                            </div>
+                            
+                            <p id="error" style="color: red"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <script type="text/javascript" src="/js/font-button.js" ></script>
+        <script type="module" src='/js/signin.js'></script>
+    </body>
+</html>

@@ -22,3 +22,9 @@
 .button:hover {
     background: #d6d6d6;
 }
+/*--------CONTENU DES BOUTONS-------*/
+#content-button {
+    display: flex;
+    gap: 5px;
+    padding-left:5px;
+}

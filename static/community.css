@@ -57,10 +57,7 @@ input:hover{
     row-gap: 10px;
 }
 /*--------------------zone de contour POST.CSS DE ROMAIN-----------------------*/
-/* .center {
-    display: flex;
-    justify-content: center;
-} */
+
 .container {
     display: flex;
     height: 350px;

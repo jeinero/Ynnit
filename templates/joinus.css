@@ -24,6 +24,7 @@ body {
     height: 50px;
     font-size: x-large;
 }
+
 #email {
     background-color: rgb(222, 222, 222);
     border-radius: 10px;
@@ -83,9 +84,3 @@ button > img {
                         gap: 25px;
                         padding-left: 10%; 
                     }
-/*--------CONTENU DES BOUTONS-------*/
-#content-button {
-    display: flex;
-    gap: 5px;
-    padding-left:5px;
-}
