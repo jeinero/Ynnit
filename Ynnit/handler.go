@@ -158,6 +158,7 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 }
 
 func Profile(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
 	session, _ := store.Get(r, "cookie-name")
 	if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
 		http.Error(w, "Please login", http.StatusForbidden)
@@ -259,6 +260,21 @@ func NewcommunityHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func Changeemail(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/changeemail.html")
+}
+
+func Checkemail(w http.ResponseWriter, r *http.Request) {
+	var newEmail User
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &newEmail)
+	if UpdateMailUser(AllApi.db, newEmail.Id, newEmail.Email) {
+		w.Write([]byte("{\"msg\": \"Success\"}"))
+	} else {
+		http.Error(w, "{\"error\": \"Enter a valide name\"}", http.StatusUnauthorized)
+	}
+}
+
 func Handler() {
 
 	db := InitDatabase("./Ynnit.db")
@@ -272,7 +288,7 @@ func Handler() {
 	// InsertIntoComment(db, "gros bouffon", 1, 1)
 	// UpdatePassUser(db, "PaseeeeeeeeeeeeeesChang", "bc@gmail.om")
 	// UpdateMailUser(db, "azertyuiop@yahoo.ch", "jenei@gmail.com")
-	// UpdateNameUser(db, "rio", "azertyuiop@yahoo.ch")
+	// UpdateNameUser(db, 1, "test2")
 	// DeleteUser(db, "boc@gmail.com")
 
 	r := mux.NewRouter()
@@ -306,6 +322,12 @@ func Handler() {
 	r.HandleFunc("/newuser", Newuser)
 
 	r.HandleFunc("/profile", Profile)
+
+	r.HandleFunc("/changeemail", Changeemail)
+	r.HandleFunc("/checkemail", Checkemail)
+
+	// r.HandleFunc("/changedesc", Changedesc)
+	// r.HandleFunc("/changepass", Changepass)
 
 	r.HandleFunc("/community", CommunityHandler)
 	r.HandleFunc("/newcommunity", NewcommunityHandler)

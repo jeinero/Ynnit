@@ -97,13 +97,23 @@ func UpdatePassUser(db *sql.DB, password string, email string) {
 	db.Exec(`UPDATE user SET password = ? WHERE email = ?`, password, email)
 }
 
-func UpdateMailUser(db *sql.DB, emailnew string, emailact string) {
-	db.Exec(`UPDATE user SET email = ? WHERE email = ?`, emailnew, emailact)
+func UpdateMailUser(db *sql.DB, id int, emailnew string) bool {
+	_, err := db.Exec(`UPDATE user SET email = ? WHERE id = ?`, emailnew, id)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+	return true
 }
 
-func UpdateNameUser(db *sql.DB, name string, email string) {
-	db.Exec(`UPDATE user SET name = ? WHERE email = ?`, name, email)
-}
+// func UpdateNameUser(db *sql.DB, id int, name string) bool {
+// 	_, err := db.Exec(`UPDATE user SET name = '?' WHERE id = ?`, name, id)
+// 	if err != nil {
+// 		fmt.Println(err)
+// 		return false
+// 	}
+// 	return true
+// }
 
 func DeleteUser(db *sql.DB, email string) {
 	db.Exec(`DELETE FROM user WHERE email = ?`, email)

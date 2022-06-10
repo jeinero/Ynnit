@@ -1,10 +1,11 @@
-document.getElementById("btn").onclick = function() {
-    if (getCookie("name") != null ){
-        create()
+document.getElementById("button").onclick = function(){
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById("email1").value) == /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById("email2").value)) {
+        document.getElementById("error").innerText = ""
+        changeemail()
     } else {
-        document.getElementById("error").innerText = "Need a user, login or fuck off"
+        document.getElementById("error").innerText = "enter the same email valide"
     }
-}
+};
 
 function getCookie(name) {
     var nameEQ = name + "=";
@@ -16,16 +17,17 @@ function getCookie(name) {
     }
     return null;
 }
+let ids = getCookie("id")
 
-function create() {
-    fetch("/newcommunity", {
-        method: "POST",
+function changeemail() {
+    fetch("/checkemail", {
+        method: "POST", 
         headers: {
             "content-type": "application/json" 
         },
         body: JSON.stringify({
-            Name: document.getElementById("titre").value,
-            Desc: document.getElementById("content").value
+            id: parseInt(ids),
+            email: document.getElementById("email1").value
         })
     })
     .then(async (res) => {
@@ -34,7 +36,7 @@ function create() {
        return res.json()
     })
     .then((data) => {
-        location.href = "/"
+        location.href = "/profile"
     }).catch((err) => {
         document.getElementById("error").innerText = err.error
     })
