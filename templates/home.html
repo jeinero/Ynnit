@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="./css/home.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <html>
 
 <head>
         <title>Welcome</title>
         <link rel="icon" type="image/png" sizes="16x16"
                 href="https://cdn.discordapp.com/attachments/887611590873088011/981110067531243570/YnnitLogo.png">
-</head> 
+</head>
 
 <header>
         <div class="logo">
@@ -23,7 +24,8 @@
 
         <div class="searchdiv">
                 <div class="searchheader" method="get" action="/" autocomplete="off">
-                        <input class="searchhead" type="search" name="search" placeholder="Type to search" list="Artists">
+                        <input class="searchhead" type="search" name="search" placeholder="Type to search"
+                                list="Artists">
                         <datalist id="Artists">
                                 {{range .GroupeArt}}
                                 <option value="{{.Name}}">{{.Name}} - Artist/Band</option>
@@ -43,8 +45,8 @@
 
                 <div><a class="lien" href="/joinus">Join Us</a></div>
 
-                <div><a class="user" href="/profile"><i class="fa fa-user"></i></a></div>
-
+                <div><a class="user" href="/profile"><i class="material-symbols-outlined"
+                                        height="80px">account_circle</i></a></div>
         </div>
 
 
@@ -54,23 +56,38 @@
         <div class="container">
                 <div class="choose">
                         <div class="Filter1">
-                                <form action="/">
-                                        <label for="filterby">Filter by :</label>
-                                        <select id="filterby" multiple>
-                                                <option value>Categories</option>
-                                                <option value>Number of comments</option>
-                                                <option value>Publication Date</option>
-                                                <option value>Number of likes</option>
+                                <div class="Filter1top">
+                                        Select a filter:
+                                </div>
+                                <div class="Filter1bottom"> 
+                                        <div>
+                                                <input type="radio" id="filtercategory" value="category" checked>
+                                                <label for="filtercategory">Categories</label>
+                                        </div>
 
-                                        </select>
+                                        <div>
+                                                <input type="radio" id="filtercomment" value="commentnumber">
+                                                <label for="filtercomment">Number of comments</label>
+                                        </div>
 
-                                </form>
+                                        <div>
+                                                <input type="radio" id="filterdate" value="publicationdate">
+                                                <label for="filterdate">Publication Date</label>
+                                        </div>
+
+                                        <div>
+                                                <input type="radio" id="filterlike" value="likenumber">
+                                                <label for="filterlike">Number of likes</label>
+                                        </div>
+
+
+                                </div>
                         </div>
 
                         <div class="Filter2">
                                 <div class="searchdiv">
                                         <div class="formheader2" method="get" action="/" autocomplete="off">
-                                                <input onchange="submit()" class="searchhead" type="search"
+                                                <input onchange="submit()" class="searchhead2" type="search"
                                                         name="search" placeholder="Choose a Community"
                                                         class="searchartist" list="Artists">
                                                 <datalist id="Artists">
@@ -88,7 +105,7 @@
                                         </div>
                                 </div>
                         </div>
-                        
+
                         <div class="Filter3">
                                 <div class="createpost"><a class="createpost" href="/postpage"><i
                                                         class="fa fa-file"></i>&emsp;Create a Post</a></div>
@@ -104,6 +121,12 @@
 
         <div class="bigcard">
 
+        </div>
+        <div class="btn">
+
+                <img src="arrow-up-solid.svg" class="icone">
+
+                FLECHE
         </div>
 </body>
 <script type="module" src='/js/home.js'></script>
