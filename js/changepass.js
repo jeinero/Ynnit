@@ -1,25 +1,35 @@
 document.getElementById("button").onclick = function(){
-    if (document.getElementById("name").value.length >=1 && document.getElementById("pwd").value.length >= 8 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById("email").value)) {
+    if (document.getElementById("pwd1").value.length >= 8) {
         document.getElementById("error").innerText = ""
-        joinus()
+        changepass()
     } else {
-        document.getElementById("error").innerText = "enter a valide email and name and a password of at least 8 characters"
+        document.getElementById("error").innerText = "enter the same pass valide"
     }
 };
 
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+let ids = getCookie("id")
 
-function joinus() {
-    if (document.getElementById("pwd").value == document.getElementById("pwd2").value) {
+function changepass() {
+    if (document.getElementById("pwd1").value == document.getElementById("pwd2").value) {
         hashpass()
-        fetch("/newuser", {
+        fetch("/checkpass", {
             method: "POST", 
             headers: {
                 "content-type": "application/json" 
             },
             body: JSON.stringify({
-                name: document.getElementById("name").value,
-                email: document.getElementById("email").value,
-                password: document.getElementById("pwd").value
+                id: parseInt(ids),
+                password: document.getElementById("pwd1").value
             })
         })
         .then(async (res) => {
@@ -28,20 +38,20 @@ function joinus() {
            return res.json()
         })
         .then((data) => {
-            location.href = "/signin"
+            location.href = "/logout"
         }).catch((err) => {
             document.getElementById("error").innerText = err.error
         })
-    } else {
+    }  else {
         document.getElementById("error").innerText = "enter the same password"
     }
-    document.getElementById("pwd").value = ""
+    document.getElementById("pwd1").value = ""
     document.getElementById("pwd2").value = ""
 }
 
 
 function hashpass() {
-    let pwdObj = document.getElementById('pwd');
+    let pwdObj = document.getElementById('pwd1');
     let hashObj = new jsSHA("SHA-512", "TEXT", {numRounds: 1});
     hashObj.update(pwdObj.value);
     let hash = hashObj.getHash("HEX");
