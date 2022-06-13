@@ -1,11 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Otomanopee+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Chewy&display=swap');
 
 
 body {
     margin: 0px;
-    font-family: 'Acme', sans-serif;
 }
 
 header {
@@ -16,7 +14,16 @@ header {
     background: linear-gradient(90deg, rgba(238,50,78,1) 0%, rgba(254,190,16,1) 100%);
     text-decoration: none;
     box-shadow: 10px;
-    font-family: 'Chewy', cursive;  
+    font-family: 'Chewy', cursive;
+}
+
+.container {
+display: flex;
+width: auto;
+height: auto;
+justify-content: center;
+padding: 1%;
+align-items: center;
 }
 
 .logo {
@@ -26,7 +33,6 @@ header {
     align-items: center;
     margin-right: 5%;
     filter: invert(1);
-    border: 1px solid red;
 }
 
 .searchdiv {
@@ -34,7 +40,6 @@ header {
     width: 850px;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
 }
 
 .searchheader {
@@ -48,15 +53,15 @@ header {
 }
 
 .searchhead {
-    background: none;
+    background: transparent;
     border: none;
     outline: none;
     color: black;
-    font-size: 20px;
+    font-size: 25px;
     width: 100%;
     align-items: center;
     text-align: center;
-    font-family: 'Acme', sans-serif;
+    font-family: 'Chewy', cursive;
 }
 
 .Log {
@@ -66,7 +71,6 @@ header {
     width: 800px;
     height: auto;
     margin-left: 10%;
-    border: 1px solid black;
 }
 
 .Register {
@@ -82,16 +86,7 @@ header {
     height: 40px;
 }
 
-
-
-.container {
-    display: flex;
-    width: auto;
-    height: auto;
-    justify-content: center;
-    padding: 1%;
-    align-items: center;
-}
+ 
 
 .choose {
     display: flex;
@@ -99,6 +94,7 @@ header {
     height: 200px;
     justify-content: space-between;
     background: transparent;
+    font-family: 'Otomanopee One', sans-serif;
 }
 
 .Filter1 {
@@ -106,11 +102,27 @@ header {
     border: 2px solid #00529F;
     width: 20%;
     border-radius: 40px;
-    padding-top: 10px;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
     background-color: white;
+    flex-direction: column;
+}
+
+.Filter1top{
+display: flex;
+height: 30%;
+width: 100%;
+justify-content: center;
+align-items: center;
+}
+
+.Filter1bottom{
+    display: flex;
+    height: 70%;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 50%;
 }
 
 .Filter2 {
@@ -119,6 +131,18 @@ header {
     height: 100%;
     justify-content: center;
     align-items: center;
+}
+
+.searchhead2 {
+    background: none;
+    border: none;
+    outline: none;
+    color: black;
+    font-size: 20px;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    font-family: 'Otomanopee One', sans-serif;
 }
 
 .formheader2 {
@@ -251,6 +275,7 @@ color: white;
     box-shadow: 20px 20px rgba(0,0,0,.15);
     margin: 1%;
     transition: all .4s ease;
+    font-size: 22px;
 }
 
 .card:hover {
@@ -340,4 +365,26 @@ color: white;
     align-items: center;
     width: 80%;   
     height: 100%;
+}
+
+
+.btn {
+    height: 100px;
+    width: 100px;
+    background: crimson;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    cursor: pointer;
+}
+.icone {
+    width: 50px;
+}
+
+.material-icons{
+    font-size: 50px;
 }

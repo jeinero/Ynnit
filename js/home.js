@@ -102,7 +102,6 @@ fetch("/apiposts")
 
       document.body.onload = function() {
         if (getCookie("name") != null) {
-                let classComm = document.getElementsByClassName("lien")
                 classComm[0].style.display = "none"
                 classComm[1].style.display = "none"
                 }
@@ -117,3 +116,14 @@ fetch("/apiposts")
   }
   return null;
 }
+      const btn = document.querySelector('.btn');
+
+btn.addEventListener('click', () => {
+
+    window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth"
+    })
+
+})
