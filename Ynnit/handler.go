@@ -158,6 +158,7 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 }
 
 func Profile(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
 	session, _ := store.Get(r, "cookie-name")
 	if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
 		http.Error(w, "Please login", http.StatusForbidden)
@@ -194,8 +195,10 @@ func PostsPage(w http.ResponseWriter, r *http.Request) {
 func Posts(w http.ResponseWriter, r *http.Request) {
 	var newPost Post
 	body, _ := ioutil.ReadAll(r.Body)
+	fmt.Println(string(body))
 	json.Unmarshal(body, &newPost)
-	goodOrFalse := InsertIntoPost(AllApi.db, 1, newPost.Title, newPost.Content, "test")
+	fmt.Println(newPost)
+	goodOrFalse := InsertIntoPost(AllApi.db, newPost.CommuLink, newPost.Title, newPost.Content, newPost.UsersName)
 	if !goodOrFalse {
 		w.Write([]byte("{\"error\": \"Sorry\"}"))
 	}
@@ -246,6 +249,77 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/", http.StatusFound)
 }
 
+func NewcommunityHandler(w http.ResponseWriter, r *http.Request) {
+	var Newcommunauter Communauter
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &Newcommunauter)
+	if InsertIntoCommunauter(AllApi.db, Newcommunauter.Name, Newcommunauter.Desc) {
+		w.Write([]byte("{\"msg\": \"Success\"}"))
+	} else {
+		http.Error(w, "{\"error\": \"Enter a valide community\"}", http.StatusUnauthorized)
+	}
+}
+
+func Changeemail(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/changeemail.html")
+}
+
+func Checkemail(w http.ResponseWriter, r *http.Request) {
+	var newEmail User
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &newEmail)
+	if UpdateMailUser(AllApi.db, newEmail.Id, newEmail.Email) {
+		w.Write([]byte("{\"msg\": \"Success\"}"))
+	} else {
+		http.Error(w, "{\"error\": \"Enter a valide name\"}", http.StatusUnauthorized)
+	}
+}
+
+func Changedesc(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/changedesc.html")
+}
+
+func Checkdesc(w http.ResponseWriter, r *http.Request) {
+	var newDesc User
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &newDesc)
+	if UpdateDescUser(AllApi.db, newDesc.Id, newDesc.Desc) {
+		w.Write([]byte("{\"msg\": \"Success\"}"))
+	} else {
+		http.Error(w, "{\"error\": \"Enter a valide name\"}", http.StatusUnauthorized)
+	}
+}
+
+func Changepass(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/changepass.html")
+}
+
+func Checkpass(w http.ResponseWriter, r *http.Request) {
+	var newPass User
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &newPass)
+	if UpdatePassUser(AllApi.db, newPass.Id, newPass.Password) {
+		w.Write([]byte("{\"msg\": \"Success\"}"))
+	} else {
+		http.Error(w, "{\"error\": \"Enter a valide name\"}", http.StatusUnauthorized)
+	}
+}
+
+func Delete(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/delete.html")
+}
+
+func Checkdelete(w http.ResponseWriter, r *http.Request) {
+	var deleuser User
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &deleuser)
+	if DeleteUser(AllApi.db, deleuser.Id, deleuser.Name) {
+		w.Write([]byte("{\"msg\": \"Success\"}"))
+	} else {
+		http.Error(w, "{\"error\": \"Enter a valide name\"}", http.StatusUnauthorized)
+	}
+}
+
 func Handler() {
 
 	db := InitDatabase("./Ynnit.db")
@@ -253,14 +327,14 @@ func Handler() {
 	defer db.Close()
 	// InsertIntoUser(db, "jeinero", "jenei@gmail.com", "ImRio6988", "guest", "")
 	// InsertIntoUser(db, "qsdlqsd", "jeazenei@yahoo.fr", "ImRio6988")
-	// InsertIntoCommunauter(db, "Golang", "")
+	// InsertIntoCommunauter(db, "InfoFams", "DESC")
 	// InsertIntoPost(db, 1, "Golang Basic", "Golang suck lmao", "jeinero")
 	// InsertIntoComment(db, "Menteur", 1, 1)
 	// InsertIntoComment(db, "gros bouffon", 1, 1)
 	// UpdatePassUser(db, "PaseeeeeeeeeeeeeesChang", "bc@gmail.om")
 	// UpdateMailUser(db, "azertyuiop@yahoo.ch", "jenei@gmail.com")
-	// UpdateNameUser(db, "rio", "azertyuiop@yahoo.ch")
-	// DeleteUser(db, "boc@gmail.com")
+	// UpdateNameUser(db, 1, "test2")
+	// DeleteUser(AllApi.db, 2, "test")
 
 	r := mux.NewRouter()
 
@@ -293,7 +367,20 @@ func Handler() {
 
 	r.HandleFunc("/profile", Profile)
 
+	r.HandleFunc("/changeemail", Changeemail)
+	r.HandleFunc("/checkemail", Checkemail)
+
+	r.HandleFunc("/changedesc", Changedesc)
+	r.HandleFunc("/checkdesc", Checkdesc)
+
+	r.HandleFunc("/changepass", Changepass)
+	r.HandleFunc("/checkpass", Checkpass)
+
+	r.HandleFunc("/delete", Delete)
+	r.HandleFunc("/checkdelete", Checkdelete)
+
 	r.HandleFunc("/community", CommunityHandler)
+	r.HandleFunc("/newcommunity", NewcommunityHandler)
 
 	r.HandleFunc("/postpage", PostsPage)
 	r.HandleFunc("/post", Posts)

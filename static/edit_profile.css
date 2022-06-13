@@ -8,14 +8,20 @@ body {
 
 #container {
     display: flex;
-    justify-content: center;
-    align-items: center;
     width: 100%;
     height: 100%;
     border: 2px solid red;
 }
-    
-.display1 {
+
+.content {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid saddlebrown;
+    width: 100%;
+    height: 100%;
+}
+
+.title {
     display: flex;
     border: 2px solid pink;
     width: auto;
@@ -30,27 +36,53 @@ body {
     width: auto;
     height: auto;
     justify-content: center;
-    margin-left: 70%;
-    margin-right: 5%;
+   
 }
-.editaccount{
+
+.principale {
     display: flex;
-    border: 2px solid black;
-    width: auto;
-    height: auto;
-    justify-content: center;
-    margin-left: 70%;
-    margin-right: 5%;
+    height: 100%;
+    width: 100%;
 }
 
 .latestposts {
     display: flex;
-    border: 2px solid black;
-    width: auto;
+    border: 5px solid pink;
+    width: 70%;
     height: auto;
     justify-content: center;
-    margin-left: 5%;
-    margin-right: 70%;
+
+}
+
+.account {
+    display: flex;
+    width:  30%;
+    height: 100%;
+    justify-content: center;
+    border: 2px solid black;
+    flex-direction: column;
+}
+
+.editaccount{
+    display: flex;
+    height: 10%;
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+.text{
+    display: flex;
+    height: 90%;
+    width: 100%;
+    justify-content: center;
+
+}
+
+.profilepicture {
+    display: flex;
+    justify-content: center;
 
 }
 
@@ -65,8 +97,6 @@ p {
     width: auto;
     height: auto;
     justify-content: center;
-    margin-left: 70%;
-    margin-right: 5%;
 }
 
 #image {
@@ -92,12 +122,4 @@ p {
     background-color: #fb8332;
     box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
 
-}
-.content {
-    display: flex;
-    flex-direction: column;
-    border: 2px solid saddlebrown;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
 }

@@ -26,8 +26,8 @@ func InitDatabase(database string) *sql.DB {
 		);
 		CREATE TABLE IF NOT EXISTS communauter (
 			id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-			desc TEXT NOT NULL,			
-			name TEXT NOT NULL UNIQUE
+			name TEXT NOT NULL UNIQUE,
+			desc TEXT NOT NULL	
 		);
 		CREATE TABLE IF NOT EXISTS post (
 			id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -93,20 +93,73 @@ func InsertIntoUser(db *sql.DB, name string, email string, password string, desc
 	return true
 }
 
-func UpdatePassUser(db *sql.DB, password string, email string) {
-	db.Exec(`UPDATE user SET password = ? WHERE email = ?`, password, email)
+func UpdatePassUser(db *sql.DB, id int, password string) bool {
+	_, err := db.Exec(`UPDATE user SET password = ? WHERE id = ?`, password, id)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+	return true
 }
 
-func UpdateMailUser(db *sql.DB, emailnew string, emailact string) {
-	db.Exec(`UPDATE user SET email = ? WHERE email = ?`, emailnew, emailact)
+func UpdateMailUser(db *sql.DB, id int, emailnew string) bool {
+	_, err := db.Exec(`UPDATE user SET email = ? WHERE id = ?`, emailnew, id)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+	return true
 }
 
-func UpdateNameUser(db *sql.DB, name string, email string) {
-	db.Exec(`UPDATE user SET name = ? WHERE email = ?`, name, email)
+func UpdateDescUser(db *sql.DB, id int, descnew string) bool {
+	_, err := db.Exec(`UPDATE user SET desc = ? WHERE id = ?`, descnew, id)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+	return true
 }
 
-func DeleteUser(db *sql.DB, email string) {
-	db.Exec(`DELETE FROM user WHERE email = ?`, email)
+// func UpdateNameUser(db *sql.DB, id int, name string) bool {
+// 	_, err := db.Exec(`UPDATE user SET name = '?' WHERE id = ?`, name, id)
+// 	if err != nil {
+// 		fmt.Println(err)
+// 		return false
+// 	}
+// 	return true
+// }
+
+func DeleteUser(db *sql.DB, id int, name string) bool {
+	_, err := db.Exec(`DELETE FROM post WHERE username = ?`, name)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	} else {
+		_, err := db.Exec(`DELETE FROM comment WHERE username = ?`, name)
+		if err != nil {
+			fmt.Println(err)
+			return false
+		} else {
+			_, err := db.Exec(`DELETE FROM likedpost WHERE userid = ?`, id)
+			if err != nil {
+				fmt.Println(err)
+				return false
+			} else {
+				_, err := db.Exec(`DELETE FROM likedcomment WHERE userid = ?`, id)
+				if err != nil {
+					fmt.Println(err)
+					return false
+				} else {
+					_, err := db.Exec(`DELETE FROM user WHERE id = ?`, id)
+					if err != nil {
+						fmt.Println(err)
+						return false
+					}
+					return true
+				}
+			}
+		}
+	}
 }
 
 func UserExists(db *sql.DB, email string, password string) (string, int) {
@@ -172,12 +225,13 @@ func DbtoStructCommunauter(db *sql.DB) []Communauter {
 	}
 	return temptab
 }
-func InsertIntoCommunauter(db *sql.DB, Name string, Desc string) (int64, error) {
-	result, err := db.Exec(`INSERT INTO communauter (name, desc) VALUES (?, ?)`, Name, Desc)
+func InsertIntoCommunauter(db *sql.DB, Name string, Desc string) bool {
+	_, err := db.Exec(`INSERT INTO communauter (name, desc) VALUES (?, ?)`, Name, Desc)
 	if err != nil {
 		fmt.Println(err)
+		return false
 	}
-	return result.LastInsertId()
+	return true
 }
 func DbtoStructPost(db *sql.DB) []Post {
 	rowsUsers, _ := db.Query("SELECT * FROM post")
