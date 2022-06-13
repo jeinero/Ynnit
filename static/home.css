@@ -77,13 +77,7 @@ header {
     height: 40px;
 }
 
-.container {
-    display: flex;
-    width: auto;
-    height: auto;
-    justify-content: center;
-    padding: 1%;
-}
+ 
 
 .choose {
     display: flex;
