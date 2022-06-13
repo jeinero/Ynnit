@@ -180,8 +180,12 @@ func Joinus(w http.ResponseWriter, r *http.Request) {
 func ViewPost(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	http.ServeFile(w, r, "./templates/viewpost.html")
-	// println(r.URL.Query()["id"][0])
 
+}
+
+func EditProfile(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
+	http.ServeFile(w, r, "./templates/edit_profile.html")
 }
 
 func Comments(w http.ResponseWriter, r *http.Request) {
@@ -360,6 +364,8 @@ func Handler() {
 	r.HandleFunc("/session", Session)
 
 	r.HandleFunc("/logout", Logout)
+
+	r.HandleFunc("/editprofile", EditProfile)
 
 	go reloadApi()
 

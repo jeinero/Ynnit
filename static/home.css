@@ -17,6 +17,15 @@ header {
     font-family: 'Chewy', cursive;
 }
 
+.container {
+display: flex;
+width: auto;
+height: auto;
+justify-content: center;
+padding: 1%;
+align-items: center;
+}
+
 .logo {
     display: flex;
     width: 10%;
