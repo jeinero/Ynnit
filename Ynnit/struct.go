@@ -40,4 +40,5 @@ type Comment struct {
 	PostLink  int    `json: "postLink"`
 	UsersName string `json: "NameUser"`
 	Like      int    `json: "likeCount"`
+	Date      int    `json: "date"`
 }
