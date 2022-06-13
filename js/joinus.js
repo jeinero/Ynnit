@@ -33,6 +33,8 @@ function joinus() {
         }).catch((err) => {
             document.getElementById("error").innerText = err.error
         })
+    } else {
+        document.getElementById("error").innerText = "enter the same password"
     }
     document.getElementById("pwd").value = ""
     document.getElementById("pwd2").value = ""

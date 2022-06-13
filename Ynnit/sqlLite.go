@@ -100,12 +100,26 @@ func InsertIntoUser(db *sql.DB, name string, email string, password string, desc
 	return true
 }
 
-func UpdatePassUser(db *sql.DB, password string, email string) {
-	db.Exec(`UPDATE user SET password = ? WHERE email = ?`, password, email)
+func UpdatePassUser(db *sql.DB, id int, password string) bool {
+	_, err := db.Exec(`UPDATE user SET password = ? WHERE id = ?`, password, id)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+	return true
 }
 
 func UpdateMailUser(db *sql.DB, id int, emailnew string) bool {
 	_, err := db.Exec(`UPDATE user SET email = ? WHERE id = ?`, emailnew, id)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+	return true
+}
+
+func UpdateDescUser(db *sql.DB, id int, descnew string) bool {
+	_, err := db.Exec(`UPDATE user SET desc = ? WHERE id = ?`, descnew, id)
 	if err != nil {
 		fmt.Println(err)
 		return false
@@ -122,8 +136,37 @@ func UpdateMailUser(db *sql.DB, id int, emailnew string) bool {
 // 	return true
 // }
 
-func DeleteUser(db *sql.DB, email string) {
-	db.Exec(`DELETE FROM user WHERE email = ?`, email)
+func DeleteUser(db *sql.DB, id int, name string) bool {
+	_, err := db.Exec(`DELETE FROM post WHERE username = ?`, name)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	} else {
+		_, err := db.Exec(`DELETE FROM comment WHERE username = ?`, name)
+		if err != nil {
+			fmt.Println(err)
+			return false
+		} else {
+			_, err := db.Exec(`DELETE FROM likedpost WHERE userid = ?`, id)
+			if err != nil {
+				fmt.Println(err)
+				return false
+			} else {
+				_, err := db.Exec(`DELETE FROM likedcomment WHERE userid = ?`, id)
+				if err != nil {
+					fmt.Println(err)
+					return false
+				} else {
+					_, err := db.Exec(`DELETE FROM user WHERE id = ?`, id)
+					if err != nil {
+						fmt.Println(err)
+						return false
+					}
+					return true
+				}
+			}
+		}
+	}
 }
 
 func UserExists(db *sql.DB, email string, password string) (string, int) {
