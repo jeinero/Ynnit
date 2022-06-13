@@ -53,6 +53,7 @@ func UsersHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func Checksignin(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
 	var temptab User
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &temptab)
@@ -154,10 +155,12 @@ func CommentHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func Signin(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
 	http.ServeFile(w, r, "./templates/Signin.html")
 }
 
 func Profile(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
 	session, _ := store.Get(r, "cookie-name")
 	if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
 		http.Error(w, "Please login", http.StatusForbidden)
@@ -166,21 +169,39 @@ func Profile(w http.ResponseWriter, r *http.Request) {
 
 	t, _ := template.ParseFiles("./templates/profile.html")
 	t.Execute(w, nil)
+	reloadApi()
 }
 
 func Joinus(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
 	http.ServeFile(w, r, "./templates/joinus.html")
 }
 
 func ViewPost(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
 	http.ServeFile(w, r, "./templates/viewpost.html")
+	// println(r.URL.Query()["id"][0])
+
+}
+
+func Comments(w http.ResponseWriter, r *http.Request) {
+	var newComments Comment
+
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &newComments)
+	goodOrFalse := InsertIntoComment(AllApi.db, newComments.Content, newComments.UsersName, newComments.PostLink)
+	w.Write([]byte("{\"msg\": \"Success\"}"))
+	if !goodOrFalse {
+		w.Write([]byte("{\"error\": \"Sorry\"}"))
+	}
 }
 
 func Newuser(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
 	var newUser User
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &newUser)
-	if InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Password, "You can change the desc", "Guest") {
+	if InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Password, "You can change the desc", "Guest", newUser.Date) {
 		w.Write([]byte("{\"msg\": \"Success\"}"))
 	} else {
 		http.Error(w, "{\"error\": \"Enter a unique email and name\"}", http.StatusUnauthorized)
@@ -188,14 +209,16 @@ func Newuser(w http.ResponseWriter, r *http.Request) {
 }
 
 func PostsPage(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
 	http.ServeFile(w, r, "./templates/post.html")
 }
 
 func Posts(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
 	var newPost Post
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &newPost)
-	goodOrFalse := InsertIntoPost(AllApi.db, 1, newPost.Title, newPost.Content, "test")
+	goodOrFalse := InsertIntoPost(AllApi.db, newPost.CommuLink, newPost.Title, newPost.Content, newPost.UsersName, newPost.Date)
 	if !goodOrFalse {
 		w.Write([]byte("{\"error\": \"Sorry\"}"))
 	}
@@ -246,20 +269,46 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/", http.StatusFound)
 }
 
+func NewcommunityHandler(w http.ResponseWriter, r *http.Request) {
+	var Newcommunauter Communauter
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &Newcommunauter)
+	if InsertIntoCommunauter(AllApi.db, Newcommunauter.Name, Newcommunauter.Desc) {
+		w.Write([]byte("{\"msg\": \"Success\"}"))
+	} else {
+		http.Error(w, "{\"error\": \"Enter a valide community\"}", http.StatusUnauthorized)
+	}
+}
+
+func Changeemail(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/changeemail.html")
+}
+
+func Checkemail(w http.ResponseWriter, r *http.Request) {
+	var newEmail User
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &newEmail)
+	if UpdateMailUser(AllApi.db, newEmail.Id, newEmail.Email) {
+		w.Write([]byte("{\"msg\": \"Success\"}"))
+	} else {
+		http.Error(w, "{\"error\": \"Enter a valide name\"}", http.StatusUnauthorized)
+	}
+}
+
 func Handler() {
 
 	db := InitDatabase("./Ynnit.db")
 	AllApi.db = db
 	defer db.Close()
-	// InsertIntoUser(db, "jeinero", "jenei@gmail.com", "ImRio6988", "guest", "")
+	// InsertIntoUser(db, "jeinero", "jenei@gmail.com", "ImRio6988", "guest", "test", "test")
 	// InsertIntoUser(db, "qsdlqsd", "jeazenei@yahoo.fr", "ImRio6988")
-	// InsertIntoCommunauter(db, "Golang", "")
-	// InsertIntoPost(db, 1, "Golang Basic", "Golang suck lmao", "jeinero")
+	// InsertIntoCommunauter(db, "InfoFams", "DESC")
+	// InsertIntoPost(db, 1, "Golang Basic", "Golang suck lmao", "jeinero", 1)
 	// InsertIntoComment(db, "Menteur", 1, 1)
 	// InsertIntoComment(db, "gros bouffon", 1, 1)
 	// UpdatePassUser(db, "PaseeeeeeeeeeeeeesChang", "bc@gmail.om")
 	// UpdateMailUser(db, "azertyuiop@yahoo.ch", "jenei@gmail.com")
-	// UpdateNameUser(db, "rio", "azertyuiop@yahoo.ch")
+	// UpdateNameUser(db, 1, "test2")
 	// DeleteUser(db, "boc@gmail.com")
 
 	r := mux.NewRouter()
@@ -271,7 +320,6 @@ func Handler() {
 		http.StripPrefix("/js/", http.FileServer(http.Dir("./js"))))
 
 	r.HandleFunc("/", HomeHandler)
-
 	r.HandleFunc("/apiall", ApiAllHandler)
 
 	r.HandleFunc("/apiusers", UsersHandler)
@@ -294,18 +342,27 @@ func Handler() {
 
 	r.HandleFunc("/profile", Profile)
 
+	r.HandleFunc("/changeemail", Changeemail)
+	r.HandleFunc("/checkemail", Checkemail)
+
+	// r.HandleFunc("/changedesc", Changedesc)
+	// r.HandleFunc("/changepass", Changepass)
+
 	r.HandleFunc("/community", CommunityHandler)
+	r.HandleFunc("/newcommunity", NewcommunityHandler)
 
 	r.HandleFunc("/postpage", PostsPage)
 	r.HandleFunc("/post", Posts)
 
 	r.HandleFunc("/viewpost", ViewPost)
+	r.HandleFunc("/comment", Comments)
 
 	r.HandleFunc("/session", Session)
 
 	r.HandleFunc("/logout", Logout)
 
-	reloadApi()
+	go reloadApi()
+
 	http.Handle("/", r)
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
