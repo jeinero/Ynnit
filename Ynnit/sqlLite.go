@@ -28,7 +28,7 @@ func InitDatabase(database string) *sql.DB {
 		CREATE TABLE IF NOT EXISTS communauter (
 			id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 			name TEXT NOT NULL UNIQUE,
-			desc TEXT NOT NULL,
+			desc TEXT NOT NULL
 		);
 		CREATE TABLE IF NOT EXISTS post (
 			id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -137,29 +137,29 @@ func UpdateDescUser(db *sql.DB, id int, descnew string) bool {
 // }
 
 func DeleteUser(db *sql.DB, id int, name string) bool {
-	_, err := db.Exec(`DELETE FROM post WHERE username = ?`, name)
+	_, err := db.Exec(`DELETE FROM comment WHERE username = ?`, name)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println(err, "1")
 		return false
 	} else {
-		_, err := db.Exec(`DELETE FROM comment WHERE username = ?`, name)
+		_, err := db.Exec(`DELETE FROM post WHERE username = ?`, name)
 		if err != nil {
-			fmt.Println(err)
+			fmt.Println(err, "2")
 			return false
 		} else {
 			_, err := db.Exec(`DELETE FROM likedpost WHERE userid = ?`, id)
 			if err != nil {
-				fmt.Println(err)
+				fmt.Println(err, "3")
 				return false
 			} else {
 				_, err := db.Exec(`DELETE FROM likedcomment WHERE userid = ?`, id)
 				if err != nil {
-					fmt.Println(err)
+					fmt.Println(err, "4")
 					return false
 				} else {
 					_, err := db.Exec(`DELETE FROM user WHERE id = ?`, id)
 					if err != nil {
-						fmt.Println(err)
+						fmt.Println(err, "5")
 						return false
 					}
 					return true

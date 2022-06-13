@@ -39,6 +39,6 @@ function del() {
     .then((data) => {
         location.href = "/"
     }).catch((err) => {
-        document.getElementById("error").innerText = err.error
+        // document.getElementById("error").innerText = err.error
     })
 }
