@@ -162,12 +162,13 @@ func DbtoStructComment(db *sql.DB) []Comment {
 	return temptab
 }
 
-func InsertIntoComment(db *sql.DB, content string, Username string, PostLink int) (int64, error) {
-	result, err := db.Exec(`INSERT INTO comment (contentComment, username, postLink) VALUES (?, ?, ?)`, content, Username, PostLink)
+func InsertIntoComment(db *sql.DB, content string, Username string, PostLink int) bool {
+	_, err := db.Exec(`INSERT INTO comment (contentComment, username, postLink) VALUES (?, ?, ?)`, content, Username, PostLink)
 	if err != nil {
 		fmt.Println(err)
+		return false
 	}
-	return result.LastInsertId()
+	return true
 }
 
 func DbtoStructCommunauter(db *sql.DB) []Communauter {

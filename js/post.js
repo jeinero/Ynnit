@@ -57,6 +57,7 @@ fetch("/apicommunauters")
         let options = document.createElement("option")
         options.text = elemnt.Name
         options.value = elemnt.Id
+        console.log(options)
         selector.appendChild(options)
     })
     console.log(selector)

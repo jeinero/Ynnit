@@ -8,9 +8,9 @@
 
 <body>
     <button class="button" onclick = "changeColor('white');" >Mode Clair</button>
-        <button class="button" onclick = "returnChangeColor('rgb(64, 64, 64)');" >Mode foncé</button>
-    <div class="container">
+    <button class="button" onclick = "returnChangeColor('rgb(64, 64, 64)');" >Mode foncé</button> 
 
+    <div class="container">
 
         <select name="communité" class="selectcomm" id="select">
             <option value="0">Choose the community</option>
@@ -20,8 +20,8 @@
         <div class="CreatePost">
             <p><strong>Create a Post:</strong> </p>
            
-                <input  id="titre" type="text" maxlength="300" size="50" placeholder="Title" required>
-                <textarea id="content"name="" cols="30" rows="10" placeholder="Text (optional)"></textarea>
+                <input  id="titre" type="text" maxlength="50" size="50" placeholder="Title" required>
+                <textarea id="content"name=""  cols="30" rows="10" placeholder="Text (optional)"></textarea>
             
                       <input type="checkbox" id="btnControl" />
             <label for="btnControl">
@@ -36,7 +36,7 @@
 
                 <div class="Poster">
                     <button id="btn" type="submit" href="/" > Post </button>
-                        <button class="test">Delete</button>
+                    <button onclick="window.location.href='/'">Cancel</button>
                 </div>
 
             </div>
@@ -47,6 +47,6 @@
     </div>
 </body>
 <script type="module" src='/js/post.js'></script>
-<script type="text/javascript" src="/js/font-button.js" ></script>
+<script src="/js/font-button.js" ></script>
 
 </html>

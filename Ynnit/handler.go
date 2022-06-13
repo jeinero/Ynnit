@@ -180,6 +180,20 @@ func Joinus(w http.ResponseWriter, r *http.Request) {
 func ViewPost(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	http.ServeFile(w, r, "./templates/viewpost.html")
+	// println(r.URL.Query()["id"][0])
+
+}
+
+func Comments(w http.ResponseWriter, r *http.Request) {
+	var newComments Comment
+
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &newComments)
+	goodOrFalse := InsertIntoComment(AllApi.db, newComments.Content, newComments.UsersName, newComments.PostLink)
+	w.Write([]byte("{\"msg\": \"Success\"}"))
+	if !goodOrFalse {
+		w.Write([]byte("{\"error\": \"Sorry\"}"))
+	}
 }
 
 func Newuser(w http.ResponseWriter, r *http.Request) {
@@ -286,10 +300,10 @@ func Handler() {
 	db := InitDatabase("./Ynnit.db")
 	AllApi.db = db
 	defer db.Close()
-	// InsertIntoUser(db, "jeinero", "jenei@gmail.com", "ImRio6988", "guest", "")
+	// InsertIntoUser(db, "jeinero", "jenei@gmail.com", "ImRio6988", "guest", "test", "test")
 	// InsertIntoUser(db, "qsdlqsd", "jeazenei@yahoo.fr", "ImRio6988")
 	// InsertIntoCommunauter(db, "InfoFams", "DESC")
-	// InsertIntoPost(db, 1, "Golang Basic", "Golang suck lmao", "jeinero")
+	// InsertIntoPost(db, 1, "Golang Basic", "Golang suck lmao", "jeinero", 1)
 	// InsertIntoComment(db, "Menteur", 1, 1)
 	// InsertIntoComment(db, "gros bouffon", 1, 1)
 	// UpdatePassUser(db, "PaseeeeeeeeeeeeeesChang", "bc@gmail.om")
@@ -306,7 +320,6 @@ func Handler() {
 		http.StripPrefix("/js/", http.FileServer(http.Dir("./js"))))
 
 	r.HandleFunc("/", HomeHandler)
-
 	r.HandleFunc("/apiall", ApiAllHandler)
 
 	r.HandleFunc("/apiusers", UsersHandler)
@@ -342,6 +355,7 @@ func Handler() {
 	r.HandleFunc("/post", Posts)
 
 	r.HandleFunc("/viewpost", ViewPost)
+	r.HandleFunc("/comment", Comments)
 
 	r.HandleFunc("/session", Session)
 

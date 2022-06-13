@@ -7,12 +7,8 @@ fetch("/apiposts")
             .then(resp => resp.json())
             .then(data => {
                 const newcard = document.createElement('div')
-            const a = document.createElement('a')
-            const lien = document.createTextNode('voici le lien')
-            a.append(lien)
-            a.href = "/viewpost?id=" + element.Id
-            newcard.append(a)
-            newcard.classList = 'card'
+                newcard.id = element.Id
+                newcard.classList = "card"
 
             const divhaut = document.createElement('div')
             divhaut.classList = 'divhaut'
@@ -66,9 +62,13 @@ fetch("/apiposts")
             divbas.append(comments)
             const integrate = document.querySelector('.bigcard')
             integrate.appendChild(newcard)
-            } )
-              });
-    })
+            document.getElementById(element.Id).onclick = function() {
+              location.href = "/viewpost?id=" + element.Id
+          } 
+          } )
+        });
+      })
+      
 
 
     function timeSince(date) {

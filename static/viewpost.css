@@ -44,3 +44,34 @@
     font-style: italic;
     font-size: 20px;
 }
+.commentaire{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+textarea {
+  
+    border-radius: 10px;
+    background-color: #d6d6d6;
+    width: 800px;
+    margin-left: 100px;
+    margin-top: 30px;
+    resize: none;
+    border: 3px solid black;
+}
+
+.PosterContain {
+
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.Poster {
+
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    width: 150px;
+}
