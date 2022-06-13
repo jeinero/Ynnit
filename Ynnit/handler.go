@@ -189,7 +189,7 @@ func Comments(w http.ResponseWriter, r *http.Request) {
 
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &newComments)
-	goodOrFalse := InsertIntoComment(AllApi.db, newComments.Content, newComments.UsersName, newComments.PostLink)
+	goodOrFalse := InsertIntoComment(AllApi.db, newComments.Content, newComments.UsersName, newComments.PostLink, newComments.Date)
 	w.Write([]byte("{\"msg\": \"Success\"}"))
 	if !goodOrFalse {
 		w.Write([]byte("{\"error\": \"Sorry\"}"))
@@ -295,11 +295,60 @@ func Checkemail(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func Changedesc(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/changedesc.html")
+}
+
+func Checkdesc(w http.ResponseWriter, r *http.Request) {
+	var newDesc User
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &newDesc)
+	if UpdateDescUser(AllApi.db, newDesc.Id, newDesc.Desc) {
+		w.Write([]byte("{\"msg\": \"Success\"}"))
+	} else {
+		http.Error(w, "{\"error\": \"Enter a valide name\"}", http.StatusUnauthorized)
+	}
+}
+
+func Changepass(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/changepass.html")
+}
+
+func Checkpass(w http.ResponseWriter, r *http.Request) {
+	var newPass User
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &newPass)
+	if UpdatePassUser(AllApi.db, newPass.Id, newPass.Password) {
+		w.Write([]byte("{\"msg\": \"Success\"}"))
+	} else {
+		http.Error(w, "{\"error\": \"Enter a valide name\"}", http.StatusUnauthorized)
+	}
+}
+
+func Delete(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/delete.html")
+}
+
+func Checkdelete(w http.ResponseWriter, r *http.Request) {
+	var deleuser User
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &deleuser)
+	if DeleteUser(AllApi.db, deleuser.Id, deleuser.Name) {
+		w.Write([]byte("{\"msg\": \"Success\"}"))
+	} else {
+		http.Error(w, "{\"error\": \"Enter a valide name\"}", http.StatusUnauthorized)
+	}
+}
+
 func Handler() {
 
 	db := InitDatabase("./Ynnit.db")
 	AllApi.db = db
 	defer db.Close()
+	InsertIntoCategorie(AllApi.db, "Informatique")
+	InsertIntoCategorie(AllApi.db, "France")
+	InsertIntoCategorie(AllApi.db, "Food")
+
 	// InsertIntoUser(db, "jeinero", "jenei@gmail.com", "ImRio6988", "guest", "test", "test")
 	// InsertIntoUser(db, "qsdlqsd", "jeazenei@yahoo.fr", "ImRio6988")
 	// InsertIntoCommunauter(db, "InfoFams", "DESC")
@@ -309,7 +358,7 @@ func Handler() {
 	// UpdatePassUser(db, "PaseeeeeeeeeeeeeesChang", "bc@gmail.om")
 	// UpdateMailUser(db, "azertyuiop@yahoo.ch", "jenei@gmail.com")
 	// UpdateNameUser(db, 1, "test2")
-	// DeleteUser(db, "boc@gmail.com")
+	// DeleteUser(AllApi.db, 2, "test")
 
 	r := mux.NewRouter()
 
@@ -345,8 +394,14 @@ func Handler() {
 	r.HandleFunc("/changeemail", Changeemail)
 	r.HandleFunc("/checkemail", Checkemail)
 
-	// r.HandleFunc("/changedesc", Changedesc)
-	// r.HandleFunc("/changepass", Changepass)
+	r.HandleFunc("/changedesc", Changedesc)
+	r.HandleFunc("/checkdesc", Checkdesc)
+
+	r.HandleFunc("/changepass", Changepass)
+	r.HandleFunc("/checkpass", Checkpass)
+
+	r.HandleFunc("/delete", Delete)
+	r.HandleFunc("/checkdelete", Checkdelete)
 
 	r.HandleFunc("/community", CommunityHandler)
 	r.HandleFunc("/newcommunity", NewcommunityHandler)

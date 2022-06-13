@@ -98,4 +98,22 @@ fetch("/apiposts")
         console.log(interval)
         return Math.floor(seconds) + " seconds";
       }
-      let aDay = 24*60*60*1000;
+      var aDay = 24*60*60*1000;
+
+      document.body.onload = function() {
+        if (getCookie("name") != null) {
+                let classComm = document.getElementsByClassName("lien")
+                classComm[0].style.display = "none"
+                classComm[1].style.display = "none"
+                }
+ }
+ function getCookie(name) {
+  let nameEQ = name + "=";
+  let ca = document.cookie.split(';');
+  for(let i=0;i < ca.length;i++) {
+      let c = ca[i];
+      while (c.charAt(0)==' ') c = c.substring(1,c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+  }
+  return null;
+}

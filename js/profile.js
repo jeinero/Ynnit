@@ -5,10 +5,6 @@ document.getElementById("home").onclick = function(){
     location.href = "/"
 }
 
-document.getElementById("changename").onclick = function(){
-    location.href = "/changename"
-}
-
 document.getElementById("changeemail").onclick = function(){
     location.href = "/changeemail"
 }
@@ -19,6 +15,10 @@ document.getElementById("changedesc").onclick = function(){
 
 document.getElementById("changepass").onclick = function(){
     location.href = "/changepass"
+}
+
+document.getElementById("delete").onclick = function(){
+    location.href = "/delete"
 }
 
 

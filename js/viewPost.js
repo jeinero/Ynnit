@@ -17,6 +17,14 @@ function getCookie(name) {
         }
         return null;
     }
+document.body.onload = function() {
+       if (getCookie("name") === null) {
+               let classComm = document.getElementsByClassName("commentaire")[0]
+               classComm.style.display = "none"
+               }
+}
+var currentDate = new Date()
+let dates = currentDate.getTime()
 
 function onClickComment() {
         fetch("/comment", {
@@ -28,6 +36,7 @@ function onClickComment() {
                         UsersName: getCookie("name"),
                         postLink : parseInt(id),
                         content: document.getElementById("content").value,
+                        Date:  dates
                 })
         })
                 .catch((err) => {
@@ -46,6 +55,12 @@ fetch("/apiposts/" + id)
                 divtop.classList = 'divtop'
                 viewpost.appendChild(divtop)
 
+                const date = document.createElement('div')
+                console.log(data.Post.Date)
+                date.innerHTML = timeSince(data.Post.Date)
+                date.classList = 'date'
+                divtop.appendChild(date)
+
                 const title = document.createElement('div')
                 title.innerHTML = data.Post.Title
                 title.classList = 'title'
@@ -60,11 +75,15 @@ fetch("/apiposts/" + id)
                 content.innerHTML = data.Post.Content
                 content.classList = 'content'
                 viewpost.appendChild(content)
-
                 data.Comments.forEach(element => {
                         const divtop = document.createElement('div')
                         divtop.classList = 'divtop'
                         viewcommentaire.appendChild(divtop)
+
+                        const dates = document.createElement('div')
+                        dates.innerHTML = timeSince(element.Date)
+                        dates.classList = 'date'
+                        viewcommentaire.appendChild(dates)
 
                         const content = document.createElement('div')
                         content.innerHTML = element.Content
@@ -80,6 +99,34 @@ fetch("/apiposts/" + id)
 
 
         })
+
+        function timeSince(date) {
+                var seconds = Math.floor((new Date() - date) / 1000);
+                var interval = seconds / 31536000;
+              
+                if (interval > 1) {
+                  return Math.floor(interval) + " years";
+                }
+                interval = seconds / 2592000;
+                if (interval > 1) {
+                  return Math.floor(interval) + " months";
+                }
+                interval = seconds / 86400;
+                if (interval > 1) {
+                  return Math.floor(interval) + " days";
+                }
+                interval = seconds / 3600;
+                if (interval > 1) {
+                  return Math.floor(interval) + " hours";
+                }
+                interval = seconds / 60;
+                if (interval > 1) {
+                  return Math.floor(interval) + " minutes";
+                }
+                console.log(interval)
+                return Math.floor(seconds) + " seconds";
+              }
+              var aDay = 24*60*60*1000;
 
 
 
