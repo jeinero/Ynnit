@@ -69,3 +69,12 @@ select.addEventListener('change', function handleChange(event) {
 
 var currentDate = new Date()
 dates = currentDate.getTime()
+
+
+document.body.onload = function() {
+    if (getCookie("name") != null) {
+            let classComm = document.getElementsByClassName("lien")
+            classComm[0].style.display = "none"
+            classComm[1].style.display = "none"
+            }
+}
