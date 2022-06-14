@@ -1,24 +1,34 @@
 <!DOCTYPE html>
 <html>
-    <header>
-        <title>Ynnit</title>
-        <meta charset="utf-8"/>
-        <link rel="stylesheet" href="/css/signin.css">
-    </header>
+<header>
+    <title>Ynnit</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/css/signin.css">
+    <link rel="stylesheet" href="/css/font-button.css">
+</header>
 
-    <body>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="john.doe@example.com" required><br><br>
-    
-        <label for="pwd">Password:</label>
-        <input type="password" id="pwd" name="pwd" minlength="8" autocomplete="on" required><br><br>
-    
-        <button id="button" type="submit">Sign In</button>
-        <p id="error" style="color: red"></p>
-    </body>
+<body>
+    <button class="button" onclick="changeColor('white');">Mode Clair</button>
+    <button class="button" onclick="returnChangeColor('rgb(64, 64, 64)');">Mode foncé</button>
+    <div class="container">
 
+        <div class="select">
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="john.doe@example.com" required><br><br>
+
+            <label for="pwd">Password:</label>
+            <input type="password" id="pwd" name="pwd" minlength="8" autocomplete="on" placeholder="Enter password"required><br><br>
+
+
+            <button id="button" type="submit">signin</button>
+            <p id="error" style="color: red"></p>
+
+        </div>
+
+    <script type="text/javascript" src="/js/font-button.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/2.0.2/sha.js"></script>
-
     <script type="module" src='/js/signin.js'></script>
+</body>
 
 </html>

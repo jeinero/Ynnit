@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <title>Edit acocunt</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./css/profile.css">
+
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://kit.fontawesome.com/e37a482217.js" crossorigin="anonymous"></script>
@@ -14,47 +15,54 @@
 
 </head>
 
+
 <body>
     <div id="container">
         <div class="content">
             <div id="title">
-                Welcome            
-                <div class = "logout">
-                    <button type ="submit" id = "logout">Logout</button>
-                </div>
+                Welcome
             </div>
+
             <div class="principale">
-                <div class="latestposts">
+                <div id="latestposts">
                     Your latest posts :
+                    <div class="logout">
+                        <button type="submit" id="logout">Logout</button>
+                    </div>
                 </div>
                 <div class="account">
                     <div class="viewaccount">
-                        <div class ="text">
                             <p>Your personal informations :</p>
+                        <div class="profilepicture">
+                            <img id="image"
+                                src="https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png">
                         </div>
-                        <div class = "profilepicture">                            
-                            <img id="image" src="https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png">
-                        </div>
-                        <div id = "viewtext">
+                        <div id="viewtext">
 
                         </div>
                     </div>
                     <div class="setaccount">
                         <div class="display2">
-                            <div class = "text">
+                            <div class="text">
                                 Edit your account :
                             </div>
-                            <button type="submit" id="changeemail" class="button">EDIT <br> EMAIL<br><i class="fa-solid fa-at"></i></button>
-                            <button type="submit" id="changedesc" class="button">EDIT <br> BIO<br><i class="fa-solid fa-file-lines"></i></button>
-                            <button type="submit" id="changepass" class="button">EDIT <br> PASSWORD<br><i class="fa-solid fa-lock"></i></button>
-                            <button type="submit" id="editpicture" class="button">EDIT <br> PICTURE<br><i class="fa-solid fa-camera-rotate"></i></button>    
-                            <button type="submit" id="delete" class="button">DELETE <br> ACCOUNT<br><i class="fa-solid fa-user-slash"></i></button>
+                            <button type="submit" id="changeemail" class="button">EDIT <br> EMAIL<br><i
+                                    class="fa-solid fa-at"></i></button>
+                            <button type="submit" id="changedesc" class="button">EDIT <br> BIO<br><i
+                                    class="fa-solid fa-file-lines"></i></button>
+                            <button type="submit" id="changepass" class="button">EDIT <br> PASSWORD<br><i
+                                    class="fa-solid fa-lock"></i></button>
+                            <button type="submit" id="editpicture" class="button">EDIT <br> PICTURE<br><i
+                                    class="fa-solid fa-camera-rotate"></i></button>
+                            <button type="submit" id="delete" class="button">DELETE <br> ACCOUNT<br><i
+                                    class="fa-solid fa-user-slash"></i></button>
                         </div>
 
                     </div>
+                </div>
+
             </div>
-        
-        </div>
+            
         </div>
     </div>
 

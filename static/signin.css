@@ -1,4 +1,3 @@
-
 body {
     margin: 0px;
 }
@@ -15,11 +14,28 @@ body {
     padding: 1%;
     display: flex;
     flex-direction: column;
-    width: 25%;
+    width: auto;
     height: auto;
     border: 2px solid black;
     justify-content: center;
     align-items: center;
     border-radius: 40px;
     
+}
+
+#email {
+    background-color: rgb(222, 222, 222);
+    border-radius: 10px;
+    font-weight: bold;
+    width: 360px;
+    height: 50px;
+    font-size: x-large;
+}
+#pwd {
+    background-color: rgb(222, 222, 222);
+    border-radius: 10px;
+    font-weight: bold;
+    width: 360px;
+    height: 50px;
+    font-size: x-large;
 }

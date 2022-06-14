@@ -30,29 +30,35 @@ function getCookie(name) {
     return null;
 }
 let id = getCookie("id")
+
+
+
 const title = document.getElementById('viewtext')
 
 const loadDataUser = data => {
     
-    const name = document.createElement("p")
+    const name = document.createElement("div")
     name.innerText = data.User.Name
     title.appendChild(name)
 
-    let email = document.createElement("p")
+    let email = document.createElement("div")
     email.innerText = data.User.Email
     title.append(email)
 
-    let desc = document.createElement("p")
+    let desc = document.createElement("div")
+    desc.classList = "desc"
     desc.innerText = data.User.Desc
     title.append(desc)
 
-    // let rank = document.createElement("p")
-    // rank.innerText = data.User.UsersLevel
-    // title.append(rank)
+    let rank = document.createElement("div")
+    rank.innerText = data.User.UsersLevel
+    title.append(rank)
+
+    document.getElementById("latestposts").append(desc)
 
 }
 
 
- fetch("/apiusers/" + id)
+fetch("/apiusers/" + id)
 .then(resp => resp.json())
 .then(loadDataUser)
