@@ -5,8 +5,13 @@
         <meta charset="utf-8"/>
         <link rel="stylesheet" href="changeemail.css">
     </header>
-
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&display=swap');
+</style>
     <body>
+        <button class="button" onclick = "changeColor('white');" >Mode Clair</button>
+        <button class="button" onclick = "returnChangeColor('rgb(64, 64, 64)');" >Mode foncé</button> 
+                
         <div id="flex-content">
             <div id="content">
                 <label for="email1">Email:</label>
@@ -25,3 +30,35 @@
     <script type="module" src='/js/changeemail.js'></script>
 
 </html>
+
+
+
+
+
+
+
+            <div id="content-center">
+                <div id="content">
+
+                    <div id="flex-title">
+                        <h1 id="flex-title-image">
+                            <img src="connected.png">
+                        <br/>
+                            TO LOGIN
+                        </h1>
+                    </div>
+                    <div id="content">        
+                        <div action="" method="get" id="form">
+                            <div id="centerTop">
+                                <input type="email" name="name" class="email" placeholder="john.doe@example.com" id="email" required>
+                                <input type="password" name="pwd" class="pwd" placeholder="Enter password : " id="password" minlength="8" autocomplete="on" required>
+                            </div>
+                            <br/>
+                            <div id="centerBottom">
+                                <button id="button" >SIGN IN <img src="connexion.png"></button>
+                                
+                            </div>
+                        </div>
+
+                </div>
+            </div>
