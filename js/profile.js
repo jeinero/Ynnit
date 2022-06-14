@@ -1,9 +1,9 @@
-document.getElementById("logout").onclick = function(){
-    location.href = "/logout"
-}
-document.getElementById("home").onclick = function(){
-    location.href = "/"
-}
+// document.getElementById("logout").onclick = function(){
+//     location.href = "/logout"
+// }
+// document.getElementById("home").onclick = function(){
+//     location.href = "/"
+// }
 
 document.getElementById("changeemail").onclick = function(){
     location.href = "/changeemail"
@@ -33,11 +33,17 @@ function getCookie(name) {
     return null;
 }
 let id = getCookie("id")
+const title = document.getElementById('title')
 
 const loadDataUser = data => {
-    let name = document.createElement("h1")
-    name.innerText = data.User.Name
-    document.body.append(name)
+    data.forEach(element => {
+    const name = document.createElement("div")
+    name.innerText = element.Name
+    title.appendChild(name)
+
+
+
+    console.log(name)
 
     let email = document.createElement("h1")
     email.innerText = data.User.Email
@@ -50,6 +56,7 @@ const loadDataUser = data => {
     let rank = document.createElement("h1")
     rank.innerText = data.User.UsersLevel
     document.body.append(rank)
+    })
 }
 
  fetch("/apiusers/" + id)

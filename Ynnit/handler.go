@@ -192,6 +192,10 @@ func PostsPage(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/post.html")
 }
 
+func EditProfile(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/edit_profile.html")
+}
+
 func Posts(w http.ResponseWriter, r *http.Request) {
 	var newPost Post
 	body, _ := ioutil.ReadAll(r.Body)

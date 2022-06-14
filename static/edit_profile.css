@@ -63,7 +63,7 @@ body {
     flex-direction: column;
 }
 
-.editaccount{
+.viewaccount{
     display: flex;
     height: 10%;
     width: 100%;
@@ -107,19 +107,21 @@ p {
 }
 
 .button {
-    border-radius: 10px;
+    border-radius: 50%;
     border: 5px solid black;
     font-size: 30px;
-    width: 180px;
-    height: 180px;
+    width: 150px;
+    height: 150px;
     margin: 5px;
     background-color: #fa6400;
     font-family: 'Dosis', sans-serif;
+    transition: .4s;
+
 }
 
 .button:hover {
-    transform: translateY(-3px);
     background-color: #fb8332;
-    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
 
 }
+
+
