@@ -34,6 +34,7 @@ fetch("/apiposts")
 
             const like = document.createElement('button')
             like.classList = 'like'
+            like.id = "like"
             like.innerHTML = `<i class="fa fa-thumbs-up" aria-hidden="true"></i>`
 
             const dislike = document.createElement('button')
@@ -42,7 +43,7 @@ fetch("/apiposts")
 
             const comments = document.createElement('div')
             comments.classList = 'comments'
-            comments.innerHTML = "Commentaires"
+            comments.innerHTML = "nb commentaires"
 
             const userpseudo = document.createElement('div')
             userpseudo.classList = 'userpseudo'
@@ -63,6 +64,9 @@ fetch("/apiposts")
             document.getElementById(element.Id).onclick = function() {
               location.href = "/viewpost?id=" + element.Id
           } 
+          document.getElementById("like").onclick = function() {
+            alert("I am an alert box!");
+        } 
           } )
         });
       })
