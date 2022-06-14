@@ -8,6 +8,7 @@ type AllStructs struct {
 	CommunautersAll []Communauter
 	PostsAll        []Post
 	CommentsAll     []Comment
+	TagsAll         []tags
 }
 
 type User struct {
@@ -24,15 +25,17 @@ type Communauter struct {
 	Id   int    `json: "id"`
 	Name string `json: "name"`
 	Desc string `json: "desc"`
+	Tags string `json: "tags"`
 }
 type Post struct {
-	Id        int    `json: "id"`
-	Date      int    `json: "date"`
-	CommuLink int    `json: "commuLink"`
-	Title     string `json: "title"`
-	Content   string `json: "content"`
-	UsersName string `json: "NameUser"`
-	Like      int    `json: "likeCount"`
+	Id            int    `json: "id"`
+	Date          int    `json: "date"`
+	CommuLink     int    `json: "commuLink"`
+	Title         string `json: "title"`
+	Content       string `json: "content"`
+	UsersName     string `json: "NameUser"`
+	Like          int    `json: "likeCount"`
+	NumberComment int    `json: "commentCount"`
 }
 type Comment struct {
 	Id        int    `json: "id"`
@@ -41,4 +44,9 @@ type Comment struct {
 	UsersName string `json: "NameUser"`
 	Like      int    `json: "likeCount"`
 	Date      int    `json: "date"`
+}
+
+type tags struct {
+	Id   int    `json: "id"`
+	Name string `json: "name"`
 }

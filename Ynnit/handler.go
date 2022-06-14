@@ -138,6 +138,11 @@ func CommunauterHandler(w http.ResponseWriter, r *http.Request) {
 
 }
 
+func tagsHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
+	json.NewEncoder(w).Encode(AllApi.TagsAll)
+}
+
 func CommentsHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	json.NewEncoder(w).Encode(AllApi.CommentsAll)
@@ -181,9 +186,7 @@ func ViewPost(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	http.ServeFile(w, r, "./templates/viewpost.html")
 	// println(r.URL.Query()["id"][0])
-
 }
-
 func Comments(w http.ResponseWriter, r *http.Request) {
 	var newComments Comment
 
@@ -218,6 +221,7 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 	var newPost Post
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &newPost)
+	fmt.Println(newPost.UsersName, newPost.CommuLink)
 	goodOrFalse := InsertIntoPost(AllApi.db, newPost.CommuLink, newPost.Title, newPost.Content, newPost.UsersName, newPost.Date)
 	if !goodOrFalse {
 		w.Write([]byte("{\"error\": \"Sorry\"}"))
@@ -273,7 +277,7 @@ func NewcommunityHandler(w http.ResponseWriter, r *http.Request) {
 	var Newcommunauter Communauter
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &Newcommunauter)
-	if InsertIntoCommunauter(AllApi.db, Newcommunauter.Name, Newcommunauter.Desc) {
+	if InsertIntoCommunauter(AllApi.db, Newcommunauter.Name, Newcommunauter.Desc, "Shitpost") {
 		w.Write([]byte("{\"msg\": \"Success\"}"))
 	} else {
 		http.Error(w, "{\"error\": \"Enter a valide community\"}", http.StatusUnauthorized)
@@ -345,14 +349,10 @@ func Handler() {
 	db := InitDatabase("./Ynnit.db")
 	AllApi.db = db
 	defer db.Close()
-	InsertIntoCategorie(AllApi.db, "Informatique")
-	InsertIntoCategorie(AllApi.db, "France")
-	InsertIntoCategorie(AllApi.db, "Food")
-
-	// InsertIntoUser(db, "jeinero", "jenei@gmail.com", "ImRio6988", "guest", "test", "test")
+	InsertIntoCategorie(AllApi.db, "Shitpost")
 	// InsertIntoUser(db, "qsdlqsd", "jeazenei@yahoo.fr", "ImRio6988")
 	// InsertIntoCommunauter(db, "InfoFams", "DESC")
-	// InsertIntoPost(db, 1, "Golang Basic", "Golang suck lmao", "jeinero", 1)
+	// InsertIntoPost(db, 1, "Golang Basic", "Golang suck lmao", "Zupz", 1)
 	// InsertIntoComment(db, "Menteur", 1, 1)
 	// InsertIntoComment(db, "gros bouffon", 1, 1)
 	// UpdatePassUser(db, "PaseeeeeeeeeeeeeesChang", "bc@gmail.om")
@@ -380,6 +380,8 @@ func Handler() {
 
 	r.HandleFunc("/apicommunauters", CommunautersHandler)
 	r.HandleFunc("/apicommunauters/{id}", CommunauterHandler)
+
+	r.HandleFunc("/apitags", tagsHandler)
 
 	r.HandleFunc("/apicomments", CommentsHandler)
 	r.HandleFunc("/apicomments/{id}", CommentHandler)
@@ -428,4 +430,5 @@ func reloadApi() {
 	AllApi.CommunautersAll = DbtoStructCommunauter(AllApi.db)
 	AllApi.PostsAll = DbtoStructPost(AllApi.db)
 	AllApi.CommentsAll = DbtoStructComment(AllApi.db)
+	AllApi.TagsAll = DbtoStructCategorie(AllApi.db)
 }

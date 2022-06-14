@@ -29,6 +29,8 @@ func InitDatabase(database string) *sql.DB {
 			id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 			name TEXT NOT NULL UNIQUE,
 			desc TEXT NOT NULL,
+			tags TEXT NOT NULL,
+			FOREIGN KEY (tags) REFERENCES categorie(name) 
 		);
 		CREATE TABLE IF NOT EXISTS post (
 			id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -65,7 +67,7 @@ func InitDatabase(database string) *sql.DB {
 		);
 		CREATE TABLE IF NOT EXISTS categorie (
 			id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-			name INTEGER NOT NULL
+			name TEXT NOT NULL UNIQUE
 		);
 		`
 	_, err = db.Exec(sqlStmt)
@@ -225,7 +227,7 @@ func DbtoStructCommunauter(db *sql.DB) []Communauter {
 
 	for rowsUsers.Next() {
 		var u Communauter
-		err := rowsUsers.Scan(&u.Id, &u.Name, &u.Desc)
+		err := rowsUsers.Scan(&u.Id, &u.Name, &u.Desc, &u.Tags)
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -233,22 +235,15 @@ func DbtoStructCommunauter(db *sql.DB) []Communauter {
 	}
 	return temptab
 }
-func InsertIntoCommunauter(db *sql.DB, Name string, Desc string) bool {
-	_, err := db.Exec(`INSERT INTO communauter (name, desc) VALUES (?, ?)`, Name, Desc)
+func InsertIntoCommunauter(db *sql.DB, Name string, Desc string, Tags string) bool {
+	_, err := db.Exec(`INSERT INTO communauter (name, desc, tags) VALUES (?, ?, ?)`, Name, Desc, Tags)
 	if err != nil {
 		fmt.Println(err)
 		return false
 	}
 	return true
 }
-func InsertIntoCategorie(db *sql.DB, Name string) bool {
-	_, err := db.Exec(`INSERT INTO categorie (name) VALUES (?)`, Name)
-	if err != nil {
-		fmt.Println(err)
-		return false
-	}
-	return true
-}
+
 func DbtoStructPost(db *sql.DB) []Post {
 	rowsUsers, _ := db.Query("SELECT * FROM post")
 	var temptab []Post
@@ -260,11 +255,13 @@ func DbtoStructPost(db *sql.DB) []Post {
 			fmt.Println(err)
 		}
 		u.Like = countLike(db, "likedpost", "postLike", u.Id)
+		u.NumberComment = countComment(db, u.Id)
 		temptab = append(temptab, u)
 	}
 	return temptab
 }
 func InsertIntoPost(db *sql.DB, CommuLink int, Title string, Content string, UsersName string, Date int) bool {
+	fmt.Println(CommuLink, Title, Content, UsersName, Date)
 	_, err := db.Exec(`INSERT INTO post (commuLink, title, contentPost, username, date) VALUES (?,?,?,?,?)`, CommuLink, Title, Content, UsersName, Date)
 	if err != nil {
 		fmt.Println(err)
@@ -280,4 +277,36 @@ func countLike(db *sql.DB, table string, tableRow string, whereID int) int {
 		fmt.Println(err)
 	}
 	return count
+}
+func countComment(db *sql.DB, whereID int) int {
+	var count int
+	err := db.QueryRow("SELECT COUNT(*) FROM comment  WHERE postLink = ?", whereID).Scan(&count)
+	if err != nil {
+		fmt.Println(err)
+	}
+	return count
+}
+
+func InsertIntoCategorie(db *sql.DB, Name string) bool {
+	_, err := db.Exec(`INSERT INTO categorie (name) VALUES (?)`, Name)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+	return true
+}
+
+func DbtoStructCategorie(db *sql.DB) []tags {
+	rowsUsers, _ := db.Query("SELECT * FROM categorie")
+	var temptab []tags
+
+	for rowsUsers.Next() {
+		var u tags
+		err := rowsUsers.Scan(&u.Id, &u.Name)
+		if err != nil {
+			fmt.Println(err)
+		}
+		temptab = append(temptab, u)
+	}
+	return temptab
 }
