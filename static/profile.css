@@ -1,3 +1,130 @@
-* {
-    background-color: grey;
+@import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@600&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Otomanopee+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chewy&display=swap');
+
+
+body {
+    margin: 0px;
+}
+
+
+#container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    border: 2px solid red;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid saddlebrown;
+    width: 100%;
+    height: 100%;
+}
+
+#title {
+    display: flex;
+    border: 2px solid pink;
+    width: auto;
+    height: auto;
+    justify-content: center;
+}
+
+.display2 {
+    display: flex;
+    flex-wrap: wrap;
+    border: 2px solid black;
+    width: auto;
+    height: auto;
+    justify-content: center;
+   
+}
+
+.principale {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+#latestposts {
+    display: flex;
+    border: 5px solid pink;
+    width: 70%;
+    height: auto;
+    justify-content: center;
+
+}
+
+.account {
+    display: flex;
+    width:  30%;
+    height: 100%;
+    justify-content: center;
+    border: 2px solid black;
+    flex-direction: column;
+}
+
+.editaccount{
+    display: flex;
+    height: 10%;
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+.text{
+    display: flex;
+    height: 90%;
+    width: 100%;
+    justify-content: center;
+
+}
+
+.profilepicture {
+    display: flex;
+    justify-content: center;
+
+}
+
+p {
+    font-size: 34px;
+}
+
+.picture {
+    display: flex;
+    flex-wrap: wrap;
+    border: 2px solid black;
+    width: auto;
+    height: auto;
+    justify-content: center;
+}
+
+#image {
+    width: 180px;
+    height: 180px;
+    padding: 1%;
+    border-radius: 10%;
+}
+
+.button {
+    border-radius: 50%;
+    border: 5px solid black;
+    font-size: 30px;
+    width: 170px;
+    height: 170px;
+    margin: 5px;
+    background-color: #fa6400;
+    font-family: 'Dosis', sans-serif;
+}
+
+.button:hover {
+    background-color: #fb8332;
+}
+
+.logout {
+    display: flex;
 }

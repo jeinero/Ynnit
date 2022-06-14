@@ -47,7 +47,7 @@ func InitDatabase(database string) *sql.DB {
 			contentComment TEXT NOT NULL,
 			username TEXT NOT NULL,
 			date INTEGER NOT NULL,
-			postLink INT,
+			s INT,
 			FOREIGN KEY (postLink) REFERENCES post(id),
 			FOREIGN KEY (username) REFERENCES user(name) 
 		);

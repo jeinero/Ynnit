@@ -185,7 +185,6 @@ func Joinus(w http.ResponseWriter, r *http.Request) {
 func ViewPost(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	http.ServeFile(w, r, "./templates/viewpost.html")
-	// println(r.URL.Query()["id"][0])
 }
 func Comments(w http.ResponseWriter, r *http.Request) {
 	var newComments Comment
@@ -331,7 +330,7 @@ func Checkpass(w http.ResponseWriter, r *http.Request) {
 
 func Delete(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/delete.html")
-}
+}s
 
 func Checkdelete(w http.ResponseWriter, r *http.Request) {
 	var deleuser User
