@@ -217,6 +217,10 @@ func PostsPage(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/post.html")
 }
 
+// func EditProfile(w http.ResponseWriter, r *http.Request) {
+// 	http.ServeFile(w, r, "./templates/edit_profile.html")
+// }
+
 func Posts(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	var newPost Post
@@ -420,7 +424,7 @@ func Handler() {
 
 	r.HandleFunc("/logout", Logout)
 
-	r.HandleFunc("/editprofile", EditProfile)
+	// r.HandleFunc("/editprofile", EditProfile)
 
 	go reloadApi()
 

@@ -100,7 +100,8 @@ p {
     border: 2px solid black;
     width: auto;
     height: auto;
-    justify-content: center;}
+    justify-content: center;
+}
 
 #image {
     width: 180px;
@@ -110,19 +111,20 @@ p {
 }
 
 .button {
-    border-radius: 10px;
+    border-radius: 50%;
     border: 5px solid black;
     font-size: 30px;
-    width: 180px;
-    height: 180px;
+    width: 170px;
+    height: 170px;
     margin: 5px;
     background-color: #fa6400;
     font-family: 'Dosis', sans-serif;
 }
 
 .button:hover {
-    transform: translateY(-3px);
     background-color: #fb8332;
-    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
 
+.logout {
+    display: flex;
 }
