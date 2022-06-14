@@ -1,5 +1,5 @@
 document.getElementById("button").onclick = function(){
-    if (document.getElementById("name").value.length >=1 && document.getElementById("pwd").value.length >= 8 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById("email").value)) {
+    if (document.getElementById("name").value.length >=1 && document.getElementById("pwd").value.length >= 8 && /^[^\s@]+@[^\s@]+.[^\s@]+$/.test(document.getElementById("email").value)) {
         document.getElementById("error").innerText = ""
         joinus()
     } else {
@@ -33,6 +33,8 @@ function joinus() {
         }).catch((err) => {
             document.getElementById("error").innerText = err.error
         })
+    } else {
+        document.getElementById("error").innerText = "enter the same password"
     }
     document.getElementById("pwd").value = ""
     document.getElementById("pwd2").value = ""

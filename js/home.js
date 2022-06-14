@@ -6,9 +6,9 @@ fetch("/apiposts")
             fetch("/apicommunauters/"+element.CommuLink)
             .then(resp => resp.json())
             .then(data => {
-                const newcard = document.createElement('div')
-                newcard.id = element.Id
-                newcard.classList = "card"
+            const newcard = document.createElement('div')
+            newcard.id = element.Id
+            newcard.classList = "card"
 
             const divhaut = document.createElement('div')
             divhaut.classList = 'divhaut'
@@ -25,12 +25,6 @@ fetch("/apiposts")
             community.classList = 'community'
             community.innerHTML = data.Communauter.Name
 
-
-            const userpseudo = document.createElement('div')
-
-            userpseudo.classList = 'userpseudo'
-            userpseudo.innerHTML = element.UsersName
-
             const content = document.createElement('div')
             content.classList = 'content'
             content.innerHTML = element.Content
@@ -38,28 +32,32 @@ fetch("/apiposts")
             const divbas = document.createElement('div')
             divbas.classList = 'divbas'
 
-            const like = document.createElement('div')
+            const like = document.createElement('button')
             like.classList = 'like'
-            like.innerHTML = "L"
+            like.innerHTML = `<i class="fa fa-thumbs-up" aria-hidden="true"></i>`
 
-            const dislike = document.createElement('div')
+            const dislike = document.createElement('button')
             dislike.classList = 'dislike'
-            dislike.innerHTML = "D"
+            dislike.innerHTML = `<i class="fa fa-thumbs-down" aria-hidden="true"></i>`
 
             const comments = document.createElement('div')
             comments.classList = 'comments'
             comments.innerHTML = "Commentaires"
 
+            const userpseudo = document.createElement('div')
+            userpseudo.classList = 'userpseudo'
+            userpseudo.innerHTML = element.UsersName
+
             divhaut.append(title)
             divhaut.append(community)
             divhaut.append(date)
-            // divhaut.append(userpseudo)
             newcard.appendChild(divhaut)
             newcard.append(content)
             newcard.appendChild(divbas)
             divbas.append(like)
             divbas.append(dislike)
             divbas.append(comments)
+            divbas.append(userpseudo)
             const integrate = document.querySelector('.bigcard')
             integrate.appendChild(newcard)
             document.getElementById(element.Id).onclick = function() {
@@ -111,3 +109,4 @@ btn.addEventListener('click', () => {
     })
 
 })
+
