@@ -1,86 +1,25 @@
-/*--------------POLICE--------------*/
+
 body {
-  font-family: 'Tiro Devanagari Sanskrit', serif;
+  margin: 0px;
 }
-#flex-title {
-  font-family: 'Tiro Devanagari Sanskrit', serif;
-  text-align: center;
-}
-/*-------------BUTTON PAGE CONNECT ET JOINUS----------------------------------------------*/
-#button {
-  font-size: medium;
-  height: 30px;
-  width: 150px;
-}
-#button:hover {
-  background: #d6d6d6;
-}
-/*---------------LES INPUT DE CHAQUE ; Mail, Nom, Password-------------------------------*/
-#name {
-  background-color: rgb(222, 222, 222);
-  border-radius: 10px;
-  font-weight: bold;
-  width: 360px;
-  height: 50px;
-  font-size: x-large;
+.container{
+  display: flex;
+  border: 2px solid red;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
 }
 
-#email {
-  background-color: rgb(222, 222, 222);
-  border-radius: 10px;
-  font-weight: bold;
-  width: 360px;
-  height: 50px;
-  font-size: x-large;
+.select{
+  padding: 1%;
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  height: auto;
+  border: 2px solid black;
+  justify-content: center;
+  align-items: center;
+  border-radius: 40px;
+  
 }
-#password {
-  background-color: rgb(222, 222, 222);
-  border-radius: 10px;
-  font-weight: bold;
-  width: 360px;
-  height: 50px;
-  font-size: x-large;
-}
-#verify {
-  background-color: rgb(222, 222, 222);
-  border-radius: 10px;
-  font-weight: bold;
-  width: 360px;
-  height: 50px;
-  font-size: x-large;
-}
-/*-------------------------TAILLE IMAGE DE JOINUS--------------------------*/
-
-#flex-title-image > img {
-  width: 40%;
-}
-button > img {
-  width: 11%;
-}
-
-/*------------------------------Taille des flexs Ect-------------------------------*/
-                  #content{
-                      display: flex;
-                      justify-content: center;
-                  }
-                  /*------flex pour centrer le haut------*/
-                  #form {
-                      display: flex;
-                      flex-direction: column;
-                  }
-                  #flex-title {
-                      display: flex;
-                      justify-content: center;                        
-                  }
-                  #centerTop {
-                      display: flex;
-                      flex-direction: column;
-                      gap: 25px;
-                      width: 250px;
-                  }
-                  #centerBottom {
-                      display: flex;
-                      flex-direction: row;
-                      gap: 25px;
-                      padding-left: 10%; 
-                  }
