@@ -18,6 +18,7 @@ type User struct {
 	Pp         string `json: "pp"`
 	Password   string `json: "password"`
 	UsersLevel string `json: "usersLevel"`
+	Date       string `json: "date"`
 }
 type Communauter struct {
 	Id   int    `json: "id"`
@@ -26,6 +27,7 @@ type Communauter struct {
 }
 type Post struct {
 	Id        int    `json: "id"`
+	Date      int    `json: "date"`
 	CommuLink int    `json: "commuLink"`
 	Title     string `json: "title"`
 	Content   string `json: "content"`
@@ -38,4 +40,5 @@ type Comment struct {
 	PostLink  int    `json: "postLink"`
 	UsersName string `json: "NameUser"`
 	Like      int    `json: "likeCount"`
+	Date      int    `json: "date"`
 }

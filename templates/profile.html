@@ -4,7 +4,7 @@
 <head>
     <title>Edit acocunt</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="./css/edit_profile.css">
+    <link rel="stylesheet" href="./css/profile.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://kit.fontawesome.com/e37a482217.js" crossorigin="anonymous"></script>
@@ -12,14 +12,16 @@
         href="https://cdn.discordapp.com/attachments/887611590873088011/981110067531243570/YnnitLogo.png">
     <script type="module" src='/js/profile.js'></script>
 
-
 </head>
 
 <body>
     <div id="container">
         <div class="content">
-            <div class="title">
-                <p>Welcome, [user]</p>
+            <div id="title">
+                Welcome            
+                <div class = "logout">
+                    <button type ="submit" id = "logout">Logout</button>
+                </div>
             </div>
             <div class="principale">
                 <div class="latestposts">
@@ -27,18 +29,21 @@
                 </div>
                 <div class="account">
                     <div class="viewaccount">
-                        <div class = "text">
-                            Your personnal informations :
+                        <div class ="text">
+                            <p>Your personal informations :</p>
                         </div>
                         <div class = "profilepicture">                            
                             <img id="image" src="https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png">
                         </div>
+                        <div id = "viewtext">
+
+                        </div>
                     </div>
                     <div class="setaccount">
-                        <div class = "text">
-                            Edit your account :
-                        </div>
                         <div class="display2">
+                            <div class = "text">
+                                Edit your account :
+                            </div>
                             <button type="submit" id="changeemail" class="button">EDIT <br> EMAIL<br><i class="fa-solid fa-at"></i></button>
                             <button type="submit" id="changedesc" class="button">EDIT <br> BIOG<br><i class="fa-solid fa-file-lines"></i></button>
                             <button type="submit" id="changepass" class="button">EDIT <br> PASSWORD<br><i class="fa-solid fa-lock"></i></button>

@@ -1,80 +1,86 @@
-/* POLICE ----------------------------------------------------- */
+/*--------------POLICE--------------*/
 body {
   font-family: 'Tiro Devanagari Sanskrit', serif;
 }
-#template {
-  margin-top: 80px;
-  margin-left: 16%;
+#flex-title {
   font-family: 'Tiro Devanagari Sanskrit', serif;
+  text-align: center;
 }
-
-/*-----------------------------------------------------------*/
-.CreatePost {
-  display: flex;
-  flex-direction: column;
-  border-radius: 30px;
-  padding: 24px;
-  border: 2px solid black;
-  height: 450px;
-  width: 1000px;
-  box-shadow: 15px 10px 10px rgb(179, 179, 179);
-}
-.CenterPost{
-margin-left: 350px;
-}
-
-label {
-  margin-top: 20px;
-  margin-left: 35px;
-  justify-content: center;
-  border: 2px solid black;
-  background-color: #d6d6d6;
-  /* color: #0c86e9; */
-  display: flex;
-  border-radius: 30px;
-  /* height: 50px; */
-  width: 170px;
-}
-.button{
+/*-------------BUTTON PAGE CONNECT ET JOINUS----------------------------------------------*/
+#button {
+  font-size: medium;
   height: 30px;
-  width: 200px;
-  border-radius: 20px;
+  width: 150px;
+}
+#button:hover {
+  background: #d6d6d6;
+}
+/*---------------LES INPUT DE CHAQUE ; Mail, Nom, Password-------------------------------*/
+#name {
+  background-color: rgb(222, 222, 222);
+  border-radius: 10px;
+  font-weight: bold;
+  width: 360px;
+  height: 50px;
+  font-size: x-large;
 }
 
-/*--------------------------------------------------------------*/
-* {
-  /* background-color: grey; */
+#email {
+  background-color: rgb(222, 222, 222);
+  border-radius: 10px;
+  font-weight: bold;
+  width: 360px;
+  height: 50px;
+  font-size: x-large;
+}
+#password {
+  background-color: rgb(222, 222, 222);
+  border-radius: 10px;
+  font-weight: bold;
+  width: 360px;
+  height: 50px;
+  font-size: x-large;
+}
+#verify {
+  background-color: rgb(222, 222, 222);
+  border-radius: 10px;
+  font-weight: bold;
+  width: 360px;
+  height: 50px;
+  font-size: x-large;
+}
+/*-------------------------TAILLE IMAGE DE JOINUS--------------------------*/
+
+#flex-title-image > img {
+  width: 40%;
+}
+button > img {
+  width: 11%;
 }
 
-::placeholder { 
-  color: black;
-  opacity: 1;
-}
-
-.name{
-  border-radius: 15px;
-  border: solid 4px black;
-  color: #d6d6d6;
-  width: 240px;
-}
-
-.email{
-  border-radius: 15px;
-  border: solid 4px black;
-  color: #d6d6d6;
-  width: 240px;
-}
-
-.pwd{
-  border-radius: 15px;
-  border: solid 4px black;
-  color: #d6d6d6;
-  width: 240px;
-}
-
-.pwd2{
-  border-radius: 15px;
-  border: solid 4px black;
-  color: #d6d6d6;
-  width: 240px;
-}
+/*------------------------------Taille des flexs Ect-------------------------------*/
+                  #content{
+                      display: flex;
+                      justify-content: center;
+                  }
+                  /*------flex pour centrer le haut------*/
+                  #form {
+                      display: flex;
+                      flex-direction: column;
+                  }
+                  #flex-title {
+                      display: flex;
+                      justify-content: center;                        
+                  }
+                  #centerTop {
+                      display: flex;
+                      flex-direction: column;
+                      gap: 25px;
+                      width: 250px;
+                  }
+                  #centerBottom {
+                      display: flex;
+                      flex-direction: row;
+                      gap: 25px;
+                      padding-left: 10%; 
+                  }

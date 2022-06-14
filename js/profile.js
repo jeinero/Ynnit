@@ -1,9 +1,6 @@
-// document.getElementById("logout").onclick = function(){
-//     location.href = "/logout"
-// }
-// document.getElementById("home").onclick = function(){
-//     location.href = "/"
-// }
+document.getElementById("logout").onclick = function(){
+    location.href = "/logout"
+}
 
 document.getElementById("changeemail").onclick = function(){
     location.href = "/changeemail"
@@ -33,31 +30,28 @@ function getCookie(name) {
     return null;
 }
 let id = getCookie("id")
-const title = document.getElementById('title')
+const title = document.getElementById('viewtext')
 
 const loadDataUser = data => {
-    data.forEach(element => {
-    const name = document.createElement("div")
-    name.innerText = element.Name
+    
+    const name = document.createElement("p")
+    name.innerText = data.User.Name
     title.appendChild(name)
 
-
-
-    console.log(name)
-
-    let email = document.createElement("h1")
+    let email = document.createElement("p")
     email.innerText = data.User.Email
-    document.body.append(email)
+    title.append(email)
 
-    let desc = document.createElement("h1")
+    let desc = document.createElement("p")
     desc.innerText = data.User.Desc
-    document.body.append(desc)
+    title.append(desc)
 
-    let rank = document.createElement("h1")
+    let rank = document.createElement("p")
     rank.innerText = data.User.UsersLevel
-    document.body.append(rank)
-    })
+    title.append(rank)
+
 }
+
 
  fetch("/apiusers/" + id)
 .then(resp => resp.json())

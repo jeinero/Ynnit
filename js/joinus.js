@@ -19,7 +19,8 @@ function joinus() {
             body: JSON.stringify({
                 name: document.getElementById("name").value,
                 email: document.getElementById("email").value,
-                password: document.getElementById("pwd").value
+                password: document.getElementById("pwd").value,
+                date: dates
             })
         })
         .then(async (res) => {
@@ -47,3 +48,9 @@ function hashpass() {
     let hash = hashObj.getHash("HEX");
     pwdObj.value = hash;
 }
+
+var currentDate = new Date(),
+      day = currentDate.getDate(),
+      month = currentDate.getMonth() + 1,
+      year = currentDate.getFullYear();
+const dates = ( year + "-" + day + "-" + month)

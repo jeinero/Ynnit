@@ -1,4 +1,5 @@
 let linkCommu = 0
+let dates = ""
 document.getElementById("btn").onclick = function () {
     if (document.getElementById("titre").value.length >= 1 ) {
         if (getCookie("name") != null ){
@@ -33,6 +34,7 @@ function onClickPost() {
             "content-type": "application/json"
         },
         body: JSON.stringify({
+            date : dates,
             commuLink: parseInt(linkCommu),
             usersname : getCookie("name"),
             title: document.getElementById("titre").value,
@@ -52,10 +54,10 @@ fetch("/apicommunauters")
 .then(data => {
     let selector = document.getElementsByClassName("selectcomm")[0]
     data.forEach(elemnt => {
-        console.log(data)
         let options = document.createElement("option")
         options.text = elemnt.Name
         options.value = elemnt.Id
+        console.log(options)
         selector.appendChild(options)
     })
     console.log(selector)
@@ -65,3 +67,14 @@ select.addEventListener('change', function handleChange(event) {
   linkCommu = event.target.value
 });
 
+var currentDate = new Date()
+dates = currentDate.getTime()
+
+
+document.body.onload = function() {
+    if (getCookie("name") != null) {
+            let classComm = document.getElementsByClassName("lien")
+            classComm[0].style.display = "none"
+            classComm[1].style.display = "none"
+            }
+}

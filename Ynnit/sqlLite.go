@@ -21,16 +21,18 @@ func InitDatabase(database string) *sql.DB {
 			name TEXT NOT NULL UNIQUE,
 			email TEXT NOT NULL UNIQUE,
 			desc TEXT NOT NULL,
-			levelUser TEXT NOT NULL,			
+			levelUser TEXT NOT NULL,
+			date TEXT NOT NULL,		
 			password TEXT NOT NULL
 		);
 		CREATE TABLE IF NOT EXISTS communauter (
 			id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 			name TEXT NOT NULL UNIQUE,
-			desc TEXT NOT NULL	
+			desc TEXT NOT NULL
 		);
 		CREATE TABLE IF NOT EXISTS post (
 			id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+			date INTEGER NOT NULL,
 			commulink INTEGER NOT NULL,
 			title TEXT NOT NULL,
 			contentPost TEXT NOT NULL,
@@ -42,6 +44,7 @@ func InitDatabase(database string) *sql.DB {
 			id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 			contentComment TEXT NOT NULL,
 			username TEXT NOT NULL,
+			date INTEGER NOT NULL,
 			postLink INT,
 			FOREIGN KEY (postLink) REFERENCES post(id),
 			FOREIGN KEY (username) REFERENCES user(name) 
@@ -60,6 +63,10 @@ func InitDatabase(database string) *sql.DB {
 			FOREIGN KEY (commentLike) REFERENCES comment(id),
 			FOREIGN KEY (userid) REFERENCES user(id) 
 		);
+		CREATE TABLE IF NOT EXISTS categorie (
+			id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+			name INTEGER NOT NULL
+		);
 		`
 	_, err = db.Exec(sqlStmt)
 	if err != nil {
@@ -75,7 +82,7 @@ func DbtoStructUser(db *sql.DB) []User {
 
 	for rowsUsers.Next() {
 		var u User
-		err := rowsUsers.Scan(&u.Id, &u.Name, &u.Email, &u.Desc, &u.UsersLevel, &u.Password)
+		err := rowsUsers.Scan(&u.Id, &u.Name, &u.Email, &u.Desc, &u.UsersLevel, &u.Date, &u.Password)
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -84,8 +91,8 @@ func DbtoStructUser(db *sql.DB) []User {
 	return temptab
 }
 
-func InsertIntoUser(db *sql.DB, name string, email string, password string, desc string, levelUser string) bool {
-	_, err := db.Exec(`INSERT INTO user (name, email, password, desc, levelUser) VALUES (?, ?, ?, ?, ?)`, name, email, password, desc, levelUser)
+func InsertIntoUser(db *sql.DB, name string, email string, password string, desc string, levelUser string, date string) bool {
+	_, err := db.Exec(`INSERT INTO user (name, email, password, desc, levelUser, date) VALUES (?, ?, ?, ?, ?, ?)`, name, email, password, desc, levelUser, date)
 	if err != nil {
 		fmt.Println(err)
 		return false
@@ -193,7 +200,7 @@ func DbtoStructComment(db *sql.DB) []Comment {
 
 	for rowsUsers.Next() {
 		var u Comment
-		err := rowsUsers.Scan(&u.Id, &u.Content, &u.UsersName, &u.PostLink)
+		err := rowsUsers.Scan(&u.Id, &u.Content, &u.UsersName, &u.Date, &u.PostLink)
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -203,12 +210,13 @@ func DbtoStructComment(db *sql.DB) []Comment {
 	return temptab
 }
 
-func InsertIntoComment(db *sql.DB, content string, Username string, PostLink int) (int64, error) {
-	result, err := db.Exec(`INSERT INTO comment (contentComment, username, postLink) VALUES (?, ?, ?)`, content, Username, PostLink)
+func InsertIntoComment(db *sql.DB, content string, Username string, PostLink int, Date int) bool {
+	_, err := db.Exec(`INSERT INTO comment (contentComment, username, postLink, date) VALUES (?, ?, ?, ?)`, content, Username, PostLink, Date)
 	if err != nil {
 		fmt.Println(err)
+		return false
 	}
-	return result.LastInsertId()
+	return true
 }
 
 func DbtoStructCommunauter(db *sql.DB) []Communauter {
@@ -233,13 +241,21 @@ func InsertIntoCommunauter(db *sql.DB, Name string, Desc string) bool {
 	}
 	return true
 }
+func InsertIntoCategorie(db *sql.DB, Name string) bool {
+	_, err := db.Exec(`INSERT INTO categorie (name) VALUES (?)`, Name)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+	return true
+}
 func DbtoStructPost(db *sql.DB) []Post {
 	rowsUsers, _ := db.Query("SELECT * FROM post")
 	var temptab []Post
 
 	for rowsUsers.Next() {
 		var u Post
-		err := rowsUsers.Scan(&u.Id, &u.CommuLink, &u.Title, &u.Content, &u.UsersName)
+		err := rowsUsers.Scan(&u.Id, &u.Date, &u.CommuLink, &u.Title, &u.Content, &u.UsersName)
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -248,8 +264,8 @@ func DbtoStructPost(db *sql.DB) []Post {
 	}
 	return temptab
 }
-func InsertIntoPost(db *sql.DB, CommuLink int, Title string, Content string, UsersName string) bool {
-	_, err := db.Exec(`INSERT INTO post (commuLink, title, contentPost, username) VALUES (?,?,?,?)`, CommuLink, Title, Content, UsersName)
+func InsertIntoPost(db *sql.DB, CommuLink int, Title string, Content string, UsersName string, Date int) bool {
+	_, err := db.Exec(`INSERT INTO post (commuLink, title, contentPost, username, date) VALUES (?,?,?,?,?)`, CommuLink, Title, Content, UsersName, Date)
 	if err != nil {
 		fmt.Println(err)
 		return false
