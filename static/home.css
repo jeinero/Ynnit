@@ -332,8 +332,9 @@ color: white;
     justify-content: center;
     border: 2px solid black;
     border-radius: 40px;
-    height: 100px;
-    width: 90%;
+    height: auto;
+    padding:1%;
+    width: auto;
     align-items: center;
 }
 
