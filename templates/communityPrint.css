@@ -2,90 +2,77 @@
 body {
     font-family: 'Tiro Devanagari Sanskrit', serif;
 }
-#template {
-    display: flex;
-    margin-top: 80px;
-    justify-content: center;
-    font-family: 'Tiro Devanagari Sanskrit', serif;
-}
-/*--------------FLEX DES NOMS ET DESCRIPTION DE LA Communauté-----------------*/
-#centerTop {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    width: 250px;
-    border: solid black 3px;
-    background-color: #d6d6d6;
-    border-radius: 15px;
-}
-#centerBottom {
+#template-center {
     display: flex;
     flex-direction: row;
-    gap: 25px;
-    padding-left: 10%;
-    border: solid black 3px;
-    background-color: #d6d6d6;
-    border-radius: 15px;
+    justify-content: center;
+    margin-top: 80px;
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+}
+
+/*--------------FLEX DES NOMS ET DESCRIPTION DE LA Communauté-----------------*/
+
+#container-column{
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    height: 350px;
+    padding: 15px;
+    gap: 20px;
+}
+#little-column{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    font-size: xx-large;
+    text-decoration: underline;
+    padding: 3px;
+    gap: 10px;
+}
+#container-row{
+    display: flex;
+    flex-direction: row;
+    border: solid 20px rgb(110, 110, 110);
+    border-radius: 40px;
+    padding: 15px;
+    gap: 10px;
+    height: auto;
+    width: auto;
+}
+.box{
+    display: flex;
+    border: solid 4px black;
+    border-radius: 20px;
+}
+#flex-title{
+    text-decoration: underline;
+    font-family: Impact, sans-serif;
+    font-size: 35px;
+    letter-spacing: 2px;
+}
+li{
+    font-size: x-large;
 }
 #flex-community {
     display: flex;
     flex-direction: column;
     gap: 25px;
 }
-#flex-title{
-    text-decoration: underline;
-    position: relative;
-    font-family: Impact, sans-serif;
-    font-size: 45px;
-    letter-spacing: 2px;
+p {
+    background-color: rgb(208, 208, 208);
+    border: 3px solid black;
+    border-radius: 10px;
+    height: 172px;
 }
 /*--------------------zone de contour POST.CSS DE ROMAIN-----------------------*/
 
-.container {
-    display: flex;
-    height: 350px;
-    flex-direction: column;
-    padding: 10px;
-    width: auto;
-}
 .CreatePost {
-    border-radius: 30px;
-    padding: 10px;
-    border: 2px solid black;
-    height: 2048px;
     display: flex;
-    width: 350px;
-    flex-direction: column;
+    padding: 10px;
+    height: 100px;
+    width: 100px;
+    border-radius: 30px;
+    border: 2px solid black;
     box-shadow: 15px 10px 10px rgb(179, 179, 179);
 }
-.rightLign {
-    border-radius: 30px;
-    padding: 10px;
-    border: 2px solid black;
-    height: 2048px;
-    display: flex;
-    width: 400px;
-    flex-direction: column;
-    box-shadow: 15px 10px 10px rgb(179, 179, 179);
-}
-textarea {
-    border-radius: 10px;
-    background-color: #d6d6d6;
-    width: 800px;
-    margin-left: 100px;
-    margin-top: 30px;
-    resize: none;
-    border: 3px solid black;
-}
-.PosterContain {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 50px;
-}
-.Poster {
-    margin-right: 20px;
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-    width: 130px;
-}
+

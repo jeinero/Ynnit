@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
     <header>
-        <title>Community</title>
+        <title>PrintCommunity</title>
         <meta charset="utf-8"/>
         <link rel="stylesheet" href="communityPrint.css">
-        <link rel="stylesheet" href="/css/font-button.css">
+        <link rel="stylesheet" href="font-button.css">
     </header>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&display=swap');
@@ -15,33 +15,47 @@
                 <button class="button" onclick = "returnChangeColor('rgb(64, 64, 64)');" >Mode foncé</button> 
             </div>
             
-            <div id="template">
-                <div class="container">
-                    <div class="CreatePost">
-                        <div id="flex-community">
-                            <h1 id="flex-title">
-                                Name of Community :
-                            </h1>
-                            <div id="centerTop">
-                                {{.name.community}}
-                            </div>
-                            <div id="centerBottom">   
-                                <p>{{.description.community}}</p>
-                            </div>
+                <div id="template-center">
+                    <div id="container-row">
 
-                            <div class="PosterContain">
-                                <div class="Poster">
-                                    <button id="button" id="submitPost" type="Submit" form="ContainPost">Modify
-                                    <button id="button" type="Submit">Cancel</button>
+                        <div class="box">
+                            <div id="container-column">
+                                <div id="little-column">
+                                    <h1 id="flex-title">
+                                        Name of Community :
+                                    </h1>
+                                    <li>{{.name.community}}</li>
+                                </div>
+                                <div id="flex-community">
+                                    <p>{{.Description}}</p>
                                 </div>
                             </div>
-                            
-                            <p id="error" style="color: red"></p>
+                        </div>
+    
+                        <div class="box">
+                            <div id="container-column">
+                                <div id="little-column">
+                                    <h1 id="flex-title">
+                                        About community :
+                                    </h1>
+                                </div>
+                                <div id="little-column">
+                                    Date :
+                                </div>
+                                <li>{{.Date.create}}</li>
+                                <div id="little-column">
+                                    Type :
+                                </div>
+                                <li>{{.type.community}}</li>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        <script type="text/javascript" src="/js/font-button.js" ></script>
+                    
+                    <li id="error" style="color: red"></li>
+                </div>
+                    
+        <script type="text/javascript" src="font-button.js" ></script>
         <script type="module" src='/js/signin.js'></script>
     </body>
 </html>
