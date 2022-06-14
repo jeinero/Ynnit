@@ -1,7 +1,6 @@
-// document.getElementById("logout").onclick = function(){
-//     location.href = "/logout"
-// }
-
+document.getElementById("logout").onclick = function(){
+    location.href = "/logout"
+}
 
 document.getElementById("changeemail").onclick = function(){
     location.href = "/changeemail"
@@ -33,23 +32,24 @@ function getCookie(name) {
 let id = getCookie("id")
 
 
-const title = document.getElementById('title')
+
+const title = document.getElementById('viewtext')
 
 const loadDataUser = data => {
     
-    const name = document.createElement("div")
+    const name = document.createElement("p")
     name.innerText = data.User.Name
     title.appendChild(name)
 
-    let email = document.createElement("div")
+    let email = document.createElement("p")
     email.innerText = data.User.Email
     title.append(email)
 
-    let desc = document.createElement("div")
+    let desc = document.createElement("p")
     desc.innerText = data.User.Desc
-  title.append(desc)
+    title.append(desc)
 
-    let rank = document.createElement("div")
+    let rank = document.createElement("p")
     rank.innerText = data.User.UsersLevel
     title.append(rank)
 
