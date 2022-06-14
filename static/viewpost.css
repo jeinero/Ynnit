@@ -83,7 +83,7 @@ header {
     height: 100%;
     flex-direction: column;
     align-items: center;
-    border: 2px solid black;
+    border: double 5px #00529F;
     border-radius: 40px;
     padding: 1%;
 }
@@ -104,8 +104,8 @@ header {
 
 .content {
     justify-content: center;
-    width: auto;
-    height: auto;
+    height: 80px;
+    width: 90%;
     display: flex;
     align-items: center;
     font-size: 25px;
@@ -125,9 +125,19 @@ header {
 }
 
 .commentaire {
+    margin: 1% 10%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    border: solid 2px grey;
+    position: fixed;
+    bottom: 20px;
+    background-color: white;
+    opacity: 0;
+
+}
+.commentaire:hover{
+    opacity: 1;
 }
 
 textarea {
