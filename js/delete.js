@@ -37,7 +37,7 @@ function del() {
        return res.json()
     })
     .then((data) => {
-        location.href = "/"
+        location.href = "/logout"
     }).catch((err) => {
         // document.getElementById("error").innerText = err.error
     })

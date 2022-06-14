@@ -33,6 +33,18 @@ function getCookie(name) {
     return null;
 }
 let id = getCookie("id")
+let statu = getCookie("status")
+
+if (statu == "Administrators") {
+    let buttonadmin = document.createElement("button")
+    buttonadmin.id = "buttonadmin"
+    buttonadmin.innerText = "admin"
+    document.body.append(buttonadmin)
+    document.getElementById("buttonadmin").onclick = function(){
+        location.href = "/admin"
+    }
+}
+
 
 const loadDataUser = data => {
     let name = document.createElement("h1")
@@ -50,6 +62,10 @@ const loadDataUser = data => {
     let rank = document.createElement("h1")
     rank.innerText = data.User.UsersLevel
     document.body.append(rank)
+
+    let creationdate = document.createElement("h1")
+    creationdate.innerText = data.User.Date
+    document.body.append(creationdate)
 }
 
  fetch("/apiusers/" + id)

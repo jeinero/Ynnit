@@ -118,8 +118,21 @@ func UpdateMailUser(db *sql.DB, id int, emailnew string) bool {
 	return true
 }
 
-func UpdateDescUser(db *sql.DB, id int, descnew string) bool {
-	_, err := db.Exec(`UPDATE user SET desc = ? WHERE id = ?`, descnew, id)
+func Leveluser(db *sql.DB, id int) string {
+	var status string
+
+	sqlStmt := `SELECT levelUser FROM user WHERE id = ?`
+	err := db.QueryRow(sqlStmt, id).Scan(&status)
+	if err != nil {
+		fmt.Println(err)
+		return ""
+	}
+	return status
+
+}
+
+func Changeleveluser(db *sql.DB, name string, level string) bool {
+	_, err := db.Exec(`UPDATE user SET levelUser = ? WHERE name = ?`, level, name)
 	if err != nil {
 		fmt.Println(err)
 		return false
@@ -135,6 +148,15 @@ func UpdateDescUser(db *sql.DB, id int, descnew string) bool {
 // 	}
 // 	return true
 // }
+
+func UpdateDescUser(db *sql.DB, id int, descnew string) bool {
+	_, err := db.Exec(`UPDATE user SET desc = ? WHERE id = ?`, descnew, id)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+	return true
+}
 
 func DeleteUser(db *sql.DB, id int, name string) bool {
 	_, err := db.Exec(`DELETE FROM comment WHERE username = ?`, name)

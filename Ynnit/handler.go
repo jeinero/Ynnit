@@ -60,7 +60,8 @@ func Checksignin(w http.ResponseWriter, r *http.Request) {
 	var names, ids = UserExists(AllApi.db, temptab.Email, temptab.Password)
 	if names != "" && ids != 0 {
 		name, id := UserExists(AllApi.db, temptab.Email, temptab.Password)
-		w.Write([]byte("{\"msgname\": \"" + name + "\", \"msgid\": \"" + strconv.Itoa(id) + "\"}"))
+		status := Leveluser(AllApi.db, id)
+		w.Write([]byte("{\"msgname\": \"" + name + "\", \"msgid\": \"" + strconv.Itoa(id) + "\", \"msgstatus\": \"" + status + "\"}"))
 	} else {
 		http.Error(w, "{\"error\": \"Your email or password was entered incorrectly\"}", http.StatusUnauthorized)
 	}
@@ -163,7 +164,7 @@ func Profile(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	session, _ := store.Get(r, "cookie-name")
 	if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
-		http.Error(w, "Please login", http.StatusForbidden)
+		http.Error(w, "Please login", http.StatusUnauthorized)
 		return
 	}
 
@@ -201,7 +202,7 @@ func Newuser(w http.ResponseWriter, r *http.Request) {
 	var newUser User
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &newUser)
-	if InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Password, "You can change the desc", "Guest", newUser.Date) {
+	if InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Password, "You can change the desc", "Users", newUser.Date) {
 		w.Write([]byte("{\"msg\": \"Success\"}"))
 	} else {
 		http.Error(w, "{\"error\": \"Enter a unique email and name\"}", http.StatusUnauthorized)
@@ -232,6 +233,9 @@ func Session(w http.ResponseWriter, r *http.Request) {
 	ids := r.URL.Query()["id"]
 	id := ids[0]
 
+	status := r.URL.Query()["status"]
+	statu := status[0]
+
 	n := http.Cookie{
 		Name:  "name",
 		Value: "" + name}
@@ -241,6 +245,11 @@ func Session(w http.ResponseWriter, r *http.Request) {
 		Name:  "id",
 		Value: "" + id}
 	http.SetCookie(w, &i)
+
+	s := http.Cookie{
+		Name:  "status",
+		Value: "" + statu}
+	http.SetCookie(w, &s)
 
 	session, _ := store.Get(r, "cookie-name")
 	session.Values["authenticated"] = true
@@ -252,14 +261,17 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 
 	n, err := r.Cookie("name")
 	i, err := r.Cookie("id")
+	s, err := r.Cookie("status")
 	if err != nil {
 		fmt.Println(err)
 	}
 
 	n.MaxAge = -1
 	i.MaxAge = -1
+	s.MaxAge = -1
 	http.SetCookie(w, n)
 	http.SetCookie(w, i)
+	http.SetCookie(w, s)
 
 	session, _ := store.Get(r, "cookie-name")
 
@@ -340,14 +352,42 @@ func Checkdelete(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func Admin(w http.ResponseWriter, r *http.Request) {
+	s, err := r.Cookie("status")
+	if err != nil {
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
+	} else {
+		value := s.Value
+		if value == "Administrators" {
+			t, _ := template.ParseFiles("./templates/admin.html")
+			t.Execute(w, nil)
+			reloadApi()
+		} else {
+			http.Error(w, "Unauthorized", http.StatusUnauthorized)
+		}
+	}
+}
+
+func Changelevel(w http.ResponseWriter, r *http.Request) {
+	var newuserlevel User
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &newuserlevel)
+	if Changeleveluser(AllApi.db, newuserlevel.Name, newuserlevel.UsersLevel) {
+		w.Write([]byte("{\"msg\": \"Success\"}"))
+	} else {
+		http.Error(w, "{\"error\": \"Enter a valide name\"}", http.StatusUnauthorized)
+	}
+}
+
 func Handler() {
 
 	db := InitDatabase("./Ynnit.db")
 	AllApi.db = db
 	defer db.Close()
-	InsertIntoCategorie(AllApi.db, "Informatique")
-	InsertIntoCategorie(AllApi.db, "France")
-	InsertIntoCategorie(AllApi.db, "Food")
+
+	// InsertIntoCategorie(AllApi.db, "Informatique")
+	// InsertIntoCategorie(AllApi.db, "France")
+	// InsertIntoCategorie(AllApi.db, "Food")
 
 	// InsertIntoUser(db, "jeinero", "jenei@gmail.com", "ImRio6988", "guest", "test", "test")
 	// InsertIntoUser(db, "qsdlqsd", "jeazenei@yahoo.fr", "ImRio6988")
@@ -390,6 +430,9 @@ func Handler() {
 	r.HandleFunc("/newuser", Newuser)
 
 	r.HandleFunc("/profile", Profile)
+
+	r.HandleFunc("/admin", Admin)
+	r.HandleFunc("/changelevel", Changelevel)
 
 	r.HandleFunc("/changeemail", Changeemail)
 	r.HandleFunc("/checkemail", Checkemail)
