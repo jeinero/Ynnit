@@ -1,13 +1,7 @@
-document.getElementById("logout").onclick = function(){
-    location.href = "/logout"
-}
-document.getElementById("home").onclick = function(){
-    location.href = "/"
-}
+// document.getElementById("logout").onclick = function(){
+//     location.href = "/logout"
+// }
 
-document.getElementById("changename").onclick = function(){
-    location.href = "/changename"
-}
 
 document.getElementById("changeemail").onclick = function(){
     location.href = "/changeemail"
@@ -19,6 +13,10 @@ document.getElementById("changedesc").onclick = function(){
 
 document.getElementById("changepass").onclick = function(){
     location.href = "/changepass"
+}
+
+document.getElementById("delete").onclick = function(){
+    location.href = "/delete"
 }
 
 
@@ -33,24 +31,28 @@ function getCookie(name) {
     return null;
 }
 let id = getCookie("id")
+const title = document.getElementById('title')
 
 const loadDataUser = data => {
-    let name = document.createElement("h1")
+    
+    const name = document.createElement("div")
     name.innerText = data.User.Name
-    document.body.append(name)
+    title.appendChild(name)
 
-    let email = document.createElement("h1")
+    let email = document.createElement("div")
     email.innerText = data.User.Email
-    document.body.append(email)
+    title.append(email)
 
-    let desc = document.createElement("h1")
+    let desc = document.createElement("div")
     desc.innerText = data.User.Desc
-    document.body.append(desc)
+  title.append(desc)
 
-    let rank = document.createElement("h1")
+    let rank = document.createElement("div")
     rank.innerText = data.User.UsersLevel
-    document.body.append(rank)
+    title.append(rank)
+
 }
+
 
  fetch("/apiusers/" + id)
 .then(resp => resp.json())

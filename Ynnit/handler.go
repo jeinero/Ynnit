@@ -344,9 +344,7 @@ func Handler() {
 	db := InitDatabase("./Ynnit.db")
 	AllApi.db = db
 	defer db.Close()
-	// InsertIntoCategorie(AllApi.db, "Informatique")
-	// InsertIntoCategorie(AllApi.db, "France")
-	// InsertIntoCategorie(AllApi.db, "Food")
+	//
 
 	// InsertIntoUser(db, "jeinero", "jenei@gmail.com", "ImRio6988", "guest", "test", "test")
 	// InsertIntoUser(db, "qsdlqsd", "jeazenei@yahoo.fr", "ImRio6988")

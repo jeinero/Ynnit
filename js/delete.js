@@ -1,10 +1,10 @@
-document.getElementById("btn").onclick = function() {
-    if (getCookie("name") != null ){
-        create()
-    } else {
-        document.getElementById("error").innerText = "Need a user, login or fuck off"
-    }
-}
+document.getElementById("No").onclick = function(){
+    location.href = "/profile"
+};
+
+document.getElementById("Yes").onclick = function(){
+    del()
+};
 
 function getCookie(name) {
     var nameEQ = name + "=";
@@ -16,16 +16,19 @@ function getCookie(name) {
     }
     return null;
 }
+let ids = getCookie("id")
+let names = getCookie("name")
 
-function create() {
-    fetch("/newcommunity", {
-        method: "POST",
+
+function del() {
+    fetch("/checkdelete", {
+        method: "POST", 
         headers: {
             "content-type": "application/json" 
         },
         body: JSON.stringify({
-            Name: document.getElementById("titre").value,
-            Desc: document.getElementById("content").value
+            id: parseInt(ids),
+            name: names
         })
     })
     .then(async (res) => {
@@ -38,12 +41,4 @@ function create() {
     }).catch((err) => {
         document.getElementById("error").innerText = err.error
     })
-}
-
-document.body.onload = function() {
-    if (getCookie("name") != null) {
-            let classComm = document.getElementsByClassName("lien")
-            classComm[0].style.display = "none"
-            classComm[1].style.display = "none"
-            }
 }
