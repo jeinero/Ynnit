@@ -46,9 +46,9 @@ const loadDataUser = data => {
     desc.innerText = data.User.Desc
     title.append(desc)
 
-    let rank = document.createElement("p")
-    rank.innerText = data.User.UsersLevel
-    title.append(rank)
+    // let rank = document.createElement("p")
+    // rank.innerText = data.User.UsersLevel
+    // title.append(rank)
 
 }
 

@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html>
     <header>
-        <title>Ynnit</title>
+        <title>Change description</title>
         <meta charset="utf-8"/>
+        <link rel="icon" type="image/png" sizes="16x16"
+        href="https://cdn.discordapp.com/attachments/887611590873088011/981110067531243570/YnnitLogo.png">
+        <link rel="stylesheet" href="./css/changedesc.css">
+
     </header>
 
     <body>
-        <label for="desc">Desc :</label>
+        <div>
+            You can change your description :
+        </div>
+        
 
-        <input type="text" id="desc" name="desc" required>
+        <textarea maxlength="200" cols="30" rows="10" type="text" id="desc" name="desc" required></textarea>
 
         <button id="button" type="submit">Change</button>
         <p id="error" style="color: red"></p>

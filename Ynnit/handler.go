@@ -183,11 +183,6 @@ func ViewPost(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func EditProfile(w http.ResponseWriter, r *http.Request) {
-	reloadApi()
-	http.ServeFile(w, r, "./templates/edit_profile.html")
-}
-
 func Comments(w http.ResponseWriter, r *http.Request) {
 	var newComments Comment
 
@@ -215,10 +210,6 @@ func Newuser(w http.ResponseWriter, r *http.Request) {
 func PostsPage(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	http.ServeFile(w, r, "./templates/post.html")
-}
-
-func EditProfile(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "./templates/edit_profile.html")
 }
 
 func Posts(w http.ResponseWriter, r *http.Request) {
@@ -423,8 +414,6 @@ func Handler() {
 	r.HandleFunc("/session", Session)
 
 	r.HandleFunc("/logout", Logout)
-
-	r.HandleFunc("/editprofile", EditProfile)
 
 	go reloadApi()
 
