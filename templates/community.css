@@ -40,22 +40,8 @@ input:hover{
     height: 50px;
     font-size: x-large;
 }
-#formDescription {
-    color:rgb(255, 255, 255);
-    background-color: rgb(201, 201, 201);
-    border-radius: 10px;
-    font-weight: bold;
-    width: 720px;
-    height: 350px;
-    font-size: x-large;
-}
-#flex-form{
-    display: flex;
-    /* background-color: rgb(91, 91, 91); */
-    color: aliceblue;
-    grid-row: 10;
-    row-gap: 10px;
-}
+
+
 /*--------------------zone de contour POST.CSS DE ROMAIN-----------------------*/
 
 .container {
@@ -142,4 +128,9 @@ label {
     border-radius: 30px;
     height: 50px;
     width: 170px;
+}
+.Button{
+    background: #0b7dda;
+    border-radius: 10px;
+    font-weight: bold;
 }

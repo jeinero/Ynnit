@@ -3,6 +3,7 @@
     border-radius: 10px;
     font-weight: bold;
 }
+
 #button:hover {
     background: #d6d6d6;
 }
@@ -26,5 +27,5 @@
 #content-button {
     display: flex;
     gap: 5px;
-    padding-left:5px;
+    padding-left:10px;
 }
