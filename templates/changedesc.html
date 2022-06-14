@@ -4,16 +4,35 @@
         <title>Ynnit</title>
         <meta charset="utf-8"/>
         <link rel="stylesheet" href="changedesc.css">
+        <link rel="stylesheet" href="font-button.css">
     </header>
 
-    <body>
-        <label for="desc">Desc :</label>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&display=swap');
+    </style>
+        <body>
+            <button class="button" onclick = "changeColor('white');" >Mode Clair</button>
+            <button class="button" onclick = "returnChangeColor('rgb(64, 64, 64)');" >Mode foncé</button> 
+                    
+            <div id="flex-content">
+        
+                <div id="content-center">
+                    <div id="flex-title">
+                        Modify Description :
+                    </div>
 
-        <input type="text" id="desc" name="desc" required>
-
-        <button id="button" type="submit">Change</button>
-        <p id="error" style="color: red"></p>
-    </body>
+                    <div id="content">
+                        <div id="center">
+                            <input type="text" id="description" name="desc" placeholder="Mofidy your Description" required>
+                        </div>
+                        <div id="center">
+                            <button id="button" type="submit">Change</button>
+                        </div>
+    
+                        <p id="error" style="color: red"></p>
+                    </div>
+                </div>
+            </div>
 
     <script type="module" src='/js/changedesc.js'></script>
 

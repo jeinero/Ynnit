@@ -4,6 +4,8 @@
         <title>Ynnit</title>
         <meta charset="utf-8"/>
         <link rel="stylesheet" href="changeemail.css">
+        <link rel="stylesheet" href="font-button.css">
+
     </header>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&display=swap');
@@ -13,52 +15,31 @@
         <button class="button" onclick = "returnChangeColor('rgb(64, 64, 64)');" >Mode foncé</button> 
                 
         <div id="flex-content">
-            <div id="content">
-                <label for="email1">Email:</label>
-                <input type="email" id="email1" name="email1" placeholder="john.doe@example.com" required><br><br>
-            
-                <label for="email2">Email:</label>
-                <input type="email" id="email2" name="email2" placeholder="john.doe@example.com" required><br><br>
-        
-                <button id="button" type="submit">Change</button>
-                <p id="error" style="color: red"></p>
+            <div id="flex-title">
+                <h1 id="flex-title-image">
+                    <img src="connected.png">
+                    Modify your Email
+                </h1>
+            </div>
+    
+            <div id="content-center">
+                <div id="content">
+                    <li>New email:</li>
+                    <input type="email" id="email1" class="email" name="email" placeholder="john.doe@example.com" required>
+    
+                    <li>Confirm new email :</li>
+                    <input type="email" id="email2" name="email2" placeholder="john.doe@example.com" required>
+                <div id="center">
+                    <button id="button" type="submit">Change</button>
+                </div>
+
+                    <p id="error" style="color: red"></p>
+                </div>
             </div>
         </div>
         
-    </body>
-
+    <script type="module" src='font-button.js'></script>
     <script type="module" src='/js/changeemail.js'></script>
 
+    </body>
 </html>
-
-
-
-
-
-
-
-            <div id="content-center">
-                <div id="content">
-
-                    <div id="flex-title">
-                        <h1 id="flex-title-image">
-                            <img src="connected.png">
-                        <br/>
-                            TO LOGIN
-                        </h1>
-                    </div>
-                    <div id="content">        
-                        <div action="" method="get" id="form">
-                            <div id="centerTop">
-                                <input type="email" name="name" class="email" placeholder="john.doe@example.com" id="email" required>
-                                <input type="password" name="pwd" class="pwd" placeholder="Enter password : " id="password" minlength="8" autocomplete="on" required>
-                            </div>
-                            <br/>
-                            <div id="centerBottom">
-                                <button id="button" >SIGN IN <img src="connexion.png"></button>
-                                
-                            </div>
-                        </div>
-
-                </div>
-            </div>
