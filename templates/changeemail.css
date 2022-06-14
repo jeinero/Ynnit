@@ -1,0 +1,12 @@
+#flex-content{
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    font-size: x-large;
+}
+#content{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    height: 100px;
+}

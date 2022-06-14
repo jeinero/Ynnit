@@ -3,17 +3,23 @@
     <header>
         <title>Ynnit</title>
         <meta charset="utf-8"/>
+        <link rel="stylesheet" href="changeemail.css">
     </header>
 
     <body>
-        <label for="email1">Email:</label>
-        <input type="email" id="email1" name="email1" placeholder="john.doe@example.com" required><br><br>
-    
-        <label for="email2">Email:</label>
-        <input type="email" id="email2" name="email2" placeholder="john.doe@example.com" required><br><br>
-
-        <button id="button" type="submit">Change</button>
-        <p id="error" style="color: red"></p>
+        <div id="flex-content">
+            <div id="content">
+                <label for="email1">Email:</label>
+                <input type="email" id="email1" name="email1" placeholder="john.doe@example.com" required><br><br>
+            
+                <label for="email2">Email:</label>
+                <input type="email" id="email2" name="email2" placeholder="john.doe@example.com" required><br><br>
+        
+                <button id="button" type="submit">Change</button>
+                <p id="error" style="color: red"></p>
+            </div>
+        </div>
+        
     </body>
 
     <script type="module" src='/js/changeemail.js'></script>

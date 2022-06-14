@@ -3,8 +3,8 @@
     <header>
         <title>Ynnit</title>
         <meta charset="utf-8"/>
-        <link rel="stylesheet" href="/css/signin.css">
-        <link rel="stylesheet" href="/css/font-button.css">
+        <link rel="stylesheet" href="signin.css">
+        <link rel="stylesheet" href="font-button.css">
     </header>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&display=swap');
@@ -13,24 +13,31 @@
             <button class="button" onclick = "changeColor('white');" >Mode Clair</button>
             <button class="button" onclick = "returnChangeColor('rgb(64, 64, 64)');" >Mode foncé</button> 
             
-            <h1 id="template">
-                <img src="/css/image/connected.png"><br/>
-                TO LOGIN
-            </h1>
-            <div>        
-                <div action="" method="get" id="form">
-                    <div id="centerTop">
-                        <input type="email" name="name" class="email" placeholder="john.doe@example.com" id="email" required>
-                        <input type="password" name="pwd" class="pwd" placeholder="Enter password : " id="password" minlength="8" autocomplete="on" required>
+            <div id="content-center">
+                <div id="content">
+
+                    <div id="flex-title">
+                        <h1 id="flex-title-image">
+                            <img src="connected.png">
+                        <br/>
+                            TO LOGIN
+                        </h1>
                     </div>
-                <br/>
-                    <div id="centerBottom">
-                        <button id="button" type="submit">TO REGISTER</button>
-                        <button id="button" >SIGN IN <img src="/css/image/connexion.png"></button>
-    
-                        <p id="error" style="color: red"></p>
-                        
-                    </div>
+                    <div id="content">        
+                        <div action="" method="get" id="form">
+                            <div id="centerTop">
+                                <input type="email" name="name" class="email" placeholder="john.doe@example.com" id="email" required>
+                                <input type="password" name="pwd" class="pwd" placeholder="Enter password : " id="password" minlength="8" autocomplete="on" required>
+                            </div>
+                        <br/>
+                            <div id="centerBottom">
+                                <button id="button" >SIGN IN <img src="connexion.png"></button>
+            
+                                <p id="error" style="color: red"></p>
+                                
+                            </div>
+                        </div>
+
                 </div>
             </div>
 
