@@ -1,25 +1,75 @@
-
+/*--------POLICE--------*/
 body {
-    margin: 0px;
+    font-family: 'Tiro Devanagari Sanskrit', serif;
 }
-.container{
-    display: flex;
-    border: 2px solid red;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
+#template {
+    margin-top: 30px;
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    color:gray;
+    text-align: center;
+}
+/*-------------BUTTON PAGE CONNECT ET JOINUS----------------------------------------------*/
+#button {
+    font-size: medium;
+    height: 30px;
+    width: 150px;
+}
+#button:hover {
+    background: #d6d6d6;
+}
+/*---------------LES INPUT DE CHAQUE ; Mail, Nom, Password-------------------------------*/
+#name {
+    margin-left: 230%;
+    background-color: rgb(222, 222, 222);
+    border-radius: 10px;
+    font-weight: bold;
+    width: 360px;
+    height: 50px;
+    font-size: x-large;
+}
+#email {
+    margin-left: 230%;
+    background-color: rgb(222, 222, 222);
+    border-radius: 10px;
+    font-weight: bold;
+    width: 360px;
+    height: 50px;
+    font-size: x-large;
+}
+#pwd {
+    margin-left: 230%;
+    background-color: rgb(222, 222, 222);
+    border-radius: 10px;
+    font-weight: bold;
+    width: 360px;
+    height: 50px;
+    font-size: x-large;
+}
+/*-------------------------TAILLE IMAGE DE JOINUS/SIGN IN--------------------------*/
+
+#template > img {
+    width: 10%;
+}
+button > img {
+    width: 11%;
 }
 
-.select{
-    padding: 1%;
+/*------------------------------Taille des divs Ect-------------------------------*/
+
+#centerTop {
     display: flex;
     flex-direction: column;
-    width: 25%;
-    height: auto;
-    border: 2px solid black;
-    justify-content: center;
-    align-items: center;
-    border-radius: 40px;
-    
+    gap: 25px;
+    width: 250px;
+}
+#centerBottom {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    margin-left: 39%;  
+}
+/*------Colonnes centrée pour tout------*/
+#form {
+    display: flex;
+    flex-direction: column;
 }

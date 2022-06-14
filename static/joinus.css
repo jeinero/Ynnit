@@ -1,6 +1,32 @@
 
-body {
-  margin: 0px;
+#email {
+  background-color: rgb(222, 222, 222);
+  border-radius: 10px;
+  font-weight: bold;
+  width: 360px;
+  height: 50px;
+  font-size: x-large;
+}
+#pwd {
+  background-color: rgb(222, 222, 222);
+  border-radius: 10px;
+  font-weight: bold;
+  width: 360px;
+  height: 50px;
+  font-size: x-large;
+}
+#pwd2 {
+  background-color: rgb(222, 222, 222);
+  border-radius: 10px;
+  font-weight: bold;
+  width: 360px;
+  height: 50px;
+  font-size: x-large;
+}
+/*-------------------------TAILLE IMAGE DE JOINUS--------------------------*/
+
+#flex-title-image > img {
+  width: 40%;
 }
 .container{
   display: flex;
