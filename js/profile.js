@@ -31,6 +31,8 @@ function getCookie(name) {
     return null;
 }
 let id = getCookie("id")
+
+
 const title = document.getElementById('title')
 
 const loadDataUser = data => {
@@ -54,6 +56,6 @@ const loadDataUser = data => {
 }
 
 
- fetch("/apiusers/" + id)
+fetch("/apiusers/" + id)
 .then(resp => resp.json())
 .then(loadDataUser)

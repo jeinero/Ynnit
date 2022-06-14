@@ -100,12 +100,9 @@ fetch("/apiposts")
       }
       var aDay = 24*60*60*1000;
 
-      document.body.onload = function() {
-        if (getCookie("name") != null) {
-                classComm[0].style.display = "none"
-                classComm[1].style.display = "none"
-                }
- }
+
+
+
  function getCookie(name) {
   let nameEQ = name + "=";
   let ca = document.cookie.split(';');
@@ -116,7 +113,9 @@ fetch("/apiposts")
   }
   return null;
 }
-      const btn = document.querySelector('.btn');
+
+
+const btn = document.querySelector('.btn');
 
 btn.addEventListener('click', () => {
 
@@ -127,3 +126,14 @@ btn.addEventListener('click', () => {
     })
 
 })
+
+
+
+
+document.body.onload = function() {
+  if (getCookie("name") != null) {
+          let classComm = document.getElementsByClassName("lien")
+          classComm[0].style.display = "none"
+          classComm[1].style.display = "none"
+          }
+}

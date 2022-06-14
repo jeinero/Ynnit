@@ -33,7 +33,7 @@ body {
   height: 50px;
   font-size: x-large;
 }
-#password {
+#pwd {
   background-color: rgb(222, 222, 222);
   border-radius: 10px;
   font-weight: bold;
@@ -41,7 +41,7 @@ body {
   height: 50px;
   font-size: x-large;
 }
-#verify {
+#pwd2 {
   background-color: rgb(222, 222, 222);
   border-radius: 10px;
   font-weight: bold;
