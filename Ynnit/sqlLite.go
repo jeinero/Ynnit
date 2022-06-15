@@ -253,6 +253,9 @@ func InsertIntoCommunauter(db *sql.DB, Name string, Desc string, Tags string) bo
 func InsertIntoLike(db *sql.DB, IdUser int, PostLink int) bool {
 	if CheckLike(db, IdUser, PostLink) {
 		_, err := db.Exec(`INSERT INTO likedpost (userid, postLike) VALUES (?, ?)`, IdUser, PostLink)
+		if !CheckDisLike(db, IdUser, PostLink) {
+			fmt.Println("dislike del")
+		}
 		if err != nil {
 			fmt.Println(err)
 			return false
@@ -298,6 +301,9 @@ func DbtoStructLike(db *sql.DB) []Like {
 func InsertIntoDisLike(db *sql.DB, IdUser int, PostLink int) bool {
 	if CheckDisLike(db, IdUser, PostLink) {
 		_, err := db.Exec(`INSERT INTO dislikedpost (userid, postLike) VALUES (?, ?)`, IdUser, PostLink)
+		if !CheckLike(db, IdUser, PostLink) {
+			fmt.Println("like del")
+		}
 		if err != nil {
 			fmt.Println(err)
 			return false

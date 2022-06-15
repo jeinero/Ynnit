@@ -1,9 +1,12 @@
 let post = await getApi("/apiposts")
-var user = undefined
+var likeTab = undefined
+var dislikeTab = undefined
+
 if (getCookie("id") != null) {
- user = await getApi('/apilike/' + getCookie("id"))
+ likeTab = await getApi('/apilike/' + getCookie("id"))
+ dislikeTab = await getApi('/apidislike/' + getCookie("id"))
 }
-console.log(user)
+console.log(dislikeTab)
 // document.body.onload = function() {
 //   newCard(post)
 //   console.log("witf")
@@ -80,8 +83,8 @@ function newCard(posts) {
           event.stopPropagation(e)
   }
       like.innerHTML = `<i class="fa fa-thumbs-up" aria-hidden="true"></i>`
-      if (user != null) {
-      user.forEach(elem => {
+      if (likeTab != null) {
+      likeTab.forEach(elem => {
         if (elem.PostLink == newcard.id) {
           like.style.color = "rgb(49, 172, 49)"
         }
@@ -114,6 +117,13 @@ function newCard(posts) {
             }
           }
           event.stopPropagation(e)
+  }
+  if (dislikeTab != null) {
+    dislikeTab.forEach(elem => {
+      if (elem.PostLink == newcard.id) {
+        dislike.style.color = "red"
+      }
+    })
   }
       dislike.innerHTML = `<i class="fa fa-thumbs-down" aria-hidden="true"></i>`
 

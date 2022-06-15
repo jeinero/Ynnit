@@ -394,13 +394,15 @@ func DislikesHandler(w http.ResponseWriter, r *http.Request) {
 }
 func DislikeHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
+	var temptab []DisLike
 	vars := mux.Vars(r)
 	id := vars["userId"]
-	for _, like := range AllApi.DislikeALl {
-		if strconv.Itoa(like.UserId) == id {
-			json.NewEncoder(w).Encode(like)
+	for _, dislike := range AllApi.DislikeALl {
+		if strconv.Itoa(dislike.UserId) == id {
+			temptab = append(temptab, dislike)
 		}
 	}
+	json.NewEncoder(w).Encode(temptab)
 }
 
 func Handler() {
@@ -447,6 +449,9 @@ func Handler() {
 
 	r.HandleFunc("/apilike", likesHandler)
 	r.HandleFunc("/apilike/{userId}", likesHandler)
+
+	r.HandleFunc("/apidislike", DislikesHandler)
+	r.HandleFunc("/apidislike/{userId}", DislikeHandler)
 
 	r.HandleFunc("/signin", Signin)
 
