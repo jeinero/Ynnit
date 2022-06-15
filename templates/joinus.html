@@ -1,48 +1,39 @@
 <!DOCTYPE html>
 <html>
-    <header>
-        <title>Ynnit</title>
-        <meta charset="utf-8"/>
-        <link rel="stylesheet" href="/css/joinus.css">
-        <link rel="stylesheet" href="/css/font-button.css">
-        
-    </header>
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&display=swap');
-</style>
-    <body>
-        <div id="content-button">
-            <button class="button" onclick = "changeColor('white');" >Mode Clair</button>
-            <button class="button" onclick = "returnChangeColor('rgb(64, 64, 64)');" >Mode foncé</button> 
+<header>
+    <title>Ynnit</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="joinus.css">
+    <link rel="stylesheet" href="/css/font-button.css">
+</header>
+
+<body>
+    <button class="button" onclick="changeColor('white');">Mode Clair</button>
+    <button class="button" onclick="returnChangeColor('rgb(64, 64, 64)');">Mode foncé   </button>
+    <div class="container">
+
+        <div class="select">
+
+            <label id="title" for="name">Name:</label>
+            <input type="name" id="name" name="name" placeholder="BocMacFrite" required><br><br>
+
+            <label id="title" for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="john.doe@example.com" required><br><br>
+
+            <label id="title" for="pwd">Password:</label>
+            <input type="password" id="pwd" name="pwd" minlength="8" autocomplete="on" placeholder="Enter password"required><br><br>
+
+            <label id="title" for="pwd2">Password:</label>
+            <input type="password" id="pwd2" name="pwd2" minlength="8" autocomplete="on"placeholder="Enter password" required><br><br>
+
+            <button id="button" type="submit">Join Us</button>
+            <p id="error" style="color: red"></p>
+
         </div>
 
-        
-        <div id="flex-title">
-            <h1 id="flex-title-image">
-                <img src="/css/image/connected.png">
-            <br/>
-                TO REGISTER
-            </h1>
-        </div>
-        <div id="content">        
-            <div action="" method="get" id="form">
-                <div id="centerTop">
-                    <input type="name" name="name" class="name" placeholder="Name : " id="name" required>
-                    <input type="email" name="name" class="email" placeholder="john.doe@example.com" id="email" required>
-                    <input type="password" name="pwd" class="pwd" placeholder="Enter password : " id="password" minlength="8" autocomplete="on" required>
-                    <input type="password" name="pwd2" class="pwd2" placeholder="Verify password : " id="verify" minlength="8" autocomplete="on" required>
-                </div>
-                <br/>
-                <div id="centerBottom">
-                    <button id="button" >LOGIN <img src="/css/image/connexion.png"></button>
-                    <button id="button" type="submit">REGISTER</button>
-                    <p id="error" style="color: red"></p> 
-                </div>
-            </div>
-        </div>
-        
-        <script type="text/javascript" src="/js/font-button.js" ></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/2.0.2/sha.js"></script>
-        <script type="module" src='/js/joinus.js'></script>
-    </body>
+    <script type="text/javascript" src="/js/font-button.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/2.0.2/sha.js"></script>
+    <script type="module" src='/js/joinus.js'></script>
+</body>
+
 </html>

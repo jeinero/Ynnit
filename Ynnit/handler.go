@@ -180,7 +180,6 @@ func Joinus(w http.ResponseWriter, r *http.Request) {
 func ViewPost(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	http.ServeFile(w, r, "./templates/viewpost.html")
-	// println(r.URL.Query()["id"][0])
 
 }
 
@@ -345,9 +344,7 @@ func Handler() {
 	db := InitDatabase("./Ynnit.db")
 	AllApi.db = db
 	defer db.Close()
-	InsertIntoCategorie(AllApi.db, "Informatique")
-	InsertIntoCategorie(AllApi.db, "France")
-	InsertIntoCategorie(AllApi.db, "Food")
+	//
 
 	// InsertIntoUser(db, "jeinero", "jenei@gmail.com", "ImRio6988", "guest", "test", "test")
 	// InsertIntoUser(db, "qsdlqsd", "jeazenei@yahoo.fr", "ImRio6988")

@@ -2,29 +2,33 @@
 body {
     font-family: 'Tiro Devanagari Sanskrit', serif;
 }
+#title{
+    display: flex;
+    justify-content: center;
+    font-size: x-large;
+    font-weight: bold;
+}
 #flex-title {
     font-family: 'Tiro Devanagari Sanskrit', serif;
     text-align: center;
     font-weight: bold;
-    font-size: x-large;
+    font-size: large;
 }
 /*-------------BUTTON PAGE CONNECT ET JOINUS----------------------------------------------*/
 #button {
     font-size: medium;
-    height: 30px;
-    width: 150px;
+    height: 25px;
+    width: 30%;
 }
 #button:hover {
     background: #d6d6d6;
 }
 /*---------------LES INPUT DE CHAQUE ; Mail, Nom, Password-------------------------------*/
 
-#description {
+.changedesc {
     background-color: rgb(222, 222, 222);
     border-radius: 10px;
     font-weight: bold;
-    width: 360px;
-    height: 50px;
     font-size: x-large;
 }
 
@@ -39,22 +43,24 @@ button > img {
 
 /*------------------------------Taille des flexs Ect-------------------------------*/
                     #flex-content{
-                        margin-top: 45px;
+                        margin-top: 35px;
                         display: flex;
                         justify-content: center;
-                        font-size: xx-large;
+                        font-size: x-large;
                     }
                     #content-center{
                         display: flex;
                         flex-direction: column;
-                        width: 45%;
-                        height: 180px;
+                        justify-content: center;
+                        padding: 15px;
+                        border:solid black 3px;
+                        border-radius: 40px;
                     }
                     #content{
                         display: flex;
                         flex-direction: column;
                         margin-top: 10px;
-                        gap: 24px;
+                        gap: 12px;
                         border: solid 4px black;
                         padding: 8px;
                         border-radius: 15px;

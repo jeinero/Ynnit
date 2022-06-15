@@ -11,23 +11,25 @@
         @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&display=swap');
     </style>
         <body>
-            <button class="button" onclick = "changeColor('white');" >Mode Clair</button>
-            <button class="button" onclick = "returnChangeColor('rgb(64, 64, 64)');" >Mode foncé</button> 
+            <div id="content-button">
+                <button class="button" onclick = "changeColor('white');" >Mode Clair</button>
+                <button class="button" onclick = "returnChangeColor('rgb(64, 64, 64)');" >Mode foncé</button> 
+            </div>
                     
             <div id="flex-content">
         
                 <div id="content-center">
                     <div id="flex-title">
-                        Modify Description :
+                        <h1 id="flex-title-image">
+                            <img src="connected.png"><br/>
+                            Change Your Description  :
+                        </h1>
                     </div>
 
                     <div id="content">
-                        <div id="center">
-                            <input type="text" id="description" name="desc" placeholder="Mofidy your Description" required>
-                        </div>
-                        <div id="center">
+                            <textarea type="text" id="description" class="changedesc" cols="35" rows="8" name="desc" placeholder="Modify Your Description" required></textarea>
+
                             <button id="button" type="submit">Change</button>
-                        </div>
     
                         <p id="error" style="color: red"></p>
                     </div>

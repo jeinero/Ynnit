@@ -1,0 +1,41 @@
+body {
+    margin: 0px;
+}
+.container{
+    display: flex;
+    border: 2px solid red;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.select{
+    padding: 1%;
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: auto;
+    border: 2px solid black;
+    justify-content: center;
+    align-items: center;
+    border-radius: 40px;
+    
+}
+
+#email {
+    background-color: rgb(222, 222, 222);
+    border-radius: 10px;
+    font-weight: bold;
+    width: 360px;
+    height: 50px;
+    font-size: x-large;
+}
+#pwd {
+    background-color: rgb(222, 222, 222);
+    border-radius: 10px;
+    font-weight: bold;
+    width: 360px;
+    height: 50px;
+    font-size: x-large;
+}
