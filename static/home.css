@@ -348,6 +348,7 @@ color: white;
 
 .like {
     display: flex;
+    color: #000;
     justify-content: center;
     align-items: center;
     width: auto;   
@@ -358,7 +359,7 @@ color: white;
 }
 
 .like:hover {
-    color: rgb(49, 172, 49);
+    color: rgb(49, 172, 49) !important;
 }
 
 .dislike {
@@ -373,7 +374,7 @@ color: white;
 }
 
 .dislike:hover {
-    color: red;
+    color: red !important;
 }
 
 .comments {
