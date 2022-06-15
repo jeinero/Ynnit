@@ -6,7 +6,8 @@ body {
     display: flex;
     justify-content: center;
     font-size: x-large;
-    font-weight: bold;
+    font-weight: bold; 
+    margin-top: 15px;
 }
 #flex-title {
     font-family: 'Tiro Devanagari Sanskrit', serif;
@@ -46,7 +47,7 @@ button > img {
                         margin-top: 35px;
                         display: flex;
                         justify-content: center;
-                        font-size: x-large;
+                        /* font-size: x-large; */
                     }
                     #content-center{
                         display: flex;
@@ -60,7 +61,7 @@ button > img {
                         display: flex;
                         flex-direction: column;
                         margin-top: 10px;
-                        gap: 12px;
+                        /* gap: 12px; */
                         border: solid 4px black;
                         padding: 8px;
                         border-radius: 15px;
