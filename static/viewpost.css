@@ -104,7 +104,7 @@ header {
 
 .content {
     justify-content: center;
-    width: auto;
+    width: 80%;
     height: auto;
     display: flex;
     align-items: center;

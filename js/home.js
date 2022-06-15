@@ -133,10 +133,10 @@ btn.addEventListener('click', () => {
 
 
 
-// document.body.onload = function() {
-//   if (getCookie("name") != null) {
-//           let classComm = document.getElementsByClassName("lien")
-//           classComm[0].style.display = "none"
-//           classComm[1].style.display = "none"
-//           }
-// }
+document.body.onload = function() {
+  if (getCookie("name") != null) {
+          let classComm = document.getElementsByClassName("lien")
+          classComm[0].style.display = "none"
+          classComm[1].style.display = "none"
+          }
+}
