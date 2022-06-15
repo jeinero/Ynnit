@@ -1,80 +1,57 @@
-/* POLICE ----------------------------------------------------- */
 body {
-  font-family: 'Tiro Devanagari Sanskrit', serif;
+  margin: 0px;
 }
-#template {
-  margin-top: 80px;
-  margin-left: 16%;
-  font-family: 'Tiro Devanagari Sanskrit', serif;
+.container{
+  display: flex;
+  border: 2px solid red;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
 }
 
-/*-----------------------------------------------------------*/
-.CreatePost {
+.select{
+  padding: 1%;
   display: flex;
   flex-direction: column;
-  border-radius: 30px;
-  padding: 24px;
+  width: auto;
+  height: auto;
   border: 2px solid black;
-  height: 450px;
-  width: 1000px;
-  box-shadow: 15px 10px 10px rgb(179, 179, 179);
-}
-.CenterPost{
-margin-left: 350px;
-}
-
-label {
-  margin-top: 20px;
-  margin-left: 35px;
   justify-content: center;
-  border: 2px solid black;
-  background-color: #d6d6d6;
-  /* color: #0c86e9; */
-  display: flex;
-  border-radius: 30px;
-  /* height: 50px; */
-  width: 170px;
+  align-items: center;
+  border-radius: 40px;
+  
 }
-.button{
-  height: 30px;
-  width: 200px;
-  border-radius: 20px;
+#name {
+  background-color: rgb(222, 222, 222);
+  border-radius: 10px;
+  font-weight: bold;
+  width: 360px;
+  height: 50px;
+  font-size: x-large;
 }
-
-/*--------------------------------------------------------------*/
-* {
-  /* background-color: grey; */
-}
-
-::placeholder { 
-  color: black;
-  opacity: 1;
+#pwd2 {
+  background-color: rgb(222, 222, 222);
+  border-radius: 10px;
+  font-weight: bold;
+  width: 360px;
+  height: 50px;
+  font-size: x-large;
 }
 
-.name{
-  border-radius: 15px;
-  border: solid 4px black;
-  color: #d6d6d6;
-  width: 240px;
+#email {
+  background-color: rgb(222, 222, 222);
+  border-radius: 10px;
+  font-weight: bold;
+  width: 360px;
+  height: 50px;
+  font-size: x-large;
 }
-
-.email{
-  border-radius: 15px;
-  border: solid 4px black;
-  color: #d6d6d6;
-  width: 240px;
-}
-
-.pwd{
-  border-radius: 15px;
-  border: solid 4px black;
-  color: #d6d6d6;
-  width: 240px;
-}
-
-.pwd2{
-  border-radius: 15px;
-  border: solid 4px black;
-  color: #d6d6d6;
-  width: 240px;
+#pwd {
+  background-color: rgb(222, 222, 222);
+  border-radius: 10px;
+  font-weight: bold;
+  width: 360px;
+  height: 50px;
+  font-size: x-large;
 }
