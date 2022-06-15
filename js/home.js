@@ -132,7 +132,6 @@ btn.addEventListener('click', () => {
 
 
 
-
 document.body.onload = function() {
   if (getCookie("name") != null) {
           let classComm = document.getElementsByClassName("lien")
