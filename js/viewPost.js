@@ -69,31 +69,32 @@ fetch("/apiposts/" + id)
                 const username = document.createElement('div')
                 username.innerHTML = "by&ensp;" + data.Post.UsersName
                 username.classList = 'username'
-                divtop.appendChild(username)
+                divtop.appendChild(username)    
 
                 const content = document.createElement('div')
                 content.innerHTML = data.Post.Content
                 content.classList = 'content'
                 viewpost.appendChild(content)
                 data.Comments.forEach(element => {
-                        const divtop = document.createElement('div')
-                        divtop.classList = 'divtop'
-                        viewcommentaire.appendChild(divtop)
+                        const post = document.createElement('div')
+                        post.classList = 'post'
+                        viewcommentaire.appendChild(post)
 
                         const dates = document.createElement('div')
                         dates.innerHTML = timeSince(element.Date)
                         dates.classList = 'date'
-                        viewcommentaire.appendChild(dates)
+                post.appendChild(dates)
 
                         const content = document.createElement('div')
                         content.innerHTML = element.Content
-                        content.classList = 'content'
-                        viewcommentaire.appendChild(content)
+                        content.classList = 'contents'
+                        post.appendChild(content)
 
                         const username = document.createElement('div')
                         username.innerHTML = "by&ensp;" + element.UsersName
                         username.classList = 'username'
-                        viewcommentaire.appendChild(username)
+                        post.appendChild(username)
+                        
 
                 })
 
