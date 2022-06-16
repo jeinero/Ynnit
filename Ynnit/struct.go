@@ -55,12 +55,14 @@ type Tags struct {
 }
 
 type Like struct {
-	Id       int `json: "id"`
-	UserId   int `json: "userId"`
-	PostLink int `json: "postLink"`
+	Id          int `json: "id"`
+	UserId      int `json: "userId"`
+	PostLink    int `json: "postLink"`
+	CommentLink int `json: "commentLink"`
 }
 type DisLike struct {
-	Id       int `json: "id"`
-	UserId   int `json: "userId"`
-	PostLink int `json: "postLink"`
+	Id          int `json: "id"`
+	UserId      int `json: "userId"`
+	PostLink    int `json: "postLink"`
+	CommentLink int `json: "commentLink"`
 }

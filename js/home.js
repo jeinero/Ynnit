@@ -51,7 +51,7 @@ function newCard(posts) {
         like.classList = 'like'
         like.id = "like"
         like.onclick = function addLike(e) {
-          fetch("/addLike", {
+          fetch("/addLikepost", {
             method: "POST",
             headers: {
               "content-type": "application/json"
@@ -87,7 +87,7 @@ function newCard(posts) {
         const dislike = document.createElement('button')
         dislike.classList = 'dislike'
         dislike.onclick = function addLike(e) {
-          fetch("/addDislike", {
+          fetch("/addDislikepost", {
             method: "POST",
             headers: {
               "content-type": "application/json"
@@ -201,7 +201,6 @@ function newCard(posts) {
 
         secondoptionbuttondropdown.onclick = function addLike(e) {
           event.stopPropagation(e)
-          console.log(parseInt(newcard.id))
         }
 
 

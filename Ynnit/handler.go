@@ -24,6 +24,12 @@ type ApiPosts struct {
 	Comments []Comment
 	like     int
 }
+
+type ApiComments struct {
+	Comments Comment
+	like     int
+}
+
 type ApiUsers struct {
 	User     User
 	Post     []Post
@@ -151,13 +157,16 @@ func CommentsHandler(w http.ResponseWriter, r *http.Request) {
 func CommentHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	vars := mux.Vars(r)
-
+	var temptab ApiComments
 	id := vars["id"]
 	for _, comment := range AllApi.CommentsAll {
 		if strconv.Itoa(comment.Id) == id {
-			json.NewEncoder(w).Encode(comment)
+			temptab.Comments = comment
 		}
 	}
+	idInt, _ := strconv.Atoi((id))
+	temptab.like = countLike(AllApi.db, "likedcomment", "commentLike", idInt)
+	json.NewEncoder(w).Encode(temptab)
 }
 
 func Signin(w http.ResponseWriter, r *http.Request) {
@@ -381,16 +390,15 @@ func Changelevel(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func AddLike(w http.ResponseWriter, r *http.Request) {
+func AddLikePost(w http.ResponseWriter, r *http.Request) {
 	type like struct {
 		PostLink int
 		UsersId  int
 	}
 	var newLike like
 	body, _ := ioutil.ReadAll(r.Body)
-	fmt.Println(string(body))
 	json.Unmarshal(body, &newLike)
-	goodOrFalse := InsertIntoLike(AllApi.db, newLike.UsersId, newLike.PostLink)
+	goodOrFalse := InsertIntoLikePost(AllApi.db, newLike.UsersId, newLike.PostLink)
 	w.Write([]byte("{\"msg\": \"Success\"}"))
 	if !goodOrFalse {
 		w.Write([]byte("{\"error\": \"Sorry\"}"))
@@ -411,16 +419,15 @@ func likeHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 }
-func AddDislike(w http.ResponseWriter, r *http.Request) {
+func AddDislikePost(w http.ResponseWriter, r *http.Request) {
 	type like struct {
 		PostLink int
 		UsersId  int
 	}
 	var newLike like
 	body, _ := ioutil.ReadAll(r.Body)
-	fmt.Println(string(body))
 	json.Unmarshal(body, &newLike)
-	goodOrFalse := InsertIntoDisLike(AllApi.db, newLike.UsersId, newLike.PostLink)
+	goodOrFalse := InsertIntoDisLikePost(AllApi.db, newLike.UsersId, newLike.PostLink)
 	w.Write([]byte("{\"msg\": \"Success\"}"))
 	if !goodOrFalse {
 		w.Write([]byte("{\"error\": \"Sorry\"}"))
@@ -463,6 +470,36 @@ func Deletepost(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("{\"msg\": \"Success\"}"))
 	} else {
 		http.Error(w, "{\"error\": \"Enter a valide name\"}", http.StatusUnauthorized)
+	}
+}
+
+func AddLikeComment(w http.ResponseWriter, r *http.Request) {
+	type like struct {
+		CommentLink int
+		UsersId     int
+	}
+	var newLike like
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &newLike)
+	goodOrFalse := InsertIntoLikeComment(AllApi.db, newLike.UsersId, newLike.CommentLink)
+	w.Write([]byte("{\"msg\": \"Success\"}"))
+	if !goodOrFalse {
+		w.Write([]byte("{\"error\": \"Sorry\"}"))
+	}
+}
+
+func AddDislikeComment(w http.ResponseWriter, r *http.Request) {
+	type like struct {
+		CommentLink int
+		UsersId     int
+	}
+	var newLike like
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &newLike)
+	goodOrFalse := InsertIntoDisLikeComment(AllApi.db, newLike.UsersId, newLike.CommentLink)
+	w.Write([]byte("{\"msg\": \"Success\"}"))
+	if !goodOrFalse {
+		w.Write([]byte("{\"error\": \"Sorry\"}"))
 	}
 }
 
@@ -551,8 +588,11 @@ func Handler() {
 	r.HandleFunc("/viewpost", ViewPost)
 	r.HandleFunc("/comment", Comments)
 
-	r.HandleFunc("/addLike", AddLike)
-	r.HandleFunc("/addDislike", AddDislike)
+	r.HandleFunc("/addLikepost", AddLikePost)
+	r.HandleFunc("/addDislikepost", AddDislikePost)
+
+	r.HandleFunc("/addLikecomment", AddLikeComment)
+	r.HandleFunc("/addDislikecomment", AddDislikeComment)
 
 	r.HandleFunc("/deletepost", Deletepost)
 	r.HandleFunc("/deletecomme", Deletecomme)
@@ -574,7 +614,8 @@ func reloadApi() {
 	AllApi.PostsAll = DbtoStructPost(AllApi.db)
 	AllApi.CommentsAll = DbtoStructComment(AllApi.db)
 	AllApi.TagsAll = DbtoStructCategorie(AllApi.db)
-	AllApi.LikeAll = DbtoStructLike(AllApi.db)
-	AllApi.DislikeALl = DbtoStructDisLike(AllApi.db)
-
+	AllApi.LikeAll = DbtoStructLikePost(AllApi.db)
+	AllApi.DislikeALl = DbtoStructDisLikePost(AllApi.db)
+	AllApi.LikeAll = DbtoStructLikeComment(AllApi.db)
+	AllApi.DislikeALl = DbtoStructDisLikeComment(AllApi.db)
 }
