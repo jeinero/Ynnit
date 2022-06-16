@@ -2,13 +2,6 @@
 body {
     font-family: 'Tiro Devanagari Sanskrit', serif;
 }
-#title{
-    display: flex;
-    justify-content: center;
-    font-size: x-large;
-    font-weight: bold; 
-    margin-top: 15px;
-}
 
 #flex-title{
     display: flex;
@@ -31,7 +24,8 @@ body {
 /*-------------------------TAILLE IMAGE DE JOINUS--------------------------*/
 
 #flex-title-image > img {
-    width: 40%;
+    width: 50%;
+
 }
 /* button > img {
     width: 11%;
@@ -53,19 +47,27 @@ body {
                         flex-direction: column;
                         justify-content: center;
                         padding: 15px;
-                        border:solid black 3px;
+                        border:solid black 6px;
                         border-radius: 40px;
                     }
                     #content{
                         display: flex;
                         flex-direction: column;
                         gap: 30px;
+                        border:solid black 7px;
+                        border-radius: 40px;
+                        margin-left: 10px;
+                        margin-left: 10px;
                     }
 
                     /*------flex pour centrer le haut/bas ------*/
                     #flex-title {
                         display: flex;
-                        justify-content: center;                        
+                        justify-content: center;
+                        padding-left: 15px;                      
+                    }
+                    h1 > img{
+                      padding-left: 20%;
                     }
 
 /*----------------------------BOUTON CSS----------------------------------*/
@@ -75,15 +77,16 @@ body {
     display: flex;
     flex-direction: row;
     margin: 15px auto;
-    text-align: center;
+    justify-content: center;
 }
 button {
-  margin: 20px;
+  margin: 10px;
 }
 .custom-btn {
-  width: 200px;
+  width: 180px;
   height: 200px;
-  color: #fff;
+  color: aliceblue;
+  text-shadow: rgb(255, 255, 255) 3px 0 10px;
   border-radius: 30px;
   padding: 5px 15px;
   font-family: 'Lato', sans-serif;
@@ -98,6 +101,7 @@ button {
    4px 4px 5px 0px rgba(0,0,0,.1);
   outline: none;
 }
+
 
 
 /* 13 */
