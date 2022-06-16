@@ -40,6 +40,10 @@ type ApiCommunauter struct {
 	Post        []Post
 }
 
+type ApiTags struct {
+	Tags Tags
+}
+
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/home.html")
 }
@@ -296,7 +300,8 @@ func NewcommunityHandler(w http.ResponseWriter, r *http.Request) {
 	var Newcommunauter Communauter
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &Newcommunauter)
-	if InsertIntoCommunauter(AllApi.db, Newcommunauter.Name, Newcommunauter.Desc, "Shitpost") {
+	fmt.Println(string(body))
+	if InsertIntoCommunauter(AllApi.db, Newcommunauter.Name, Newcommunauter.Desc, Newcommunauter.Tags) {
 		w.Write([]byte("{\"msg\": \"Success\"}"))
 	} else {
 		http.Error(w, "{\"error\": \"Enter a valide community\"}", http.StatusUnauthorized)
@@ -503,6 +508,24 @@ func AddDislikeComment(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func CategoriesHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
+	json.NewEncoder(w).Encode(AllApi.TagsAll)
+}
+
+func CategorieHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
+	vars := mux.Vars(r)
+	id := vars["id"]
+	var temptab ApiTags
+	for _, tags := range AllApi.TagsAll {
+		if strconv.Itoa(tags.Id) == id {
+			temptab.Tags = tags
+		}
+	}
+	json.NewEncoder(w).Encode(temptab)
+}
+
 func Handler() {
 
 	db := InitDatabase("./Ynnit.db")
@@ -556,6 +579,9 @@ func Handler() {
 
 	r.HandleFunc("/apidislike", DislikesHandler)
 	r.HandleFunc("/apidislike/{userId}", DislikeHandler)
+
+	r.HandleFunc("/apicategories", CategoriesHandler)
+	r.HandleFunc("/apicategories/{id}", CategorieHandler)
 
 	r.HandleFunc("/signin", Signin)
 
