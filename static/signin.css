@@ -1,27 +1,21 @@
+/*--------------POLICE--------------*/
 body {
-    margin: 0px;
+    font-family: 'Tiro Devanagari Sanskrit', serif;
 }
-.container{
-    display: flex;
-    border: 2px solid red;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
+#flex-title {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    text-align: center;
 }
-
-.select{
-    padding: 1%;
-    display: flex;
-    flex-direction: column;
-    width: auto;
-    height: auto;
-    border: 2px solid black;
-    justify-content: center;
-    align-items: center;
-    border-radius: 40px;
-    
+/*-------------BUTTON PAGE CONNECT ET JOINUS----------------------------------------------*/
+#button {
+    font-size: medium;
+    height: 30px;
+    width: 150px;
 }
+#button:hover {
+    background: #d6d6d6;
+}
+/*---------------LES INPUT DE CHAQUE ; Mail, Nom, Password-------------------------------*/
 
 #email {
     background-color: rgb(222, 222, 222);
@@ -31,7 +25,7 @@ body {
     height: 50px;
     font-size: x-large;
 }
-#pwd {
+#password {
     background-color: rgb(222, 222, 222);
     border-radius: 10px;
     font-weight: bold;
@@ -39,3 +33,44 @@ body {
     height: 50px;
     font-size: x-large;
 }
+/*-------------------------TAILLE IMAGE DE JOINUS--------------------------*/
+
+#flex-title-image > img {
+    width: 40%;
+}
+button > img {
+    width: 11%;
+}
+
+/*------------------------------Taille des flexs Ect-------------------------------*/
+                    #content{
+                        display: flex;
+                        flex-direction: column;
+                        border: solid black 3px;
+                        border-radius: 40px;
+                        padding: 10px; 
+                    }
+                    #content-center{
+                        display: flex;
+                        justify-content: center;
+                    }
+                    /*------flex pour centrer le haut------*/
+                    #flex-title {
+                        display: flex;
+                        justify-content: center;                        
+                    }
+                    #centerBottom {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 20px;
+                        padding: 15px;
+                        padding-left: 9%; 
+                        border: solid black 3px;
+                        border-radius: 40px;
+                    }
+                    #centerError{
+                        display: flex;
+                        flex-direction: row;
+                        gap: 25px;
+                        padding-left: 29%;
+                    }

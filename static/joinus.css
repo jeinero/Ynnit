@@ -13,7 +13,10 @@ body {
   justify-content: center;
   align-items: center;
 }
-
+#button{
+  font-size: large;
+  width: 120px;
+}
 .select{
   padding: 1%;
   display: flex;

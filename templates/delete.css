@@ -1,0 +1,137 @@
+/*--------------POLICE--------------*/
+body {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+}
+#title{
+    display: flex;
+    justify-content: center;
+    font-size: x-large;
+    font-weight: bold; 
+    margin-top: 15px;
+}
+
+#flex-title{
+    display: flex;
+    justify-content: center;
+    text-decoration: underline;
+    font-family: Impact, sans-serif;
+    font-size: 35px;
+    letter-spacing: 2px;
+}
+/*-------------BUTTON PAGE CONNECT ET JOINUS----------------------------------------------*/
+#button {
+    font-size: medium;
+    height: 25px;
+    width: 30%;
+}
+#button:hover {
+    background: #d6d6d6;
+}
+
+/*-------------------------TAILLE IMAGE DE JOINUS--------------------------*/
+
+#flex-title-image > img {
+    width: 40%;
+}
+/* button > img {
+    width: 11%;
+} */
+#yes {
+    width: 50%
+}
+
+
+/*------------------------------Taille des flexs Ect-------------------------------*/
+                    #flex-content{
+                        margin-top: 35px;
+                        display: flex;
+                        justify-content: center;
+                        /* font-size: x-large; */
+                    }
+                    #content-center{
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        padding: 15px;
+                        border:solid black 3px;
+                        border-radius: 40px;
+                    }
+                    #content{
+                        display: flex;
+                        flex-direction: column;
+                        gap: 30px;
+                    }
+
+                    /*------flex pour centrer le haut/bas ------*/
+                    #flex-title {
+                        display: flex;
+                        justify-content: center;                        
+                    }
+
+/*----------------------------BOUTON CSS----------------------------------*/
+
+
+.frame {
+    display: flex;
+    flex-direction: row;
+    margin: 15px auto;
+    text-align: center;
+}
+button {
+  margin: 20px;
+}
+.custom-btn {
+  width: 200px;
+  height: 200px;
+  color: #fff;
+  border-radius: 30px;
+  padding: 5px 15px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+
+
+/* 13 */
+.btn-13 {
+  background-color: #89d8d3;
+background-image: linear-gradient(315deg, #89d8d3 0%, #03c8a8 74%);
+  border: none;
+  z-index: 1;
+}
+.btn-13:after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  border-radius: 20px;
+   background-color: #4dccc6;
+background-image: linear-gradient(315deg, #4dccc6 0%, #96e4df 74%);
+  box-shadow:
+   -7px -7px 20px 0px #fff9,
+   -4px -4px 5px 0px #fff9,
+   7px 7px 20px 0px #0002,
+   4px 4px 5px 0px #0001;
+  transition: all 0.3s ease;
+}
+.btn-13:hover {
+  color: #fff;
+}
+.btn-13:hover:after {
+  top: 0;
+  height: 100%;
+}
+.btn-13:active {
+  top: 2px;
+}

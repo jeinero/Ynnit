@@ -3,16 +3,38 @@
     <header>
         <title>Ynnit</title>
         <meta charset="utf-8"/>
-        <link rel="stylesheet" href="/css/profile.css">
+        <link rel="stylesheet" href="profile.css">
+        <link rel="stylesheet" href="delete.css">
     </header>
-
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&display=swap');
+</style>
     <body>
-        <h1>Sure ?</h1>
-        <button id="No" type="submit">No</button>
+        <div id="flex-content">
+        
+            <div id="content-center">
+                <div id="flex-title">
+                    <h1 id="flex-title-image">
+                        <img src="connected.png"><br/>
+                        Are You Sure ?
+                    </h1>
+                </div>
+                
+                <div id="content">
+                    <div id="title">
+                        <div class="frame">
+                            <button class="custom-btn btn-13">No</button>
+                            <button id="yes" class="custom-btn btn-13"><img id="yes" src="trash.png"></button>
+                        </div>
+                    </div>
+                </div>
 
-        <button id="Yes" type="submit">Yes</button>
+                  
+                    
+                <p id="error" style="color: red"></p>
+            </div>
+        </div>
+
+        <script type="module" src='/js/delete.js'></script>
     </body>
-
-    <script type="module" src='/js/delete.js'></script>
-
 </html>
