@@ -21,6 +21,7 @@ type User struct {
 	Pp         string `json: "pp"`
 	Password   string `json: "password"`
 	UsersLevel string `json: "usersLevel"`
+	Warn       int    `json: "warn"`
 	Date       string `json: "date"`
 }
 type Communauter struct {
