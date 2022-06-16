@@ -22,7 +22,8 @@ func InitDatabase(database string) *sql.DB {
 			email TEXT NOT NULL UNIQUE,
 			desc TEXT NOT NULL,
 			levelUser TEXT NOT NULL,
-			date TEXT NOT NULL,		
+			date TEXT NOT NULL,	
+			warn INTEGET NOT NULL,	
 			password TEXT NOT NULL
 		);
 		CREATE TABLE IF NOT EXISTS communauter (
@@ -91,7 +92,7 @@ func DbtoStructUser(db *sql.DB) []User {
 
 	for rowsUsers.Next() {
 		var u User
-		err := rowsUsers.Scan(&u.Id, &u.Name, &u.Email, &u.Desc, &u.UsersLevel, &u.Date, &u.Password)
+		err := rowsUsers.Scan(&u.Id, &u.Name, &u.Email, &u.Desc, &u.UsersLevel, &u.Date, &u.Warn, &u.Password)
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -101,7 +102,7 @@ func DbtoStructUser(db *sql.DB) []User {
 }
 
 func InsertIntoUser(db *sql.DB, name string, email string, password string, desc string, levelUser string, date string) bool {
-	_, err := db.Exec(`INSERT INTO user (name, email, password, desc, levelUser, date) VALUES (?, ?, ?, ?, ?, ?)`, name, email, password, desc, levelUser, date)
+	_, err := db.Exec(`INSERT INTO user (name, email, password, desc, levelUser, date, warn) VALUES (?, ?, ?, ?, ?, ?, ?)`, name, email, password, desc, levelUser, date, 0)
 	if err != nil {
 		fmt.Println(err)
 		return false
@@ -120,6 +121,15 @@ func UpdatePassUser(db *sql.DB, id int, password string) bool {
 
 func UpdateMailUser(db *sql.DB, id int, emailnew string) bool {
 	_, err := db.Exec(`UPDATE user SET email = ? WHERE id = ?`, emailnew, id)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+	return true
+}
+
+func UpdateWarnUser(db *sql.DB, warn int, name string) bool {
+	_, err := db.Exec(`UPDATE user SET warn = ? WHERE name = ?`, warn, name)
 	if err != nil {
 		fmt.Println(err)
 		return false
