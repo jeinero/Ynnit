@@ -444,6 +444,28 @@ func DislikeHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(temptab)
 }
 
+func Deletecomme(w http.ResponseWriter, r *http.Request) {
+	var deletecomme Comment
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &deletecomme)
+	if DeleteCom(AllApi.db, deletecomme.Id) {
+		w.Write([]byte("{\"msg\": \"Success\"}"))
+	} else {
+		http.Error(w, "{\"error\": \"Enter a valide name\"}", http.StatusUnauthorized)
+	}
+}
+
+func Deletepost(w http.ResponseWriter, r *http.Request) {
+	var deletepost Post
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &deletepost)
+	if DeletePost(AllApi.db, deletepost.Id) {
+		w.Write([]byte("{\"msg\": \"Success\"}"))
+	} else {
+		http.Error(w, "{\"error\": \"Enter a valide name\"}", http.StatusUnauthorized)
+	}
+}
+
 func Handler() {
 
 	db := InitDatabase("./Ynnit.db")
@@ -531,6 +553,9 @@ func Handler() {
 
 	r.HandleFunc("/addLike", AddLike)
 	r.HandleFunc("/addDislike", AddDislike)
+
+	r.HandleFunc("/deletepost", Deletepost)
+	r.HandleFunc("/deletecomme", Deletecomme)
 
 	r.HandleFunc("/session", Session)
 

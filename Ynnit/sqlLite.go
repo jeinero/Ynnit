@@ -168,34 +168,76 @@ func UpdateDescUser(db *sql.DB, id int, descnew string) bool {
 }
 
 func DeleteUser(db *sql.DB, id int, name string) bool {
-	_, err := db.Exec(`DELETE FROM comment WHERE username = ?`, name)
+	_, err := db.Exec(`DELETE FROM likedcomment WHERE userid = ?`, id)
 	if err != nil {
-		fmt.Println(err, "1")
+		fmt.Println(err)
 		return false
 	} else {
-		_, err := db.Exec(`DELETE FROM post WHERE username = ?`, name)
+		_, err := db.Exec(`DELETE FROM dislikedpost WHERE userid = ?`, id)
 		if err != nil {
-			fmt.Println(err, "2")
+			fmt.Println(err)
 			return false
 		} else {
 			_, err := db.Exec(`DELETE FROM likedpost WHERE userid = ?`, id)
 			if err != nil {
-				fmt.Println(err, "3")
+				fmt.Println(err)
 				return false
 			} else {
-				_, err := db.Exec(`DELETE FROM likedcomment WHERE userid = ?`, id)
+				_, err := db.Exec(`DELETE FROM comment WHERE username = ?`, name)
 				if err != nil {
-					fmt.Println(err, "4")
+					fmt.Println(err)
 					return false
 				} else {
-					_, err := db.Exec(`DELETE FROM user WHERE id = ?`, id)
+					_, err := db.Exec(`DELETE FROM post WHERE username = ?`, name)
 					if err != nil {
-						fmt.Println(err, "5")
+						fmt.Println(err)
 						return false
+					} else {
+						_, err := db.Exec(`DELETE FROM user WHERE id = ?`, id)
+						if err != nil {
+							fmt.Println(err)
+							return false
+						}
+						return true
 					}
-					return true
 				}
 			}
+		}
+	}
+}
+
+func DeleteCom(db *sql.DB, id int) bool {
+	_, err := db.Exec(`DELETE FROM likedcomment WHERE commentLike = ?`, id)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	} else {
+		_, err := db.Exec(`DELETE FROM comment WHERE id = ?`, id)
+		if err != nil {
+			fmt.Println(err)
+			return false
+		}
+		return true
+	}
+}
+
+func DeletePost(db *sql.DB, id int) bool {
+	_, err := db.Exec(`DELETE FROM likedpost WHERE postLike = ?`, id)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	} else {
+		_, err := db.Exec(`DELETE FROM dislikedpost WHERE postLike = ?`, id)
+		if err != nil {
+			fmt.Println(err)
+			return false
+		} else {
+			_, err := db.Exec(`DELETE FROM post WHERE id = ?`, id)
+			if err != nil {
+				fmt.Println(err)
+				return false
+			}
+			return true
 		}
 	}
 }
