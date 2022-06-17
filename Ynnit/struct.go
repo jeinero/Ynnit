@@ -3,14 +3,16 @@ package YnnitPackage
 import "database/sql"
 
 type AllStructs struct {
-	db              *sql.DB
-	UsersAll        []User
-	CommunautersAll []Communauter
-	PostsAll        []Post
-	CommentsAll     []Comment
-	TagsAll         []Tags
-	LikeAll         []Like
-	DislikeALl      []DisLike
+	db                *sql.DB
+	UsersAll          []User
+	CommunautersAll   []Communauter
+	PostsAll          []Post
+	CommentsAll       []Comment
+	TagsAll           []Tags
+	LikeAll           []Like
+	DislikeALl        []DisLike
+	LikeAllComment    []Like
+	DislikeALlComment []DisLike
 }
 
 type User struct {

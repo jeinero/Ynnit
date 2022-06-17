@@ -114,6 +114,7 @@ function newCard(posts) {
         }
         if (dislikeTab != null) {
           dislikeTab.forEach(elem => {
+            console.log(elem, newcard.id)
             if (elem.PostLink == newcard.id) {
               dislike.style.color = "red"
             }
@@ -289,6 +290,12 @@ function getCookie(name) {
     if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
   }
   return null;
+}
+
+const sortComment = document.getElementById("filtercomment")
+// console.log(sortByComment)
+sortComment.onclick = function() {
+  console.log("fuck")
 }
 
 

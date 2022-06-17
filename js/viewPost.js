@@ -2,8 +2,8 @@ let likeTab = undefined
 let dislikeTab = undefined
 
 if (getCookie("id") != null) {
-    likeTab = await getApi('/apilike/' + getCookie("id"))
-    dislikeTab = await getApi('/apidislike/' + getCookie("id"))
+    likeTab = await getApi('/apilikecomment/' + getCookie("id"))
+    dislikeTab = await getApi('/apidislikecomment/' + getCookie("id"))
 }
 
 async function getApi(url) {
@@ -146,7 +146,8 @@ fetch("/apiposts/" + id)
             like.innerHTML = `<i class="fa fa-thumbs-up" aria-hidden="true"></i>`
             if (likeTab != null) {
                 likeTab.forEach(elem => {
-                    if (elem.CommmentLink == divcom.id) {
+                        console.log(elem.CommentLink, parseInt(divcom.id))
+                    if (parseInt(divcom.id) === elem.CommentLink) {
                         like.style.color = "rgb(49, 172, 49)"
                     }
                 })

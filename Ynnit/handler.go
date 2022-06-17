@@ -45,10 +45,12 @@ type ApiTags struct {
 }
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
 	http.ServeFile(w, r, "./templates/home.html")
 }
 
 func CommunityHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
 	http.ServeFile(w, r, "./templates/community.html")
 }
 
@@ -424,6 +426,22 @@ func likeHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 }
+func likesCommentsHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
+	json.NewEncoder(w).Encode(AllApi.LikeAllComment)
+}
+func likesCommentHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
+	vars := mux.Vars(r)
+	id := vars["userId"]
+	var temptab []Like
+	for _, like := range AllApi.LikeAllComment {
+		if strconv.Itoa(like.UserId) == id {
+			temptab = append(temptab, like)
+		}
+	}
+	json.NewEncoder(w).Encode(temptab)
+}
 func AddDislikePost(w http.ResponseWriter, r *http.Request) {
 	type like struct {
 		PostLink int
@@ -431,6 +449,7 @@ func AddDislikePost(w http.ResponseWriter, r *http.Request) {
 	}
 	var newLike like
 	body, _ := ioutil.ReadAll(r.Body)
+	fmt.Println(string(body))
 	json.Unmarshal(body, &newLike)
 	goodOrFalse := InsertIntoDisLikePost(AllApi.db, newLike.UsersId, newLike.PostLink)
 	w.Write([]byte("{\"msg\": \"Success\"}"))
@@ -449,6 +468,22 @@ func DislikeHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["userId"]
 	for _, dislike := range AllApi.DislikeALl {
+		if strconv.Itoa(dislike.UserId) == id {
+			temptab = append(temptab, dislike)
+		}
+	}
+	json.NewEncoder(w).Encode(temptab)
+}
+func DislikesCommentsHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
+	json.NewEncoder(w).Encode(AllApi.DislikeALlComment)
+}
+func DislikeCommentHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
+	var temptab []DisLike
+	vars := mux.Vars(r)
+	id := vars["userId"]
+	for _, dislike := range AllApi.DislikeALlComment {
 		if strconv.Itoa(dislike.UserId) == id {
 			temptab = append(temptab, dislike)
 		}
@@ -537,7 +572,7 @@ func Handler() {
 	// InsertIntoCategorie(AllApi.db, "Food")
 
 	// InsertIntoUser(db, "jeinero", "jenei@gmail.com", "ImRio6988", "guest", "test", "test")
-	// InsertIntoCategorie(AllApi.db, "Shitpost")
+	InsertIntoCategorie(AllApi.db, "Shitpost")
 	// InsertIntoUser(db, "qsdlqsd", "jeazenei@yahoo.fr", "ImRio6988")
 	// InsertIntoCommunauter(db, "InfoFams", "DESC")
 	// InsertIntoPost(db, 1, "Golang Basic", "Golang suck lmao", "Zupz", 1)
@@ -579,6 +614,12 @@ func Handler() {
 
 	r.HandleFunc("/apidislike", DislikesHandler)
 	r.HandleFunc("/apidislike/{userId}", DislikeHandler)
+
+	r.HandleFunc("/apilikecomment", likesCommentsHandler)
+	r.HandleFunc("/apilikecomment/{userId}", likesCommentHandler)
+
+	r.HandleFunc("/apidislikecomment", DislikesCommentsHandler)
+	r.HandleFunc("/apidislikecomment/{userId}", DislikeCommentHandler)
 
 	r.HandleFunc("/apicategories", CategoriesHandler)
 	r.HandleFunc("/apicategories/{id}", CategorieHandler)
@@ -642,6 +683,6 @@ func reloadApi() {
 	AllApi.TagsAll = DbtoStructCategorie(AllApi.db)
 	AllApi.LikeAll = DbtoStructLikePost(AllApi.db)
 	AllApi.DislikeALl = DbtoStructDisLikePost(AllApi.db)
-	AllApi.LikeAll = DbtoStructLikeComment(AllApi.db)
-	AllApi.DislikeALl = DbtoStructDisLikeComment(AllApi.db)
+	AllApi.LikeAllComment = DbtoStructLikeComment(AllApi.db)
+	AllApi.DislikeALlComment = DbtoStructDisLikeComment(AllApi.db)
 }

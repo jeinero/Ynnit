@@ -426,7 +426,9 @@ func DbtoStructDisLikePost(db *sql.DB) []DisLike {
 		if err != nil {
 			fmt.Println(err)
 		}
+		fmt.Println(2)
 		temptab = append(temptab, u)
+		fmt.Println(temptab, "help")
 	}
 	return temptab
 }
@@ -539,6 +541,7 @@ func DbtoStructLikeComment(db *sql.DB) []Like {
 		if err != nil {
 			fmt.Println(err)
 		}
+		fmt.Println()
 		temptab = append(temptab, u)
 	}
 	return temptab
