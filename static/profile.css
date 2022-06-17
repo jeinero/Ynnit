@@ -50,7 +50,7 @@ body {
 }
 
 #latestposts {
-    display: flex;
+    /* display: flex; */
     border: 5px solid pink;
     width: 70%;
     height: auto;
@@ -127,4 +127,31 @@ p {
 
 .logout {
     display: flex;
+}
+
+
+.divtop {
+    display: flex;
+    width: 100%;
+    height: 100px;
+}
+
+.date {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 15%;
+    height: 100%;
+}
+
+.content {
+    justify-content: center;
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+    padding: 2%;
+    border: 2px solid black;
+    border-radius: 40px;
 }
