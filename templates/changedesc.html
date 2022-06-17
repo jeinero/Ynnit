@@ -1,25 +1,38 @@
 <!DOCTYPE html>
 <html>
     <header>
-        <title>Change description</title>
+        <title>Ynnit</title>
         <meta charset="utf-8"/>
-        <link rel="icon" type="image/png" sizes="16x16"
-        href="https://cdn.discordapp.com/attachments/887611590873088011/981110067531243570/YnnitLogo.png">
-        <link rel="stylesheet" href="./css/changedesc.css">
-
+        <link rel="stylesheet" href="/css/changedesc.css">
+        <link rel="stylesheet" href="/css/font-button.css">
+        
     </header>
 
-    <body>
-        <div>
-            You can change your description :
-        </div>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&display=swap');
+    </style>
+        <body>
+            
+                    
+            <div id="flex-content">
         
+                <div id="content-center">
+                    <div id="flex-title">
+                        <h1 id="flex-title-image">
+                            <img src="./css/connected.png"><br/>
+                            Change Your Description  :
+                        </h1>
+                    </div>
 
-        <textarea maxlength="200" cols="30" rows="10" type="text" id="desc" name="desc" required></textarea>
+                    <div id="content">
+                            <textarea type="text" id="description" class="changedesc" cols="35" rows="8" name="desc" placeholder="Modify Your Description" required></textarea>
 
-        <button id="button" type="submit">Change</button>
-        <p id="error" style="color: red"></p>
-    </body>
+                            <button id="button-password" type="submit">Change</button>
+    
+                        <p id="error" style="color: red"></p>
+                    </div>
+                </div>
+            </div>
 
     <script type="module" src='/js/changedesc.js'></script>
 

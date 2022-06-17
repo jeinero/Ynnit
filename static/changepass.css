@@ -1,13 +1,14 @@
+    @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&display=swap');
+
 /*--------------POLICE--------------*/
 body {
     font-family: 'Tiro Devanagari Sanskrit', serif;
 }
-#title-desc{
+#title-pass{
     display: flex;
     justify-content: center;
     font-size: x-large;
-    font-weight: bold; 
-    margin-top: 15px;
+    font-weight: bold;
 }
 #flex-title {
     font-family: 'Tiro Devanagari Sanskrit', serif;
@@ -16,20 +17,21 @@ body {
     font-size: large;
 }
 /*-------------BUTTON PAGE CONNECT ET JOINUS----------------------------------------------*/
-.button-desc {
+#button {
     font-size: medium;
     height: 25px;
     width: 30%;
 }
-.button-desc:hover {
+#button:hover {
     background: #d6d6d6;
 }
 /*---------------LES INPUT DE CHAQUE ; Mail, Nom, Password-------------------------------*/
 
-.changedesc {
+.changepass {
     background-color: rgb(222, 222, 222);
     border-radius: 10px;
     font-weight: bold;
+    height: 40px;
     font-size: x-large;
 }
 
@@ -44,10 +46,10 @@ button > img {
 
 /*------------------------------Taille des flexs Ect-------------------------------*/
                     #flex-content{
-                        margin-top: 35px;
+                        margin-top: 45px;
                         display: flex;
                         justify-content: center;
-                        /* font-size: x-large; */
+                        font-size: x-large;
                     }
                     #content-center{
                         display: flex;
@@ -61,7 +63,7 @@ button > img {
                         display: flex;
                         flex-direction: column;
                         margin-top: 10px;
-                        /* gap: 12px; */
+                        gap: 12px;
                         border: solid 4px black;
                         padding: 8px;
                         border-radius: 15px;
@@ -76,3 +78,4 @@ button > img {
                         display: flex;
                         justify-content: center;                        
                     }
+

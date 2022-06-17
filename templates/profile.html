@@ -1,34 +1,49 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <title>Edit acocunt</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="./css/profile.css">
-
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://kit.fontawesome.com/e37a482217.js" crossorigin="anonymous"></script>
-    <link rel="icon" type="image/png" sizes="16x16"
-        href="https://cdn.discordapp.com/attachments/887611590873088011/981110067531243570/YnnitLogo.png">
-    <script type="module" src='/js/profile.js'></script>
+    <link rel="icon" type="image/png" sizes="16x16" href="https://cdn.discordapp.com/attachments/887611590873088011/981110067531243570/YnnitLogo.png">
+    
+    <link rel="stylesheet" href="./css/profile.css">
+    <link rel="stylesheet" href="./css/changepass.css">
+    <link rel="stylesheet" href="./css/changedesc.css">
+    <link rel="stylesheet" href="./css/changeemail.css">
+    <link rel="stylesheet" href="./css/font-button.css">
+    <link rel="stylesheet" href="/css/delete.css">
 
+
+
+    <script type="module" src='/js/profile.js'></script>
+    <script type="module" src='/js/changeemail.js'></script>
+    <script type="module" src='/js/changepass.js'></script>
+    <script type="module" src='/js/changedesc.js'></script>
+    <script type="module" src='/js/delete.js'></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/2.0.2/sha.js"></script>
 </head>
 
 
 <body>
+    <div id="title">
+        <div id ="tiletext">
+            Welcome,
+        </div>
+        <div class="buttons">
+            <button class="square_btn" id="logout">Logout</button>
+            <button class="square_btn" id="home">Home</button>
+            <button class="square_btn" id="admin">Admin</button>
+        </div>
+    </div>
     <div id="container">
         <div class="content">
-            <div id="title">
-                Welcome
-            </div>
 
             <div class="principale">
                 <div id="latestposts">
                     Your latest posts :
-                    <div class="logout">
-                        <button type="submit" id="logout">Logout</button>
-                    </div>
                 </div>
                 <div class="account">
                     <div class="viewaccount">
@@ -37,35 +52,141 @@
                             <img id="image"
                                 src="https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png">
                         </div>
-                        <div id="viewtext">
-
+                        <div class = "viewtext1">
+                            <div id="viewtext">
+                            </div>
                         </div>
                     </div>
                     <div class="setaccount">
-                        <div class="display2">
-                            <div class="text">
-                                Edit your account :
-                            </div>
-                            <button type="submit" id="changeemail" class="button">EDIT <br> EMAIL<br><i
-                                    class="fa-solid fa-at"></i></button>
-                            <button type="submit" id="changedesc" class="button">EDIT <br> BIO<br><i
-                                    class="fa-solid fa-file-lines"></i></button>
-                            <button type="submit" id="changepass" class="button">EDIT <br> PASSWORD<br><i
-                                    class="fa-solid fa-lock"></i></button>
-                            <button type="submit" id="editpicture" class="button">EDIT <br> PICTURE<br><i
-                                    class="fa-solid fa-camera-rotate"></i></button>
-                            <button type="submit" id="delete" class="button">DELETE <br> ACCOUNT<br><i
-                                    class="fa-solid fa-user-slash"></i></button>
+                        <div class="textedit">
+                            Edit your account :
                         </div>
-
+                        <div class="display2">
+                            <button id="changeemail" class="button-28"><i class="fa-solid fa-at"></i> EDIT EMAIL</button>
+                            <button id="changedesc" class="button-28"><i class="fa-solid fa-file-lines"></i> EDIT DESCRIPTION</button>
+                            <button id="changepass" class="button-28"><i class="fa-solid fa-lock"></i> EDIT PASSWORD</button>
+                            <!-- <button id="changepicture" class="button-28"><i class="fa-solid fa-camera-rotate"></i> EDIT PICTURE</button> -->
+                            <button id="deleteaccount" class="button-28"><i class="fa-solid fa-user-slash"></i> DELETE ACCOUNT</button>
+                        </div>
                     </div>
                 </div>
-
             </div>
-            
         </div>
     </div>
 
-</body>
 
+<div id="modal-changedesc" class="modal">
+  <div class="modal-content">
+      <span id="close-changedesc" class="close">&times;</span>
+      <div id="flex-content">
+        <div id="content-center">
+            <div id="flex-title">
+                <h1 id="flex-title-image">
+                    <img src="./css/connected.png"><br/>
+                    Change Your Description  :
+                </h1>
+            </div>
+            <div id="content">
+                    <textarea id="desc" class="changedesc" cols="35" rows="8" name="desc" maxlength="200" placeholder="Modify Your Description" required></textarea>
+                <div id="title-desc">
+                    <button id="submit-change-desc" class = "button-max" type="submit">Change</button>
+                </div>
+            </div>
+            <p id="desc-error" style="color: red"></p>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="modal-changepass" class="modal">
+    <div class="modal-content">
+        <span id ="close-pass" class="close">&times;</span>
+        <div id="flex-content">
+            <div id="content-center">
+                <div id="flex-title">
+                    <h1 id="flex-title-image">
+                        <img src="./css/connected.png"><br/>
+                        Change Your Password :
+                    </h1>
+                </div>
+                <div id="content">
+                    <label id="title-pass" for="pwd1">New Password:</label>
+                    <input type="password" id="pwd1" class="changepass" name="pwd1" minlength="8" autocomplete="on" required>
+                    <label id="title-pass" for="pwd2">Confirm New Password:</label>
+                    <input type="password" id="pwd2" class="changepass" name="pwd2" minlength="8" autocomplete="on" required>
+                    <div id="title-pass">
+                        <button id="submit-change-pass" class="button-max" type="submit">Change</button>
+                    </div>
+                </div>
+                <p id="pass-error" style="color: red"></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modal-email" class="modal">
+    <div class="modal-content">
+        <span id ="close-email" class="close">&times;</span>
+        <div id="flex-content">
+        <div id="content-center">
+            <div id="flex-title">
+                <h1 id="flex-title-image">
+                    <img src="./css/connected.png"><br/>
+                    Change Your Email  :
+                </h1>
+            </div>
+            <div id="content">
+                    <label id="title-email">New email : </label>
+                    <input type="email" id="email1" class="email" name="email" placeholder="john.doe@example.com" required>
+                    <label id="title-email">Confirm new email : </label>
+                    <input type="email" id="email2" name="email2" placeholder="john.doe@example.com" required>
+                <div id="center">
+                    <button id="submit-change-email" class="button-max" type="submit">Change</button>
+                </div>
+            </div>
+            <p id="email-error" style="color: red"></p>
+        </div>
+    </div>
+</div>
+</div>
+  <div id="modal-picture" class="modal">
+    <div class="modal-content">
+      <span id ="close-picture" class="close">&times;</span>
+      <p>Change picture test</p>
+    </div>
+  </div>
+
+</body>
+</div>
+<div id="modal-delete" class="modal">
+  <div class="modal-content">
+    <span id ="close-delete" class="close">&times;</span>
+    <div id="flex-content">
+        
+        <div id="content-center">
+            <div id="flex-title">
+                <h1 id="flex-title-image">
+                    <img src="/css/connected.png"><br/>
+                    Are You Sure ?
+                </h1>
+            </div>
+            
+            <div id="content">
+                <div class="frame">
+                    <button id="pasdelete" class="custom-btn btn-13"><h1>No</h1></button>
+                    <button id="delete" class="custom-btn btn-13"><i class="fa fa-trash"></i></button>
+                </div>
+            </div>
+
+              
+                
+            <p id="error" style="color: red"></p>
+        </div>
+    </div>
+
+
+  </div>
+</div>
+
+</body>
 </html>
