@@ -24,6 +24,7 @@ fetch("/apiposts")
             const community = document.createElement('div')
             community.classList = 'community'
             community.innerHTML = data.Communauter.Name
+         
 
             const content = document.createElement('div')
             content.classList = 'content'
@@ -61,6 +62,7 @@ fetch("/apiposts")
             divbas.append(userpseudo)
             const integrate = document.querySelector('.bigcard')
             integrate.appendChild(newcard)
+
             document.getElementById(element.Id).onclick = function() {
               location.href = "/viewpost?id=" + element.Id
           } 

@@ -1,17 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
+
 body {
     margin: 0px;
 }
 
 header {
+    position: relative;
     display: flex;
     top: 0;
     height: 75px;
     width: 100%;
-    background: linear-gradient(90deg, rgba(238, 50, 78, 1) 0%, rgba(254, 190, 16, 1) 100%);
+    background: linear-gradient(90deg, rgba(238,50,78,1) 0%, rgba(254,190,16,1) 100%);
     text-decoration: none;
     box-shadow: 10px;
-    font-family: 'Chewy', cursive;
+    font-family: 'Noto Sans', sans-serif;
 }
+
 
 .logo {
     display: flex;
@@ -20,7 +25,6 @@ header {
     align-items: center;
     margin-right: 5%;
     filter: invert(1);
-    border: 1px solid red;
 }
 
 .searchdiv {
@@ -28,7 +32,6 @@ header {
     width: 850px;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
 }
 
 .searchheader {
@@ -38,19 +41,19 @@ header {
     border-radius: 40px;
     width: 100%;
     color: black;
-    border: 5px double rgba(238, 50, 78, 1);
+    border: 5px double rgba(238,50,78,1);
 }
 
 .searchhead {
-    background: none;
+    background: transparent;
     border: none;
     outline: none;
     color: black;
-    font-size: 20px;
+    font-size: 25px;
     width: 100%;
     align-items: center;
     text-align: center;
-    font-family: 'Acme', sans-serif;
+    font-family: 'Noto Sans', sans-serif;
 }
 
 .Log {
@@ -60,7 +63,6 @@ header {
     width: 800px;
     height: auto;
     margin-left: 10%;
-    border: 1px solid black;
 }
 
 .Register {
@@ -83,15 +85,16 @@ header {
     height: 100%;
     flex-direction: column;
     align-items: center;
-    border: 5px double rgba(238,50,78,1);
+    border: 5px double rgba(238, 50, 78, 1);
     border-radius: 40px;
     padding: 2%;
     justify-content: center;
 
 }
-#viewcommentaire{
+
+#viewcommentaire {
     display: flex;
- align-items: center;
+    align-items: center;
     flex-direction: column;
 }
 
@@ -107,17 +110,19 @@ header {
 .title {
     display: flex;
     justify-content: center;
- width: auto;
+    width: auto;
     height: auto;
     font-size: 40px;
     align-items: center;
 }
+
 .divtop {
     display: flex;
     width: 100%;
     height: auto;
     align-items: center;
 }
+
 .divtop2 {
     display: flex;
     width: 100%;
@@ -125,7 +130,8 @@ header {
     align-items: center;
     margin-bottom: 1%;
 }
-.divcontent{
+
+.divcontent {
     justify-content: center;
     height: auto;
     width: auto;
@@ -141,7 +147,7 @@ header {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-  width: 50%;
+    width: 50%;
     height: 100%;
 }
 
@@ -156,8 +162,9 @@ header {
     border: 2px solid black;
     border-radius: 40px;
 }
+
 .contents {
-   
+
     display: flex;
     width: auto;
     height: auto;
@@ -165,7 +172,7 @@ header {
     align-items: center;
 }
 
-.divbottom{
+.divbottom {
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -181,12 +188,52 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: auto;   
+    width: auto;
     height: 100%;
     border: 2px solid black;
     border-radius: 40px;
     z-index: 10;
 }
+.lien {
+    display: flex;
+    width: 150px;
+    height: 40px;
+    font-size: 25px;
+    align-items: center;
+    color: black;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 40px;
+    border: 2px solid black;
+    justify-content: center;
+    text-decoration: none;
+    }
+    
+    .lien:hover {
+    background-color: rgba(255, 0, 0, 1);
+    }
+    
+    .lien:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+        inset 2px 2px 3px rgba(0, 0, 0, .6);
+    }
+    .user {
+        display: flex;
+        width: 45px;
+        height: 40px;
+        font-size: 25px;
+        align-items: center;
+        text-shadow: 1px 1px 1px #000;
+        border-radius: 40px;
+        border: 2px solid black;
+        justify-content: center;
+        text-decoration: none;
+        color: black;
+        }
+        
+        .user:hover {
+        background-color: black;
+        color: white;
+        }
 
 .like:hover {
     color: rgb(49, 172, 49);
@@ -196,7 +243,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: auto;   
+    width: auto;
     height: 100%;
     border: 2px solid black;
     border-radius: 40px;
@@ -223,18 +270,19 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border: double  4px rgba(254, 190, 16, 1);
+    border: double 4px rgba(254, 190, 16, 1);
     border-radius: 40px;
     height: auto;
     width: auto;
     padding: 1%;
- 
+
     /* position: fixed;
     bottom: 20px;
     background-color: white;
     opacity: 0; */
 
 }
+
 /* .commentaire:hover{
     opacity: 1;
 } */
@@ -269,7 +317,7 @@ textarea {
 .btn {
     height: 60px;
     width: 60px;
-    background:rgba(238,50,78,1);
+    background: rgba(238, 50, 78, 1);
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -282,54 +330,63 @@ textarea {
 }
 
 
-.couleur{
+.couleur {
     filter: invert(1);
 }
 
 
 /* The Modal (background) */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
-  
-  /* Modal Content */
-  .modal-content {
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
-  }
-  
-  /* The Close Button */
-  .close {
+}
+
+/* The Close Button */
+.close {
     color: #aaaaaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
+}
+
+.close:hover,
+.close:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
-  }
+}
 
-  #myBtn{
+#myBtn {
     height: 60px;
     width: 60px;
-    background:rgba(238,50,78,1);
+    background: rgba(238, 50, 78, 1);
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -339,11 +396,11 @@ textarea {
     bottom: 20px;
     cursor: pointer;
     border: 5px double black;
-  }
+}
 
-  #content{
+#content {
     display: flex;
     height: auto;
     width: auto;
     justify-content: center;
-  }
+}

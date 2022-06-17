@@ -1,3 +1,12 @@
+
+var currentDate = new Date(),
+      day = currentDate.getDate(),
+      month = currentDate.getMonth() + 1,
+      year = currentDate.getFullYear();
+const dates = ( year + "-" + day + "-" + month)
+
+
+
 document.getElementById("btn").onclick = function() {
     if (getCookie("name") != null ){
         create()
@@ -24,8 +33,9 @@ function create() {
             "content-type": "application/json" 
         },
         body: JSON.stringify({
-            Name: document.getElementById("titre").value,
-            Desc: document.getElementById("content").value
+            name: document.getElementById("titre").value,
+            desc: document.getElementById("content").value,
+            date: dates,
         })
     })
     .then(async (res) => {
@@ -34,7 +44,7 @@ function create() {
        return res.json()
     })
     .then((data) => {
-        location.href = "/"
+       location.href = "/"
     }).catch((err) => {
         document.getElementById("error").innerText = err.error
     })
@@ -47,3 +57,4 @@ document.body.onload = function() {
             classComm[1].style.display = "none"
             }
 }
+

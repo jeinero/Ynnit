@@ -182,6 +182,11 @@ func ViewPost(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/viewpost.html")
 
 }
+func Viewcommunity(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
+	http.ServeFile(w, r, "./templates/viewcommunity.html")
+
+}
 
 func Comments(w http.ResponseWriter, r *http.Request) {
 	var newComments Comment
@@ -199,6 +204,7 @@ func Newuser(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	var newUser User
 	body, _ := ioutil.ReadAll(r.Body)
+	fmt.Println(string(body))
 	json.Unmarshal(body, &newUser)
 	if InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Password, "You can change the desc", "Guest", newUser.Date) {
 		w.Write([]byte("{\"msg\": \"Success\"}"))
@@ -271,8 +277,10 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 func NewcommunityHandler(w http.ResponseWriter, r *http.Request) {
 	var Newcommunauter Communauter
 	body, _ := ioutil.ReadAll(r.Body)
+	fmt.Println("troijg", string(body))
 	json.Unmarshal(body, &Newcommunauter)
-	if InsertIntoCommunauter(AllApi.db, Newcommunauter.Name, Newcommunauter.Desc) {
+	fmt.Println(Newcommunauter)
+	if InsertIntoCommunauter(AllApi.db, Newcommunauter.Name, Newcommunauter.Desc, Newcommunauter.Date) {
 		w.Write([]byte("{\"msg\": \"Success\"}"))
 	} else {
 		http.Error(w, "{\"error\": \"Enter a valide community\"}", http.StatusUnauthorized)
@@ -408,6 +416,8 @@ func Handler() {
 
 	r.HandleFunc("/viewpost", ViewPost)
 	r.HandleFunc("/comment", Comments)
+
+	r.HandleFunc("/viewcommunity", Viewcommunity)
 
 	r.HandleFunc("/session", Session)
 

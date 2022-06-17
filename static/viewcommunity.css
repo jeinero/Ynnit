@@ -1,0 +1,77 @@
+/* POLICE ----------------------------------------------------- */
+body {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+}
+#template-center {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 80px;
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+}
+
+/*--------------FLEX DES NOMS ET DESCRIPTION DE LA Communauté-----------------*/
+
+#container-column{
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    height: 350px;
+    padding: 15px;
+    gap: 20px;
+}
+#little-column{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    font-size: xx-large;
+    text-decoration: underline;
+    padding: 3px;
+    gap: 10px;
+}
+#container-row{
+    display: flex;
+    flex-direction: row;
+    border: solid 20px rgb(110, 110, 110);
+    border-radius: 40px;
+    padding: 15px;
+    gap: 10px;
+    height: auto;
+    width: auto;
+}
+.box{
+    display: flex;
+    border: solid 4px black;
+    border-radius: 20px;
+}
+#flex-title{
+    text-decoration: underline;
+    font-family: Impact, sans-serif;
+    font-size: 35px;
+    letter-spacing: 2px;
+}
+li{
+    font-size: x-large;
+}
+#flex-community {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+p {
+    background-color: rgb(208, 208, 208);
+    border: 3px solid black;
+    border-radius: 10px;
+    height: 172px;
+}
+/*--------------------zone de contour POST.CSS DE ROMAIN-----------------------*/
+
+.CreatePost {
+    display: flex;
+    padding: 10px;
+    height: 100px;
+    width: 100px;
+    border-radius: 30px;
+    border: 2px solid black;
+    box-shadow: 15px 10px 10px rgb(179, 179, 179);
+}
