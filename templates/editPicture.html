@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ynnit</title>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="editPicture.css">
+        <link rel="stylesheet" href="font-button.css">
+    </head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&display=swap');
+</style>
+
+    <body>
+        <div id="content-button">
+            <button class="button" onclick = "changeColor('white');" >Mode Clair</button>
+            <button class="button" onclick = "returnChangeColor('rgb(64, 64, 64)');" >Mode foncé</button> 
+        </div>
+
+        <div id="flex-content">
+            <div id="content-center">
+                <div id="flex-title">
+                    <h1 id="flex-title-image">
+                        <img src="connected.png"><br/>
+                        Change Your Picture Profile  :
+                    </h1>
+                </div>
+                <div id="content">
+                        <label id="title">New Picture : </label>
+                        <li>(click here)</li>
+                        <div id="center">
+                            <div class="addPicture"><img src="addimage.png"></div>
+                        </div>
+                        
+                    <div id="center">
+                        <button id="button" type="submit">Change</button>
+                    </div>
+                </div>
+                
+                <p id="error" style="color: red"></p>
+            </div>
+
+        </div>
+
+        <script type="module" src='/js/font-button.js'></script>
+        <script type="module" src='/js/editPicture.js'></script>
+    </body>
+</html>
