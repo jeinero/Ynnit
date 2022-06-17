@@ -6,6 +6,7 @@ fetch("/apiposts")
             fetch("/apicommunauters/"+element.CommuLink)
             .then(resp => resp.json())
             .then(data => {
+              console.log(posts)
             const newcard = document.createElement('div')
             newcard.id = element.Id
             newcard.classList = "card"
@@ -23,8 +24,7 @@ fetch("/apiposts")
 
             const community = document.createElement('div')
             community.classList = 'community'
-            community.innerHTML = data.Communauter.Name
-         
+            community.innerHTML = `<a href='/viewcommunity?id=${element.CommuLink}'>${data.Communauter.Name}</a>`
 
             const content = document.createElement('div')
             content.classList = 'content'

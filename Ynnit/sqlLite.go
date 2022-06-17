@@ -235,7 +235,7 @@ func DbtoStructCommunauter(db *sql.DB) []Communauter {
 	return temptab
 }
 func InsertIntoCommunauter(db *sql.DB, Name string, Desc string, Date string) bool {
-	_, err := db.Exec(`INSERT INTO communauter (name, desc, date) VALUES (?, ?,?)`, Name, Desc, Date)
+	_, err := db.Exec(`INSERT INTO communauter (name, desc, date) VALUES (?, ?, ?)`, Name, Desc, Date)
 	if err != nil {
 		fmt.Println(err)
 		return false

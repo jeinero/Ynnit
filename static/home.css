@@ -1,9 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
 
-
+:root {
+    --btn-corner: 20px;
+  }
+  
 body {
     margin: 0px;
+    background-image: url("https://i.pinimg.com/originals/5c/e6/b9/5ce6b97ce3bde0864188a5d89604da1c.jpg");
+    background-size:cover;   
 }
 
 header {
@@ -14,8 +19,8 @@ header {
     width: 100%;
     background: linear-gradient(90deg, rgba(238,50,78,1) 0%, rgba(254,190,16,1) 100%);
     text-decoration: none;
-    box-shadow: 10px;
     font-family: 'Noto Sans', sans-serif;
+
 }
 
 .container {
@@ -47,10 +52,9 @@ align-items: center;
     display: flex;
     justify-content: center;
     background: white;
-    border-radius: 40px;
+    border-radius: 10px;
     width: 100%;
     color: black;
-    border: 5px double rgba(238,50,78,1);
 }
 
 .searchhead {
@@ -63,6 +67,7 @@ align-items: center;
     align-items: center;
     text-align: center;
     font-family: 'Noto Sans', sans-serif;
+    text-transform: uppercase;
 }
 
 .Log {
@@ -74,27 +79,28 @@ align-items: center;
     margin-left: 10%;
 }
 
-
- 
-
 .choose {
     display: flex;
     width: 100%;
     height: 200px;
     justify-content: space-between;
-    background: transparent;
+    border-radius: 40px;
+    padding: 1%;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     font-family: 'Noto Sans', sans-serif;
+    text-transform: uppercase;
 }
 
 .Filter1 {
     display: flex;
-    border: 5px double #00529F;
+    border: 5px double rgba(254,190,16,1);
     width: 20%;
-    border-radius: 40px;
+    border-radius: var(--btn-corner);
     align-items: center;
     justify-content: center;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     flex-direction: column;
+   
 }
 
 .Filter1top{
@@ -103,16 +109,20 @@ height: 30%;
 width: 100%;
 justify-content: center;
 align-items: center;
+text-transform: uppercase;
 }
 
 .Filter1bottom{
     display: flex;
     height: 70%;
-    width: 100%;
+    width: auto;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    
 }
+.radio {
+    margin-top: -1px;
+    vertical-align: middle;
+  }
 
 .Filter2 {
     display: flex;
@@ -132,13 +142,14 @@ align-items: center;
     align-items: center;
     text-align: center;
     font-family: 'IBM Plex Sans', sans-serif;
+    text-transform: uppercase;
 }
 
 .formheader2 {
     display: flex;
     justify-content: center;
     background: white;
-    border-radius: 40px;
+    border-radius: var(--btn-corner);
     width: 100%;
     height: 50px;
     color: black;
@@ -150,7 +161,7 @@ align-items: center;
     width: 30%;
     align-items: center;
     flex-direction: column;
-    border-radius: 40px;
+    border-radius: var(--btn-corner);
     border: 5px double #FEBE10;
     font-size: 20px;
 }
@@ -160,8 +171,8 @@ align-items: center;
     border-bottom: 1px solid black;
     height: 50%;
     width: 100%;
-    border-top-left-radius: 40px;
-    border-top-right-radius: 40px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
     align-items: center;
     justify-content: center;
     text-decoration: none;
@@ -184,8 +195,8 @@ a.createpost{
     border-top: 1px solid black;
     height: 50%;
     width: 100%;
-    border-bottom-left-radius: 40px;
-    border-bottom-right-radius: 40px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
     align-items: center;
     justify-content: center;
     background-color: white;
@@ -211,7 +222,7 @@ font-size: 25px;
 align-items: center;
 color: black;
 text-shadow: 1px 1px 1px #000;
-border-radius: 40px;
+border-radius: 10px;
 border: 2px solid black;
 justify-content: center;
 text-decoration: none;
@@ -233,7 +244,7 @@ height: 40px;
 font-size: 25px;
 align-items: center;
 text-shadow: 1px 1px 1px #000;
-border-radius: 40px;
+border-radius: 10px;
 border: 2px solid black;
 justify-content: center;
 text-decoration: none;
@@ -250,11 +261,14 @@ color: white;
     display: flex;
     flex-wrap: wrap;
     height: 100%;
+    padding: 1%;
+    border-radius: var(--btn-corner);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;   
 }
 
 .card {
     background: white;
-    border-radius: 40px;
+    border-radius: var(--btn-corner);
     padding: 1%;
     width: 100%;
     border: double 5px #00529F;
@@ -270,7 +284,7 @@ color: white;
 }
 
 .card:hover {
-    border-radius: 20px;
+    border-radius: 40px;
     box-shadow: 10px 10px rgba(0,0,0,.25);
   }
 
@@ -285,7 +299,7 @@ color: white;
 
 .title {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     width: 30%;   
     height: 100%;
@@ -319,7 +333,7 @@ color: white;
     display: flex;
     justify-content: center;
     border: 2px solid black;
-    border-radius: 40px;
+    border-radius: var(--btn-corner);
     height: auto;
     padding:1%;
     width: auto;
@@ -342,8 +356,7 @@ color: white;
     width: auto;   
     height: 100%;
     border: 2px solid black;
-    border-radius: 40px;
-    z-index: 10;
+    border-radius: 20px;
 }
 
 .like:hover {

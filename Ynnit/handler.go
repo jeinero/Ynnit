@@ -180,7 +180,11 @@ func Joinus(w http.ResponseWriter, r *http.Request) {
 func ViewPost(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	http.ServeFile(w, r, "./templates/viewpost.html")
+}
 
+func ViewCommunity(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
+	http.ServeFile(w, r, "./templates/viewcommunity.html")
 }
 func Viewcommunity(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
@@ -277,9 +281,7 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 func NewcommunityHandler(w http.ResponseWriter, r *http.Request) {
 	var Newcommunauter Communauter
 	body, _ := ioutil.ReadAll(r.Body)
-	fmt.Println("troijg", string(body))
 	json.Unmarshal(body, &Newcommunauter)
-	fmt.Println(Newcommunauter)
 	if InsertIntoCommunauter(AllApi.db, Newcommunauter.Name, Newcommunauter.Desc, Newcommunauter.Date) {
 		w.Write([]byte("{\"msg\": \"Success\"}"))
 	} else {
@@ -422,7 +424,7 @@ func Handler() {
 	r.HandleFunc("/session", Session)
 
 	r.HandleFunc("/logout", Logout)
-
+	r.HandleFunc("/viewcommunity", ViewCommunity)
 	go reloadApi()
 
 	http.Handle("/", r)
