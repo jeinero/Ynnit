@@ -1,78 +1,161 @@
-fetch("/apiposts")
-    .then((response) => response.json())
-    .then(function newCard(posts) {
-        posts.forEach(element => {
-            console.log(element.CommuLink)
-            fetch("/apicommunauters/"+element.CommuLink)
-            .then(resp => resp.json())
-            .then(data => {
-            const newcard = document.createElement('div')
-            newcard.id = element.Id
-            newcard.classList = "card"
+let post = await getApi("/apiposts")
+var likeTab = undefined
+var dislikeTab = undefined
 
-            const divhaut = document.createElement('div')
-            divhaut.classList = 'divhaut'
+if (getCookie("id") != null) {
+ likeTab = await getApi('/apilike/' + getCookie("id"))
+ dislikeTab = await getApi('/apidislike/' + getCookie("id"))
+}
+console.log(dislikeTab)
+// document.body.onload = function() {
+//   newCard(post)
+//   console.log("witf")
+// }
+async function getApi(url) {
+  return fetch(url)
+  .then((response) => response.json())
+  .then(data => {return data})
+}
+window.onload = newCard(post) 
+console.log(post)
+function newCard(posts) {
+  posts.forEach(element => {
+      console.log(element.CommuLink)
+      fetch("/apicommunauters/"+element.CommuLink)
+      .then(resp => resp.json())
+      .then(data => {
+      const newcard = document.createElement('div')
+      newcard.id = element.Id
+      newcard.classList = "card"
 
-            const title = document.createElement('div')
-            title.classList = 'title'
-            title.innerHTML = element.Title
+      const divhaut = document.createElement('div')
+      divhaut.classList = 'divhaut'
 
-            const date = document.createElement('div')
-            date.classList = 'date'
-            date.innerHTML = timeSince(element.Date)
+      const title = document.createElement('div')
+      title.classList = 'title'
+      title.innerHTML = element.Title
 
-            const community = document.createElement('div')
-            community.classList = 'community'
-            community.innerHTML = data.Communauter.Name
+      const date = document.createElement('div')
+      date.classList = 'date'
+      date.innerHTML = timeSince(element.Date)
 
-            const content = document.createElement('div')
-            content.classList = 'content'
-            content.innerHTML = element.Content
+      const community = document.createElement('div')
+      community.classList = 'community'
+      community.innerHTML = data.Communauter.Name
 
-            const divbas = document.createElement('div')
-            divbas.classList = 'divbas'
+      const content = document.createElement('div')
+      content.classList = 'content'
+      content.innerHTML = element.Content
 
-            const like = document.createElement('button')
-            like.classList = 'like'
-            like.id = "like"
-            like.innerHTML = `<i class="fa fa-thumbs-up" aria-hidden="true"></i>`
+      const divbas = document.createElement('div')
+      divbas.classList = 'divbas'
 
-            const dislike = document.createElement('button')
-            dislike.classList = 'dislike'
-            dislike.innerHTML = `<i class="fa fa-thumbs-down" aria-hidden="true"></i>`
-
-            const comments = document.createElement('div')
-            comments.classList = 'comments'
-            comments.innerHTML = "nb commentaires"
-
-            const userpseudo = document.createElement('div')
-            userpseudo.classList = 'userpseudo'
-            userpseudo.innerHTML = element.UsersName
-
-            divhaut.append(title)
-            divhaut.append(community)
-            divhaut.append(date)
-            newcard.appendChild(divhaut)
-            newcard.append(content)
-            newcard.appendChild(divbas)
-            divbas.append(like)
-            divbas.append(dislike)
-            divbas.append(comments)
-            divbas.append(userpseudo)
-            const integrate = document.querySelector('.bigcard')
-            integrate.appendChild(newcard)
-            document.getElementById(element.Id).onclick = function() {
-              location.href = "/viewpost?id=" + element.Id
-          } 
-          document.getElementById("like").onclick = function() {
-            alert("I am an alert box!");
-        } 
-          } )
-        });
+      const like = document.createElement('button')
+      like.classList = 'like'
+      like.id = "like"
+      like.onclick = function addLike(e) {
+        fetch("/addLike", {
+          method: "POST",
+          headers: {
+                  "content-type": "application/json"
+          },
+          body: JSON.stringify({
+                  PostLink : parseInt(newcard.id),
+                  UsersId:  parseInt(getCookie("id")),
+          })
+  })
+          .catch((err) => {
+                  document.getElementById("error").innerText = err.error
+          })
+          if (dislike.style.color == "red") {
+            console.log("1")
+            like.style.color = "rgb(49, 172, 49)"
+            dislike.style.color = "#000"
+          } else {
+            if (like.style.color == "rgb(49, 172, 49)") {
+              like.style.color = "#000"
+            } else {
+              console.log("3")
+              like.style.color = "rgb(49, 172, 49)"
+              console.log(like.style.color)
+            }
+          }
+          event.stopPropagation(e)
+  }
+      like.innerHTML = `<i class="fa fa-thumbs-up" aria-hidden="true"></i>`
+      if (likeTab != null) {
+      likeTab.forEach(elem => {
+        if (elem.PostLink == newcard.id) {
+          like.style.color = "rgb(49, 172, 49)"
+        }
       })
-      
+    }
+      const dislike = document.createElement('button')
+      dislike.classList = 'dislike'
+      dislike.onclick = function addLike(e) {
+        fetch("/addDislike", {
+          method: "POST",
+          headers: {
+                  "content-type": "application/json"
+          },
+          body: JSON.stringify({
+                  PostLink : parseInt(newcard.id),
+                  UsersId:  parseInt(getCookie("id")),
+          })
+  })
+          .catch((err) => {
+                  document.getElementById("error").innerText = err.error
+          })
+          if (like.style.color === "rgb(49, 172, 49)") {
+            like.style.color = "#000"
+            dislike.style.color = "red"
+          } else {
+            if (dislike.style.color === "red") {
+              dislike.style.color = "#000"
+            } else {
+              dislike.style.color = "red"
+            }
+          }
+          event.stopPropagation(e)
+  }
+  if (dislikeTab != null) {
+    dislikeTab.forEach(elem => {
+      if (elem.PostLink == newcard.id) {
+        dislike.style.color = "red"
+      }
+    })
+  }
+      dislike.innerHTML = `<i class="fa fa-thumbs-down" aria-hidden="true"></i>`
 
+      const comments = document.createElement('div')
+      comments.classList = 'comments'
+      comments.innerHTML = element.NumberComment + " commentaires"
 
+      const userpseudo = document.createElement('div')
+      userpseudo.classList = 'userpseudo'
+      userpseudo.innerHTML = element.UsersName
+
+      divhaut.append(title)
+      divhaut.append(community)
+      divhaut.append(date)
+      newcard.appendChild(divhaut)
+      newcard.append(content)
+      newcard.appendChild(divbas)
+      divbas.append(like)
+      divbas.append(dislike)
+      divbas.append(comments)
+      divbas.append(userpseudo)
+      const integrate = document.querySelector('.bigcard')
+      integrate.appendChild(newcard)
+      document.getElementById(element.Id).onclick = function() {
+        location.href = "/viewpost?id=" + element.Id
+    } 
+  //   document.getElementById("like").onclick = function() {
+  //     alert("I am an alert box!");
+  // } 
+    } )
+})
+}
     function timeSince(date) {
         let  seconds = Math.floor((new Date() - date) / 1000);
         console.log(seconds)
