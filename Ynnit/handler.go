@@ -180,7 +180,11 @@ func Joinus(w http.ResponseWriter, r *http.Request) {
 func ViewPost(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	http.ServeFile(w, r, "./templates/viewpost.html")
+}
 
+func ViewCommunity(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
+	http.ServeFile(w, r, "./templates/viewcommunity.html")
 }
 
 func Comments(w http.ResponseWriter, r *http.Request) {
@@ -272,7 +276,7 @@ func NewcommunityHandler(w http.ResponseWriter, r *http.Request) {
 	var Newcommunauter Communauter
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &Newcommunauter)
-	if InsertIntoCommunauter(AllApi.db, Newcommunauter.Name, Newcommunauter.Desc) {
+	if InsertIntoCommunauter(AllApi.db, Newcommunauter.Name, Newcommunauter.Desc, Newcommunauter.Date) {
 		w.Write([]byte("{\"msg\": \"Success\"}"))
 	} else {
 		http.Error(w, "{\"error\": \"Enter a valide community\"}", http.StatusUnauthorized)
@@ -412,7 +416,7 @@ func Handler() {
 	r.HandleFunc("/session", Session)
 
 	r.HandleFunc("/logout", Logout)
-
+	r.HandleFunc("/viewcommunity", ViewCommunity)
 	go reloadApi()
 
 	http.Handle("/", r)

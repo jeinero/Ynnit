@@ -1,3 +1,10 @@
+
+var currentDate = new Date(),
+day = currentDate.getDate(),
+month = currentDate.getMonth() + 1,
+year = currentDate.getFullYear();
+const dates = ( year + "-" + day + "-" + month)
+
 document.getElementById("btn").onclick = function() {
     if (getCookie("name") != null ){
         create()
@@ -25,7 +32,8 @@ function create() {
         },
         body: JSON.stringify({
             Name: document.getElementById("titre").value,
-            Desc: document.getElementById("content").value
+            Desc: document.getElementById("content").value,
+            date: dates,
         })
     })
     .then(async (res) => {
@@ -47,3 +55,4 @@ document.body.onload = function() {
             classComm[1].style.display = "none"
             }
 }
+

@@ -19,9 +19,8 @@ header {
     width: 100%;
     background: linear-gradient(90deg, rgba(238,50,78,1) 0%, rgba(254,190,16,1) 100%);
     text-decoration: none;
-    box-shadow: 10px;
     font-family: 'Noto Sans', sans-serif;
-    border-bottom: 1px solid black;
+
 }
 
 .container {
@@ -54,7 +53,6 @@ align-items: center;
     justify-content: center;
     background: white;
     border-radius: 10px;
-
     width: 100%;
     color: black;
 }
@@ -69,6 +67,7 @@ align-items: center;
     align-items: center;
     text-align: center;
     font-family: 'Noto Sans', sans-serif;
+    text-transform: uppercase;
 }
 
 .Log {
@@ -85,19 +84,23 @@ align-items: center;
     width: 100%;
     height: 200px;
     justify-content: space-between;
-    background: transparent;
+    border-radius: 40px;
+    padding: 1%;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     font-family: 'Noto Sans', sans-serif;
+    text-transform: uppercase;
 }
 
 .Filter1 {
     display: flex;
-    border: 5px double #00529F;
+    border: 5px double rgba(254,190,16,1);
     width: 20%;
     border-radius: var(--btn-corner);
     align-items: center;
     justify-content: center;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     flex-direction: column;
+   
 }
 
 .Filter1top{
@@ -106,16 +109,20 @@ height: 30%;
 width: 100%;
 justify-content: center;
 align-items: center;
+text-transform: uppercase;
 }
 
 .Filter1bottom{
     display: flex;
     height: 70%;
-    width: 100%;
+    width: auto;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    
 }
+.radio {
+    margin-top: -1px;
+    vertical-align: middle;
+  }
 
 .Filter2 {
     display: flex;
@@ -135,6 +142,7 @@ align-items: center;
     align-items: center;
     text-align: center;
     font-family: 'IBM Plex Sans', sans-serif;
+    text-transform: uppercase;
 }
 
 .formheader2 {
@@ -253,6 +261,9 @@ color: white;
     display: flex;
     flex-wrap: wrap;
     height: 100%;
+    padding: 1%;
+    border-radius: var(--btn-corner);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;   
 }
 
 .card {

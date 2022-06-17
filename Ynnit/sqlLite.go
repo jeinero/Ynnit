@@ -28,7 +28,8 @@ func InitDatabase(database string) *sql.DB {
 		CREATE TABLE IF NOT EXISTS communauter (
 			id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 			name TEXT NOT NULL UNIQUE,
-			desc TEXT NOT NULL
+			desc TEXT NOT NULL,
+			date TEXT NOT NULL
 		);
 		CREATE TABLE IF NOT EXISTS post (
 			id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -225,7 +226,7 @@ func DbtoStructCommunauter(db *sql.DB) []Communauter {
 
 	for rowsUsers.Next() {
 		var u Communauter
-		err := rowsUsers.Scan(&u.Id, &u.Name, &u.Desc)
+		err := rowsUsers.Scan(&u.Id, &u.Name, &u.Desc, &u.Date)
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -233,8 +234,8 @@ func DbtoStructCommunauter(db *sql.DB) []Communauter {
 	}
 	return temptab
 }
-func InsertIntoCommunauter(db *sql.DB, Name string, Desc string) bool {
-	_, err := db.Exec(`INSERT INTO communauter (name, desc) VALUES (?, ?)`, Name, Desc)
+func InsertIntoCommunauter(db *sql.DB, Name string, Desc string, Date string) bool {
+	_, err := db.Exec(`INSERT INTO communauter (name, desc, date) VALUES (?, ?, ?)`, Name, Desc, Date)
 	if err != nil {
 		fmt.Println(err)
 		return false
