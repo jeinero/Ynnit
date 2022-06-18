@@ -57,10 +57,8 @@ fetch("/apicommunauters")
         let options = document.createElement("option")
         options.text = elemnt.Name
         options.value = elemnt.Id
-        console.log(options)
         selector.appendChild(options)
     })
-    console.log(selector)
 })
 const select = document.getElementById('select');
 select.addEventListener('change', function handleChange(event) {

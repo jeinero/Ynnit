@@ -207,7 +207,6 @@ func ViewCommunity(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	http.ServeFile(w, r, "./templates/viewcommunity.html")
 }
-
 func Comments(w http.ResponseWriter, r *http.Request) {
 	var newComments Comment
 
@@ -497,7 +496,6 @@ func DislikeCommentHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(temptab)
 }
 
-/*
 func Deletecomme(w http.ResponseWriter, r *http.Request) {
 	var deletecomme Comment
 	body, _ := ioutil.ReadAll(r.Body)
@@ -508,7 +506,6 @@ func Deletecomme(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "{\"error\": \"Enter a valide name\"}", http.StatusUnauthorized)
 	}
 }
-*/
 func Deletepost(w http.ResponseWriter, r *http.Request) {
 	var deletepost Post
 	body, _ := ioutil.ReadAll(r.Body)
@@ -578,7 +575,7 @@ func Handler() {
 	// InsertIntoCategorie(AllApi.db, "Food")
 
 	// InsertIntoUser(db, "jeinero", "jenei@gmail.com", "ImRio6988", "guest", "test", "test")
-	// InsertIntoCategorie(AllApi.db, "Shitpost")
+	InsertIntoCategorie(AllApi.db, "Shitpost")
 	// InsertIntoUser(db, "qsdlqsd", "jeazenei@yahoo.fr", "ImRio6988")
 	// InsertIntoCommunauter(db, "InfoFams", "DESC")
 	// InsertIntoPost(db, 1, "Golang Basic", "Golang suck lmao", "Zupz", 1)
@@ -668,9 +665,8 @@ func Handler() {
 	r.HandleFunc("/addDislikecomment", AddDislikeComment)
 
 	r.HandleFunc("/deletepost", Deletepost)
-	/*
-		r.HandleFunc("/deletecomme", Deletecomme)
-	*/
+	r.HandleFunc("/deletecomme", Deletecomme)
+
 	r.HandleFunc("/session", Session)
 
 	r.HandleFunc("/logout", Logout)

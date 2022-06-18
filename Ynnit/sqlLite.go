@@ -230,6 +230,27 @@ func DeleteUser(db *sql.DB, id int, name string) bool {
 	}
 }
 
+func DeleteCom(db *sql.DB, id int) bool {
+	_, err := db.Exec(`DELETE FROM likedcomment WHERE commentLike = ?`, id)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	} else {
+		_, err := db.Exec(`DELETE FROM dislikedcomment WHERE commentLike = ?`, id)
+		if err != nil {
+			fmt.Println(err)
+			return false
+		} else {
+			_, err := db.Exec(`DELETE FROM comment WHERE id = ?`, id)
+			if err != nil {
+				fmt.Println(err)
+				return false
+			}
+			return true
+		}
+	}
+}
+
 func DeletePost(db *sql.DB, id int) bool {
 	_, err := db.Exec(`DELETE FROM likedpost WHERE postLike = ?`, id)
 	if err != nil {
