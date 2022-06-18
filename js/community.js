@@ -1,5 +1,13 @@
 let linkCat = ""
 
+
+var currentDate = new Date(),
+day = currentDate.getDate(),
+month = currentDate.getMonth() + 1,
+year = currentDate.getFullYear();
+const dates = ( year + "-" + day + "-" + month)
+
+
 document.getElementById("btn").onclick = function () {
     if (getCookie("name") != null && document.getElementById("titre").value.length >= 1 && linkCat != "") {
         create()

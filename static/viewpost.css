@@ -1,16 +1,28 @@
 body {
     margin: 0px;
+    background-image: url("https://i.pinimg.com/originals/5c/e6/b9/5ce6b97ce3bde0864188a5d89604da1c.jpg");
+    background-size:cover;   
 }
 
 header {
+    position: relative;
     display: flex;
     top: 0;
     height: 75px;
     width: 100%;
     background: linear-gradient(90deg, rgba(238, 50, 78, 1) 0%, rgba(254, 190, 16, 1) 100%);
     text-decoration: none;
-    box-shadow: 10px;
-    font-family: 'Chewy', cursive;
+    font-family: 'Noto Sans', sans-serif;
+
+}
+
+.container {
+    display: flex;
+    width: auto;
+    height: auto;
+    justify-content: center;
+    padding: 1%;
+    align-items: center;
 }
 
 .logo {
@@ -20,7 +32,6 @@ header {
     align-items: center;
     margin-right: 5%;
     filter: invert(1);
-    border: 1px solid red;
 }
 
 .searchdiv {
@@ -28,29 +39,28 @@ header {
     width: 850px;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
 }
 
 .searchheader {
     display: flex;
     justify-content: center;
     background: white;
-    border-radius: 40px;
+    border-radius: 10px;
     width: 100%;
     color: black;
-    border: 5px double rgba(238, 50, 78, 1);
 }
 
 .searchhead {
-    background: none;
+    background: transparent;
     border: none;
     outline: none;
     color: black;
-    font-size: 20px;
+    font-size: 25px;
     width: 100%;
     align-items: center;
     text-align: center;
-    font-family: 'Acme', sans-serif;
+    font-family: 'Noto Sans', sans-serif;
+    text-transform: uppercase;
 }
 
 .Log {
@@ -60,7 +70,6 @@ header {
     width: 800px;
     height: auto;
     margin-left: 10%;
-    border: 1px solid black;
 }
 
 #viewpost {

@@ -30,8 +30,8 @@ func InitDatabase(database string) *sql.DB {
 			id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 			name TEXT NOT NULL UNIQUE,
 			desc TEXT NOT NULL,
-			tags TEXT NOT NULL,
 			date TEXT NOT NULL,
+			tags TEXT NOT NULL,
 			FOREIGN KEY (tags) REFERENCES categorie(name) 
 		);
 		CREATE TABLE IF NOT EXISTS post (
