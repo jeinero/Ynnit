@@ -24,6 +24,12 @@ type ApiPosts struct {
 	Comments []Comment
 	like     int
 }
+
+type ApiComments struct {
+	Comments Comment
+	like     int
+}
+
 type ApiUsers struct {
 	User     User
 	Post     []Post
@@ -34,11 +40,17 @@ type ApiCommunauter struct {
 	Post        []Post
 }
 
+type ApiTags struct {
+	Tags Tags
+}
+
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
 	http.ServeFile(w, r, "./templates/home.html")
 }
 
 func CommunityHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
 	http.ServeFile(w, r, "./templates/community.html")
 }
 
@@ -60,7 +72,8 @@ func Checksignin(w http.ResponseWriter, r *http.Request) {
 	var names, ids = UserExists(AllApi.db, temptab.Email, temptab.Password)
 	if names != "" && ids != 0 {
 		name, id := UserExists(AllApi.db, temptab.Email, temptab.Password)
-		w.Write([]byte("{\"msgname\": \"" + name + "\", \"msgid\": \"" + strconv.Itoa(id) + "\"}"))
+		status := Leveluser(AllApi.db, id)
+		w.Write([]byte("{\"msgname\": \"" + name + "\", \"msgid\": \"" + strconv.Itoa(id) + "\", \"msgstatus\": \"" + status + "\"}"))
 	} else {
 		http.Error(w, "{\"error\": \"Your email or password was entered incorrectly\"}", http.StatusUnauthorized)
 	}
@@ -138,6 +151,11 @@ func CommunauterHandler(w http.ResponseWriter, r *http.Request) {
 
 }
 
+func tagsHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
+	json.NewEncoder(w).Encode(AllApi.TagsAll)
+}
+
 func CommentsHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	json.NewEncoder(w).Encode(AllApi.CommentsAll)
@@ -145,13 +163,16 @@ func CommentsHandler(w http.ResponseWriter, r *http.Request) {
 func CommentHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	vars := mux.Vars(r)
-
+	var temptab ApiComments
 	id := vars["id"]
 	for _, comment := range AllApi.CommentsAll {
 		if strconv.Itoa(comment.Id) == id {
-			json.NewEncoder(w).Encode(comment)
+			temptab.Comments = comment
 		}
 	}
+	idInt, _ := strconv.Atoi((id))
+	temptab.like = countLike(AllApi.db, "likedcomment", "commentLike", idInt)
+	json.NewEncoder(w).Encode(temptab)
 }
 
 func Signin(w http.ResponseWriter, r *http.Request) {
@@ -163,7 +184,7 @@ func Profile(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	session, _ := store.Get(r, "cookie-name")
 	if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
-		http.Error(w, "Please login", http.StatusForbidden)
+		http.Error(w, "Please login", http.StatusUnauthorized)
 		return
 	}
 
@@ -204,7 +225,7 @@ func Newuser(w http.ResponseWriter, r *http.Request) {
 	var newUser User
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &newUser)
-	if InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Password, "You can change the desc", "Guest", newUser.Date) {
+	if InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Password, "You can change the desc", "Users", newUser.Date) {
 		w.Write([]byte("{\"msg\": \"Success\"}"))
 	} else {
 		http.Error(w, "{\"error\": \"Enter a unique email and name\"}", http.StatusUnauthorized)
@@ -235,6 +256,9 @@ func Session(w http.ResponseWriter, r *http.Request) {
 	ids := r.URL.Query()["id"]
 	id := ids[0]
 
+	status := r.URL.Query()["status"]
+	statu := status[0]
+
 	n := http.Cookie{
 		Name:  "name",
 		Value: "" + name}
@@ -244,6 +268,11 @@ func Session(w http.ResponseWriter, r *http.Request) {
 		Name:  "id",
 		Value: "" + id}
 	http.SetCookie(w, &i)
+
+	s := http.Cookie{
+		Name:  "status",
+		Value: "" + statu}
+	http.SetCookie(w, &s)
 
 	session, _ := store.Get(r, "cookie-name")
 	session.Values["authenticated"] = true
@@ -255,14 +284,17 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 
 	n, err := r.Cookie("name")
 	i, err := r.Cookie("id")
+	s, err := r.Cookie("status")
 	if err != nil {
 		fmt.Println(err)
 	}
 
 	n.MaxAge = -1
 	i.MaxAge = -1
+	s.MaxAge = -1
 	http.SetCookie(w, n)
 	http.SetCookie(w, i)
+	http.SetCookie(w, s)
 
 	session, _ := store.Get(r, "cookie-name")
 
@@ -276,7 +308,8 @@ func NewcommunityHandler(w http.ResponseWriter, r *http.Request) {
 	var Newcommunauter Communauter
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &Newcommunauter)
-	if InsertIntoCommunauter(AllApi.db, Newcommunauter.Name, Newcommunauter.Desc, Newcommunauter.Date) {
+	fmt.Println(string(body))
+	if InsertIntoCommunauter(AllApi.db, Newcommunauter.Name, Newcommunauter.Desc, Newcommunauter.Date, Newcommunauter.Tags) {
 		w.Write([]byte("{\"msg\": \"Success\"}"))
 	} else {
 		http.Error(w, "{\"error\": \"Enter a valide community\"}", http.StatusUnauthorized)
@@ -343,17 +376,212 @@ func Checkdelete(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func Admin(w http.ResponseWriter, r *http.Request) {
+	s, err := r.Cookie("status")
+	if err != nil {
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
+	} else {
+		value := s.Value
+		if value == "Administrators" {
+			t, _ := template.ParseFiles("./templates/admin.html")
+			t.Execute(w, nil)
+			reloadApi()
+		} else {
+			http.Error(w, "Unauthorized", http.StatusUnauthorized)
+		}
+	}
+}
+
+func Changelevel(w http.ResponseWriter, r *http.Request) {
+	var newuserlevel User
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &newuserlevel)
+	if Changeleveluser(AllApi.db, newuserlevel.Name, newuserlevel.UsersLevel) {
+		w.Write([]byte("{\"msg\": \"Success\"}"))
+	} else {
+		http.Error(w, "{\"error\": \"Enter a valide name\"}", http.StatusUnauthorized)
+	}
+}
+
+func AddLikePost(w http.ResponseWriter, r *http.Request) {
+	type like struct {
+		PostLink int
+		UsersId  int
+	}
+	var newLike like
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &newLike)
+	goodOrFalse := InsertIntoLikePost(AllApi.db, newLike.UsersId, newLike.PostLink)
+	w.Write([]byte("{\"msg\": \"Success\"}"))
+	if !goodOrFalse {
+		w.Write([]byte("{\"error\": \"Sorry\"}"))
+	}
+}
+
+func likesHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
+	json.NewEncoder(w).Encode(AllApi.LikeAll)
+}
+func likeHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
+	vars := mux.Vars(r)
+	id := vars["userId"]
+	for _, like := range AllApi.LikeAll {
+		if strconv.Itoa(like.UserId) == id {
+			json.NewEncoder(w).Encode(like)
+		}
+	}
+}
+func likesCommentsHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
+	json.NewEncoder(w).Encode(AllApi.LikeAllComment)
+}
+func likesCommentHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
+	vars := mux.Vars(r)
+	id := vars["userId"]
+	var temptab []Like
+	for _, like := range AllApi.LikeAllComment {
+		if strconv.Itoa(like.UserId) == id {
+			temptab = append(temptab, like)
+		}
+	}
+	json.NewEncoder(w).Encode(temptab)
+}
+func AddDislikePost(w http.ResponseWriter, r *http.Request) {
+	type like struct {
+		PostLink int
+		UsersId  int
+	}
+	var newLike like
+	body, _ := ioutil.ReadAll(r.Body)
+	fmt.Println(string(body))
+	json.Unmarshal(body, &newLike)
+	goodOrFalse := InsertIntoDisLikePost(AllApi.db, newLike.UsersId, newLike.PostLink)
+	w.Write([]byte("{\"msg\": \"Success\"}"))
+	if !goodOrFalse {
+		w.Write([]byte("{\"error\": \"Sorry\"}"))
+	}
+}
+
+func DislikesHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
+	json.NewEncoder(w).Encode(AllApi.DislikeALl)
+}
+func DislikeHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
+	var temptab []DisLike
+	vars := mux.Vars(r)
+	id := vars["userId"]
+	for _, dislike := range AllApi.DislikeALl {
+		if strconv.Itoa(dislike.UserId) == id {
+			temptab = append(temptab, dislike)
+		}
+	}
+	json.NewEncoder(w).Encode(temptab)
+}
+func DislikesCommentsHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
+	json.NewEncoder(w).Encode(AllApi.DislikeALlComment)
+}
+func DislikeCommentHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
+	var temptab []DisLike
+	vars := mux.Vars(r)
+	id := vars["userId"]
+	for _, dislike := range AllApi.DislikeALlComment {
+		if strconv.Itoa(dislike.UserId) == id {
+			temptab = append(temptab, dislike)
+		}
+	}
+	json.NewEncoder(w).Encode(temptab)
+}
+
+/*
+func Deletecomme(w http.ResponseWriter, r *http.Request) {
+	var deletecomme Comment
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &deletecomme)
+	if DeleteCom(AllApi.db, deletecomme.Id) {
+		w.Write([]byte("{\"msg\": \"Success\"}"))
+	} else {
+		http.Error(w, "{\"error\": \"Enter a valide name\"}", http.StatusUnauthorized)
+	}
+}
+*/
+func Deletepost(w http.ResponseWriter, r *http.Request) {
+	var deletepost Post
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &deletepost)
+	if DeletePost(AllApi.db, deletepost.Id) {
+		w.Write([]byte("{\"msg\": \"Success\"}"))
+	} else {
+		http.Error(w, "{\"error\": \"Enter a valide name\"}", http.StatusUnauthorized)
+	}
+}
+
+func AddLikeComment(w http.ResponseWriter, r *http.Request) {
+	type like struct {
+		CommentLink int
+		UsersId     int
+	}
+	var newLike like
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &newLike)
+	goodOrFalse := InsertIntoLikeComment(AllApi.db, newLike.UsersId, newLike.CommentLink)
+	w.Write([]byte("{\"msg\": \"Success\"}"))
+	if !goodOrFalse {
+		w.Write([]byte("{\"error\": \"Sorry\"}"))
+	}
+}
+
+func AddDislikeComment(w http.ResponseWriter, r *http.Request) {
+	type like struct {
+		CommentLink int
+		UsersId     int
+	}
+	var newLike like
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &newLike)
+	goodOrFalse := InsertIntoDisLikeComment(AllApi.db, newLike.UsersId, newLike.CommentLink)
+	w.Write([]byte("{\"msg\": \"Success\"}"))
+	if !goodOrFalse {
+		w.Write([]byte("{\"error\": \"Sorry\"}"))
+	}
+}
+
+func CategoriesHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
+	json.NewEncoder(w).Encode(AllApi.TagsAll)
+}
+
+func CategorieHandler(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
+	vars := mux.Vars(r)
+	id := vars["id"]
+	var temptab ApiTags
+	for _, tags := range AllApi.TagsAll {
+		if strconv.Itoa(tags.Id) == id {
+			temptab.Tags = tags
+		}
+	}
+	json.NewEncoder(w).Encode(temptab)
+}
 func Handler() {
 
 	db := InitDatabase("./Ynnit.db")
 	AllApi.db = db
 	defer db.Close()
-	//
+
+	// InsertIntoCategorie(AllApi.db, "Informatique")
+	// InsertIntoCategorie(AllApi.db, "France")
+	// InsertIntoCategorie(AllApi.db, "Food")
 
 	// InsertIntoUser(db, "jeinero", "jenei@gmail.com", "ImRio6988", "guest", "test", "test")
+	// InsertIntoCategorie(AllApi.db, "Shitpost")
 	// InsertIntoUser(db, "qsdlqsd", "jeazenei@yahoo.fr", "ImRio6988")
 	// InsertIntoCommunauter(db, "InfoFams", "DESC")
-	// InsertIntoPost(db, 1, "Golang Basic", "Golang suck lmao", "jeinero", 1)
+	// InsertIntoPost(db, 1, "Golang Basic", "Golang suck lmao", "Zupz", 1)
 	// InsertIntoComment(db, "Menteur", 1, 1)
 	// InsertIntoComment(db, "gros bouffon", 1, 1)
 	// UpdatePassUser(db, "PaseeeeeeeeeeeeeesChang", "bc@gmail.om")
@@ -382,8 +610,25 @@ func Handler() {
 	r.HandleFunc("/apicommunauters", CommunautersHandler)
 	r.HandleFunc("/apicommunauters/{id}", CommunauterHandler)
 
+	r.HandleFunc("/apitags", tagsHandler)
+
 	r.HandleFunc("/apicomments", CommentsHandler)
 	r.HandleFunc("/apicomments/{id}", CommentHandler)
+
+	r.HandleFunc("/apilike", likesHandler)
+	r.HandleFunc("/apilike/{userId}", likesHandler)
+
+	r.HandleFunc("/apidislike", DislikesHandler)
+	r.HandleFunc("/apidislike/{userId}", DislikeHandler)
+
+	r.HandleFunc("/apilikecomment", likesCommentsHandler)
+	r.HandleFunc("/apilikecomment/{userId}", likesCommentHandler)
+
+	r.HandleFunc("/apidislikecomment", DislikesCommentsHandler)
+	r.HandleFunc("/apidislikecomment/{userId}", DislikeCommentHandler)
+
+	r.HandleFunc("/apicategories", CategoriesHandler)
+	r.HandleFunc("/apicategories/{id}", CategorieHandler)
 
 	r.HandleFunc("/signin", Signin)
 
@@ -391,6 +636,9 @@ func Handler() {
 	r.HandleFunc("/newuser", Newuser)
 
 	r.HandleFunc("/profile", Profile)
+
+	r.HandleFunc("/admin", Admin)
+	r.HandleFunc("/changelevel", Changelevel)
 
 	r.HandleFunc("/changeemail", Changeemail)
 	r.HandleFunc("/checkemail", Checkemail)
@@ -413,6 +661,16 @@ func Handler() {
 	r.HandleFunc("/viewpost", ViewPost)
 	r.HandleFunc("/comment", Comments)
 
+	r.HandleFunc("/addLikepost", AddLikePost)
+	r.HandleFunc("/addDislikepost", AddDislikePost)
+
+	r.HandleFunc("/addLikecomment", AddLikeComment)
+	r.HandleFunc("/addDislikecomment", AddDislikeComment)
+
+	r.HandleFunc("/deletepost", Deletepost)
+	/*
+		r.HandleFunc("/deletecomme", Deletecomme)
+	*/
 	r.HandleFunc("/session", Session)
 
 	r.HandleFunc("/logout", Logout)
@@ -429,4 +687,9 @@ func reloadApi() {
 	AllApi.CommunautersAll = DbtoStructCommunauter(AllApi.db)
 	AllApi.PostsAll = DbtoStructPost(AllApi.db)
 	AllApi.CommentsAll = DbtoStructComment(AllApi.db)
+	AllApi.TagsAll = DbtoStructCategorie(AllApi.db)
+	AllApi.LikeAll = DbtoStructLikePost(AllApi.db)
+	AllApi.DislikeALl = DbtoStructDisLikePost(AllApi.db)
+	AllApi.LikeAllComment = DbtoStructLikeComment(AllApi.db)
+	AllApi.DislikeALlComment = DbtoStructDisLikeComment(AllApi.db)
 }
