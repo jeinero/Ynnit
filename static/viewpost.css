@@ -63,20 +63,6 @@ header {
     border: 1px solid black;
 }
 
-.Register {
-    background: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    font-size: 25px;
-    width: 150px;
-    border: 2px solid black;
-    border-radius: 40px;
-    height: 40px;
-}
-
-
 #viewpost {
     margin: 1% 10%;
     display: flex;
@@ -87,7 +73,6 @@ header {
     border-radius: 40px;
     padding: 2%;
     justify-content: center;
-
 }
 #viewcommentaire{
     display: flex;
@@ -107,7 +92,7 @@ header {
 .title {
     display: flex;
     justify-content: center;
- width: auto;
+    width: auto;
     height: auto;
     font-size: 40px;
     align-items: center;
@@ -118,6 +103,7 @@ header {
     height: auto;
     align-items: center;
 }
+
 .divtop2 {
     display: flex;
     width: 100%;
@@ -157,12 +143,12 @@ header {
     border-radius: 40px;
 }
 .contents {
-   
     display: flex;
     width: auto;
     height: auto;
     font-size: 20px;
     align-items: center;
+    margin-bottom: 1%;
 }
 
 .divbottom{
@@ -173,8 +159,6 @@ header {
     align-items: center;
     padding: 1%;
     border-bottom: 1px solid red;
-
-
 }
 
 .like {
@@ -203,9 +187,13 @@ header {
     z-index: 10;
 }
 
-.dislike:hover {
-    color: red;
+.divbottom2 {
+    display: flex;
+    width: 100%;
+    height: auto;
+    align-items: center;
 }
+
 
 .username {
     justify-content: flex-start;

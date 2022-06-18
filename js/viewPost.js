@@ -69,53 +69,66 @@ fetch("/apiposts/" + id)
         divtop.classList = 'divtop'
         viewpost.appendChild(divtop)
 
+        const username = document.createElement('div')
+        username.innerHTML = "avatar du mec&ensp;" + data.Post.UsersName
+        username.classList = 'username'
+        divtop.appendChild(username)
+
         const date = document.createElement('div')
         date.innerHTML = timeSince(data.Post.Date)
         date.classList = 'date'
         divtop.appendChild(date)
 
+        const divmiddle = document.createElement('div')
+        divmiddle.classList = 'divmiddle'
+        viewpost.appendChild(divmiddle)
+
         const title = document.createElement('div')
         title.innerHTML = data.Post.Title
         title.classList = 'title'
-        divtop.appendChild(title)
-
-        const username = document.createElement('div')
-        username.innerHTML = "by&ensp;" + data.Post.UsersName
-        username.classList = 'username'
-        divtop.appendChild(username)
+        divmiddle.appendChild(title)
 
         const content = document.createElement('div')
         content.innerHTML = data.Post.Content
         content.classList = 'content'
         viewpost.appendChild(content)
-        data.Comments.forEach(element => {
-            const divcom = document.createElement('div')
-            divcom.id = element.Id
-            viewcommentaire.appendChild(divcom)
 
-            const divtop = document.createElement('div')
-            divtop.classList = 'divtop'
-            divcom.appendChild(divtop)
+        const divbottom = document.createElement('div')
+        divbottom.classList = 'divbottom'
+        viewpost.appendChild(divbottom)
+
+        data.Comments.forEach(element => {
+            const post = document.createElement('div')
+            post.classList = 'post'
+            viewpost.appendChild(post)
+
+            const divtop2 = document.createElement('div')
+            divtop2.classList = 'divtop2'
+            post.appendChild(divtop2)
+
+            const username = document.createElement('div')
+            username.innerHTML = "avatar du mec&ensp;" + element.UsersName
+            username.classList = 'username'
+            divtop2.appendChild(username)
 
             const dates = document.createElement('div')
             dates.innerHTML = timeSince(element.Date)
             dates.classList = 'date'
-            divcom.appendChild(dates)
+            divtop2.appendChild(dates)
 
             const content = document.createElement('div')
             content.innerHTML = element.Content
-            content.classList = 'content'
-            divcom.appendChild(content)
+            content.classList = 'contents'
+            post.appendChild(content)
 
-            const username = document.createElement('div')
-            username.innerHTML = "by&ensp;" + element.UsersName
-            username.classList = 'username'
-            divcom.appendChild(username)
+            const divbottom2 = document.createElement('div')
+            divbottom2.classList = 'divbottom2'
+            post.appendChild(divbottom2)
 
             const like = document.createElement('button')
             like.classList = 'like'
             like.id = "like"
-            divcom.appendChild(like)
+            divbottom2.appendChild(like)
 
             like.onclick = function addLike(e) {
                 fetch("/addLikecomment", {
@@ -124,7 +137,7 @@ fetch("/apiposts/" + id)
                         "content-type": "application/json"
                     },
                     body: JSON.stringify({
-                        CommentLink: parseInt(divcom.id),
+                        CommentLink: parseInt(divbottom2.id),
                         UsersId: parseInt(getCookie("id")),
                     })
                 })
@@ -146,16 +159,17 @@ fetch("/apiposts/" + id)
             like.innerHTML = `<i class="fa fa-thumbs-up" aria-hidden="true"></i>`
             if (likeTab != null) {
                 likeTab.forEach(elem => {
-                        console.log(elem.CommentLink, parseInt(divcom.id))
-                    if (parseInt(divcom.id) === elem.CommentLink) {
+                        console.log(elem.CommentLink, parseInt(divbottom2.id))
+                    if (parseInt(divbottom2.id) === elem.CommentLink) {
                         like.style.color = "rgb(49, 172, 49)"
                     }
                 })
             }
+
             const dislike = document.createElement('button')
             dislike.classList = 'dislike'
-            divcom.appendChild(dislike)
-
+            dislike.id = "dislike"
+            divbottom2.appendChild(dislike)
             dislike.onclick = function addLike(e) {
                 fetch("/addDislikecomment", {
                     method: "POST",
@@ -163,7 +177,7 @@ fetch("/apiposts/" + id)
                         "content-type": "application/json"
                     },
                     body: JSON.stringify({
-                        CommentLink: parseInt(divcom.id),
+                        CommentLink: parseInt(divbottom2.id),
                         UsersId: parseInt(getCookie("id")),
                     })
                 })
@@ -184,94 +198,59 @@ fetch("/apiposts/" + id)
             }
             if (dislikeTab != null) {
                 dislikeTab.forEach(elem => {
-                    if (elem.CommentLink == divcom.id) {
+                    if (elem.CommentLink == divbottom2.id) {
                         dislike.style.color = "red"
                     }
                 })
             }
             dislike.innerHTML = `<i class="fa fa-thumbs-down" aria-hidden="true"></i>`
 
+           
+
+
+
         })
 
 
     })
 
-function timeSince(date) {
-    var seconds = Math.floor((new Date() - date) / 1000);
-    var interval = seconds / 31536000;
-
-    if (interval > 1) {
-        return Math.floor(interval) + " years";
-    }
-    interval = seconds / 2592000;
-    if (interval > 1) {
-        return Math.floor(interval) + " months";
-    }
-    interval = seconds / 86400;
-    if (interval > 1) {
-        return Math.floor(interval) + " days";
-    }
-    interval = seconds / 3600;
-    if (interval > 1) {
-        return Math.floor(interval) + " hours";
-    }
-    interval = seconds / 60;
-    if (interval > 1) {
-        return Math.floor(interval) + " minutes";
-    }
-    return Math.floor(seconds) + " seconds";
-}
-var aDay = 24 * 60 * 60 * 1000;
-
-
-
-
-document.body.onload = function () {
-    if (getCookie("name") != null) {
-        let classComm = document.getElementsByClassName("lien")
-        classComm[0].style.display = "none"
-        classComm[1].style.display = "none"
-    }
-}
-
+    function timeSince(date) {
+        var seconds = Math.floor((new Date() - date) / 1000);
+        var interval = seconds / 31536000;
+    
         if (interval > 1) {
-                return Math.floor(interval) + " years";
+            return Math.floor(interval) + " years";
         }
         interval = seconds / 2592000;
         if (interval > 1) {
-                return Math.floor(interval) + " months";
+            return Math.floor(interval) + " months";
         }
         interval = seconds / 86400;
         if (interval > 1) {
-                return Math.floor(interval) + " days";
+            return Math.floor(interval) + " days";
         }
         interval = seconds / 3600;
         if (interval > 1) {
-                return Math.floor(interval) + " hours";
+            return Math.floor(interval) + " hours";
         }
         interval = seconds / 60;
         if (interval > 1) {
-                return Math.floor(interval) + " minutes";
+            return Math.floor(interval) + " minutes";
         }
-        console.log(interval)
         return Math.floor(seconds) + " seconds";
-}
-var aDay = 24 * 60 * 60 * 1000;
-
-
-
-
-document.body.onload = function () {
+    }
+    var aDay = 24 * 60 * 60 * 1000;
+    
+    
+    
+    
+    document.body.onload = function () {
         if (getCookie("name") != null) {
-                let classComm = document.getElementsByClassName("lien")
-                classComm[0].style.display = "none"
-                classComm[1].style.display = "none"
+            let classComm = document.getElementsByClassName("lien")
+            classComm[0].style.display = "none"
+            classComm[1].style.display = "none"
         }
-}
-
-
-
-
+    }
 
 
 const btn = document.querySelector('.btn');
@@ -298,18 +277,18 @@ const btnpop = document.getElementById("myBtn");
 const span = document.getElementsByClassName("close")[0];
 
 
-btnpop.onclick = function() {
-  modal.style.display = "block";
+btnpop.onclick = function () {
+    modal.style.display = "block";
 }
 
 
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-
-window.onclick = function(event) {
-  if (event.target == modal) {
+span.onclick = function () {
     modal.style.display = "none";
-  }
+}
+
+
+window.onclick = function (event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
 }
