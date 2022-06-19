@@ -40,7 +40,7 @@ height: 50px;
 }
 
 #latestposts {
-    /* display: flex; */
+    display: flex;
     border: 5px solid pink;
     width: 70%;
     height: auto;

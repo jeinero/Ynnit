@@ -1,9 +1,9 @@
-document.getElementById("button").onclick = function(){
+document.getElementById("submit-change-desc").onclick = function(){
     if (document.getElementById("desc").value.length >=1) {
-        document.getElementById("error").innerText = ""
+        document.getElementById("desc-error").innerText = ""
         changedesc()
     } else {
-        document.getElementById("error").innerText = "enter a valide desc"
+        document.getElementById("desc-error").innerText = "Please enter a valide description"
     }
 };
 

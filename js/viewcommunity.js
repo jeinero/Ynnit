@@ -67,15 +67,3 @@ document.body.onload = function () {
                 classComm[1].style.display = "none"
         }
 }
-
-const btn = document.querySelector('.btn');
-
-btn.addEventListener('click', () => {
-
-    window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "smooth"
-    })
-
-})
