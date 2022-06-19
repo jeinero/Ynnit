@@ -39,7 +39,7 @@ function newCard(posts) {
 
         const community = document.createElement('div')
         community.classList = 'community'
-        community.innerHTML = data.Communauter.Name
+        community.innerHTML = `<a href='/viewcommunity?id=${element.CommuLink}'>${data.Communauter.Name}</a>`
 
         const content = document.createElement('div')
         content.classList = 'content'
@@ -231,7 +231,7 @@ function newCard(posts) {
 
         const comments = document.createElement('div')
         comments.classList = 'comments'
-        comments.innerHTML = element.NumberComment + " commentaires"
+        comments.innerHTML = element.NumberComment + "commentaires"
 
         const userpseudo = document.createElement('div')
         userpseudo.classList = 'userpseudo'
@@ -351,10 +351,10 @@ btn.addEventListener('click', () => {
 
 
 
-// document.body.onload = function() {
-//   if (getCookie("name") != null) {
-//           let classComm = document.getElementsByClassName("lien")
-//           classComm[0].style.display = "none"
-//           classComm[1].style.display = "none"
-//           }
-// }
+document.body.onload = function() {
+  if (getCookie("name") != null) {
+          let classComm = document.getElementsByClassName("lien")
+          classComm[0].style.display = "none"
+          classComm[1].style.display = "none"
+          }
+}
