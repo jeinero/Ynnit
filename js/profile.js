@@ -44,7 +44,8 @@ if (statu == "Administrators") {
 const viewtext = document.getElementById('viewtext')
 const title = document.getElementById('tiletext')
 
-const divcomment = document.getElementById("latestposts")
+const divcomment = document.getElementById("latestcomments")
+const divpost = document.getElementById("latestposts")
 
 const loadDataUser = data => {
     
@@ -75,51 +76,105 @@ const loadDataUser = data => {
 
 
     data.Comments.forEach(element => {
-        const divcom = document.createElement('div')
-        divcom.id = element.Id
-        divcomment.appendChild(divcom)
+       
+        const titleofpost = document.createElement('div')
 
-        const divtop = document.createElement('div')
-        divtop.classList = 'divtop'
-        divcom.appendChild(divtop)
+        fetch("/apiposts/"+element.Id)
+        .then(resp => resp.json())
+        .then(datapost => {
+          titleofpost.classList = 'title'
+          titleofpost.innerHTML = 'On post "'+datapost.Post.Title+'"'
 
-        const dates = document.createElement('div')
-        dates.innerHTML = timeSince(element.Date)
-        dates.classList = 'date'
-        divcom.appendChild(dates)
+        })
+
+       
+
+
+        const newcard = document.createElement('div')
+        newcard.id = element.Id
+        newcard.classList = "card"
+        // newcard.href = "/viewpost?id="+element.Id
+
+        const divhaut = document.createElement('div')
+        divhaut.classList = 'divhaut'
+
+        // const title = document.createElement('div')
+        // title.classList = 'title'
+        // title.innerHTML = "On post "+TitlePost+'"'
+
+        const date = document.createElement('div')
+        date.classList = 'date'
+        date.innerHTML = timeSince(element.Date)
 
         const content = document.createElement('div')
-        content.innerHTML = element.Content
         content.classList = 'content'
-        divcom.appendChild(content)
+        content.innerHTML = element.Content
+
+        
+        
+
+        // divhaut.append(title)
+        divhaut.append(titleofpost)
+
+        divhaut.append(date)
+        newcard.appendChild(divhaut)
+        newcard.append(content)
+
+        const integrate = document.querySelector('.bigcardcomments')
+        integrate.appendChild(newcard)
+      
+        // document.getElementById(element.Id).onclick = function () {
+        //   location.href = "/viewpost?id=" + element.Id
+        // }
+        
     });
 
-    const divpost = document.getElementById("lavraidvpost")
 
 
     data.Post.forEach(element => {
-        const divcom = document.createElement('div')
-        divcom.id = element.Id
-        divpost.appendChild(divcom)
+        const newcard = document.createElement('div')
+        newcard.id = element.Id
+        newcard.classList = "card"
 
-        const divtop = document.createElement('div')
-        divtop.classList = 'divtop'
-        divcom.appendChild(divtop)
-
-        const dates = document.createElement('div')
-        dates.innerHTML = timeSince(element.Date)
-        dates.classList = 'date'
-        divcom.appendChild(dates)
+        const divhaut = document.createElement('div')
+        divhaut.classList = 'divhaut'
 
         const title = document.createElement('div')
-        title.innerHTML = element.Title
         title.classList = 'title'
-        divcom.appendChild(title)
+        title.innerHTML = element.Title
+
+        const date = document.createElement('div')
+        date.classList = 'date'
+        date.innerHTML = timeSince(element.Date)
 
         const content = document.createElement('div')
-        content.innerHTML = element.Content
         content.classList = 'content'
-        divcom.appendChild(content)
+        content.innerHTML = element.Content
+
+        const divbas = document.createElement('div')
+        divbas.classList = 'divbas'
+
+        const comments = document.createElement('div')
+        let textcomment = ""
+        if (element.NumberComment<=1) {
+          textcomment = " comment"
+        } else {
+          textcomment = " comments"
+        }
+        comments.classList = 'comments'
+        comments.innerHTML = element.NumberComment + textcomment
+        
+
+        divhaut.append(title)
+        divhaut.append(date)
+        newcard.appendChild(divhaut)
+        newcard.append(content)
+        newcard.appendChild(divbas)
+        divbas.append(comments)
+
+        const integrate = document.querySelector('.bigcard')
+        integrate.appendChild(newcard)
+        
     });
 }
 
@@ -154,6 +209,9 @@ fetch("/apiusers/" + id)
 .then(resp => resp.json())
 .then(loadDataUser)
 
+
+
+// MODALS:
 
 const modal = document.getElementById("modal-changedesc");
 const btn = document.getElementById("changedesc");
