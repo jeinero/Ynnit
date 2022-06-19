@@ -98,6 +98,7 @@ fetch("/apiposts/" + id)
         viewpost.appendChild(divbottom)
 
         data.Comments.forEach(element => {
+            console.log(element)
             const divcom = document.createElement('div')
             divcom.id = element.Id
             divcom.className = "comm"
