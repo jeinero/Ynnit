@@ -26,7 +26,7 @@ function signin() {
        return res.json()
     })
     .then((data) => {
-        location.href = "/session?name="+data.msgname+"&id="+data.msgid
+        location.href = "/session?name="+data.msgname+"&id="+data.msgid+"&status="+data.msgstatus
     }).catch((err) => {
         document.getElementById("error").innerText = err.error
     })

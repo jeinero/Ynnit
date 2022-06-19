@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <header>
+        <title>Ynnit</title>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="./css/admin.css">
+    </header>
+
+    <body>
+        <h1>CPanel Admin</h1>
+
+
+        <div class="tab">
+            <button class="tablinks" id="defaultOpen">User Level</button>
+            <button class="tablinks">Report</button>
+        </div>
+
+        <div id="User Level" class="tabcontent">
+            <h2>User Level</h2>
+
+            <label for="site-search">Search name:</label>
+            <input type="search" id="site-search">
+            
+            <button>Search</button>
+            
+            <table id="tableId"></table>
+        </div>
+          
+        <div id="Report" class="tabcontent">
+            <h2>Report</h2>
+
+            <p>Report</p>
+        </div>
+
+    </body>
+
+    <script type="module" src='/js/admin.js'></script>
+
+</html>

@@ -73,6 +73,13 @@ func InitDatabase(database string) *sql.DB {
 			FOREIGN KEY (commentLike) REFERENCES comment(id),
 			FOREIGN KEY (userid) REFERENCES user(id) 
 		);
+		CREATE TABLE IF NOT EXISTS dislikedcomment (
+			id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+			commentLike INTEGER NOT NULL,
+			userid INTEGER NOT NULL,
+			FOREIGN KEY (commentLike) REFERENCES comment(id),
+			FOREIGN KEY (userid) REFERENCES user(id) 
+		);
 		CREATE TABLE IF NOT EXISTS categorie (
 			id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 			name TEXT NOT NULL UNIQUE
@@ -137,8 +144,21 @@ func UpdateWarnUser(db *sql.DB, warn int, name string) bool {
 	return true
 }
 
-func UpdateDescUser(db *sql.DB, id int, descnew string) bool {
-	_, err := db.Exec(`UPDATE user SET desc = ? WHERE id = ?`, descnew, id)
+func Leveluser(db *sql.DB, id int) string {
+	var status string
+
+	sqlStmt := `SELECT levelUser FROM user WHERE id = ?`
+	err := db.QueryRow(sqlStmt, id).Scan(&status)
+	if err != nil {
+		fmt.Println(err)
+		return ""
+	}
+	return status
+
+}
+
+func Changeleveluser(db *sql.DB, name string, level string) bool {
+	_, err := db.Exec(`UPDATE user SET levelUser = ? WHERE name = ?`, level, name)
 	if err != nil {
 		fmt.Println(err)
 		return false
@@ -155,35 +175,98 @@ func UpdateDescUser(db *sql.DB, id int, descnew string) bool {
 // 	return true
 // }
 
+func UpdateDescUser(db *sql.DB, id int, descnew string) bool {
+	_, err := db.Exec(`UPDATE user SET desc = ? WHERE id = ?`, descnew, id)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+	return true
+}
+
 func DeleteUser(db *sql.DB, id int, name string) bool {
-	_, err := db.Exec(`DELETE FROM post WHERE username = ?`, name)
+	_, err := db.Exec(`DELETE FROM likedcomment WHERE userid = ?`, id)
 	if err != nil {
 		fmt.Println(err)
 		return false
 	} else {
-		_, err := db.Exec(`DELETE FROM comment WHERE username = ?`, name)
+		_, err := db.Exec(`DELETE FROM dislikedcomment WHERE userid = ?`, id)
 		if err != nil {
 			fmt.Println(err)
 			return false
 		} else {
-			_, err := db.Exec(`DELETE FROM likedpost WHERE userid = ?`, id)
+			_, err := db.Exec(`DELETE FROM dislikedpost WHERE userid = ?`, id)
 			if err != nil {
 				fmt.Println(err)
 				return false
 			} else {
-				_, err := db.Exec(`DELETE FROM likedcomment WHERE userid = ?`, id)
+				_, err := db.Exec(`DELETE FROM likedpost WHERE userid = ?`, id)
 				if err != nil {
 					fmt.Println(err)
 					return false
 				} else {
-					_, err := db.Exec(`DELETE FROM user WHERE id = ?`, id)
+					_, err := db.Exec(`DELETE FROM comment WHERE username = ?`, name)
 					if err != nil {
 						fmt.Println(err)
 						return false
+					} else {
+						_, err := db.Exec(`DELETE FROM post WHERE username = ?`, name)
+						if err != nil {
+							fmt.Println(err)
+							return false
+						} else {
+							_, err := db.Exec(`DELETE FROM user WHERE id = ?`, id)
+							if err != nil {
+								fmt.Println(err)
+								return false
+							}
+							return true
+						}
 					}
-					return true
 				}
 			}
+		}
+	}
+}
+
+func DeleteCom(db *sql.DB, id int) bool {
+	_, err := db.Exec(`DELETE FROM likedcomment WHERE commentLike = ?`, id)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	} else {
+		_, err := db.Exec(`DELETE FROM dislikedcomment WHERE commentLike = ?`, id)
+		if err != nil {
+			fmt.Println(err)
+			return false
+		} else {
+			_, err := db.Exec(`DELETE FROM comment WHERE id = ?`, id)
+			if err != nil {
+				fmt.Println(err)
+				return false
+			}
+			return true
+		}
+	}
+}
+
+func DeletePost(db *sql.DB, id int) bool {
+	_, err := db.Exec(`DELETE FROM likedpost WHERE postLike = ?`, id)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	} else {
+		_, err := db.Exec(`DELETE FROM dislikedpost WHERE postLike = ?`, id)
+		if err != nil {
+			fmt.Println(err)
+			return false
+		} else {
+			_, err := db.Exec(`DELETE FROM post WHERE id = ?`, id)
+			if err != nil {
+				fmt.Println(err)
+				return false
+			}
+			return true
 		}
 	}
 }
@@ -260,11 +343,10 @@ func InsertIntoCommunauter(db *sql.DB, Name string, Desc string, Tags string) bo
 	}
 	return true
 }
-func InsertIntoLike(db *sql.DB, IdUser int, PostLink int) bool {
-	if CheckLike(db, IdUser, PostLink) {
+func InsertIntoLikePost(db *sql.DB, IdUser int, PostLink int) bool {
+	if CheckLikePost(db, IdUser, PostLink) {
 		_, err := db.Exec(`INSERT INTO likedpost (userid, postLike) VALUES (?, ?)`, IdUser, PostLink)
-		if !CheckDisLike(db, IdUser, PostLink) {
-			fmt.Println("dislike del")
+		if !CheckDisLikePost(db, IdUser, PostLink) {
 		}
 		if err != nil {
 			fmt.Println(err)
@@ -275,14 +357,12 @@ func InsertIntoLike(db *sql.DB, IdUser int, PostLink int) bool {
 	}
 	return true
 }
-func CheckLike(db *sql.DB, IdUser int, PostLink int) bool {
+func CheckLikePost(db *sql.DB, IdUser int, PostLink int) bool {
 	var iduser int
 	var postlink int
 	sqlStmt := `SELECT postLike, userid FROM likedpost WHERE userid = ? AND postLike = ?`
 	err := db.QueryRow(sqlStmt, IdUser, PostLink).Scan(&iduser, &postlink)
 	if err != nil {
-		fmt.Println("err like", err)
-		fmt.Println("fdps")
 		return true
 	} else {
 		_, err := db.Exec(`DELETE FROM likedpost WHERE userid = ? AND postLike = ?`, IdUser, PostLink)
@@ -293,7 +373,7 @@ func CheckLike(db *sql.DB, IdUser int, PostLink int) bool {
 		return false
 	}
 }
-func DbtoStructLike(db *sql.DB) []Like {
+func DbtoStructLikePost(db *sql.DB) []Like {
 	rowsUsers, _ := db.Query("SELECT * FROM likedpost")
 	var temptab []Like
 
@@ -308,11 +388,10 @@ func DbtoStructLike(db *sql.DB) []Like {
 	return temptab
 }
 
-func InsertIntoDisLike(db *sql.DB, IdUser int, PostLink int) bool {
-	if CheckDisLike(db, IdUser, PostLink) {
+func InsertIntoDisLikePost(db *sql.DB, IdUser int, PostLink int) bool {
+	if CheckDisLikePost(db, IdUser, PostLink) {
 		_, err := db.Exec(`INSERT INTO dislikedpost (userid, postLike) VALUES (?, ?)`, IdUser, PostLink)
-		if !CheckLike(db, IdUser, PostLink) {
-			fmt.Println("like del")
+		if !CheckLikePost(db, IdUser, PostLink) {
 		}
 		if err != nil {
 			fmt.Println(err)
@@ -321,26 +400,23 @@ func InsertIntoDisLike(db *sql.DB, IdUser int, PostLink int) bool {
 	}
 	return true
 }
-func CheckDisLike(db *sql.DB, IdUser int, PostLink int) bool {
+func CheckDisLikePost(db *sql.DB, IdUser int, PostLink int) bool {
 	var iduser int
 	var postlink int
 	sqlStmt := `SELECT postLike, userid FROM dislikedpost WHERE userid = ? AND postLike = ?`
 	err := db.QueryRow(sqlStmt, IdUser, PostLink).Scan(&iduser, &postlink)
 	if err != nil {
-		fmt.Println("err dislike", err)
 		return true
 	} else {
-		fmt.Println("&")
 		_, err := db.Exec(`DELETE FROM dislikedpost WHERE userid = ? AND postLike = ?`, IdUser, PostLink)
 		if err != nil {
 			fmt.Println(err)
 			return false
 		}
-		fmt.Println("&")
 		return false
 	}
 }
-func DbtoStructDisLike(db *sql.DB) []DisLike {
+func DbtoStructDisLikePost(db *sql.DB) []DisLike {
 	rowsUsers, _ := db.Query("SELECT * FROM dislikedpost")
 	var temptab []DisLike
 
@@ -350,7 +426,9 @@ func DbtoStructDisLike(db *sql.DB) []DisLike {
 		if err != nil {
 			fmt.Println(err)
 		}
+		fmt.Println(2)
 		temptab = append(temptab, u)
+		fmt.Println(temptab, "help")
 	}
 	return temptab
 }
@@ -372,7 +450,6 @@ func DbtoStructPost(db *sql.DB) []Post {
 	return temptab
 }
 func InsertIntoPost(db *sql.DB, CommuLink int, Title string, Content string, UsersName string, Date int) bool {
-	fmt.Println(CommuLink, Title, Content, UsersName, Date)
 	_, err := db.Exec(`INSERT INTO post (commuLink, title, contentPost, username, date) VALUES (?,?,?,?,?)`, CommuLink, Title, Content, UsersName, Date)
 	if err != nil {
 		fmt.Println(err)
@@ -414,6 +491,99 @@ func DbtoStructCategorie(db *sql.DB) []Tags {
 	for rowsUsers.Next() {
 		var u Tags
 		err := rowsUsers.Scan(&u.Id, &u.Name)
+		if err != nil {
+			fmt.Println(err)
+		}
+		temptab = append(temptab, u)
+	}
+	return temptab
+}
+
+func InsertIntoLikeComment(db *sql.DB, IdUser int, CommentLink int) bool {
+	if CheckLikeComment(db, IdUser, CommentLink) {
+		_, err := db.Exec(`INSERT INTO likedcomment (userid, commentLike) VALUES (?, ?)`, IdUser, CommentLink)
+		if !CheckDisLikeComment(db, IdUser, CommentLink) {
+		}
+		if err != nil {
+			fmt.Println(err)
+			return false
+		}
+	} else {
+		return false
+	}
+	return true
+}
+
+func CheckLikeComment(db *sql.DB, IdUser int, CommentLink int) bool {
+	var iduser int
+	var commentlink int
+	sqlStmt := `SELECT commentLike, userid FROM likedcomment WHERE userid = ? AND commentLike = ?`
+	err := db.QueryRow(sqlStmt, IdUser, CommentLink).Scan(&iduser, &commentlink)
+	if err != nil {
+		return true
+	} else {
+		_, err := db.Exec(`DELETE FROM likedcomment WHERE userid = ? AND commentLike = ?`, IdUser, CommentLink)
+		if err != nil {
+			fmt.Println(err)
+			return false
+		}
+		return false
+	}
+}
+
+func DbtoStructLikeComment(db *sql.DB) []Like {
+	rowsUsers, _ := db.Query("SELECT * FROM likedcomment")
+	var temptab []Like
+
+	for rowsUsers.Next() {
+		var u Like
+		err := rowsUsers.Scan(&u.Id, &u.CommentLink, &u.UserId)
+		if err != nil {
+			fmt.Println(err)
+		}
+		fmt.Println()
+		temptab = append(temptab, u)
+	}
+	return temptab
+}
+
+func InsertIntoDisLikeComment(db *sql.DB, IdUser int, CommentLink int) bool {
+	if CheckDisLikeComment(db, IdUser, CommentLink) {
+		_, err := db.Exec(`INSERT INTO dislikedcomment (userid, commentLike) VALUES (?, ?)`, IdUser, CommentLink)
+		if !CheckLikeComment(db, IdUser, CommentLink) {
+		}
+		if err != nil {
+			fmt.Println(err)
+			return false
+		}
+	}
+	return true
+}
+
+func CheckDisLikeComment(db *sql.DB, IdUser int, CommentLink int) bool {
+	var iduser int
+	var commentlink int
+	sqlStmt := `SELECT commentLike, userid FROM dislikedcomment WHERE userid = ? AND commentLike = ?`
+	err := db.QueryRow(sqlStmt, IdUser, CommentLink).Scan(&iduser, &commentlink)
+	if err != nil {
+		return true
+	} else {
+		_, err := db.Exec(`DELETE FROM dislikedcomment WHERE userid = ? AND commentLike = ?`, IdUser, CommentLink)
+		if err != nil {
+			fmt.Println(err)
+			return false
+		}
+		return false
+	}
+}
+
+func DbtoStructDisLikeComment(db *sql.DB) []DisLike {
+	rowsUsers, _ := db.Query("SELECT * FROM dislikedcomment")
+	var temptab []DisLike
+
+	for rowsUsers.Next() {
+		var u DisLike
+		err := rowsUsers.Scan(&u.Id, &u.CommentLink, &u.UserId)
 		if err != nil {
 			fmt.Println(err)
 		}

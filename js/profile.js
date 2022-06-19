@@ -26,6 +26,18 @@ function getCookie(name) {
     return null;
 }
 let id = getCookie("id")
+let statu = getCookie("status")
+
+if (statu == "Administrators") {
+    let buttonadmin = document.createElement("button")
+    buttonadmin.id = "buttonadmin"
+    buttonadmin.innerText = "admin"
+    document.body.append(buttonadmin)
+    document.getElementById("buttonadmin").onclick = function(){
+        location.href = "/admin"
+    }
+}
+
 
 
 

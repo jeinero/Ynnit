@@ -3,14 +3,16 @@ package YnnitPackage
 import "database/sql"
 
 type AllStructs struct {
-	db              *sql.DB
-	UsersAll        []User
-	CommunautersAll []Communauter
-	PostsAll        []Post
-	CommentsAll     []Comment
-	TagsAll         []Tags
-	LikeAll         []Like
-	DislikeALl      []DisLike
+	db                *sql.DB
+	UsersAll          []User
+	CommunautersAll   []Communauter
+	PostsAll          []Post
+	CommentsAll       []Comment
+	TagsAll           []Tags
+	LikeAll           []Like
+	DislikeALl        []DisLike
+	LikeAllComment    []Like
+	DislikeALlComment []DisLike
 }
 
 type User struct {
@@ -55,12 +57,14 @@ type Tags struct {
 }
 
 type Like struct {
-	Id       int `json: "id"`
-	UserId   int `json: "userId"`
-	PostLink int `json: "postLink"`
+	Id          int `json: "id"`
+	UserId      int `json: "userId"`
+	PostLink    int `json: "postLink"`
+	CommentLink int `json: "commentLink"`
 }
 type DisLike struct {
-	Id       int `json: "id"`
-	UserId   int `json: "userId"`
-	PostLink int `json: "postLink"`
+	Id          int `json: "id"`
+	UserId      int `json: "userId"`
+	PostLink    int `json: "postLink"`
+	CommentLink int `json: "commentLink"`
 }
