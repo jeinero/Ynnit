@@ -1,5 +1,5 @@
 document.getElementById("button").onclick = function(){
-    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById("email1").value) == /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById("email2").value)) {
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById("email1").value) && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById("email2").value) && document.getElementById("email1").value == document.getElementById("email2").value ) {
         document.getElementById("error").innerText = ""
         changeemail()
     } else {
