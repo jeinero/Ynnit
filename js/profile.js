@@ -76,7 +76,6 @@ const loadDataUser = data => {
 
 
     data.Comments.forEach(element => {
-       
         const titleofpost = document.createElement('div')
 
         fetch("/apiposts/"+element.Id)
@@ -84,11 +83,7 @@ const loadDataUser = data => {
         .then(datapost => {
           titleofpost.classList = 'title'
           titleofpost.innerHTML = 'On post "'+datapost.Post.Title+'"'
-
         })
-
-       
-
 
         const newcard = document.createElement('div')
         newcard.id = element.Id

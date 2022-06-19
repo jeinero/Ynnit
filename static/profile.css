@@ -87,6 +87,8 @@ body {
     width: 50%;
     height: auto;
     flex-direction: column;
+    font-size: 30px;
+    align-items: center;
 
 }
 
@@ -98,7 +100,7 @@ body {
     padding: 1%;
     border-radius: var(--btn-corner);
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;  
-    border: 5px solid green;
+    /* border: 5px solid green; */
 }
 
 .bigcardcomments {
@@ -109,7 +111,7 @@ body {
     padding: 1%;
     border-radius: var(--btn-corner);
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;  
-    border: 5px solid green;
+    /* border: 5px solid green; */
 }
 .divhaut {
     display: flex;
@@ -124,9 +126,11 @@ body {
 
 #latestcomments {
     display: flex;
-    border: 5px solid violet;
+    /* border: 5px solid violet; */
     width: 50%;
     flex-direction: column;
+    font-size: 30px;
+    align-items: center;
 
 }
 
@@ -361,13 +365,6 @@ textarea {
     height: 100px;
 }
 
-.date {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    width: 15%;
-    height: 100%;
-}
 
 .content {
     display: flex;
