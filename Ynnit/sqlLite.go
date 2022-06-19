@@ -30,6 +30,7 @@ func InitDatabase(database string) *sql.DB {
 			id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 			name TEXT NOT NULL UNIQUE,
 			desc TEXT NOT NULL,
+			date TEXT NOT NULL,
 			tags TEXT NOT NULL,
 			FOREIGN KEY (tags) REFERENCES categorie(name) 
 		);
@@ -327,7 +328,7 @@ func DbtoStructCommunauter(db *sql.DB) []Communauter {
 
 	for rowsUsers.Next() {
 		var u Communauter
-		err := rowsUsers.Scan(&u.Id, &u.Name, &u.Desc, &u.Tags)
+		err := rowsUsers.Scan(&u.Id, &u.Name, &u.Desc, &u.Date, &u.Tags)
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -335,8 +336,8 @@ func DbtoStructCommunauter(db *sql.DB) []Communauter {
 	}
 	return temptab
 }
-func InsertIntoCommunauter(db *sql.DB, Name string, Desc string, Tags string) bool {
-	_, err := db.Exec(`INSERT INTO communauter (name, desc, tags) VALUES (?, ?, ?)`, Name, Desc, Tags)
+func InsertIntoCommunauter(db *sql.DB, Name string, Desc string, Date string, Tags string) bool {
+	_, err := db.Exec(`INSERT INTO communauter (name, desc, date, tags) VALUES (?, ?, ?, ?)`, Name, Desc, Date, Tags)
 	if err != nil {
 		fmt.Println(err)
 		return false
@@ -387,7 +388,6 @@ func DbtoStructLikePost(db *sql.DB) []Like {
 	}
 	return temptab
 }
-
 func InsertIntoDisLikePost(db *sql.DB, IdUser int, PostLink int) bool {
 	if CheckDisLikePost(db, IdUser, PostLink) {
 		_, err := db.Exec(`INSERT INTO dislikedpost (userid, postLike) VALUES (?, ?)`, IdUser, PostLink)
@@ -432,7 +432,6 @@ func DbtoStructDisLikePost(db *sql.DB) []DisLike {
 	}
 	return temptab
 }
-
 func DbtoStructPost(db *sql.DB) []Post {
 	rowsUsers, _ := db.Query("SELECT * FROM post")
 	var temptab []Post
@@ -457,7 +456,6 @@ func InsertIntoPost(db *sql.DB, CommuLink int, Title string, Content string, Use
 	}
 	return true
 }
-
 func countLike(db *sql.DB, table string, tableRow string, whereID int) int {
 	var count int
 	err := db.QueryRow("SELECT COUNT(*) FROM "+table+" WHERE "+tableRow+" = ?", whereID).Scan(&count)
@@ -474,7 +472,6 @@ func countComment(db *sql.DB, whereID int) int {
 	}
 	return count
 }
-
 func InsertIntoCategorie(db *sql.DB, Name string) bool {
 	_, err := db.Exec(`INSERT INTO categorie (name) VALUES (?)`, Name)
 	if err != nil {
@@ -483,7 +480,6 @@ func InsertIntoCategorie(db *sql.DB, Name string) bool {
 	}
 	return true
 }
-
 func DbtoStructCategorie(db *sql.DB) []Tags {
 	rowsUsers, _ := db.Query("SELECT * FROM categorie")
 	var temptab []Tags
@@ -513,7 +509,6 @@ func InsertIntoLikeComment(db *sql.DB, IdUser int, CommentLink int) bool {
 	}
 	return true
 }
-
 func CheckLikeComment(db *sql.DB, IdUser int, CommentLink int) bool {
 	var iduser int
 	var commentlink int
@@ -530,7 +525,6 @@ func CheckLikeComment(db *sql.DB, IdUser int, CommentLink int) bool {
 		return false
 	}
 }
-
 func DbtoStructLikeComment(db *sql.DB) []Like {
 	rowsUsers, _ := db.Query("SELECT * FROM likedcomment")
 	var temptab []Like
@@ -546,7 +540,6 @@ func DbtoStructLikeComment(db *sql.DB) []Like {
 	}
 	return temptab
 }
-
 func InsertIntoDisLikeComment(db *sql.DB, IdUser int, CommentLink int) bool {
 	if CheckDisLikeComment(db, IdUser, CommentLink) {
 		_, err := db.Exec(`INSERT INTO dislikedcomment (userid, commentLike) VALUES (?, ?)`, IdUser, CommentLink)
@@ -559,7 +552,6 @@ func InsertIntoDisLikeComment(db *sql.DB, IdUser int, CommentLink int) bool {
 	}
 	return true
 }
-
 func CheckDisLikeComment(db *sql.DB, IdUser int, CommentLink int) bool {
 	var iduser int
 	var commentlink int

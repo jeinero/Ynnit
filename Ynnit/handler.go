@@ -202,6 +202,11 @@ func ViewPost(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	http.ServeFile(w, r, "./templates/viewpost.html")
 }
+
+func ViewCommunity(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
+	http.ServeFile(w, r, "./templates/viewcommunity.html")
+}
 func Comments(w http.ResponseWriter, r *http.Request) {
 	var newComments Comment
 
@@ -303,7 +308,7 @@ func NewcommunityHandler(w http.ResponseWriter, r *http.Request) {
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &Newcommunauter)
 	fmt.Println(string(body))
-	if InsertIntoCommunauter(AllApi.db, Newcommunauter.Name, Newcommunauter.Desc, Newcommunauter.Tags) {
+	if InsertIntoCommunauter(AllApi.db, Newcommunauter.Name, Newcommunauter.Desc, Newcommunauter.Date, Newcommunauter.Tags) {
 		w.Write([]byte("{\"msg\": \"Success\"}"))
 	} else {
 		http.Error(w, "{\"error\": \"Enter a valide community\"}", http.StatusUnauthorized)
@@ -501,7 +506,6 @@ func Deletecomme(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "{\"error\": \"Enter a valide name\"}", http.StatusUnauthorized)
 	}
 }
-
 func Deletepost(w http.ResponseWriter, r *http.Request) {
 	var deletepost Post
 	body, _ := ioutil.ReadAll(r.Body)
@@ -560,7 +564,6 @@ func CategorieHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	json.NewEncoder(w).Encode(temptab)
 }
-
 func Handler() {
 
 	db := InitDatabase("./Ynnit.db")
@@ -667,7 +670,7 @@ func Handler() {
 	r.HandleFunc("/session", Session)
 
 	r.HandleFunc("/logout", Logout)
-
+	r.HandleFunc("/viewcommunity", ViewCommunity)
 	go reloadApi()
 
 	http.Handle("/", r)

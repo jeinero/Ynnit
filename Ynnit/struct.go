@@ -30,6 +30,7 @@ type Communauter struct {
 	Id   int    `json: "id"`
 	Name string `json: "name"`
 	Desc string `json: "desc"`
+	Date string `json: "date"`
 	Tags string `json: "tags"`
 }
 type Post struct {
