@@ -7,7 +7,9 @@ const dates = (year + "-" + day + "-" + month)
 
 document.getElementById("btn").onclick = function () {
     if (getCookie("name") != null) {
-        let linkCat = ""
+       
+let linkCat = ""
+
 
         document.getElementById("btn").onclick = function () {
             if (getCookie("name") != null && document.getElementById("titre").value.length >= 1 && linkCat != "") {
@@ -17,16 +19,14 @@ document.getElementById("btn").onclick = function () {
             }
         }
 
-        function getCookie(name) {
-            var nameEQ = name + "=";
-            var ca = document.cookie.split(';');
-            for (var i = 0; i < ca.length; i++) {
-                var c = ca[i];
-                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-            }
-            return null;
-        }
+
+document.getElementById("btn").onclick = function () {
+    if (getCookie("name") != null && document.getElementById("titre").value.length >= 1 && linkCat != "") {
+        create()
+    } else {
+        document.getElementById("error").innerText = "Need a user, login or fuck off"
+    }
+}
 
         function create() {
             fetch("/newcommunity", {
@@ -53,15 +53,37 @@ document.getElementById("btn").onclick = function () {
                 })
         }
 
-        document.body.onload = function () {
-            if (getCookie("name") != null) {
-                let classComm = document.getElementsByClassName("lien")
-                classComm[0].style.display = "none"
-                classComm[1].style.display = "none"
-            }
-        }
+function create() {
+    fetch("/newcommunity", {
+        method: "POST",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: JSON.stringify({
+            Name: document.getElementById("titre").value,
+            Desc: document.getElementById("content").value,
+            Tags: linkCat
+        })
+    })
+        .then(async (res) => {
+            if (!res.ok)
+                throw await res.json()
+            return res.json()
+        })
+        .then((data) => {
+            location.href = "/"
+        }).catch((err) => {
+            document.getElementById("error").innerText = err.error
+        })
+}
 
-        const selector = document.getElementsByClassName("selectcat")[0]
+document.body.onload = function () {
+    if (getCookie("name") != null) {
+        let classComm = document.getElementsByClassName("lien")
+        classComm[0].style.display = "none"
+        classComm[1].style.display = "none"
+    }
+}
 
         fetch("/apicategories")
             .then(resp => resp.json())
@@ -81,6 +103,6 @@ document.getElementById("btn").onclick = function () {
         select.addEventListener('change', function handleChange(event) {
             linkCat = event.target.value
         })
-
     }
 }
+

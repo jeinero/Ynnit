@@ -511,7 +511,6 @@ func Deletecomme(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "{\"error\": \"Enter a valide name\"}", http.StatusUnauthorized)
 	}
 }
-
 func Deletepost(w http.ResponseWriter, r *http.Request) {
 	var deletepost Post
 	body, _ := ioutil.ReadAll(r.Body)
@@ -570,7 +569,6 @@ func CategorieHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	json.NewEncoder(w).Encode(temptab)
 }
-
 func Handler() {
 
 	db := InitDatabase("./Ynnit.db")

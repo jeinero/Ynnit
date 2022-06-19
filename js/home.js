@@ -220,7 +220,7 @@ function newCard(posts) {
 
         const comments = document.createElement('div')
         comments.classList = 'comments'
-        comments.innerHTML = element.NumberComment + " commentaires"
+        comments.innerHTML = element.NumberComment + "commentaires"
 
         const userpseudo = document.createElement('div')
         userpseudo.classList = 'userpseudo'

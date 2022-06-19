@@ -3,6 +3,8 @@
 
 body {
     margin: 0px;
+    background-image: url("https://i.pinimg.com/originals/5c/e6/b9/5ce6b97ce3bde0864188a5d89604da1c.jpg");
+    background-size:cover;   
 }
 
 header {
@@ -13,8 +15,22 @@ header {
     width: 100%;
     background: linear-gradient(90deg, rgba(238,50,78,1) 0%, rgba(254,190,16,1) 100%);
     text-decoration: none;
+<<<<<<< HEAD
     box-shadow: 10px;
     font-family: 'Noto Sans', sans-serif;
+=======
+    font-family: 'Noto Sans', sans-serif;
+
+}
+
+.container {
+    display: flex;
+    width: auto;
+    height: auto;
+    justify-content: center;
+    padding: 1%;
+    align-items: center;
+>>>>>>> d0a425c1041d47a4b225164302f2e9989fc202b7
 }
 
 
@@ -38,10 +54,13 @@ header {
     display: flex;
     justify-content: center;
     background: white;
-    border-radius: 40px;
+    border-radius: 10px;
     width: 100%;
     color: black;
+<<<<<<< HEAD
     border: 5px double rgba(238,50,78,1);
+=======
+>>>>>>> d0a425c1041d47a4b225164302f2e9989fc202b7
 }
 
 .searchhead {
@@ -54,6 +73,10 @@ header {
     align-items: center;
     text-align: center;
     font-family: 'Noto Sans', sans-serif;
+<<<<<<< HEAD
+=======
+    text-transform: uppercase;
+>>>>>>> d0a425c1041d47a4b225164302f2e9989fc202b7
 }
 
 .Log {
@@ -65,20 +88,6 @@ header {
     margin-left: 10%;
 }
 
-.Register {
-    background: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    font-size: 25px;
-    width: 150px;
-    border: 2px solid black;
-    border-radius: 40px;
-    height: 40px;
-}
-
-
 #viewpost {
     margin: 1% 10%;
     display: flex;
@@ -89,7 +98,6 @@ header {
     border-radius: 40px;
     padding: 2%;
     justify-content: center;
-
 }
 
 #viewcommentaire {
@@ -164,12 +172,16 @@ header {
 }
 
 .contents {
+<<<<<<< HEAD
 
+=======
+>>>>>>> d0a425c1041d47a4b225164302f2e9989fc202b7
     display: flex;
     width: auto;
     height: auto;
     font-size: 20px;
     align-items: center;
+    margin-bottom: 1%;
 }
 
 .divbottom {
@@ -180,8 +192,6 @@ header {
     align-items: center;
     padding: 1%;
     border-bottom: 1px solid red;
-
-
 }
 
 .like {
@@ -250,9 +260,13 @@ header {
     z-index: 10;
 }
 
-.dislike:hover {
-    color: red;
+.divbottom2 {
+    display: flex;
+    width: 100%;
+    height: auto;
+    align-items: center;
 }
+
 
 .username {
     justify-content: flex-start;

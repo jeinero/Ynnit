@@ -42,8 +42,8 @@ fetch("/apicommunauters/" + id)
                 divright.appendChild(date)
 
                 const datecontent = document.createElement('div')
-                datecontent.classList = 'date'
-                datecontent.innerHTML = data.Communauter.Date
+                datecontent.classList = 'datecontent'
+                datecontent.innerHTML = data.Communauter.Date + "la date ici"
                 divright.appendChild(datecontent)
 
                 const description = document.createElement('div')
@@ -59,7 +59,6 @@ fetch("/apicommunauters/" + id)
 
 
    
-
 
 document.body.onload = function () {
         if (getCookie("name") != null) {
