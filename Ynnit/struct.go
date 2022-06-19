@@ -13,6 +13,8 @@ type AllStructs struct {
 	DislikeALl        []DisLike
 	LikeAllComment    []Like
 	DislikeALlComment []DisLike
+	WarnPost          []Warn
+	WarnUser          []Warn
 }
 
 type User struct {
@@ -41,6 +43,7 @@ type Post struct {
 	UsersName     string `json: "NameUser"`
 	Like          int    `json: "likeCount"`
 	NumberComment int    `json: "commentCount"`
+	Warn          int    `json: "warn"`
 }
 type Comment struct {
 	Id        int    `json: "id"`
@@ -67,4 +70,10 @@ type DisLike struct {
 	UserId      int `json: "userId"`
 	PostLink    int `json: "postLink"`
 	CommentLink int `json: "commentLink"`
+}
+
+type Warn struct {
+	Id      int    `json: "id"`
+	Content string `json: "Content"`
+	Link    int    `json: "idLink"`
 }

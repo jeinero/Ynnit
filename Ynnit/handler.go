@@ -22,6 +22,7 @@ var AllApi AllStructs
 type ApiPosts struct {
 	Post     Post
 	Comments []Comment
+	Warn     []Warn
 	like     int
 }
 
@@ -235,6 +236,7 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	var newPost Post
 	body, _ := ioutil.ReadAll(r.Body)
+	fmt.Println(string(body))
 	json.Unmarshal(body, &newPost)
 	goodOrFalse := InsertIntoPost(AllApi.db, newPost.CommuLink, newPost.Title, newPost.Content, newPost.UsersName, newPost.Date)
 	if !goodOrFalse {
@@ -561,6 +563,18 @@ func CategorieHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(temptab)
 }
 
+func AddWarnPost(w http.ResponseWriter, r *http.Request) {
+	var warn Warn
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &warn)
+	fmt.Println(string(body))
+	goodOrFalse := InsertIntoWarnPost(AllApi.db, warn.Content, warn.Link)
+	w.Write([]byte("{\"msg\": \"Success\"}"))
+	if !goodOrFalse {
+		w.Write([]byte("{\"error\": \"Sorry\"}"))
+	}
+}
+
 func Handler() {
 
 	db := InitDatabase("./Ynnit.db")
@@ -570,7 +584,7 @@ func Handler() {
 	// InsertIntoCategorie(AllApi.db, "Informatique")
 	// InsertIntoCategorie(AllApi.db, "France")
 	// InsertIntoCategorie(AllApi.db, "Food")
-
+	Changeleveluser(AllApi.db, "Zupz", "Administrators")
 	// InsertIntoUser(db, "jeinero", "jenei@gmail.com", "ImRio6988", "guest", "test", "test")
 	InsertIntoCategorie(AllApi.db, "Shitpost")
 	// InsertIntoUser(db, "qsdlqsd", "jeazenei@yahoo.fr", "ImRio6988")
@@ -668,6 +682,8 @@ func Handler() {
 
 	r.HandleFunc("/logout", Logout)
 
+	r.HandleFunc("/addWarnPost", AddWarnPost)
+
 	go reloadApi()
 
 	http.Handle("/", r)
@@ -685,4 +701,6 @@ func reloadApi() {
 	AllApi.DislikeALl = DbtoStructDisLikePost(AllApi.db)
 	AllApi.LikeAllComment = DbtoStructLikeComment(AllApi.db)
 	AllApi.DislikeALlComment = DbtoStructDisLikeComment(AllApi.db)
+	AllApi.WarnPost = DbtoStructWarnPost(AllApi.db)
+
 }

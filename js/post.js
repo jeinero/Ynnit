@@ -28,6 +28,7 @@ function getCookie(name) {
 }
 const selector = document.getElementsByClassName("selectcomm")[0]
 function onClickPost() {
+    console.log("marche?")
     fetch("/post", {
         method: "POST",
         headers: {
@@ -45,8 +46,9 @@ function onClickPost() {
         document.getElementById("error").innerText = err.error
 
         })
-    window.location.assign("/");
-
+    .then(data => {
+        window.location.assign("/");
+    })
 }
 
 fetch("/apicommunauters")

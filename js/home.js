@@ -17,6 +17,7 @@ async function getApi(url) {
 }
 window.onload = newCard(post)
 function newCard(posts) {
+  console.log(posts)
   posts.forEach(element => {
     fetch("/apicommunauters/" + element.CommuLink)
       .then(resp => resp.json())
@@ -140,7 +141,7 @@ function newCard(posts) {
         divbuttondropdown.append(firstoptionbuttondropdown)
 
         const secondoptionbuttondropdown = document.createElement('a')
-        secondoptionbuttondropdown.innerText = "Report User"
+        secondoptionbuttondropdown.innerText = "Report Post"
         divbuttondropdown.append(secondoptionbuttondropdown)
 
         buttondropdown.onclick = function addLike(e) {
@@ -202,6 +203,16 @@ function newCard(posts) {
 
         secondoptionbuttondropdown.onclick = function addLike(e) {
           event.stopPropagation(e)
+          fetch("/addWarnPost", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json"
+            },
+            body: JSON.stringify({
+              Content: "needToAddAlgo",
+              Link: parseInt(element.Id)
+            })
+          })
         }
 
 
@@ -293,9 +304,35 @@ function getCookie(name) {
 }
 
 const sortComment = document.getElementById("filtercomment")
-// console.log(sortByComment)
 sortComment.onclick = function() {
-  console.log("fuck")
+  post.sort((a,b) => {
+    return b.NumberComment - a.NumberComment
+  })
+  deleteCards()
+  newCard(post)
+}
+const filterdate = document.getElementById("filterdate")
+filterdate.onclick = function() {
+  post.sort((a,b) => {
+    return b.date - a.date
+  })
+  deleteCards()
+  newCard(post)
+}
+const filterlike = document.getElementById("filterlike")
+filterlike.onclick = function() {
+  post.sort((a,b) => {
+    return b.Like - a.Like
+  })
+  deleteCards()
+  newCard(post)
+}
+
+function deleteCards() {
+  const display = document.querySelectorAll('.card');
+  display.forEach(heroe => {
+    heroe.remove();
+  });
 }
 
 
