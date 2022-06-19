@@ -85,23 +85,7 @@
 
                         <div class="Filter2">
                                 <div class="searchdiv">
-                                        <div class="formheader2" method="get" action="/" autocomplete="off">
-                                                <input onchange="submit()" class="searchhead2" type="search"
-                                                        name="search" placeholder="Choose a Community"
-                                                        class="searchartist" list="Artists">
-                                                <datalist id="Artists">
-                                                        {{range .GroupeArt}}
-                                                        <option value="{{.Name}}">{{.Name}} - Artist/Band</option>
-                                                        <option value="{{.Name}}">{{.CreationDate}} - Creation Date
-                                                        </option>
-                                                        {{range .Members}}
-                                                        <option value="{{.}}">Member</option>
-                                                        {{end}}
-                                                        <option value={{.Name}}>{{.FirstAlbum}} - First Album Release
-                                                                Date</option>
-                                                        {{end}}
-                                                </datalist>
-                                        </div>
+                                        <input type="text" placeholder="Search.." id="search">
                                 </div>
                         </div>
 

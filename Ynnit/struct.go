@@ -3,11 +3,16 @@ package YnnitPackage
 import "database/sql"
 
 type AllStructs struct {
-	db              *sql.DB
-	UsersAll        []User
-	CommunautersAll []Communauter
-	PostsAll        []Post
-	CommentsAll     []Comment
+	db                *sql.DB
+	UsersAll          []User
+	CommunautersAll   []Communauter
+	PostsAll          []Post
+	CommentsAll       []Comment
+	TagsAll           []Tags
+	LikeAll           []Like
+	DislikeALl        []DisLike
+	LikeAllComment    []Like
+	DislikeALlComment []DisLike
 }
 
 type User struct {
@@ -18,6 +23,7 @@ type User struct {
 	Pp         string `json: "pp"`
 	Password   string `json: "password"`
 	UsersLevel string `json: "usersLevel"`
+	Warn       int    `json: "warn"`
 	Date       string `json: "date"`
 }
 type Communauter struct {
@@ -25,15 +31,17 @@ type Communauter struct {
 	Name string `json: "name"`
 	Desc string `json: "desc"`
 	Date string `json: "date"`
+	Tags string `json: "tags"`
 }
 type Post struct {
-	Id        int    `json: "id"`
-	Date      int    `json: "date"`
-	CommuLink int    `json: "commuLink"`
-	Title     string `json: "title"`
-	Content   string `json: "content"`
-	UsersName string `json: "NameUser"`
-	Like      int    `json: "likeCount"`
+	Id            int    `json: "id"`
+	Date          int    `json: "date"`
+	CommuLink     int    `json: "commuLink"`
+	Title         string `json: "title"`
+	Content       string `json: "content"`
+	UsersName     string `json: "NameUser"`
+	Like          int    `json: "likeCount"`
+	NumberComment int    `json: "commentCount"`
 }
 type Comment struct {
 	Id        int    `json: "id"`
@@ -42,4 +50,22 @@ type Comment struct {
 	UsersName string `json: "NameUser"`
 	Like      int    `json: "likeCount"`
 	Date      int    `json: "date"`
+}
+
+type Tags struct {
+	Id   int    `json: "id"`
+	Name string `json: "name"`
+}
+
+type Like struct {
+	Id          int `json: "id"`
+	UserId      int `json: "userId"`
+	PostLink    int `json: "postLink"`
+	CommentLink int `json: "commentLink"`
+}
+type DisLike struct {
+	Id          int `json: "id"`
+	UserId      int `json: "userId"`
+	PostLink    int `json: "postLink"`
+	CommentLink int `json: "commentLink"`
 }

@@ -56,10 +56,16 @@
         <div class="CreatePost">
             <p><strong>Create a Community:</strong> </p>
 
-            <input id="titre" type="text" maxlength="300" size="50" placeholder="Title" required>
-            <textarea id="content" name="" cols="30" rows="10" placeholder="Text (optional)"></textarea>
-
-            <input type="checkbox" id="btnControl" />
+            <select name="categorie" class="selectcat" id="select">
+                <option value="0">Choose the Categorie</option>
+                <option value="1">Cnacim</option>
+                <option value="2">rom</option>
+            </select>
+           
+                <input  id="titre" type="text" maxlength="300" size="50" placeholder="Title" required>
+                <textarea id="content"name="" cols="30" rows="10" placeholder="Text (optional)"></textarea>
+            
+                      <input type="checkbox" id="btnControl" />
             <label for="btnControl">
                 <div id="colored">
                     + informatique
