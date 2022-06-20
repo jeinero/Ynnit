@@ -58,6 +58,7 @@ type Comment struct {
 	Like      int    `json: "likeCount"`
 	DisLike   int    `json: "DisLikeCount"`
 	Date      int    `json: "date"`
+	Photo     string `json: "date"`
 }
 
 type Tags struct {

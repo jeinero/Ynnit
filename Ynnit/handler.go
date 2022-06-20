@@ -144,12 +144,17 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		for _, users := range AllApi.UsersAll {
 			if post.Id == users.Id {
-				post.Photo = users.Photo
+				temptab.Post.Photo = users.Photo
 			}
 		}
 	}
 	for _, comment := range AllApi.CommentsAll {
 		if strconv.Itoa(comment.PostLink) == id {
+			for _, users := range AllApi.UsersAll {
+				if comment.UsersName == users.Name {
+					comment.Photo = users.Photo
+				}
+			}
 			temptab.Comments = append(temptab.Comments, comment)
 		}
 
@@ -190,6 +195,18 @@ func tagsHandler(w http.ResponseWriter, r *http.Request) {
 
 func CommentsHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
+	var temptab []Comment
+	for _, comment := range AllApi.CommentsAll {
+		for _, users := range AllApi.UsersAll {
+			fmt.Println(comment.UsersName, users.Name)
+			if comment.UsersName == users.Name {
+
+				comment.Photo = users.Photo
+			}
+		}
+		temptab = append(temptab, comment)
+	}
+	AllApi.CommentsAll = temptab
 	json.NewEncoder(w).Encode(AllApi.CommentsAll)
 }
 func CommentHandler(w http.ResponseWriter, r *http.Request) {
