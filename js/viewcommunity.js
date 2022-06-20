@@ -22,8 +22,8 @@ window.onload = function() {
 
 function newCard(commu) {
         document.getElementById("name").innerText = commu.Communauter.Name
-        document.getElementById("date").innerText = commu.Communauter.date
-        document.getElementById("desc").innerText = commu.Communauter.desc
+        document.getElementById("date").innerText = commu.Communauter.Date
+        document.getElementById("desc").innerText = commu.Communauter.Desc
   commu.Post.forEach(element => {
         const newcard = document.createElement('div')
         newcard.id = element.Id
@@ -304,3 +304,12 @@ function getCookie(name) {
   }
   return null;
 }
+
+
+document.body.onload = function() {
+        if (getCookie("name") != null) {
+                let classComm = document.getElementsByClassName("lien")
+                classComm[0].style.display = "none"
+                classComm[1].style.display = "none"
+                }
+      }
