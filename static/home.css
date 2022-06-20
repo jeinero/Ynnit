@@ -247,13 +247,13 @@ a.createpost {
     justify-content: center;
     background-color: white;
     text-decoration: none;
+    font-size: 15px;
 }
 
 a.createcommunity {
     height: 100%;
     border: none;
     color: black;
-
 }
 
 .createcommunity:hover {
