@@ -144,12 +144,17 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		for _, users := range AllApi.UsersAll {
 			if post.Id == users.Id {
-				post.Photo = users.Photo
+				temptab.Post.Photo = users.Photo
 			}
 		}
 	}
 	for _, comment := range AllApi.CommentsAll {
 		if strconv.Itoa(comment.PostLink) == id {
+			for _, users := range AllApi.UsersAll {
+				if comment.UsersName == users.Name {
+					comment.Photo = users.Photo
+				}
+			}
 			temptab.Comments = append(temptab.Comments, comment)
 		}
 
@@ -190,6 +195,18 @@ func tagsHandler(w http.ResponseWriter, r *http.Request) {
 
 func CommentsHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
+	var temptab []Comment
+	for _, comment := range AllApi.CommentsAll {
+		for _, users := range AllApi.UsersAll {
+			fmt.Println(comment.UsersName, users.Name)
+			if comment.UsersName == users.Name {
+
+				comment.Photo = users.Photo
+			}
+		}
+		temptab = append(temptab, comment)
+	}
+	AllApi.CommentsAll = temptab
 	json.NewEncoder(w).Encode(AllApi.CommentsAll)
 }
 func CommentHandler(w http.ResponseWriter, r *http.Request) {
@@ -666,25 +683,21 @@ func Handler() {
 	AllApi.db = db
 	defer db.Close()
 
-	// InsertIntoCategorie(AllApi.db, "Informatique")
-	// InsertIntoCategorie(AllApi.db, "France")
-	// InsertIntoCategorie(AllApi.db, "Food")
-	Changeleveluser(AllApi.db, "Admin", "Administrators")
-	// InsertIntoUser(db, "jeinero", "jenei@gmail.com", "ImRio6988", "guest", "test", "test")
+	// // InsertIntoCategorie(AllApi.db, "Informatique")
+	// // InsertIntoCategorie(AllApi.db, "France")
+	// // InsertIntoCategorie(AllApi.db, "Food")
+	// Changeleveluser(AllApi.db, "Admin", "Administrators")
+	// // InsertIntoUser(db, "jeinero", "jenei@gmail.com", "ImRio6988", "guest", "test", "test")
 	InsertIntoCategorie(AllApi.db, "Shitpost")
-<<<<<<< HEAD
-	// InsertIntoCategorie(AllApi.db, "z")
-=======
->>>>>>> ae885929a6569390489d7cb211a5ebc668317e29
-	// InsertIntoUser(db, "qsdlqsd", "jeazenei@yahoo.fr", "ImRio6988")
-	// InsertIntoCommunauter(db, "InfoFams", "DESC")
-	// InsertIntoPost(db, 1, "Golang Basic", "Golang suck lmao", "Zupz", 1)
-	// InsertIntoComment(db, "Menteur", 1, 1)
-	// InsertIntoComment(db, "gros bouffon", 1, 1)
-	// UpdatePassUser(db, "PaseeeeeeeeeeeeeesChang", "bc@gmail.om")
-	// UpdateMailUser(db, "azertyuiop@yahoo.ch", "jenei@gmail.com")
-	// UpdateNameUser(db, 1, "test2")
-	// DeleteUser(AllApi.db, 2, "test")
+	// // InsertIntoUser(db, "qsdlqsd", "jeazenei@yahoo.fr", "ImRio6988")
+	// // InsertIntoCommunauter(db, "InfoFams", "DESC")
+	// // InsertIntoPost(db, 1, "Golang Basic", "Golang suck lmao", "Zupz", 1)
+	// // InsertIntoComment(db, "Menteur", 1, 1)
+	// // InsertIntoComment(db, "gros bouffon", 1, 1)
+	// // UpdatePassUser(db, "PaseeeeeeeeeeeeeesChang", "bc@gmail.om")
+	// // UpdateMailUser(db, "azertyuiop@yahoo.ch", "jenei@gmail.com")
+	// // UpdateNameUser(db, 1, "test2")
+	// // DeleteUser(AllApi.db, 2, "test")
 
 	r := mux.NewRouter()
 

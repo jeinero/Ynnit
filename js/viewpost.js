@@ -117,6 +117,7 @@ fetch("/apiposts/" + id)
 
             const avatar = document.createElement('img')
             avatar.classList = 'avatar'
+            console.log(element)
             avatar.src = element.Photo
             divtop2.appendChild(avatar)
 
@@ -143,7 +144,7 @@ fetch("/apiposts/" + id)
             like.classList = 'like'
             like.id = "like"
             divbottom2.appendChild(like)
-
+            let likeInt = element.Like
             like.onclick = function addLike(e) {
                 console.log(element.Id)
                 fetch("/addLikecomment", {
@@ -162,19 +163,27 @@ fetch("/apiposts/" + id)
                 if (dislike.style.color == "red") {
                     like.style.color = "rgb(49, 172, 49)"
                     dislike.style.color = "#000"
+                    likeInt += 1
+                    dislikeInt -= 1
+                    dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+                    like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
                 } else {
                     if (like.style.color == "rgb(49, 172, 49)") {
                         like.style.color = "#000"
+                        likeInt -= 1
+                        like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
                     } else {
                         like.style.color = "rgb(49, 172, 49)"
+                        likeInt += 1
+                        like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
                     }
                 }
                 event.stopPropagation(e)
             }
-            like.innerHTML = `<i class="fa fa-thumbs-up" aria-hidden="true"></i>`
+            like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
             if (likeTab != null) {
                 likeTab.forEach(elem => {
-                    if (parseInt(divbottom2.id) === elem.CommentLink) {
+                    if (elem.CommentLink == element.Id) {
                         like.style.color = "rgb(49, 172, 49)"
                     }
                 })
@@ -184,6 +193,8 @@ fetch("/apiposts/" + id)
             dislike.classList = 'dislike'
             dislike.id = "dislike"
             divbottom2.appendChild(dislike)
+            console.log(element.DisLike)
+            let dislikeInt = element.DisLike
             dislike.onclick = function addLike(e) {
                 fetch("/addDislikecomment", {
                     method: "POST",
@@ -201,11 +212,20 @@ fetch("/apiposts/" + id)
                 if (like.style.color === "rgb(49, 172, 49)") {
                     like.style.color = "#000"
                     dislike.style.color = "red"
+                    dislikeInt += 1
+                    dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+                    likeInt -= 1
+                    like.innerHTML = ` ${likeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
                 } else {
                     if (dislike.style.color === "red") {
                         dislike.style.color = "#000"
+                        dislikeInt -= 1
+                        dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
                     } else {
                         dislike.style.color = "red"
+                        dislikeInt += 1
+                        dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+
                     }
                 }
                 event.stopPropagation(e)
@@ -218,7 +238,7 @@ fetch("/apiposts/" + id)
                     }
                 })
             }
-            dislike.innerHTML = `<i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+            dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
 
            
 
@@ -291,7 +311,6 @@ fetch("/apiposts/" + id)
 
     })
 
-// })
 
 function timeSince(date) {
     var seconds = Math.floor((new Date() - date) / 1000);
