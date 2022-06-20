@@ -28,20 +28,30 @@
             <label id="title" for="email">Email:</label>
             <input type="email" id="email" name="email" placeholder="john.doe@example.com" required><br><br>
 
-            <label id="title" for="pwd">Password:</label>
-            <input type="password" id="pwd" name="pwd" minlength="8" autocomplete="on" placeholder="Enter password"required><br><br>
+            <label for="pwd">Password:</label>
+            <input type="password" id="pwd" name="pwd" minlength="8" autocomplete="on" placeholder="Enter password"
+                required><br><br>
 
-            <label id="title" for="pwd2">Password:</label>
-            <input type="password" id="pwd2" name="pwd2" minlength="8" autocomplete="on"placeholder="Enter password" required><br><br>
+            <label for="pwd2">Password:</label>
+            <input type="password" id="pwd2" name="pwd2" minlength="8" autocomplete="on" placeholder="Enter password"
+                required><br><br>
 
             <button id="button" type="submit">Join Us</button>
             <p id="error" style="color: red"></p>
 
         </div>
 
-    <script type="text/javascript" src="/js/font-button.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/2.0.2/sha.js"></script>
-    <script type="module" src='/js/joinus.js'></script>
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+        <script type="module" src='/js/joinusgoogle.js'></script>
+
+
+        <div id="buttonDiv"></div>
+
+
+        <script type="text/javascript" src="/js/font-button.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/2.0.2/sha.js"></script>
+        <script type="module" src='/js/joinus.js'></script>
 </body>
 
 </html>

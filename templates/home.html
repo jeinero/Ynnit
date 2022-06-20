@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <link rel="stylesheet" href="/css/home.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -24,7 +25,7 @@
 
         <div class="searchdiv">
                 <div class="searchheader" method="get" action="/" autocomplete="off">
-                        <input class="searchhead" type="search" name="search" placeholder="Type to search"
+                        <input class="searchhead" type="search" name="search" placeholder="Search for something"
                                 list="Artists">
                         <datalist id="Artists">
                                 {{range .GroupeArt}}
@@ -75,23 +76,7 @@
                         </div>
                         <div class="Filter2">
                                 <div class="searchdiv">
-                                        <div class="formheader2" method="get" action="/" autocomplete="off">
-                                                <input onchange="submit()" class="searchhead2" type="search"
-                                                        name="search" placeholder="Choose a Community"
-                                                        class="searchartist" list="Artists">
-                                                <datalist id="Artists">
-                                                        {{range .GroupeArt}}
-                                                        <option value="{{.Name}}">{{.Name}} - Artist/Band</option>
-                                                        <option value="{{.Name}}">{{.CreationDate}} - Creation Date
-                                                        </option>
-                                                        {{range .Members}}
-                                                        <option value="{{.}}">Member</option>
-                                                        {{end}}
-                                                        <option value={{.Name}}>{{.FirstAlbum}} - First Album Release
-                                                                Date</option>
-                                                        {{end}}
-                                                </datalist>
-                                        </div>
+                                        <input type="text" placeholder="Search.." id="search">
                                 </div>
                         </div>
                         <div class="Filter3">
@@ -105,6 +90,11 @@
         </div>
         <div class="bigcard">
         </div>
+        <div class="modal">
+                <textarea></textarea>
+                <button>close</button>
+                <button>send</button>
+        </div>
         <div class="btn">
 
                 <svg class="couleur" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -117,4 +107,6 @@
 
         </div>
 </body>
+<script type="module" src='/js/home.js'></script>
+
 </html>

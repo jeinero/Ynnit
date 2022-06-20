@@ -1,9 +1,9 @@
-document.getElementById("button").onclick = function(){
+document.getElementById("submit-change-pass").onclick = function(){
     if (document.getElementById("pwd1").value.length >= 8) {
-        document.getElementById("error").innerText = ""
+        document.getElementById("pass-error").innerText = ""
         changepass()
     } else {
-        document.getElementById("error").innerText = "enter the same pass valide"
+        document.getElementById("pass-error").innerText = "Please a valide password 2 times"
     }
 };
 

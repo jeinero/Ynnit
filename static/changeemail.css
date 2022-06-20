@@ -2,7 +2,11 @@
 body {
     font-family: 'Tiro Devanagari Sanskrit', serif;
 }
+<<<<<<< HEAD
 #title{
+=======
+#title-email{
+>>>>>>> f188c8797168e448aed3915d28ba9a6a53bcb933
     display: flex;
     justify-content: center;
     font-size: x-large;

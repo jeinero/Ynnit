@@ -2,7 +2,11 @@
 body {
     font-family: 'Tiro Devanagari Sanskrit', serif;
 }
+<<<<<<< HEAD
 #title{
+=======
+#title-desc{
+>>>>>>> f188c8797168e448aed3915d28ba9a6a53bcb933
     display: flex;
     justify-content: center;
     font-size: x-large;
@@ -16,12 +20,20 @@ body {
     font-size: large;
 }
 /*-------------BUTTON PAGE CONNECT ET JOINUS----------------------------------------------*/
+<<<<<<< HEAD
 #button {
+=======
+.button-desc {
+>>>>>>> f188c8797168e448aed3915d28ba9a6a53bcb933
     font-size: medium;
     height: 25px;
     width: 30%;
 }
+<<<<<<< HEAD
 #button:hover {
+=======
+.button-desc:hover {
+>>>>>>> f188c8797168e448aed3915d28ba9a6a53bcb933
     background: #d6d6d6;
 }
 /*---------------LES INPUT DE CHAQUE ; Mail, Nom, Password-------------------------------*/
@@ -76,4 +88,7 @@ button > img {
                         display: flex;
                         justify-content: center;                        
                     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> f188c8797168e448aed3915d28ba9a6a53bcb933

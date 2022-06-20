@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*--------------POLICE--------------*/
 body {
     font-family: 'Tiro Devanagari Sanskrit', serif;
@@ -135,3 +136,113 @@ background-image: linear-gradient(315deg, #fff200 0%, #ff0000 74%);
 .btn-13:active {
   top: 2px;
 }
+=======
+/*--------------POLICE--------------*/
+body {
+  font-family: 'Tiro Devanagari Sanskrit', serif;
+}
+
+.flex-title-delete {
+  display: flex;
+  justify-content: center;
+  text-decoration: underline;
+  font-family: Impact, sans-serif;
+  font-size: 35px;
+  letter-spacing: 2px;
+}
+/*-------------BUTTON PAGE CONNECT ET JOINUS----------------------------------------------*/
+#button-delete {
+  font-size: medium;
+  height: 25px;
+  width: 30%;
+}
+#button-delete:hover {
+  background: #d6d6d6;
+}
+
+/*-------------------------TAILLE IMAGE DE JOINUS--------------------------*/
+
+.flex-title-image-delete > img {
+  width: 50%;
+}
+/* button > img {
+  width: 11%;
+} */
+
+
+
+/*------------------------------Taille des flexs Ect-------------------------------*/
+                  #flex-content-delete{
+                      margin-top: 35px;
+                      display: flex;
+                      justify-content: center;
+                      /* font-size: x-large; */
+                  }
+                  #content-center-delete{
+                      display: flex;
+                      flex-direction: column;
+                      justify-content: center;
+                      padding: 15px;
+                      border:solid black 6px;
+                      border-radius: 40px;
+                  }
+                  #content-delete{
+                      display: flex;
+                      flex-direction: column;
+                      gap: 30px;
+                      border:solid black 7px; 
+                      border-radius: 40px;
+                      margin-left: 10px;
+                      margin-left: 10px;
+                  }
+
+                  /*------flex pour centrer le haut/bas ------*/
+                  .flex-title-delete {
+                      display: flex;
+                      justify-content: center;
+                      padding-left: 15px;                      
+                  }
+                  /* h1 > img{
+                    padding-left: 20%;
+                  } */
+
+/*----------------------------BOUTON CSS----------------------------------*/
+
+
+.frame-delete {
+  display: flex;
+  flex-direction: row;
+  margin: 15px auto;
+  justify-content: center;
+}
+button {
+margin: 10px;
+}
+.custom-btn {
+width: 180px;
+height: 200px;
+color: aliceblue;
+text-shadow: rgb(255, 255, 255) 3px 0 10px;
+border-radius: 30px;
+padding: 5px 15px;
+font-family: 'Lato', sans-serif;
+font-weight: 500;
+background: transparent;
+cursor: pointer;
+transition: all 0.3s ease;
+position: relative;
+display: inline-block;
+ box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+ 7px 7px 20px 0px rgba(0,0,0,.1),
+ 4px 4px 5px 0px rgba(0,0,0,.1);
+outline: none;
+}
+
+/* 13 */
+.btn-13 {
+background-color: #89d8d3;
+background-image: linear-gradient(315deg, #89d8d3 0%, #03c8a8 74%);
+border: none;
+z-index: 1;
+}
+>>>>>>> f188c8797168e448aed3915d28ba9a6a53bcb933

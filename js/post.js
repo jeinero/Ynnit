@@ -28,6 +28,7 @@ function getCookie(name) {
 }
 const selector = document.getElementsByClassName("selectcomm")[0]
 function onClickPost() {
+    console.log("marche?")
     fetch("/post", {
         method: "POST",
         headers: {
@@ -45,8 +46,9 @@ function onClickPost() {
         document.getElementById("error").innerText = err.error
 
         })
-    window.location.assign("/");
-
+    .then(data => {
+        window.location.assign("/");
+    })
 }
 
 fetch("/apicommunauters")
@@ -57,10 +59,8 @@ fetch("/apicommunauters")
         let options = document.createElement("option")
         options.text = elemnt.Name
         options.value = elemnt.Id
-        console.log(options)
         selector.appendChild(options)
     })
-    console.log(selector)
 })
 const select = document.getElementById('select');
 select.addEventListener('change', function handleChange(event) {

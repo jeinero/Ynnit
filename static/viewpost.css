@@ -1,16 +1,28 @@
 body {
     margin: 0px;
+    background-image: url("https://i.pinimg.com/originals/5c/e6/b9/5ce6b97ce3bde0864188a5d89604da1c.jpg");
+    background-size:cover;   
 }
 
 header {
+    position: relative;
     display: flex;
     top: 0;
     height: 75px;
     width: 100%;
     background: linear-gradient(90deg, rgba(238, 50, 78, 1) 0%, rgba(254, 190, 16, 1) 100%);
     text-decoration: none;
-    box-shadow: 10px;
-    font-family: 'Chewy', cursive;
+    font-family: 'Noto Sans', sans-serif;
+
+}
+
+.container {
+    display: flex;
+    width: auto;
+    height: auto;
+    justify-content: center;
+    padding: 1%;
+    align-items: center;
 }
 
 .logo {
@@ -20,7 +32,6 @@ header {
     align-items: center;
     margin-right: 5%;
     filter: invert(1);
-    border: 1px solid red;
 }
 
 .searchdiv {
@@ -28,29 +39,28 @@ header {
     width: 850px;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
 }
 
 .searchheader {
     display: flex;
     justify-content: center;
     background: white;
-    border-radius: 40px;
+    border-radius: 10px;
     width: 100%;
     color: black;
-    border: 5px double rgba(238, 50, 78, 1);
 }
 
 .searchhead {
-    background: none;
+    background: transparent;
     border: none;
     outline: none;
     color: black;
-    font-size: 20px;
+    font-size: 25px;
     width: 100%;
     align-items: center;
     text-align: center;
-    font-family: 'Acme', sans-serif;
+    font-family: 'Noto Sans', sans-serif;
+    text-transform: uppercase;
 }
 
 .Log {
@@ -60,22 +70,7 @@ header {
     width: 800px;
     height: auto;
     margin-left: 10%;
-    border: 1px solid black;
 }
-
-.Register {
-    background: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    font-size: 25px;
-    width: 150px;
-    border: 2px solid black;
-    border-radius: 40px;
-    height: 40px;
-}
-
 
 #viewpost {
     margin: 1% 10%;
@@ -83,29 +78,52 @@ header {
     height: 100%;
     flex-direction: column;
     align-items: center;
-    border: 2px solid black;
+    border: 5px double rgba(238,50,78,1);
     border-radius: 40px;
-    padding: 1%;
+    padding: 2%;
+    justify-content: center;
+}
+#viewcommentaire{
+    display: flex;
+ align-items: center;
+    flex-direction: column;
 }
 
-.divtop {
+.post {
+    flex-direction: column;
     display: flex;
     width: 100%;
-    height: 100px;
+    height: auto;
+    border-bottom: 1px solid red;
+    padding: 1%;
 }
 
 .title {
     display: flex;
     justify-content: center;
-    width: 85%;
-    height: 100px;
-    font-size: 50px;
-}
-
-.content {
-    justify-content: center;
     width: auto;
     height: auto;
+    font-size: 40px;
+    align-items: center;
+}
+.divtop {
+    display: flex;
+    width: 100%;
+    height: auto;
+    align-items: center;
+}
+
+.divtop2 {
+    display: flex;
+    width: 100%;
+    height: auto;
+    align-items: center;
+    margin-bottom: 1%;
+}
+.divcontent{
+    justify-content: center;
+    height: auto;
+    width: auto;
     display: flex;
     align-items: center;
     font-size: 25px;
@@ -114,21 +132,109 @@ header {
     border-radius: 40px;
 }
 
-.username {
+.date {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  width: 50%;
+    height: 100%;
+}
+
+.content {
     justify-content: center;
-    width: 15%;
+    height: auto;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+    padding: 2%;
+    border: 2px solid black;
+    border-radius: 40px;
+}
+.contents {
+    display: flex;
+    width: auto;
+    height: auto;
+    font-size: 20px;
+    align-items: center;
+    margin-bottom: 1%;
+}
+
+.divbottom{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    align-items: center;
+    padding: 1%;
+    border-bottom: 1px solid red;
+}
+
+.like {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;   
+    height: 100%;
+    border: 2px solid black;
+    border-radius: 40px;
+    z-index: 10;
+}
+
+.like:hover {
+    color: rgb(49, 172, 49);
+}
+
+.dislike {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;   
+    height: 100%;
+    border: 2px solid black;
+    border-radius: 40px;
+    z-index: 10;
+}
+
+.divbottom2 {
+    display: flex;
+    width: 100%;
+    height: auto;
+    align-items: center;
+}
+
+
+.username {
+    justify-content: flex-start;
+    width: 100%;
     height: auto;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     font-style: italic;
     font-size: 20px;
+
 }
 
 .commentaire {
+    margin: 1% 10%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    border: double  4px rgba(254, 190, 16, 1);
+    border-radius: 40px;
+    height: auto;
+    width: auto;
+    padding: 1%;
+ 
+    /* position: fixed;
+    bottom: 20px;
+    background-color: white;
+    opacity: 0; */
+
 }
+/* .commentaire:hover{
+    opacity: 1;
+} */
 
 textarea {
 
@@ -155,3 +261,183 @@ textarea {
     justify-content: space-between;
     width: 150px;
 }
+
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+.dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover,
+.dropbtn:focus {
+    background-color: #2980B9;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    bottom: 50px;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {
+    background-color: #ddd;
+}
+
+.show {
+    display: block;
+}
+>>>>>>> 6b1911a9ec9f5267036214c2b4f22549c6f0adde
+.btn {
+    height: 60px;
+    width: 60px;
+    background:rgba(238,50,78,1);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    cursor: pointer;
+    border: 5px double black;
+}
+
+
+.couleur{
+    filter: invert(1);
+}
+
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  #myBtn{
+    height: 60px;
+    width: 60px;
+    background:rgba(238,50,78,1);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    cursor: pointer;
+    border: 5px double black;
+  }
+
+  #content{
+    display: flex;
+    height: auto;
+    width: auto;
+    justify-content: center;
+  }
+<<<<<<< HEAD
+=======
+
+.dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover,
+.dropbtn:focus {
+    background-color: #2980B9;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    bottom: 50px;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {
+    background-color: #ddd;
+}
+
+.show {
+    display: block;
+}
+>>>>>>> 91642fe092d8402886f1c9545616afcb890c5bc5
+=======
+>>>>>>> 6b1911a9ec9f5267036214c2b4f22549c6f0adde

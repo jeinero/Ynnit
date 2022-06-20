@@ -1,9 +1,10 @@
-document.getElementById("button").onclick = function(){
-    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById("email1").value) == /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById("email2").value)) {
-        document.getElementById("error").innerText = ""
+document.getElementById("submit-change-email").onclick = function(){
+    console.log("pressed!")
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById("email1").value) && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById("email2").value)&&document.getElementById("email1").value == document.getElementById("email2").value) {
+        document.getElementById("email-error").innerText = ""
         changeemail()
     } else {
-        document.getElementById("error").innerText = "enter the same email valide"
+        document.getElementById("email-error").innerText = "Please a valide email 2 times"
     }
 };
 
