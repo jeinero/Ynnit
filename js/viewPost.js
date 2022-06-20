@@ -14,7 +14,7 @@ async function getApi(url) {
 
 const url = new URL(window.location.href)
 let id = url.searchParams.get('id')
-document.getElementById("btn").onclick = function () {
+document.getElementById("btn2").onclick = function () {
 
     onClickComment()
     location.reload().href = "/viewpost?id=" + element.Id
