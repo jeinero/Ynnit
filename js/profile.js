@@ -1,4 +1,3 @@
-
 function getCookie(name) {
   var nameEQ = name + "=";
   var ca = document.cookie.split(';');
@@ -13,7 +12,6 @@ let id = getCookie("id")
 let statu = getCookie("status")
 
 if (statu == "Administrators") {
-  console.log("je suis admin!")
   const adminbutton = document.getElementById("adminbutton")
   adminbutton.style.display = "flex"
   
@@ -21,9 +19,6 @@ if (statu == "Administrators") {
 adminbutton.style.display = "none"
 
 }
-
-
-
 
 const viewtext = document.getElementById('viewtext')
 const title = document.getElementById('titletext')
@@ -63,12 +58,12 @@ const loadDataUser = data => {
       const newcard = document.createElement('div')
       newcard.id = element.Id
       newcard.classList = "card"
-
+      newcard.href = "/viewpost?id="+element.Id
 
       const divhaut = document.createElement('div')
       divhaut.classList = 'divhaut'
 
-    
+
       const date = document.createElement('div')
       date.classList = 'date'
       date.innerHTML = timeSince(element.Date)
@@ -77,7 +72,6 @@ const loadDataUser = data => {
       content.classList = 'content'
       content.innerHTML = element.Content
 
-    
       divhaut.append(titleofpost)
 
       divhaut.append(date)
@@ -86,8 +80,6 @@ const loadDataUser = data => {
 
       const integrate = document.querySelector('.bigcardcomments')
       integrate.appendChild(newcard)
-    
-     
       
   });
 
@@ -136,7 +128,10 @@ const loadDataUser = data => {
 
       const integrate = document.querySelector('.bigcard')
       integrate.appendChild(newcard)
-      
+
+      document.getElementById(element.Id).onclick = function () {
+        location.href = "/viewpost?id=" + element.Id
+      }
   });
 }
 
@@ -231,8 +226,6 @@ bigcard2.style.display = "flex";
 }
 
 
-
-
 const modalDelte = document.getElementById("modal-delete");
 const btnDelete = document.getElementById("deleteaccount");
 const spanDelete = document.getElementById("close-delete");
@@ -245,6 +238,12 @@ bigcard2.style.display = "none";
 
 spanDelete.onclick = function() {
 modalDelte.style.display = "none";
+}
+
+window.onclick = function(event) {
+if (event.target == modalDelte) {
+  modalDelte.style.display = "none";
+}
 bigcard.style.display = "flex";
 bigcard2.style.display = "flex";
 }
