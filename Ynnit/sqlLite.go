@@ -432,7 +432,6 @@ func DbtoStructDisLikePost(db *sql.DB) []DisLike {
 		}
 		fmt.Println(2)
 		temptab = append(temptab, u)
-		fmt.Println(temptab, "help")
 	}
 	return temptab
 }
