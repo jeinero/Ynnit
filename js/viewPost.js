@@ -131,13 +131,14 @@ fetch("/apiposts/" + id)
             divbottom2.appendChild(like)
 
             like.onclick = function addLike(e) {
+                console.log(element.Id)
                 fetch("/addLikecomment", {
                     method: "POST",
                     headers: {
                         "content-type": "application/json"
                     },
                     body: JSON.stringify({
-                        CommentLink: parseInt(divbottom2.id),
+                        CommentLink: parseInt(element.Id),
                         UsersId: parseInt(getCookie("id")),
                     })
                 })
@@ -159,8 +160,9 @@ fetch("/apiposts/" + id)
             like.innerHTML = `<i class="fa fa-thumbs-up" aria-hidden="true"></i>`
             if (likeTab != null) {
                 likeTab.forEach(elem => {
+                    console.log("lol")
                         console.log(elem.CommentLink, parseInt(divbottom2.id))
-                    if (parseInt(divbottom2.id) === elem.CommentLink) {
+                    if (element.Id === elem.CommentLink) {
                         like.style.color = "rgb(49, 172, 49)"
                     }
                 })
@@ -177,7 +179,7 @@ fetch("/apiposts/" + id)
                         "content-type": "application/json"
                     },
                     body: JSON.stringify({
-                        CommentLink: parseInt(divbottom2.id),
+                        CommentLink: parseInt(element.Id),
                         UsersId: parseInt(getCookie("id")),
                     })
                 })
@@ -198,7 +200,8 @@ fetch("/apiposts/" + id)
             }
             if (dislikeTab != null) {
                 dislikeTab.forEach(elem => {
-                    if (elem.CommentLink == divbottom2.id) {
+                    console.log("lol")
+                    if (elem.CommentLink == element.Id) {
                         dislike.style.color = "red"
                     }
                 })
@@ -211,7 +214,11 @@ fetch("/apiposts/" + id)
 
         })
 
-    })
+            if (getCookie("status") != "Users" && getCookie("id") != null) {
+                // divcom.append(divdropdownbutton)
+            }
+
+        })
 
 
     function timeSince(date) {
