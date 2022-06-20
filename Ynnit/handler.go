@@ -112,6 +112,11 @@ func PostsHandler(w http.ResponseWriter, r *http.Request) {
 				post.Warn = append(post.Warn, warn)
 			}
 		}
+		for _, users := range AllApi.UsersAll {
+			if post.Id == users.Id {
+				post.Photo = users.Photo
+			}
+		}
 		temptab = append(temptab, post)
 	}
 	AllApi.PostsAll = temptab
