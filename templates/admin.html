@@ -1,39 +1,66 @@
 <!DOCTYPE html>
 <html>
-    <header>
-        <title>Ynnit</title>
-        <meta charset="utf-8"/>
-        <link rel="stylesheet" href="./css/admin.css">
-    </header>
+<header>
+    <title>Ynnit</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="./css/admin.css">
+</header>
 
-    <body>
-        <h1>CPanel Admin</h1>
+<body>
+    <h1>CPanel Admin</h1>
 
 
-        <div class="tab">
-            <button class="tablinks" id="defaultOpen">User Level</button>
-            <button class="tablinks">Report</button>
-        </div>
+    <div class="tab">
+        <button class="tablinks" id="defaultOpen">User Level</button>
+        <button class="tablinks">Report</button>
+        <button class="tablinks">New Tags</button>
+        <button class="tablinks">Flags</button>
+    </div>
 
-        <div id="User Level" class="tabcontent">
-            <h2>User Level</h2>
+    <div id="User Level" class="tabcontent">
+        <h2>User Level</h2>
 
-            <label for="site-search">Search name:</label>
-            <input type="search" id="site-search">
-            
-            <button>Search</button>
-            
-            <table id="tableId"></table>
-        </div>
-          
-        <div id="Report" class="tabcontent">
-            <h2>Report</h2>
+        <label for="site-search">Search name:</label>
+        <input type="search" id="site-search">
 
-            <p>Report</p>
-        </div>
+        <button>Search</button>
 
-    </body>
+        <table id="tableId"></table>
+    </div>
 
-    <script type="module" src='/js/admin.js'></script>
+    <div id="Report" class="tabcontent">
+        <h2>Report</h2>
+
+        <table id="tableReport"></table>
+    </div>
+
+    <div id="New Tags" class="tabcontent">
+        <h2>New Tags</h2>
+
+        <label for="search-tags">Search tags:</label>
+        <input type="search" id="search-tags">
+
+        <button>Search</button>
+
+        <br><br>
+
+        <label for="addtags">Name new tags :</label>
+        <input type="text" id="addtags" name="addtags">
+
+        <button type="submit" id="add">Add</button>
+
+        <p id="error" style="color: red"></p>
+
+        <table id="tableTags"></table>
+    </div>
+
+    <div id="Flags" class="tabcontent">
+        <h2>Flags users :</h2>
+        <table id="tableFlags"></table>
+    </div>
+
+</body>
+
+<script type="module" src='/js/admin.js'></script>
 
 </html>

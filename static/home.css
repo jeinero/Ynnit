@@ -3,12 +3,12 @@
 
 :root {
     --btn-corner: 20px;
-  }
-  
+}
+
 body {
     margin: 0px;
-    background: rgb(8,160,174);
-    background: linear-gradient(90deg, rgba(8,160,174,1) 0%, rgba(78,186,198,1) 15%, rgba(255,255,255,1) 50%, rgba(68,182,195,1) 85%, rgba(8,160,174,1) 100%);
+    background-image: url("https://i.pinimg.com/originals/5c/e6/b9/5ce6b97ce3bde0864188a5d89604da1c.jpg");
+    background-size: cover;
 }
 
 /* header */
@@ -18,7 +18,7 @@ header {
     top: 0;
     height: 75px;
     width: 100%;
-    background: linear-gradient(90deg, rgba(8,160,174,1) 4%, rgba(78,186,198,1) 15%, rgba(104,227,245,1) 29%, rgba(74,248,247,1) 58%, rgba(235,238,229,1) 86%, rgba(255,255,255,1) 95%);
+    background: linear-gradient(90deg, rgba(8, 160, 174, 1) 4%, rgba(78, 186, 198, 1) 15%, rgba(104, 227, 245, 1) 29%, rgba(74, 248, 247, 1) 58%, rgba(235, 238, 229, 1) 86%, rgba(255, 255, 255, 1) 95%);
     text-decoration: none;
     font-family: 'Noto Sans', sans-serif;
     border-bottom: 1px solid;
@@ -107,19 +107,20 @@ header {
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     transition: all 1s ease;
     border: 0.5px solid black;
-    }
-    
-    .lien:hover {
-        color: white;
-        text-shadow: 1px 1px 1px black;
-        transition: all 1s ease;
-    }
-    .lien:active {
-        box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
-            inset 2px 2px 3px rgba(0, 0, 0, .6);
-    }
-    
-    .user {
+}
+
+.lien:hover {
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    transition: all 1s ease;
+}
+
+.lien:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+        inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
+
+.user {
     display: flex;
     width: 45px;
     height: 40px;
@@ -130,13 +131,13 @@ header {
     text-decoration: none;
     color: black;
     transition: all 1s ease;
-    }
-    
-    .user:hover {
-        color: black;
-        text-shadow: 1px 1px 1px black;
-        transition: all 1s ease;
-    }
+}
+
+.user:hover {
+    color: black;
+    text-shadow: 1px 1px 1px black;
+    transition: all 1s ease;
+}
 
 .choose {
     display: flex;
@@ -156,24 +157,23 @@ header {
 /* header fin */
 .Filter1 {
     display: flex;
-    width: 40%;
+    border: 5px double rgba(254, 190, 16, 1);
+    width: 20%;
     border-radius: var(--btn-corner);
     align-items: center;
     justify-content: center;
     background-color: rgb(255, 255, 255);
     flex-direction: column;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+
 }
 
-.Filter1top{
-display: flex;
-height: 25%;
-width: 100%;
-font-size: 25px;
-justify-content: center;
-align-items: center;
-text-transform: uppercase;
-text-decoration: underline;
+.Filter1top {
+    display: flex;
+    height: 30%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
 }
 
 .Filter1bottom {
@@ -181,9 +181,20 @@ text-decoration: underline;
     height: 75%;
     width: auto;
     flex-direction: column;
-    justify-content: space-around;
-    font-size: 15px;
-    padding: 1%;
+
+}
+
+.radio {
+    margin-top: -1px;
+    vertical-align: middle;
+}
+
+.Filter2 {
+    display: flex;
+    width: 40%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
 input[type="radio"].radio1    {
@@ -269,8 +280,7 @@ a.createcommunity {
     height: 100%;
     padding: 1%;
     border-radius: var(--btn-corner);
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;   
-    border: 1px solid black; 
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
 
 .card {
@@ -292,8 +302,8 @@ a.createcommunity {
 
 .card:hover {
     border-radius: 40px;
-    box-shadow: 10px 10px rgba(0,0,0,.25);
-  }
+    box-shadow: 10px 10px rgba(0, 0, 0, .25);
+}
 
 .divhaut {
     display: flex;
@@ -352,7 +362,7 @@ a:-webkit-any-link {
     border: 2px solid black;
     border-radius: var(--btn-corner);
     height: auto;
-    padding:1%;
+    padding: 1%;
     width: auto;
     align-items: center;
 }
@@ -387,10 +397,6 @@ a:-webkit-any-link {
     height: 100%;
 }
 
-.dislike:hover {
-    color: red !important;
-}
-
 .modal {
     background-color: #00529F;
     position: absolute;
@@ -402,6 +408,10 @@ a:-webkit-any-link {
     width: 200px;
     height: 300px;
     display: none;
+}
+
+.dislike:hover {
+    color: red !important;
 }
 
 .comments {
@@ -459,7 +469,7 @@ a:-webkit-any-link {
     bottom: 50px;
     background-color: #f1f1f1;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 
@@ -476,4 +486,54 @@ a:-webkit-any-link {
 
 .show {
     display: block;
+}
+
+
+
+/* The Modal (background) */
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: transparent;
+    /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
 }

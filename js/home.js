@@ -228,18 +228,46 @@ function newCard(posts) {
           }
         }
 
+        let modal = document.getElementById("myModal");
+
+        let span = document.getElementsByClassName("close")[0];
+
+        let submit = document.getElementById("send")
+
         secondoptionbuttondropdown.onclick = function addLike(e) {
           event.stopPropagation(e)
-          fetch("/addWarnPost", {
-            method: "POST",
-            headers: {
-              "content-type": "application/json"
-            },
-            body: JSON.stringify({
-              Content: "needToAddAlgo",
-              Link: parseInt(element.Id)
-            })
-          })
+
+          modal.style.display = "block";
+
+          span.onclick = function () {
+            modal.style.display = "none";
+          }
+
+          window.onclick = function (event) {
+            if (event.target == modal) {
+              modal.style.display = "none";
+            }
+          }
+          submit.onclick = function addLike() {
+            let content = document.getElementById("details")
+            if (content.value.length > 0) {
+              fetch("/addWarnPost", {
+                method: "POST",
+                headers: {
+                  "content-type": "application/json"
+                },
+                body: JSON.stringify({
+                  Content: content.value,
+                  Link: parseInt(element.Id)
+                })
+              })
+              content.value = ""
+              document.getElementById("error").innerText = ""
+              modal.style.display = "none";
+            } else {
+              document.getElementById("error").innerText = "enter details"
+            }
+          }
         }
 
 

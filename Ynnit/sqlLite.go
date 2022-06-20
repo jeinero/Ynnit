@@ -456,6 +456,7 @@ func DbtoStructPost(db *sql.DB) []Post {
 		u.Like = countLike(db, "likedpost", "postLike", u.Id)
 		u.DisLike = countLike(db, "dislikedpost", "postLike", u.Id)
 		u.NumberComment = countComment(db, u.Id)
+		// u.Warn = countWarn(db, "warnPost", "what", u.Id)
 		temptab = append(temptab, u)
 	}
 	return temptab
@@ -547,7 +548,6 @@ func DbtoStructLikeComment(db *sql.DB) []Like {
 		if err != nil {
 			fmt.Println(err)
 		}
-		fmt.Println()
 		temptab = append(temptab, u)
 	}
 	return temptab
@@ -634,6 +634,15 @@ func DbtoStructWarnPost(db *sql.DB) []Warn {
 }
 func InsertIntoWarnPost(db *sql.DB, Content string, Link int) bool {
 	_, err := db.Exec(`INSERT INTO warnPost (text, what) VALUES (?,?)`, Content, Link)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+	return true
+}
+
+func DelIntoWarnPost(db *sql.DB, id int) bool {
+	_, err := db.Exec(`DELETE FROM warnPost WHERE what = ?`, id)
 	if err != nil {
 		fmt.Println(err)
 		return false

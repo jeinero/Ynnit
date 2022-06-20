@@ -28,6 +28,7 @@ type User struct {
 	Warn       int    `json: "warn"`
 	Date       string `json: "date"`
 	Photo      string `json: "photo"`
+	Warns      []Warn `json: "warn"`
 }
 type Communauter struct {
 	Id   int    `json: "id"`

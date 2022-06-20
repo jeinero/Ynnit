@@ -122,7 +122,6 @@ function newCard(commu) {
         }
         if (dislikeTab != null) {
           dislikeTab.forEach(elem => {
-            console.log(elem, newcard.id)
             if (elem.PostLink == newcard.id) {
               dislike.style.color = "red"
             }

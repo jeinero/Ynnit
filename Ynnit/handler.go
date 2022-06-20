@@ -62,6 +62,16 @@ func ApiAllHandler(w http.ResponseWriter, r *http.Request) {
 
 func UsersHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
+	var temptab []User
+	for _, user := range AllApi.UsersAll {
+		for _, warn := range AllApi.WarnUser {
+			if user.Id == warn.Link {
+				user.Warns = append(user.Warns, warn)
+			}
+		}
+		temptab = append(temptab, user)
+	}
+	AllApi.UsersAll = temptab
 	json.NewEncoder(w).Encode(AllApi.UsersAll)
 }
 
@@ -611,7 +621,39 @@ func UpdatePhoto(w http.ResponseWriter, r *http.Request) {
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &pp)
 	goodOrFalse := UpdatePPUser(AllApi.db, pp.ID, pp.Blop)
+	w.Write([]byte("{\"msg\": \"Success\"}"))
+	if !goodOrFalse {
+		w.Write([]byte("{\"error\": \"Sorry\"}"))
+	}
+}
 
+func DelWarnPost(w http.ResponseWriter, r *http.Request) {
+	var warn Warn
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &warn)
+	goodOrFalse := DelIntoWarnPost(AllApi.db, warn.Id)
+	w.Write([]byte("{\"msg\": \"Success\"}"))
+	if !goodOrFalse {
+		w.Write([]byte("{\"error\": \"Sorry\"}"))
+	}
+}
+
+func AddWarnUser(w http.ResponseWriter, r *http.Request) {
+	var warn Warn
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &warn)
+	goodOrFalse := InsertIntoWarnUser(AllApi.db, warn.Content, warn.Link)
+	w.Write([]byte("{\"msg\": \"Success\"}"))
+	if !goodOrFalse {
+		w.Write([]byte("{\"error\": \"Sorry\"}"))
+	}
+}
+
+func Addtags(w http.ResponseWriter, r *http.Request) {
+	var tag Tags
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &tag)
+	goodOrFalse := InsertIntoCategorie(AllApi.db, tag.Name)
 	w.Write([]byte("{\"msg\": \"Success\"}"))
 	if !goodOrFalse {
 		w.Write([]byte("{\"error\": \"Sorry\"}"))
@@ -630,6 +672,7 @@ func Handler() {
 	Changeleveluser(AllApi.db, "Admin", "Administrators")
 	// InsertIntoUser(db, "jeinero", "jenei@gmail.com", "ImRio6988", "guest", "test", "test")
 	InsertIntoCategorie(AllApi.db, "Shitpost")
+	// InsertIntoCategorie(AllApi.db, "z")
 	// InsertIntoUser(db, "qsdlqsd", "jeazenei@yahoo.fr", "ImRio6988")
 	// InsertIntoCommunauter(db, "InfoFams", "DESC")
 	// InsertIntoPost(db, 1, "Golang Basic", "Golang suck lmao", "Zupz", 1)
@@ -662,6 +705,8 @@ func Handler() {
 	r.HandleFunc("/apicommunauters/{id}", CommunauterHandler)
 
 	r.HandleFunc("/apitags", tagsHandler)
+
+	r.HandleFunc("/addtags", Addtags)
 
 	r.HandleFunc("/apicomments", CommentsHandler)
 	r.HandleFunc("/apicomments/{id}", CommentHandler)
@@ -729,6 +774,9 @@ func Handler() {
 	r.HandleFunc("/logout", Logout)
 
 	r.HandleFunc("/addWarnPost", AddWarnPost)
+	r.HandleFunc("/delWarnPost", DelWarnPost)
+
+	r.HandleFunc("/addWarnUser", AddWarnUser)
 
 	r.HandleFunc("/viewcommunity", ViewCommunity)
 	go reloadApi()
@@ -749,5 +797,5 @@ func reloadApi() {
 	AllApi.LikeAllComment = DbtoStructLikeComment(AllApi.db)
 	AllApi.DislikeALlComment = DbtoStructDisLikeComment(AllApi.db)
 	AllApi.WarnPost = DbtoStructWarnPost(AllApi.db)
-
+	AllApi.WarnUser = DbtoStructWarnUser(AllApi.db)
 }

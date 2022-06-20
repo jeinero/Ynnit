@@ -164,9 +164,7 @@ fetch("/apiposts/" + id)
             like.innerHTML = `<i class="fa fa-thumbs-up" aria-hidden="true"></i>`
             if (likeTab != null) {
                 likeTab.forEach(elem => {
-                    console.log("lol")
-                        console.log(elem.CommentLink, parseInt(divbottom2.id))
-                    if (element.Id === elem.CommentLink) {
+                    if (parseInt(divbottom2.id) === elem.CommentLink) {
                         like.style.color = "rgb(49, 172, 49)"
                     }
                 })
@@ -246,88 +244,82 @@ fetch("/apiposts/" + id)
                 }
             }
 
-            // firstoptionbuttondropdown.onclick = async function addLike(e) {
-            //     event.stopPropagation(e)
-            //     let idcom = divcom.id
-            //     fetch("/deletecomme", {
-            //         method: "POST",
-            //         headers: {
-            //             "content-type": "application/json"
-            //         },
-            //         body: JSON.stringify({
-            //             id: parseInt(idcom)
-            //         })
-            //     })
-            //         .then(async (res) => {
-            //             if (!res.ok)
-            //                 throw await res.json()
-            //             return res.json()
-            //         })
-            //         .then((data) => {
-            //             location.href = "/viewpost?id="+id
-            //         }).catch((err) => {
-            //             // document.getElementById("error").innerText = err.error
-            //         })
-            // }
-
-            // secondoptionbuttondropdown.onclick = function addLike(e) {
-            //     event.stopPropagation(e)
-            // }
-           
-
-
-
-        })
-
-            if (getCookie("status") != "Users" && getCookie("id") != null) {
-                divcom.append(divdropdownbutton)
+            firstoptionbuttondropdown.onclick = async function addLike(e) {
+                event.stopPropagation(e)
+                let idcom = divcom.id
+                fetch("/deletecomme", {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        id: parseInt(idcom)
+                    })
+                })
+                    .then(async (res) => {
+                        if (!res.ok)
+                            throw await res.json()
+                        return res.json()
+                    })
+                    .then((data) => {
+                        location.href = "/viewpost?id=" + id
+                    }).catch((err) => {
+                        // document.getElementById("error").innerText = err.error
+                    })
             }
 
+            secondoptionbuttondropdown.onclick = function addLike(e) {
+                event.stopPropagation(e)
+            }
+
+            if (getCookie("status") != "Users" && getCookie("id") != null) {
+                divbottom2.append(divdropdownbutton)
+            }
+
+
         })
 
+    })
 
-    function timeSince(date) {
-        var seconds = Math.floor((new Date() - date) / 1000);
-        var interval = seconds / 31536000;
-    
-        if (interval > 1) {
-            return Math.floor(interval) + " years";
-        }
-        interval = seconds / 2592000;
-        if (interval > 1) {
-            return Math.floor(interval) + " months";
-        }
-        interval = seconds / 86400;
-        if (interval > 1) {
-            return Math.floor(interval) + " days";
-        }
-        interval = seconds / 3600;
-        if (interval > 1) {
-            return Math.floor(interval) + " hours";
-        }
-        interval = seconds / 60;
-        if (interval > 1) {
-            return Math.floor(interval) + " minutes";
-        }
-        return Math.floor(seconds) + " seconds";
+// })
+
+function timeSince(date) {
+    var seconds = Math.floor((new Date() - date) / 1000);
+    var interval = seconds / 31536000;
+
+    if (interval > 1) {
+        return Math.floor(interval) + " years";
     }
-    var aDay = 24 * 60 * 60 * 1000;
-    
-    
-    
-    
-    document.body.onload = function () {
-        if (getCookie("name") != null) {
-          let classComm = document.getElementsByClassName("lien")
-          classComm[0].style.display = "none"
-          classComm[1].style.display = "none"
-        }
-      }
-      if (getCookie("name") != null) {
+    interval = seconds / 2592000;
+    if (interval > 1) {
+        return Math.floor(interval) + " months";
+    }
+    interval = seconds / 86400;
+    if (interval > 1) {
+        return Math.floor(interval) + " days";
+    }
+    interval = seconds / 3600;
+    if (interval > 1) {
+        return Math.floor(interval) + " hours";
+    }
+    interval = seconds / 60;
+    if (interval > 1) {
+        return Math.floor(interval) + " minutes";
+    }
+    return Math.floor(seconds) + " seconds";
+}
+var aDay = 24 * 60 * 60 * 1000;
+
+
+
+
+document.body.onload = function () {
+    if (getCookie("name") != null) {
         let classComm = document.getElementsByClassName("lien")
         classComm[0].style.display = "none"
         classComm[1].style.display = "none"
-      }
+    }
+}
 
 
 const btn = document.querySelector('.btn');
