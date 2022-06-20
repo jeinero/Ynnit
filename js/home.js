@@ -17,7 +17,6 @@ async function getApi(url) {
 }
 window.onload = newCard(post)
 function newCard(posts) {
-  console.log(posts)
   posts.forEach(element => {
     fetch("/apicommunauters/" + element.CommuLink)
       .then(resp => resp.json())
