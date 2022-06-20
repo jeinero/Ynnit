@@ -1,15 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
+
 body {
   margin: 0px;
 }
+/* header */
 header {
+    position: relative;
     display: flex;
     top: 0;
     height: 75px;
     width: 100%;
-    background: linear-gradient(90deg, rgba(238,50,78,1) 0%, rgba(254,190,16,1) 100%);
+    background: linear-gradient(90deg, rgba(8,160,174,1) 4%, rgba(78,186,198,1) 15%, rgba(104,227,245,1) 29%, rgba(74,248,247,1) 58%, rgba(235,238,229,1) 86%, rgba(255,255,255,1) 95%);
     text-decoration: none;
-    box-shadow: 10px;
-    font-family: 'Chewy', cursive;  
+    font-family: 'Noto Sans', sans-serif;
+    border-bottom: 1px solid;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.container {
+    display: flex;
+    width: auto;
+    height: auto;
+    justify-content: center;
+    padding: 1%;
+    align-items: center;
 }
 
 .logo {
@@ -19,7 +34,6 @@ header {
     align-items: center;
     margin-right: 5%;
     filter: invert(1);
-    border: 1px solid red;
 }
 
 .searchdiv {
@@ -27,29 +41,40 @@ header {
     width: 850px;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
 }
 
 .searchheader {
     display: flex;
     justify-content: center;
-    background: white;
-    border-radius: 40px;
+    border-radius: 10px;
     width: 100%;
-    color: black;
-    border: 5px double rgba(238,50,78,1);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    transition: all 1s ease;
+    border: 0.5px solid black;
 }
 
+.searchheader:hover {
+    color: white;
+    transition: all 1s ease;
+    text-shadow: 2px 2px 2px black;
+}
+
+.searchhead::placeholder {
+    color: white;
+    
+}
+
+
 .searchhead {
-    background: none;
+    background: transparent;
     border: none;
     outline: none;
     color: black;
-    font-size: 20px;
+    font-size: 25px;
     width: 100%;
     align-items: center;
     text-align: center;
-    font-family: 'Acme', sans-serif;
+    font-family: 'Noto Sans', sans-serif;
 }
 
 .Log {
@@ -59,42 +84,68 @@ header {
     width: 800px;
     height: auto;
     margin-left: 10%;
-    border: 1px solid black;
+    text-transform: uppercase;
 }
 
-.Register {
-    background: none;
+.lien {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    font-size: 25px;
     width: 150px;
-    border: 2px solid black;
-    border-radius: 40px;
     height: 40px;
-}
-
-
-.container {
+    font-size: 25px;
+    align-items: center;
+    color: black;
+    border-radius: 10px;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    transition: all 1s ease;
+    border: 0.5px solid black;
+    }
+    
+    .lien:hover {
+        color: white;
+        text-shadow: 1px 1px 1px black;
+        transition: all 1s ease;
+    }
+    .lien:active {
+        box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+            inset 2px 2px 3px rgba(0, 0, 0, .6);
+    }
+    
+    .user {
     display: flex;
-    height: 500px;
-    flex-direction: column;
-    padding: 10px;
-    width: auto;
-}
+    width: 45px;
+    height: 40px;
+    font-size: 35px;
+    align-items: center;
+    border-radius: 10px;
+    justify-content: center;
+    text-decoration: none;
+    color: black;
+    transition: all 1s ease;
+    }
+    
+    .user:hover {
+        color: black;
+        text-shadow: 1px 1px 1px black;
+        transition: all 1s ease;
+    }
 
-
-.selectcomm {
+.choose {
     display: flex;
-    text-align: center;
-    margin-bottom: 20px;
-    border-radius: 30px;
-    border: 2px solid black;
-    height: 60px;
-    width: 300px;
-
+    width: 50%;
+    height: 200px;
+    justify-content: space-around;
+    border-radius: 40px;
+    padding: 1%;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    font-family: 'Noto Sans', sans-serif;
+    text-transform: uppercase;
+    background-image: url("https://files.123freevectors.com/wp-content/original/132302-blue-and-white-lines-stripes-and-shapes-background-vector.jpg");
+    background-size:cover;   
+    
 }
+/* header fin */
 
 .CreatePost {
     border-radius: 30px;
@@ -144,39 +195,6 @@ textarea {
     flex-direction: row-reverse;
     justify-content: space-between;
     width: 150px;
-}
-
-#btnControl {
-    display: none;
-}
-
-label {
-    justify-content: center;
-    border: 2px solid black;
-    background-color: #d6d6d6;
-    color: #0b7dda;
-    display: flex;
-    border-radius: 30px;
-    height: 50px;
-    width: 170px;
-}
-
-
-#btnControl:checked+label>div {
-    background-color: #0b7dda;
-    color: #d6d6d6;
-    /* border: 3px solid purple; */
-
-}
-
-#colored {
-    justify-content: center;
-    background-color: #d6d6d6;
-    color: black;
-    display: flex;
-    border-radius: 30px;
-    height: 50px;
-    width: 170px;
 }
 
 .btn {

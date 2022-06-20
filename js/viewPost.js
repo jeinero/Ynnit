@@ -14,7 +14,7 @@ async function getApi(url) {
 
 const url = new URL(window.location.href)
 let id = url.searchParams.get('id')
-document.getElementById("btn").onclick = function () {
+document.getElementById("btn2").onclick = function () {
 
     onClickComment()
     location.reload().href = "/viewpost?id=" + element.Id
@@ -98,7 +98,6 @@ fetch("/apiposts/" + id)
         viewpost.appendChild(divbottom)
 
         data.Comments.forEach(element => {
-            console.log(element)
             const divcom = document.createElement('div')
             divcom.id = element.Id
             divcom.className = "comm"
@@ -210,13 +209,8 @@ fetch("/apiposts/" + id)
             }
             dislike.innerHTML = `<i class="fa fa-thumbs-down" aria-hidden="true"></i>`
 
-            const divdropdownbutton = document.createElement('div')
-            divdropdownbutton.className = 'dropdown'
+           
 
-            const buttondropdown = document.createElement('button')
-            buttondropdown.className = 'dropbtn'
-            buttondropdown.innerText = 'modo'
-            divdropdownbutton.append(buttondropdown)
 
             const divbuttondropdown = document.createElement('div')
             divbuttondropdown.id = 'myDropdown'
@@ -288,7 +282,6 @@ fetch("/apiposts/" + id)
 
         })
 
-    // })
 
     function timeSince(date) {
         var seconds = Math.floor((new Date() - date) / 1000);

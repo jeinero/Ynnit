@@ -298,6 +298,12 @@ btnDelete.onclick = function() {
 
 spanDelete.onclick = function() {
   modalDelte.style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == modalDelte) {
+    modalDelte.style.display = "none";
+  }
   bigcard.style.display = "flex";
   bigcard2.style.display = "flex";
 }

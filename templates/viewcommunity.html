@@ -2,7 +2,7 @@
 <html>
 
 <head>
-        <title>viewpost</title>
+        <title>viewcommunity</title>
         <link rel="stylesheet"
                 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="./css/viewcommunity.css">
@@ -49,8 +49,25 @@
 </header>
 
 <body>
-        <div id="viewcommunity">
+        <div id="container">
+                <div id="commu">
+                        <h1 id="name"></h1>
+                        <p id="desc" ></p>
+                        <h3 id="date"></h3>
+                </div>
+                <div id="makeAPost">
+                        <div id="cards">
+                        <h1 id="title">Make A post</h1>
+                        <input id="titre" type="text" maxlength="50" size="50" placeholder="Title" required>
+                        <textarea id="content" cols="30" rows="10" placeholder="Text (optional)"></textarea>
+                        <button id="btn" type="submit" href="/"> Post </button>
+                        </div>
+                </div>
+                <div id="post">
+                        <div class="bigcard">
 
+                        </div>
+                </div>
         </div>
 </body>
 

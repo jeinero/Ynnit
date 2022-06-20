@@ -36,7 +36,8 @@ function create() {
         body: JSON.stringify({
             Name: document.getElementById("titre").value,
             Desc: document.getElementById("content").value,
-            Tags: linkCat
+            Tags: linkCat,
+            date: dates
         })
     })
         .then(async (res) => {
