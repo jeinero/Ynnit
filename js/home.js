@@ -48,9 +48,10 @@ function newCard(posts) {
         const divbas = document.createElement('div')
         divbas.classList = 'divbas'
 
-        const like = document.createElement('button')
+        const like = document.createElement('a')
         like.classList = 'like'
         like.id = "like"
+        let likeInt = element.Like
         like.onclick = function addLike(e) {
           fetch("/addLikepost", {
             method: "POST",
@@ -66,13 +67,22 @@ function newCard(posts) {
               document.getElementById("error").innerText = err.error
             })
           if (dislike.style.color == "red") {
+            likeInt += 1
+            like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
             like.style.color = "rgb(49, 172, 49)"
             dislike.style.color = "#000"
           } else {
             if (like.style.color == "rgb(49, 172, 49)") {
               like.style.color = "#000"
+              likeInt -= 1
+              like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
+
+
             } else {
               like.style.color = "rgb(49, 172, 49)"
+              likeInt += 1
+              like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
+
             }
           }
           event.stopPropagation(e)
@@ -85,7 +95,7 @@ function newCard(posts) {
             }
           })
         }
-        const dislike = document.createElement('button')
+        const dislike = document.createElement('a')
         dislike.classList = 'dislike'
         dislike.onclick = function addLike(e) {
           fetch("/addDislikepost", {
@@ -102,6 +112,8 @@ function newCard(posts) {
               document.getElementById("error").innerText = err.error
             })
           if (like.style.color === "rgb(49, 172, 49)") {
+            likeInt -= 1
+              like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
             like.style.color = "#000"
             dislike.style.color = "red"
           } else {
@@ -121,7 +133,7 @@ function newCard(posts) {
             }
           })
         }
-        dislike.innerHTML = `<i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+        dislike.innerHTML = ` nb&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
 
         const divdropdownbutton = document.createElement('div')
         divdropdownbutton.className = 'dropdown'

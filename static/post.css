@@ -26,6 +26,16 @@ header {
     padding: 1%;
     align-items: center;
 }
+.selectcomm {
+    display: flex;
+    text-align: center;
+    margin-bottom: 20px;
+    border-radius: 30px;
+    border: 2px solid black;
+    height: 60px;
+    width: 300px;
+
+}
 
 .logo {
     display: flex;
