@@ -38,6 +38,7 @@ function newCard(posts) {
 
         const community = document.createElement('div')
         community.classList = 'community'
+        community.id = element.Id
         community.innerHTML = `<a href='/viewcommunity?id=${element.CommuLink}'>${data.Communauter.Name}</a>`
 
 
@@ -148,7 +149,6 @@ function newCard(posts) {
         }
         if (dislikeTab != null) {
           dislikeTab.forEach(elem => {
-            console.log(elem, newcard.id)
             if (elem.PostLink == newcard.id) {
               dislike.style.color = "red"
             }
@@ -402,6 +402,19 @@ document.body.onload = function () {
     classComm[0].style.display = "none"
     classComm[1].style.display = "none"
   }
+}
+
+
+const searchEl = document.getElementById("search")
+console.log(searchEl)
+searchEl.oninput = function() {
+  let temptab = post.filter(obj => {
+    if (obj.Content.toLowerCase().includes(searchEl.value.toLowerCase()) || (obj.Title.toLowerCase().includes(searchEl.value.toLowerCase()))) {
+      return obj
+    }
+  })
+  deleteCards()
+  newCard(temptab)
 }
 if (getCookie("name") != null) {
   let classComm = document.getElementsByClassName("lien")

@@ -105,6 +105,16 @@ func UserHandler(w http.ResponseWriter, r *http.Request) {
 
 func PostsHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
+	var temptab []Post
+	for _, post := range AllApi.PostsAll {
+		for _, warn := range AllApi.WarnPost {
+			if post.Id == warn.Link {
+				post.Warn = append(post.Warn, warn)
+			}
+		}
+		temptab = append(temptab, post)
+	}
+	AllApi.PostsAll = temptab
 	json.NewEncoder(w).Encode(AllApi.PostsAll)
 }
 
@@ -230,6 +240,7 @@ func Newuser(w http.ResponseWriter, r *http.Request) {
 	var newUser User
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &newUser)
+	sendMail(newUser.Email, newUser.Name, newUser.Id)
 	if InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Password, "You can change the desc", "Users", newUser.Date) {
 		w.Write([]byte("{\"msg\": \"Success\"}"))
 	} else {
@@ -580,6 +591,22 @@ func AddWarnPost(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func UpdatePhoto(w http.ResponseWriter, r *http.Request) {
+	type photo struct {
+		ID   int
+		Blop string
+	}
+	var pp photo
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &pp)
+	goodOrFalse := UpdatePPUser(AllApi.db, pp.ID, pp.Blop)
+
+	w.Write([]byte("{\"msg\": \"Success\"}"))
+	if !goodOrFalse {
+		w.Write([]byte("{\"error\": \"Sorry\"}"))
+	}
+}
+
 func Handler() {
 
 	db := InitDatabase("./Ynnit.db")
@@ -591,7 +618,7 @@ func Handler() {
 	// InsertIntoCategorie(AllApi.db, "Food")
 	Changeleveluser(AllApi.db, "Admin", "Administrators")
 	// InsertIntoUser(db, "jeinero", "jenei@gmail.com", "ImRio6988", "guest", "test", "test")
-	// InsertIntoCategorie(AllApi.db, "Shitpost")
+	InsertIntoCategorie(AllApi.db, "Shitpost")
 	// InsertIntoUser(db, "qsdlqsd", "jeazenei@yahoo.fr", "ImRio6988")
 	// InsertIntoCommunauter(db, "InfoFams", "DESC")
 	// InsertIntoPost(db, 1, "Golang Basic", "Golang suck lmao", "Zupz", 1)
@@ -664,6 +691,8 @@ func Handler() {
 
 	r.HandleFunc("/delete", Delete)
 	r.HandleFunc("/checkdelete", Checkdelete)
+
+	r.HandleFunc("/updatePP", UpdatePhoto)
 
 	r.HandleFunc("/community", CommunityHandler)
 	r.HandleFunc("/newcommunity", NewcommunityHandler)

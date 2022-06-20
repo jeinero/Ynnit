@@ -27,7 +27,9 @@ const divcomment = document.getElementById("latestcomments")
 const divpost = document.getElementById("latestposts")
 
 const loadDataUser = data => {
-  
+  console.log(data)
+  document.getElementById("image").setAttribute("src", data.User.Photo)
+  loadPP()
   const name = document.createElement("div")
   name.innerText = data.User.Name
   viewtext.appendChild(name)
@@ -187,6 +189,34 @@ span.onclick = function() {
 modal.style.display = "none";
 bigcard.style.display = "flex";
 bigcard2.style.display = "flex";
+}
+
+
+const el = document.getElementById("pp")
+
+el.onchange = function() {
+  loadPP()
+}
+
+function loadPP() {
+  const file = document.getElementById("pp").files;
+  if (file.length > 0) {
+      const fileReader = new FileReader();
+      fileReader.onload = function (event) {
+          document.getElementById("image").setAttribute("src", event.target.result);
+          fetch("/updatePP", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({
+                Id : parseInt(getCookie("id")),
+                Blop: event.target.result 
+            })
+        })
+      };
+       fileReader.readAsDataURL(file[0])
+  }
 }
 
 

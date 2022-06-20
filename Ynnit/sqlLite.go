@@ -23,7 +23,8 @@ func InitDatabase(database string) *sql.DB {
 			desc TEXT NOT NULL,
 			levelUser TEXT NOT NULL,
 			date TEXT NOT NULL,	
-			warn INTEGET NOT NULL,	
+			warn INTEGET NOT NULL,
+			photo TEXT NOT NULL,	
 			password TEXT NOT NULL
 		);
 		CREATE TABLE IF NOT EXISTS communauter (
@@ -112,7 +113,7 @@ func DbtoStructUser(db *sql.DB) []User {
 
 	for rowsUsers.Next() {
 		var u User
-		err := rowsUsers.Scan(&u.Id, &u.Name, &u.Email, &u.Desc, &u.UsersLevel, &u.Date, &u.Warn, &u.Password)
+		err := rowsUsers.Scan(&u.Id, &u.Name, &u.Email, &u.Desc, &u.UsersLevel, &u.Date, &u.Warn, &u.Photo, &u.Password)
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -122,7 +123,7 @@ func DbtoStructUser(db *sql.DB) []User {
 }
 
 func InsertIntoUser(db *sql.DB, name string, email string, password string, desc string, levelUser string, date string) bool {
-	_, err := db.Exec(`INSERT INTO user (name, email, password, desc, levelUser, date, warn) VALUES (?, ?, ?, ?, ?, ?, ?)`, name, email, password, desc, levelUser, date, 0)
+	_, err := db.Exec(`INSERT INTO user (name, email, password, desc, levelUser, date, warn, photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`, name, email, password, desc, levelUser, date, 0, "")
 	if err != nil {
 		fmt.Println(err)
 		return false
@@ -141,6 +142,14 @@ func UpdatePassUser(db *sql.DB, id int, password string) bool {
 
 func UpdateMailUser(db *sql.DB, id int, emailnew string) bool {
 	_, err := db.Exec(`UPDATE user SET email = ? WHERE id = ?`, emailnew, id)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+	return true
+}
+func UpdatePPUser(db *sql.DB, id int, PP string) bool {
+	_, err := db.Exec(`UPDATE user SET photo = ? WHERE id = ?`, PP, id)
 	if err != nil {
 		fmt.Println(err)
 		return false
@@ -447,7 +456,6 @@ func DbtoStructPost(db *sql.DB) []Post {
 		u.Like = countLike(db, "likedpost", "postLike", u.Id)
 		u.DisLike = countLike(db, "dislikedpost", "postLike", u.Id)
 		u.NumberComment = countComment(db, u.Id)
-		u.Warn = countWarn(db, "warnPost", "what", u.Id)
 		temptab = append(temptab, u)
 	}
 	return temptab

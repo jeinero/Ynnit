@@ -27,6 +27,7 @@ type User struct {
 	UsersLevel string `json: "usersLevel"`
 	Warn       int    `json: "warn"`
 	Date       string `json: "date"`
+	Photo      string `json: "photo"`
 }
 type Communauter struct {
 	Id   int    `json: "id"`
@@ -45,7 +46,7 @@ type Post struct {
 	Like          int    `json: "likeCount"`
 	DisLike       int    `json: "DisLikeCount"`
 	NumberComment int    `json: "commentCount"`
-	Warn          int    `json: "warn"`
+	Warn          []Warn
 }
 type Comment struct {
 	Id        int    `json: "id"`
