@@ -3,16 +3,36 @@
     <header>
         <title>Ynnit</title>
         <meta charset="utf-8"/>
+        <link rel="stylesheet" href="/css/changedesc.css">
+        <link rel="stylesheet" href="/css/font-button.css">
+        
     </header>
 
-    <body>
-        <label for="desc">Desc :</label>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&display=swap');
+    </style>
+        <body>
+            
+                    
+            <div id="flex-content">
+        
+                <div id="content-center">
+                    <div id="flex-title">
+                        <h1 id="flex-title-image">
+                            <img src="./css/connected.png"><br/>
+                            Change Your Description  :
+                        </h1>
+                    </div>
 
-        <input type="text" id="desc" name="desc" required>
+                    <div id="content">
+                            <textarea type="text" id="description" class="changedesc" cols="35" rows="8" name="desc" placeholder="Modify Your Description" required></textarea>
 
-        <button id="button" type="submit">Change</button>
-        <p id="error" style="color: red"></p>
-    </body>
+                            <button id="button-password" type="submit">Change</button>
+    
+                        <p id="error" style="color: red"></p>
+                    </div>
+                </div>
+            </div>
 
     <script type="module" src='/js/changedesc.js'></script>
 

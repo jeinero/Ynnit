@@ -208,6 +208,11 @@ func ViewCommunity(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	http.ServeFile(w, r, "./templates/viewcommunity.html")
 }
+func Viewcommunity(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
+	http.ServeFile(w, r, "./templates/viewcommunity.html")
+
+}
 func Comments(w http.ResponseWriter, r *http.Request) {
 	var newComments Comment
 
@@ -224,6 +229,7 @@ func Newuser(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	var newUser User
 	body, _ := ioutil.ReadAll(r.Body)
+	fmt.Println(string(body))
 	json.Unmarshal(body, &newUser)
 	if InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Password, "You can change the desc", "Users", newUser.Date) {
 		w.Write([]byte("{\"msg\": \"Success\"}"))
@@ -309,7 +315,6 @@ func NewcommunityHandler(w http.ResponseWriter, r *http.Request) {
 	var Newcommunauter Communauter
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &Newcommunauter)
-	fmt.Println(string(body))
 	if InsertIntoCommunauter(AllApi.db, Newcommunauter.Name, Newcommunauter.Desc, Newcommunauter.Date, Newcommunauter.Tags) {
 		w.Write([]byte("{\"msg\": \"Success\"}"))
 	} else {
@@ -673,6 +678,7 @@ func Handler() {
 	r.HandleFunc("/viewpost", ViewPost)
 	r.HandleFunc("/comment", Comments)
 
+	r.HandleFunc("/viewcommunity", Viewcommunity)
 	r.HandleFunc("/addLikepost", AddLikePost)
 	r.HandleFunc("/addDislikepost", AddDislikePost)
 

@@ -2,7 +2,6 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="./css/home.css">
     <link rel="stylesheet" href="./css/post.css">
     <link rel="stylesheet" href="./css/font-button.css">
 </head>
@@ -39,8 +38,11 @@
 
         <div><a class="lien" href="/joinus">Join Us</a></div>
 
-        <div><a class="user" href="/profile">
-            <i class="fa fa-user"></i></a></div>
+        <div>
+            <a class="user" href="/profile">
+                <i class="fa fa-user"></i></a></div>
+            </a>
+        </div>
 
     </div>
 
@@ -48,14 +50,16 @@
 </header>
 
 <body>
-    <button class="button" onclick = "changeColor('white');" >Mode Clair</button>
-        <button class="button" onclick = "returnChangeColor('rgb(64, 64, 64)');" >Mode foncé</button>
+    <button class="button" onclick="changeColor('white');">Mode Clair</button>
+    <button class="button" onclick="returnChangeColor('rgb(64, 64, 64)');">Mode foncé</button>
     <div class="container">
         <div class="CreatePost">
             <p><strong>Create a Community:</strong> </p>
 
             <select name="categorie" class="selectcat" id="select">
                 <option value="0">Choose the Categorie</option>
+                <option value="1">Cnacim</option>
+                <option value="2">rom</option>
             </select>
            
                 <input  id="titre" type="text" maxlength="300" size="50" placeholder="Title" required>
@@ -67,14 +71,14 @@
                     + informatique
                 </div>
             </label>
-          
+
             <p id="error" style="color: red"></p>
 
             <div class="PosterContain">
 
                 <div class="Poster">
-                    <button id="btn" type="submit"> Post </button>
-                        <button class="test">Delete</button>
+                    <button id="btn"> Post </button>
+                    <button class="test">Delete</button>
                 </div>
 
             </div>
@@ -85,6 +89,6 @@
     </div>
 </body>
 <script type="module" src='/js/community.js'></script>
-<script type="text/javascript" src="/js/font-button.js" ></script>
+<script type="text/javascript" src="/js/font-button.js"></script>
 
 </html>

@@ -292,8 +292,6 @@ function timeSince(date) {
 var aDay = 24 * 60 * 60 * 1000;
 
 
-
-
 function getCookie(name) {
   let nameEQ = name + "=";
   let ca = document.cookie.split(';');
@@ -304,3 +302,12 @@ function getCookie(name) {
   }
   return null;
 }
+
+
+document.body.onload = function() {
+        if (getCookie("name") != null) {
+                let classComm = document.getElementsByClassName("lien")
+                classComm[0].style.display = "none"
+                classComm[1].style.display = "none"
+                }
+      }
