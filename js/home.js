@@ -17,7 +17,6 @@ async function getApi(url) {
 }
 window.onload = newCard(post)
 function newCard(posts) {
-  console.log(posts)
   posts.forEach(element => {
     fetch("/apicommunauters/" + element.CommuLink)
       .then(resp => resp.json())
@@ -271,7 +270,9 @@ function newCard(posts) {
           textcomment = " comments"
         }
         comments.classList = 'comments'
-        comments.innerHTML = element.NumberComment + " commentaires"
+        comments.innerHTML = element.NumberComment + textcomment
+
+      
 
         const userpseudo = document.createElement('div')
         userpseudo.classList = 'userpseudo'

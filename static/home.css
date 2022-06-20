@@ -268,6 +268,12 @@ a.createcommunity {
         transition: all .4s ease-in-out;
 }
 
+a:-webkit-any-link {
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+
 .bigcard {
     margin: 1% 10%;
     display: flex;
@@ -284,7 +290,7 @@ a.createcommunity {
     border-radius: var(--btn-corner);
     padding: 1%;
     width: 100%;
-    border: double 5px #00529F;
+    border: 5px double rgb(19, 140, 206);;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -310,29 +316,23 @@ a.createcommunity {
     padding-bottom: 1%;
 }
 
-.title {
+.userpseudo{
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    width: 40%;
-    height: auto;
-    font-size: 30px;
+    width: 20%;
+    height: 100%;
+    font-size: 25px;
+    font-style: italic;
 }
 
-.community {
+.title {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 25px;
-    width: 40%;
-    height: 100%;
-    text-shadow: 1px 1px 1px #000;    
-}
-
-a:-webkit-any-link {
-    cursor: pointer;
-    text-decoration: none;
-    color: black;
+    width: 60%;
+    height: auto;
+    font-size: 30px;
 }
 
 .date {
@@ -343,6 +343,7 @@ a:-webkit-any-link {
     height: 100%;
     font-size: 20px;
 }
+
 
 .divmiddle {
     display: flex;
@@ -355,12 +356,13 @@ a:-webkit-any-link {
 .content {
     display: flex;
     justify-content: center;
-    border: 2px solid black;
+    border: 2px dotted black;
     border-radius: var(--btn-corner);
     height: auto;
     padding:1%;
     width: auto;
     align-items: center;
+    font-size: 22px;
 }
 
 .divbas {
@@ -377,7 +379,7 @@ a:-webkit-any-link {
     color: #000;
     justify-content: center;
     align-items: center;
-    width: 10%;
+    width: 5%;
     height: 100%;
 }
 
@@ -389,7 +391,7 @@ a:-webkit-any-link {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 10%;
+    width: 5%;
     height: 100%;
 }
 
@@ -401,19 +403,31 @@ a:-webkit-any-link {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 60%;
+    width: 45%;
     height: 100%;
     font-size: 20px;
 }
 
-.userpseudo{
+.community {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 25px;
+    width: 25%;
+    height: 100%;
+    text-shadow: 1px 1px 1px #000;    
+}
+
+.tags {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 20px;
     width: 20%;
     height: 100%;
-    font-size: 20px;
+    text-decoration: underline; 
 }
+
 
 .btn {
     height: 60px;
@@ -427,7 +441,7 @@ a:-webkit-any-link {
     right: 20px;
     bottom: 20px;
     cursor: pointer;
-    border: 5px double black;
+    border: 5px double white;
 }
 
 

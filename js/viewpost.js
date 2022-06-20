@@ -70,7 +70,7 @@ fetch("/apiposts/" + id)
         viewpost.appendChild(divtop)
 
         const username = document.createElement('div')
-        username.innerHTML = "avatar du mec&ensp;" + data.Post.UsersName
+        username.innerHTML = "Posted by&ensp;" + data.Post.UsersName
         username.classList = 'username'
         divtop.appendChild(username)
 
@@ -111,7 +111,7 @@ fetch("/apiposts/" + id)
             post.appendChild(divtop2)
 
             const username = document.createElement('div')
-            username.innerHTML = "avatar du mec&ensp;" + element.UsersName
+            username.innerHTML = "Posted by&ensp;" + element.UsersName
             username.classList = 'username'
             divtop2.appendChild(username)
 

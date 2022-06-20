@@ -19,12 +19,13 @@ body {
 }
 
 .select{
-  padding: 1%;
   display: flex;
   flex-direction: column;
   width: auto;
   height: auto;
-  border:  1px solid rgb(19, 140, 206);
+  padding: 1%;
+  border:  2px solid rgb(19, 140, 206);
+  border-radius: 40px;
   box-shadow: 6px 6px 6px 3px rgba(0, 0, 0, 0.2);
   justify-content: center;
   align-items: center;
@@ -50,14 +51,15 @@ input{
   box-shadow: 6px 6px 6px 3px rgba(0, 0, 0, 0.2);  
 }
 
-input:focus{
-    border: 3px solid yellow;
-  
+
+.no-outline {
+  margin: 20px;
 }
 
 .no-outline:focus {
   outline: none;
 }
+
 
 #btn{
   background:rgb(89, 197, 255);
@@ -73,4 +75,8 @@ input:focus{
   transition: all 1s ease;
   box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
   inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
+
+.google {
+  font-size: 25px;
 }
