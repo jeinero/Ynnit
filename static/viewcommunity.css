@@ -351,6 +351,11 @@ a:-webkit-any-link {
     border: none;
 }
 
+.avatar {
+    width : 70px;
+    height: 70px;
+}
+
 .card {
     background: white;
     border-radius: var(--btn-corner);

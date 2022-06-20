@@ -280,10 +280,15 @@ function newCard(commu) {
         comments.classList = 'comments'
         comments.innerHTML = element.NumberComment + textcomment
 
+        const avatar = document.createElement('img')
+            avatar.classList = 'avatar'
+            avatar.src = element.Photo
+
         const userpseudo = document.createElement('div')
         userpseudo.classList = 'userpseudo'
         userpseudo.innerHTML = element.UsersName
 
+        divhaut.append(avatar)
         divhaut.append(userpseudo)
         divhaut.append(title)
         divhaut.append(date)

@@ -149,6 +149,11 @@ header {
     
 }
 
+.avatar {
+    width : 70px;
+    height: 70px;
+}
+
 #viewpost {
     margin: 1% 10%;
     display: flex;
