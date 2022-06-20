@@ -19,8 +19,9 @@ async function getApi(url) {
 window.onload = function() {
         newCard(commu)
 }
-
+newCard(commu)
 function newCard(commu) {
+  console.log(commu)
         document.getElementById("name").innerText = commu.Communauter.Name
         document.getElementById("date").innerText = commu.Communauter.Date
         document.getElementById("desc").innerText = commu.Communauter.Desc
@@ -263,7 +264,36 @@ function newCard(commu) {
         // } 
   })
 }
-
+var currentDate = new Date(),
+day = currentDate.getDate(),
+month = currentDate.getMonth() + 1,
+year = currentDate.getFullYear();
+const dates = ( year + "-" + day + "-" + month)
+const btnPost = document.getElementById("btn")
+btnPost.onclick = function() {
+        console.log("marche?")
+        fetch("/post", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({
+                date : currentDate.getTime(),
+                commuLink: parseInt(id),
+                usersname : getCookie("name"),
+                title: document.getElementById("titre").value,
+                content: document.getElementById("content").value
+            })
+        })
+        .catch((err) => {
+            document.getElementById("error").innerText = err.error
+    
+            })
+        .then(data => {
+                //     window.location.assign("/");
+        })
+        location.reload().href = "/viewcommunity?id=" + id
+    }
 function timeSince(date) {
   let seconds = Math.floor((new Date() - date) / 1000);
   let interval = seconds / 31536000;

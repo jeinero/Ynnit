@@ -77,7 +77,8 @@ function newCard(posts) {
           }
           event.stopPropagation(e)
         }
-        like.innerHTML = `<i class="fa fa-thumbs-up" aria-hidden="true"></i>`
+        console.log(element.Like)
+        like.innerHTML = `<i class="fa fa-thumbs-up" aria-hidden="true">${element.Like}</i>`
         if (likeTab != null) {
           likeTab.forEach(elem => {
             if (elem.PostLink == newcard.id) {
