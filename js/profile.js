@@ -1,20 +1,3 @@
-// document.getElementById("logout").onclick = function () {
-//     location.href = "/logout"
-// }
-
-// document.getElementById("home").onclick = function(){
-//     location.href = "/"
-// }
-
-// document.getElementById("admin").onclick = function(){
-//   location.href = "/admin"
-// }
-
-// document.getElementById("delete").onclick = function(){
-//     location.href = "/delete"
-// }
-
-
 function getCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
@@ -29,14 +12,6 @@ let id = getCookie("id")
 let statu = getCookie("status")
 
 if (statu == "Administrators") {
-    // let buttonadmin = document.createElement("button")
-    // buttonadmin.id = "buttonadmin"
-    // buttonadmin.innerText = "admin"
-    // document.body.append(buttonadmin)
-    // document.getElementById("buttonadmin").onclick = function () {
-    //     location.href = "/admin"
-    // }
-    console.log("je suis admin!")
     const adminbutton = document.getElementById("adminbutton")
     adminbutton.style.display = "flex"
     
@@ -44,9 +19,6 @@ if (statu == "Administrators") {
   adminbutton.style.display = "none"
 
 }
-
-
-
 
 const viewtext = document.getElementById('viewtext')
 const title = document.getElementById('titletext')
@@ -73,15 +45,6 @@ const loadDataUser = data => {
     rank.innerText = data.User.UsersLevel
     viewtext.append(rank)
 
-    // const titlename = document.createElement("div")
-    // title.classList = "titlename"
-    // titlename.innerText = data.User.Name
-    // title.append(titlename)
-
-
-
-
-
     data.Comments.forEach(element => {
         const titleofpost = document.createElement('div')
 
@@ -100,13 +63,6 @@ const loadDataUser = data => {
         const divhaut = document.createElement('div')
         divhaut.classList = 'divhaut'
 
-        // // const title = document.createElement('div')
-        // // title.classList = 'title'
-        // // title.innerHTML = "On post "+TitlePost+'"'
-        // titleofpost.classList = 'title'
-
-        // titleofpost.innerHTML = 'On post "'+element.Post.Title+'"'
-
 
         const date = document.createElement('div')
         date.classList = 'date'
@@ -116,10 +72,6 @@ const loadDataUser = data => {
         content.classList = 'content'
         content.innerHTML = element.Content
 
-        
-        
-
-        // divhaut.append(title)
         divhaut.append(titleofpost)
 
         divhaut.append(date)
@@ -128,10 +80,6 @@ const loadDataUser = data => {
 
         const integrate = document.querySelector('.bigcardcomments')
         integrate.appendChild(newcard)
-      
-        // document.getElementById(element.Id).onclick = function () {
-        //   location.href = "/viewpost?id=" + element.Id
-        // }
         
     });
 
@@ -180,7 +128,10 @@ const loadDataUser = data => {
 
         const integrate = document.querySelector('.bigcard')
         integrate.appendChild(newcard)
-        
+
+        document.getElementById(element.Id).onclick = function () {
+          location.href = "/viewpost?id=" + element.Id
+        }
     });
 }
 
@@ -273,21 +224,6 @@ spanEmail.onclick = function() {
   bigcard.style.display = "flex";
   bigcard2.style.display = "flex";
 }
-
-
-
-// const modalPicture = document.getElementById("modal-picture");
-// const btnPicture = document.getElementById("changepicture");
-// const spanPicture = document.getElementById("close-picture");
-
-// btnPicture.onclick = function() {
-//   modalPicture.style.display = "block";
-// }
-
-// spanPicture.onclick = function() {
-//   modalPicture.style.display = "none";
-// }
-
 
 
 const modalDelte = document.getElementById("modal-delete");
