@@ -132,11 +132,17 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 		if strconv.Itoa(post.Id) == id {
 			temptab.Post = post
 		}
+		for _, users := range AllApi.UsersAll {
+			if post.Id == users.Id {
+				post.Photo = users.Photo
+			}
+		}
 	}
 	for _, comment := range AllApi.CommentsAll {
 		if strconv.Itoa(comment.PostLink) == id {
 			temptab.Comments = append(temptab.Comments, comment)
 		}
+
 	}
 	idInt, _ := strconv.Atoi((id))
 	temptab.like = countLike(AllApi.db, "likedpost", "postLike", idInt)
@@ -623,7 +629,7 @@ func Handler() {
 	// InsertIntoCategorie(AllApi.db, "Food")
 	Changeleveluser(AllApi.db, "Admin", "Administrators")
 	// InsertIntoUser(db, "jeinero", "jenei@gmail.com", "ImRio6988", "guest", "test", "test")
-	// InsertIntoCategorie(AllApi.db, "Shitpost")
+	InsertIntoCategorie(AllApi.db, "Shitpost")
 	// InsertIntoUser(db, "qsdlqsd", "jeazenei@yahoo.fr", "ImRio6988")
 	// InsertIntoCommunauter(db, "InfoFams", "DESC")
 	// InsertIntoPost(db, 1, "Golang Basic", "Golang suck lmao", "Zupz", 1)
