@@ -50,15 +50,6 @@ const loadDataUser = data => {
   rank.innerText = data.User.UsersLevel
   viewtext.append(rank)
 
-  // const titlename = document.createElement("div")
-  // title.classList = "titlename"
-  // titlename.innerText = data.User.Name
-  // title.append(titlename)
-
-
-
-
-
   data.Comments.forEach(element => {
       const titleofpost = document.createElement('div')
 
@@ -78,7 +69,6 @@ const loadDataUser = data => {
       divhaut.classList = 'divhaut'
 
     
-
       const date = document.createElement('div')
       date.classList = 'date'
       date.innerHTML = timeSince(element.Date)
@@ -86,9 +76,6 @@ const loadDataUser = data => {
       const content = document.createElement('div')
       content.classList = 'content'
       content.innerHTML = element.Content
-
-      
-      
 
     
       divhaut.append(titleofpost)

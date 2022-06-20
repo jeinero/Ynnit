@@ -10,7 +10,7 @@
 
 body {
     margin: 0px;
-    background-image: url("https://websitepeople.com.au/wp-content/uploads/2018/06/pattern-background.jpg");
+    background-image: url("https://static.vecteezy.com/system/resources/previews/001/409/192/original/abstract-geometric-banner-free-vector.jpg");
     background-size:cover;   
 }
 
@@ -115,10 +115,9 @@ body {
     display: flex;
     flex-wrap: wrap;
     height: auto;
+    width: auto;
     padding: 1%;
     border-radius: 20px;
-
-
     box-shadow: 0px 0px 11px 9px rgba(0,0,0,0.75);
 
 }
@@ -130,6 +129,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     height: auto;
+    width: auto;
     
     padding: 1%;
     border-radius: 20px;
@@ -403,7 +403,6 @@ textarea {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    box-shadow: 20px 20px rgb(0 0 0 / 15%);
     margin: 1%;
     transition: all .4s ease;
     font-size: 22px;
@@ -413,7 +412,6 @@ textarea {
 
 .card:hover {
     border-radius: 40px;
-    box-shadow: 10px 10px rgba(0,0,0,.25);
   }
 
 .title {
