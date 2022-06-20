@@ -69,6 +69,10 @@ function newCard(posts) {
           if (dislike.style.color == "red") {
             likeInt += 1
             like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
+            dislikeInt -=1
+
+            dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+            
             like.style.color = "rgb(49, 172, 49)"
             dislike.style.color = "#000"
           } else {
@@ -87,9 +91,7 @@ function newCard(posts) {
           }
           event.stopPropagation(e)
         }
-        console.log(element.Like)
-        
-        like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
+        like.innerHTML = `<i class="fa fa-thumbs-up" aria-hidden="true"></i>`
         if (likeTab != null) {
           likeTab.forEach(elem => {
             if (elem.PostLink == newcard.id) {
@@ -98,6 +100,7 @@ function newCard(posts) {
           })
         }
         const dislike = document.createElement('a')
+        let dislikeInt = element.DisLike
         dislike.classList = 'dislike'
         dislike.onclick = function addLike(e) {
           fetch("/addDislikepost", {
@@ -115,14 +118,25 @@ function newCard(posts) {
             })
           if (like.style.color === "rgb(49, 172, 49)") {
             likeInt -= 1
+            dislikeInt +=1
+
               like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
+              dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+
             like.style.color = "#000"
             dislike.style.color = "red"
           } else {
             if (dislike.style.color === "red") {
               dislike.style.color = "#000"
+              dislikeInt -=1
+
+              dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+
             } else {
+              dislikeInt +=1
               dislike.style.color = "red"
+              dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+
             }
           }
           event.stopPropagation(e)
@@ -135,7 +149,7 @@ function newCard(posts) {
             }
           })
         }
-        dislike.innerHTML = ` nb&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+        dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
 
         const divdropdownbutton = document.createElement('div')
         divdropdownbutton.className = 'dropdown'
@@ -245,13 +259,15 @@ function newCard(posts) {
 
         const comments = document.createElement('div')
         let textcomment = ""
-        if (element.NumberComment<=1) {
+        if (element.NumberComment <= 1) {
           textcomment = " comment"
         } else {
           textcomment = " comments"
         }
         comments.classList = 'comments'
         comments.innerHTML = element.NumberComment + textcomment
+
+      
 
         const userpseudo = document.createElement('div')
         userpseudo.classList = 'userpseudo'
@@ -324,24 +340,24 @@ function getCookie(name) {
 }
 
 const sortComment = document.getElementById("filtercomment")
-sortComment.onclick = function() {
-  post.sort((a,b) => {
+sortComment.onclick = function () {
+  post.sort((a, b) => {
     return b.NumberComment - a.NumberComment
   })
   deleteCards()
   newCard(post)
 }
 const filterdate = document.getElementById("filterdate")
-filterdate.onclick = function() {
-  post.sort((a,b) => {
+filterdate.onclick = function () {
+  post.sort((a, b) => {
     return b.date - a.date
   })
   deleteCards()
   newCard(post)
 }
 const filterlike = document.getElementById("filterlike")
-filterlike.onclick = function() {
-  post.sort((a,b) => {
+filterlike.onclick = function () {
+  post.sort((a, b) => {
     return b.Like - a.Like
   })
   deleteCards()
@@ -366,15 +382,20 @@ btn.addEventListener('click', () => {
     behavior: "smooth"
   })
 
-})
+})    
 
 
 
 
-document.body.onload = function() {
+document.body.onload = function () {
   if (getCookie("name") != null) {
-          let classComm = document.getElementsByClassName("lien")
-          classComm[0].style.display = "none"
-          classComm[1].style.display = "none"
-          }
+    let classComm = document.getElementsByClassName("lien")
+    classComm[0].style.display = "none"
+    classComm[1].style.display = "none"
+  }
+}
+if (getCookie("name") != null) {
+  let classComm = document.getElementsByClassName("lien")
+  classComm[0].style.display = "none"
+  classComm[1].style.display = "none"
 }

@@ -3,6 +3,7 @@ let id = url2.searchParams.get('id')
 let commu = await(getApi("/apicommunauters/" + id)) 
 let likeTab = undefined
 let dislikeTab = undefined
+var currentDate = new Date()
 if (getCookie("id") != null) {
         likeTab = await getApi('/apilike/' + getCookie("id"))
         dislikeTab = await getApi('/apidislike/' + getCookie("id"))
@@ -20,6 +21,8 @@ window.onload = function() {
         newCard(commu)
 }
 newCard(commu)
+
+
 function newCard(commu) {
   console.log(commu)
         document.getElementById("name").innerText = commu.Communauter.Name
@@ -334,10 +337,15 @@ function getCookie(name) {
 }
 
 
-document.body.onload = function() {
-        if (getCookie("name") != null) {
-                let classComm = document.getElementsByClassName("lien")
-                classComm[0].style.display = "none"
-                classComm[1].style.display = "none"
-                }
-      }
+document.body.onload = function () {
+  if (getCookie("name") != null) {
+    let classComm = document.getElementsByClassName("lien")
+    classComm[0].style.display = "none"
+    classComm[1].style.display = "none"
+  }
+}
+if (getCookie("name") != null) {
+  let classComm = document.getElementsByClassName("lien")
+  classComm[0].style.display = "none"
+  classComm[1].style.display = "none"
+}

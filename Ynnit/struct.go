@@ -43,6 +43,7 @@ type Post struct {
 	Content       string `json: "content"`
 	UsersName     string `json: "NameUser"`
 	Like          int    `json: "likeCount"`
+	DisLike       int    `json: "DisLikeCount"`
 	NumberComment int    `json: "commentCount"`
 	Warn          int    `json: "warn"`
 }
@@ -52,6 +53,7 @@ type Comment struct {
 	PostLink  int    `json: "postLink"`
 	UsersName string `json: "NameUser"`
 	Like      int    `json: "likeCount"`
+	DisLike   int    `json: "DisLikeCount"`
 	Date      int    `json: "date"`
 }
 

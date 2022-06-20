@@ -135,13 +135,14 @@ fetch("/apiposts/" + id)
             divbottom2.appendChild(like)
 
             like.onclick = function addLike(e) {
+                console.log(element.Id)
                 fetch("/addLikecomment", {
                     method: "POST",
                     headers: {
                         "content-type": "application/json"
                     },
                     body: JSON.stringify({
-                        CommentLink: parseInt(divbottom2.id),
+                        CommentLink: parseInt(element.Id),
                         UsersId: parseInt(getCookie("id")),
                     })
                 })
@@ -163,8 +164,9 @@ fetch("/apiposts/" + id)
             like.innerHTML = `<i class="fa fa-thumbs-up" aria-hidden="true"></i>`
             if (likeTab != null) {
                 likeTab.forEach(elem => {
+                    console.log("lol")
                         console.log(elem.CommentLink, parseInt(divbottom2.id))
-                    if (parseInt(divbottom2.id) === elem.CommentLink) {
+                    if (element.Id === elem.CommentLink) {
                         like.style.color = "rgb(49, 172, 49)"
                     }
                 })
@@ -181,7 +183,7 @@ fetch("/apiposts/" + id)
                         "content-type": "application/json"
                     },
                     body: JSON.stringify({
-                        CommentLink: parseInt(divbottom2.id),
+                        CommentLink: parseInt(element.Id),
                         UsersId: parseInt(getCookie("id")),
                     })
                 })
@@ -202,7 +204,8 @@ fetch("/apiposts/" + id)
             }
             if (dislikeTab != null) {
                 dislikeTab.forEach(elem => {
-                    if (elem.CommentLink == divbottom2.id) {
+                    console.log("lol")
+                    if (elem.CommentLink == element.Id) {
                         dislike.style.color = "red"
                     }
                 })
@@ -212,23 +215,23 @@ fetch("/apiposts/" + id)
            
 
 
-            const divbuttondropdown = document.createElement('div')
-            divbuttondropdown.id = 'myDropdown'
-            divbuttondropdown.className = 'dropdown-content'
-            divdropdownbutton.append(divbuttondropdown)
+            // const divbuttondropdown = document.createElement('div')
+            // divbuttondropdown.id = 'myDropdown'
+            // divbuttondropdown.className = 'dropdown-content'
+            // divdropdownbutton.append(divbuttondropdown)
 
-            const firstoptionbuttondropdown = document.createElement('a')
-            firstoptionbuttondropdown.innerText = "Delete comm"
-            divbuttondropdown.append(firstoptionbuttondropdown)
+            // const firstoptionbuttondropdown = document.createElement('a')
+            // firstoptionbuttondropdown.innerText = "Delete comm"
+            // divbuttondropdown.append(firstoptionbuttondropdown)
 
-            const secondoptionbuttondropdown = document.createElement('a')
-            secondoptionbuttondropdown.innerText = "Report User"
-            divbuttondropdown.append(secondoptionbuttondropdown)
+            // const secondoptionbuttondropdown = document.createElement('a')
+            // secondoptionbuttondropdown.innerText = "Report User"
+            // divbuttondropdown.append(secondoptionbuttondropdown)
 
-            buttondropdown.onclick = function addLike(e) {
-                event.stopPropagation(e)
-                divbuttondropdown.classList.toggle("show");
-            }
+            // buttondropdown.onclick = function addLike(e) {
+            //     event.stopPropagation(e)
+            //     divbuttondropdown.classList.toggle("show");
+            // }
 
             window.onclick = function (event) {
                 if (!event.target.matches('.dropbtn')) {
@@ -243,33 +246,33 @@ fetch("/apiposts/" + id)
                 }
             }
 
-            firstoptionbuttondropdown.onclick = async function addLike(e) {
-                event.stopPropagation(e)
-                let idcom = divcom.id
-                fetch("/deletecomme", {
-                    method: "POST",
-                    headers: {
-                        "content-type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        id: parseInt(idcom)
-                    })
-                })
-                    .then(async (res) => {
-                        if (!res.ok)
-                            throw await res.json()
-                        return res.json()
-                    })
-                    .then((data) => {
-                        location.href = "/viewpost?id="+id
-                    }).catch((err) => {
-                        // document.getElementById("error").innerText = err.error
-                    })
-            }
+            // firstoptionbuttondropdown.onclick = async function addLike(e) {
+            //     event.stopPropagation(e)
+            //     let idcom = divcom.id
+            //     fetch("/deletecomme", {
+            //         method: "POST",
+            //         headers: {
+            //             "content-type": "application/json"
+            //         },
+            //         body: JSON.stringify({
+            //             id: parseInt(idcom)
+            //         })
+            //     })
+            //         .then(async (res) => {
+            //             if (!res.ok)
+            //                 throw await res.json()
+            //             return res.json()
+            //         })
+            //         .then((data) => {
+            //             location.href = "/viewpost?id="+id
+            //         }).catch((err) => {
+            //             // document.getElementById("error").innerText = err.error
+            //         })
+            // }
 
-            secondoptionbuttondropdown.onclick = function addLike(e) {
-                event.stopPropagation(e)
-            }
+            // secondoptionbuttondropdown.onclick = function addLike(e) {
+            //     event.stopPropagation(e)
+            // }
            
 
 
@@ -315,11 +318,16 @@ fetch("/apiposts/" + id)
     
     document.body.onload = function () {
         if (getCookie("name") != null) {
-            let classComm = document.getElementsByClassName("lien")
-            classComm[0].style.display = "none"
-            classComm[1].style.display = "none"
+          let classComm = document.getElementsByClassName("lien")
+          classComm[0].style.display = "none"
+          classComm[1].style.display = "none"
         }
-    }
+      }
+      if (getCookie("name") != null) {
+        let classComm = document.getElementsByClassName("lien")
+        classComm[0].style.display = "none"
+        classComm[1].style.display = "none"
+      }
 
 
 const btn = document.querySelector('.btn');
