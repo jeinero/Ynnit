@@ -292,8 +292,6 @@ function timeSince(date) {
 var aDay = 24 * 60 * 60 * 1000;
 
 
-
-
 function getCookie(name) {
   let nameEQ = name + "=";
   let ca = document.cookie.split(';');

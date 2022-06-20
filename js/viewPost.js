@@ -282,7 +282,6 @@ fetch("/apiposts/" + id)
 
         })
 
-    // })
 
     function timeSince(date) {
         var seconds = Math.floor((new Date() - date) / 1000);

@@ -230,8 +230,14 @@ function newCard(posts) {
         }
 
         const comments = document.createElement('div')
+        let textcomment = ""
+        if (element.NumberComment<=1) {
+          textcomment = " comment"
+        } else {
+          textcomment = " comments"
+        }
         comments.classList = 'comments'
-        comments.innerHTML = element.NumberComment + "commentaires"
+        comments.innerHTML = element.NumberComment + textcomment
 
         const userpseudo = document.createElement('div')
         userpseudo.classList = 'userpseudo'

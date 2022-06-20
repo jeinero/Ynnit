@@ -229,7 +229,6 @@ func Newuser(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	var newUser User
 	body, _ := ioutil.ReadAll(r.Body)
-	fmt.Println(string(body))
 	json.Unmarshal(body, &newUser)
 	if InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Password, "You can change the desc", "Users", newUser.Date) {
 		w.Write([]byte("{\"msg\": \"Success\"}"))
@@ -247,7 +246,6 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	var newPost Post
 	body, _ := ioutil.ReadAll(r.Body)
-	fmt.Println(string(body))
 	json.Unmarshal(body, &newPost)
 	goodOrFalse := InsertIntoPost(AllApi.db, newPost.CommuLink, newPost.Title, newPost.Content, newPost.UsersName, newPost.Date)
 	if !goodOrFalse {
@@ -461,7 +459,6 @@ func AddDislikePost(w http.ResponseWriter, r *http.Request) {
 	}
 	var newLike like
 	body, _ := ioutil.ReadAll(r.Body)
-	fmt.Println(string(body))
 	json.Unmarshal(body, &newLike)
 	goodOrFalse := InsertIntoDisLikePost(AllApi.db, newLike.UsersId, newLike.PostLink)
 	w.Write([]byte("{\"msg\": \"Success\"}"))
@@ -576,7 +573,6 @@ func AddWarnPost(w http.ResponseWriter, r *http.Request) {
 	var warn Warn
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &warn)
-	fmt.Println(string(body))
 	goodOrFalse := InsertIntoWarnPost(AllApi.db, warn.Content, warn.Link)
 	w.Write([]byte("{\"msg\": \"Success\"}"))
 	if !goodOrFalse {
