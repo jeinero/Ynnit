@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <link rel="stylesheet" href="./css/home.css">
     <link rel="stylesheet" href="./css/post.css">
 </head>
 <header>
@@ -48,24 +49,24 @@
 <body>
     <div class="container">
         <div class="CreatePost">
-            <p><strong>Create a Community:</strong> </p>
+            <p>CREATE A COMMUNITY:</p>
 
+            <div class="center">
             <select name="categorie" class="selectcat" id="select">
-                <option value="0">Choose the Categorie</option>
-                <option value="1">Nature</option>
-                <option value="2">Sport</option>
+                <option value="0">Choose the Category</option>
             </select>
            
-                <input  id="titre" type="text" maxlength="300" size="50" placeholder="Title" required>
-                <textarea id="content"name="" cols="30" rows="10" placeholder="Text (optional)"></textarea>
-
+                <input  id="titre" type="text" maxlength="35" size="50" placeholder="Title" required>
+                <textarea id="content"name="" maxlength="1000" cols="30" rows="9" placeholder="Text (optional)"></textarea>
+            </div>
+            
             <p id="error" style="color: red"></p>
 
             <div class="PosterContain">
 
                 <div class="Poster">
                     <button id="btn"> Post </button>
-                    <button class="test">Delete</button>
+                    <button id="btn" onclick="window.location.href='/community'">Cancel</button>
                 </div>
 
             </div>

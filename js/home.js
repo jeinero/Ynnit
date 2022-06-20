@@ -161,7 +161,7 @@ function newCard(posts) {
 
         const buttondropdown = document.createElement('button')
         buttondropdown.className = 'dropbtn'
-        buttondropdown.innerText = 'modo'
+        buttondropdown.innerText = '!'
         divdropdownbutton.append(buttondropdown)
 
         const divbuttondropdown = document.createElement('div')

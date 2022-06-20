@@ -26,11 +26,13 @@ newCard(commu)
 function newCard(commu) {
   console.log(commu)
         document.getElementById("name").innerText = commu.Communauter.Name
+        document.getElementById("cat").innerText = commu.Communauter.Tags
         document.getElementById("date").innerText = commu.Communauter.Date
         document.getElementById("desc").innerText = commu.Communauter.Desc
   commu.Post.forEach(element => {
+      
         const newcard = document.createElement('div')
-        newcard.id = element.Id
+       newcard.id = element.Id
         newcard.classList = "card"
 
         const divhaut = document.createElement('div')
@@ -48,6 +50,10 @@ function newCard(commu) {
         community.classList = 'community'
         community.innerHTML = `<a href='/viewcommunity?id=${commu.id}'>${commu.Communauter.Name}</a>`
 
+        const tags = document.createElement('div')
+        tags.classList = 'tags'
+        tags.innerHTML = element.Tags
+
         const content = document.createElement('div')
         content.classList = 'content'
         content.innerHTML = element.Content
@@ -55,9 +61,10 @@ function newCard(commu) {
         const divbas = document.createElement('div')
         divbas.classList = 'divbas'
 
-        const like = document.createElement('button')
+        const like = document.createElement('a')
         like.classList = 'like'
         like.id = "like"
+        let likeInt = element.Like
         like.onclick = function addLike(e) {
           fetch("/addLikepost", {
             method: "POST",
@@ -73,18 +80,31 @@ function newCard(commu) {
               document.getElementById("error").innerText = err.error
             })
           if (dislike.style.color == "red") {
+            likeInt += 1
+            like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
+            dislikeInt -=1
+
+            dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+            
             like.style.color = "rgb(49, 172, 49)"
             dislike.style.color = "#000"
           } else {
             if (like.style.color == "rgb(49, 172, 49)") {
               like.style.color = "#000"
+              likeInt -= 1
+              like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
+
+
             } else {
               like.style.color = "rgb(49, 172, 49)"
+              likeInt += 1
+              like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
+
             }
           }
           event.stopPropagation(e)
         }
-        like.innerHTML = `<i class="fa fa-thumbs-up" aria-hidden="true"></i>`
+        like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
         if (likeTab != null) {
           likeTab.forEach(elem => {
             if (elem.PostLink == newcard.id) {
@@ -92,7 +112,8 @@ function newCard(commu) {
             }
           })
         }
-        const dislike = document.createElement('button')
+        const dislike = document.createElement('a')
+        let dislikeInt = element.DisLike
         dislike.classList = 'dislike'
         dislike.onclick = function addLike(e) {
           fetch("/addDislikepost", {
@@ -109,13 +130,26 @@ function newCard(commu) {
               document.getElementById("error").innerText = err.error
             })
           if (like.style.color === "rgb(49, 172, 49)") {
+            likeInt -= 1
+            dislikeInt +=1
+
+              like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
+              dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+
             like.style.color = "#000"
             dislike.style.color = "red"
           } else {
             if (dislike.style.color === "red") {
               dislike.style.color = "#000"
+              dislikeInt -=1
+
+              dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+
             } else {
+              dislikeInt +=1
               dislike.style.color = "red"
+              dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+
             }
           }
           event.stopPropagation(e)
@@ -128,14 +162,14 @@ function newCard(commu) {
             }
           })
         }
-        dislike.innerHTML = `<i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+        dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
 
         const divdropdownbutton = document.createElement('div')
         divdropdownbutton.className = 'dropdown'
 
         const buttondropdown = document.createElement('button')
         buttondropdown.className = 'dropbtn'
-        buttondropdown.innerText = 'modo'
+        buttondropdown.innerText = '!'
         divdropdownbutton.append(buttondropdown)
 
         const divbuttondropdown = document.createElement('div')
@@ -237,23 +271,30 @@ function newCard(commu) {
         }
 
         const comments = document.createElement('div')
+        let textcomment = ""
+        if (element.NumberComment <= 1) {
+          textcomment = " comment"
+        } else {
+          textcomment = " comments"
+        }
         comments.classList = 'comments'
-        comments.innerHTML = element.NumberComment + "commentaires"
+        comments.innerHTML = element.NumberComment + textcomment
 
         const userpseudo = document.createElement('div')
         userpseudo.classList = 'userpseudo'
         userpseudo.innerHTML = element.UsersName
 
+        divhaut.append(userpseudo)
         divhaut.append(title)
-        divhaut.append(community)
         divhaut.append(date)
-        newcard.appendChild(divhaut)
-        newcard.append(content)
-        newcard.appendChild(divbas)
         divbas.append(like)
         divbas.append(dislike)
         divbas.append(comments)
-        divbas.append(userpseudo)
+        divbas.append(community)
+        divbas.append(tags)
+        newcard.appendChild(divhaut)
+        newcard.append(content)
+        newcard.appendChild(divbas)
         if (getCookie("status") != "Users" && getCookie("id") != null) {
           divbas.append(divdropdownbutton)
         }
@@ -336,6 +377,18 @@ function getCookie(name) {
   return null;
 }
 
+
+const btn = document.querySelector('.btn');
+
+btn.addEventListener('click', () => {
+
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth"
+  })
+
+})   
 
 document.body.onload = function () {
   if (getCookie("name") != null) {

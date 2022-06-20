@@ -6,13 +6,13 @@ document.getElementById("btn").onclick = function () {
             if (linkCommu != 0) {
                 onClickPost()
             } else {
-                document.getElementById("error").innerText = "choose a community"
+                document.getElementById("error").innerText = "Please choose a community"
             }
          } else {
-            document.getElementById("error").innerText = "Need a user, login or fuck off"
+            document.getElementById("error").innerText = "You need to get registered, please log in"
         }
     } else {
-        document.getElementById("error").innerText = "enter a title"
+        document.getElementById("error").innerText = "Please enter a title"
     }
 };
 

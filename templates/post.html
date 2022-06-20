@@ -23,11 +23,14 @@
                     <input class="searchhead" type="search" name="search" placeholder="Search for something"
                             list="Artists">
                     <datalist id="Artists">
-                            erzerze
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
+                            {{range .GroupeArt}}
+                            <option value="{{.Name}}">{{.Name}} - Artist/Band</option>
+                            <option value="{{.Name}}">{{.CreationDate}} - Creation Date</option>
+                            {{range .Members}}
+                            <option value="{{.}}">Member</option>
+                            {{end}}
+                            <option value={{.Name}}>{{.FirstAlbum}} - First Album Release Date</option>
+                            {{end}}
                     </datalist>
             </div>
     </div>
@@ -46,28 +49,24 @@
 
 <body>
     <div class="container">
-
-        
-        
         <div class="CreatePost">
-            <p><strong>Create a Post:</strong> </p>
+            <p>CREATE A POST:</p>
           
-            <select name="communité" class="selectcomm" id="select">
-                <option value="0">Choose the community</option>
-            </select>
-
+            <div class="center">
+                <select name="communité" class="selectcomm" id="select">
+                    <option value="0">Choose the community</option>
+                </select>
             <input id="titre" type="text" maxlength="35" size="50" placeholder="Title" required>
-            <textarea id="content" cols="30" rows="10" maxlength="1000" placeholder="Text (optional)"></textarea>
-
-    
+            <textarea id="content" cols="30" rows="9" maxlength="1000" placeholder="Text (optional)"></textarea>
+        </div>
 
             <p id="error" style="color: red"></p>
 
             <div class="PosterContain">
 
                 <div class="Poster">
-                    <button id="btn" type="submit" href="/"> Post </button>
-                    <button onclick="window.location.href='/'">Cancel</button>
+                    <button id="btn" type="submit" href="/">Post</button>
+                    <button id="btn" onclick="window.location.href='/postpage'">Cancel</button>
                 </div>
 
             </div>

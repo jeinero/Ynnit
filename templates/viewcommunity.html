@@ -51,23 +51,60 @@
 <body>
         <div id="container">
                 <div id="commu">
-                        <h1 id="name"></h1>
-                        <p id="desc" ></p>
-                        <h3 id="date"></h3>
-                </div>
-                <div id="makeAPost">
-                        <div id="cards">
-                        <h1 id="title">Make A post</h1>
-                        <input id="titre" type="text" maxlength="50" size="50" placeholder="Title" required>
-                        <textarea id="content" cols="30" rows="10" placeholder="Text (optional)"></textarea>
-                        <button id="btn" type="submit" href="/"> Post </button>
-                        </div>
-                </div>
-                <div id="post">
-                        <div class="bigcard">
+                        <div id="contenthaut">
+
+                                <div id="namecontent">
+                                        <div id="namename">Name:</div>
+                                        <div id="name"></div>
+                                </div>
+
+                                <div id="catcontent">
+                                        <div id="catname">Category:</div>
+                                        <div id="cat"></div>
+                                </div>
+
+                                <div id="datecontent">
+                                        <div id="datename">Creation date:</div>
+                                        <div id="date"></div>
+                                </div>
+
 
                         </div>
+
+                        <div id="desccontent">
+                                <div id="namedesc">Description:</div>
+                                <div id="desc"></div>
+                        </div>
+
                 </div>
+        </div>
+
+        <div id="makeAPost">
+                <div id="cards">
+                        <div id="title">Make A post</div>
+                        <input id="titre" type="text" maxlength="35" size="50" placeholder="Title" required>
+                        <textarea id="content" cols="30" rows="9" maxlength="1000" placeholder="Text (optional)"></textarea>
+                        <div class="contbtn">
+                        <button id="btn" type="submit" href="/"> Post </button>
+                </div>
+                </div>
+        </div>
+        <div id="post">
+                <div class="bigcard">
+
+                </div>
+        </div>
+        </div>
+        <div class="btn">
+
+                <svg class="couleur" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="50%" height="50%" viewBox="0 0 98.148 98.149" style="enable-background:new 0 0 98.148 98.149;"
+	 xml:space="preserve">
+         <path d="M97.562,64.692L50.49,17.618c-0.75-0.75-2.078-0.75-2.828,0L0.586,64.693C0.211,65.068,0,65.577,0,66.106
+		c0,0.53,0.211,1.039,0.586,1.414l12.987,12.987c0.391,0.391,0.902,0.586,1.414,0.586c0.512,0,1.023-0.195,1.414-0.586
+		l32.674-32.674L81.75,80.506c0.75,0.751,2.078,0.75,2.828,0l12.984-12.987C98.344,66.739,98.344,65.472,97.562,64.692z"/>
+                </svg>
+
         </div>
 </body>
 

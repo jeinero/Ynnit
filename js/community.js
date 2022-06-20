@@ -9,12 +9,20 @@ const dates = ( year + "-" + day + "-" + month)
 
 
 document.getElementById("btn").onclick = function () {
-    if (getCookie("name") != null && document.getElementById("titre").value.length >= 1 && linkCat != "") {
-        create()
+    if (document.getElementById("titre").value.length >= 1 ) {
+        if (getCookie("name") != null ){
+            if (linkCat != "") {
+                create() 
+            } else {
+                document.getElementById("error").innerText = "Please choose a category"
+            }
+         } else {
+            document.getElementById("error").innerText = "You need to get registered, please log in"
+        }
     } else {
-        document.getElementById("error").innerText = "Need a user, login or fuck off"
+        document.getElementById("error").innerText = "Please enter a title"
     }
-}
+};
 
 function getCookie(name) {
     var nameEQ = name + "=";

@@ -144,7 +144,7 @@ header {
 
 .choose {
     display: flex;
-    width: 50%;
+    width: 70%;
     height: 250px;
     justify-content: space-around;
     border-radius: 40px;
@@ -208,13 +208,11 @@ input[type="radio"].radio1    {
     flex-direction: column;
     border-radius: var(--btn-corner);
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-    padding: 1%;
     font-size: 20px;
 }
 
 .createpost {
     display: flex;
-    box-shadow: 0 4px 15px 0 rgba(23, 168, 108, 0.75);
     height: 50%;
     width: 100%;
     border-top-left-radius: 15px;
@@ -231,7 +229,7 @@ input[type="radio"].radio1    {
 
 a.createpost {
     height: 100%;
-    border: none;
+    border-bottom: 2px solid black;
     color: rgb(47,101,125);
 }
 
@@ -280,9 +278,7 @@ a:-webkit-any-link {
     flex-wrap: wrap;
     height: 100%;
     padding: 1%;
-    border-radius: var(--btn-corner);
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
- 
+    border: none;
 }
 
 .card {
@@ -456,6 +452,7 @@ a:-webkit-any-link {
     font-size: 16px;
     border: none;
     cursor: pointer;
+    border-radius: 40px;
 }
 
 .dropbtn:hover,
@@ -491,17 +488,4 @@ a:-webkit-any-link {
 
 .show {
     display: block;
-}
-
-.modal {
-    background-color: #00529F;
-    position: absolute;
-    z-index: 8;
-    top: 50%;
-    left: 50%;
-    margin-top: -50px;
-    margin-left: -50px;
-    width: 200px;
-    height: 300px;
-    display: none;
 }

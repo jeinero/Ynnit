@@ -11,11 +11,12 @@ header {
     top: 0;
     height: 75px;
     width: 100%;
-    background: linear-gradient(90deg, rgba(8,160,174,1) 4%, rgba(78,186,198,1) 15%, rgba(104,227,245,1) 29%, rgba(74,248,247,1) 58%, rgba(235,238,229,1) 86%, rgba(255,255,255,1) 95%);
+    background: rgb(47,101,125);
+    background: linear-gradient(90deg, rgba(47,101,125,1) 0%, rgba(79,158,191,1) 20%, rgba(82,161,194,1) 22%, rgba(118,197,230,1) 50%, rgba(212,241,255,1) 76%, rgba(219,236,243,1) 100%);
     text-decoration: none;
     font-family: 'Noto Sans', sans-serif;
-    border-bottom: 1px solid;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    border-bottom: 2px solid;
+    box-shadow: 2px 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .container {
@@ -50,18 +51,21 @@ header {
     width: 100%;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     transition: all 1s ease;
-    border: 0.5px solid black;
+    background-color: white;
 }
 
 .searchheader:hover {
     transition: all 1s ease;
-    text-shadow: 1px 1px 1px black;
+    text-shadow: 2px 2px 2px black;
 }
 
 .searchhead::placeholder {
-    color: white;
+    color:rgb(47,101,125);
 }
 
+.searchhead::-webkit-calendar-picker-indicator {
+    display: none;
+  }
 
 .searchhead {
     background: transparent;
@@ -129,6 +133,8 @@ header {
         transition: all 1s ease;
     }
 
+/* header fin */
+
 .choose {
     display: flex;
     width: 50%;
@@ -143,7 +149,6 @@ header {
     background-size:cover;   
     
 }
-/* header fin */
 
 #viewpost {
     margin: 1% 10%;
@@ -250,9 +255,7 @@ header {
     align-items: center;
     background-color: black;
     height: 2px;
-    margin: 1%
-
-   
+    margin: 1%;
 }
 
 .like {
