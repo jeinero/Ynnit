@@ -77,8 +77,7 @@ function newCard(posts) {
           }
           event.stopPropagation(e)
         }
-        console.log(element.Like)
-        like.innerHTML = `<i class="fa fa-thumbs-up" aria-hidden="true">${element.Like}</i>`
+        like.innerHTML = `<i class="fa fa-thumbs-up" aria-hidden="true"></i>`
         if (likeTab != null) {
           likeTab.forEach(elem => {
             if (elem.PostLink == newcard.id) {
@@ -353,7 +352,7 @@ btn.addEventListener('click', () => {
     behavior: "smooth"
   })
 
-})
+})    
 
 
 
@@ -364,4 +363,9 @@ document.body.onload = function () {
     classComm[0].style.display = "none"
     classComm[1].style.display = "none"
   }
+}
+if (getCookie("name") != null) {
+  let classComm = document.getElementsByClassName("lien")
+  classComm[0].style.display = "none"
+  classComm[1].style.display = "none"
 }

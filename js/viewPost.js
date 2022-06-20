@@ -315,11 +315,16 @@ fetch("/apiposts/" + id)
     
     document.body.onload = function () {
         if (getCookie("name") != null) {
-            let classComm = document.getElementsByClassName("lien")
-            classComm[0].style.display = "none"
-            classComm[1].style.display = "none"
+          let classComm = document.getElementsByClassName("lien")
+          classComm[0].style.display = "none"
+          classComm[1].style.display = "none"
         }
-    }
+      }
+      if (getCookie("name") != null) {
+        let classComm = document.getElementsByClassName("lien")
+        classComm[0].style.display = "none"
+        classComm[1].style.display = "none"
+      }
 
 
 const btn = document.querySelector('.btn');
