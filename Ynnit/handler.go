@@ -672,7 +672,10 @@ func Handler() {
 	Changeleveluser(AllApi.db, "Admin", "Administrators")
 	// InsertIntoUser(db, "jeinero", "jenei@gmail.com", "ImRio6988", "guest", "test", "test")
 	InsertIntoCategorie(AllApi.db, "Shitpost")
+<<<<<<< HEAD
 	// InsertIntoCategorie(AllApi.db, "z")
+=======
+>>>>>>> ae885929a6569390489d7cb211a5ebc668317e29
 	// InsertIntoUser(db, "qsdlqsd", "jeazenei@yahoo.fr", "ImRio6988")
 	// InsertIntoCommunauter(db, "InfoFams", "DESC")
 	// InsertIntoPost(db, 1, "Golang Basic", "Golang suck lmao", "Zupz", 1)

@@ -21,18 +21,8 @@
 
         <div class="searchdiv">
                 <div class="searchheader" method="get" action="/" autocomplete="off">
-                        <input class="searchhead" type="search" name="search" placeholder="Search for something"
-                                list="Artists">
-                        <datalist id="Artists">
-                                {{range .GroupeArt}}
-                                <option value="{{.Name}}">{{.Name}} - Artist/Band</option>
-                                <option value="{{.Name}}">{{.CreationDate}} - Creation Date</option>
-                                {{range .Members}}
-                                <option value="{{.}}">Member</option>
-                                {{end}}
-                                <option value={{.Name}}>{{.FirstAlbum}} - First Album Release Date</option>
-                                {{end}}
-                        </datalist>
+                        <input id="search" class="searchhead" type="search" name="search" placeholder="Search for something">
+
                 </div>
         </div>
 
@@ -115,6 +105,6 @@
 
 
 </body>
-<script type="module" src='/js/viewPost.js'></script>
+<script type="module" src='/js/viewpost.js'></script>
 
 </html>

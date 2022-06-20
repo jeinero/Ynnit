@@ -69,8 +69,13 @@ fetch("/apiposts/" + id)
         divtop.classList = 'divtop'
         viewpost.appendChild(divtop)
 
+        const avatar = document.createElement('img')
+        avatar.classList = 'avatar'
+        avatar.src = data.Post.Photo
+        divtop.appendChild(avatar)
+
         const username = document.createElement('div')
-        username.innerHTML = "avatar du mec&ensp;" + data.Post.UsersName
+        username.innerHTML = "Posted by&ensp;" + data.Post.UsersName
         username.classList = 'username'
         divtop.appendChild(username)
 
@@ -110,8 +115,13 @@ fetch("/apiposts/" + id)
             divtop2.classList = 'divtop2'
             post.appendChild(divtop2)
 
+            const avatar = document.createElement('img')
+            avatar.classList = 'avatar'
+            avatar.src = element.Photo
+            divtop2.appendChild(avatar)
+
             const username = document.createElement('div')
-            username.innerHTML = "avatar du mec&ensp;" + element.UsersName
+            username.innerHTML = "Posted by&ensp;" + element.UsersName
             username.classList = 'username'
             divtop2.appendChild(username)
 

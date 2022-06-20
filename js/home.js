@@ -41,6 +41,12 @@ function newCard(posts) {
         community.id = element.Id
         community.innerHTML = `<a href='/viewcommunity?id=${element.CommuLink}'>${data.Communauter.Name}</a>`
 
+
+        const tags = document.createElement('div')
+        tags.classList = 'tags'
+        console.log(element)
+        tags.innerHTML = data.Communauter.Tags
+
         const content = document.createElement('div')
         content.classList = 'content'
         content.innerHTML = element.Content
@@ -91,7 +97,7 @@ function newCard(posts) {
           }
           event.stopPropagation(e)
         }
-        like.innerHTML = `<i class="fa fa-thumbs-up" aria-hidden="true"></i>`
+        like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
         if (likeTab != null) {
           likeTab.forEach(elem => {
             if (elem.PostLink == newcard.id) {
@@ -155,7 +161,7 @@ function newCard(posts) {
 
         const buttondropdown = document.createElement('button')
         buttondropdown.className = 'dropbtn'
-        buttondropdown.innerText = 'modo'
+        buttondropdown.innerText = '!'
         divdropdownbutton.append(buttondropdown)
 
         const divbuttondropdown = document.createElement('div')
@@ -294,22 +300,30 @@ function newCard(posts) {
         comments.classList = 'comments'
         comments.innerHTML = element.NumberComment + textcomment
 
-      
+        const avatar = document.createElement('img')
+        avatar.classList = 'avatar'
+        avatar.src = element.Photo
 
         const userpseudo = document.createElement('div')
         userpseudo.classList = 'userpseudo'
         userpseudo.innerHTML = element.UsersName
 
+
+        divhaut.append(avatar)
+        divhaut.append(userpseudo)
         divhaut.append(title)
-        divhaut.append(community)
         divhaut.append(date)
-        newcard.appendChild(divhaut)
-        newcard.append(content)
-        newcard.appendChild(divbas)
         divbas.append(like)
         divbas.append(dislike)
         divbas.append(comments)
-        divbas.append(userpseudo)
+        divbas.append(community)
+        divbas.append(tags)
+        newcard.appendChild(divhaut)
+        newcard.append(content)
+        newcard.appendChild(divbas)
+        
+      
+        
         if (getCookie("status") != "Users" && getCookie("id") != null) {
           divbas.append(divdropdownbutton)
         }
