@@ -28,7 +28,6 @@ function getCookie(name) {
 }
 const selector = document.getElementsByClassName("selectcomm")[0]
 function onClickPost() {
-    console.log("marche?")
     fetch("/post", {
         method: "POST",
         headers: {

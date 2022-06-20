@@ -98,7 +98,6 @@ fetch("/apiposts/" + id)
         viewpost.appendChild(divbottom)
 
         data.Comments.forEach(element => {
-            console.log(element)
             const divcom = document.createElement('div')
             divcom.id = element.Id
             divcom.className = "comm"
@@ -164,7 +163,6 @@ fetch("/apiposts/" + id)
             like.innerHTML = `<i class="fa fa-thumbs-up" aria-hidden="true"></i>`
             if (likeTab != null) {
                 likeTab.forEach(elem => {
-                        console.log(elem.CommentLink, parseInt(divbottom2.id))
                     if (parseInt(divbottom2.id) === elem.CommentLink) {
                         like.style.color = "rgb(49, 172, 49)"
                     }
@@ -267,7 +265,7 @@ fetch("/apiposts/" + id)
                         return res.json()
                     })
                     .then((data) => {
-                        location.href = "/viewpost?id="+id
+                        location.href = "/viewpost?id=" + id
                     }).catch((err) => {
                         // document.getElementById("error").innerText = err.error
                     })
@@ -276,57 +274,55 @@ fetch("/apiposts/" + id)
             secondoptionbuttondropdown.onclick = function addLike(e) {
                 event.stopPropagation(e)
             }
-           
-
-
-
-        })
 
             if (getCookie("status") != "Users" && getCookie("id") != null) {
-                divcom.append(divdropdownbutton)
+                divbottom2.append(divdropdownbutton)
             }
+
 
         })
 
-    // })
+    })
 
-    function timeSince(date) {
-        var seconds = Math.floor((new Date() - date) / 1000);
-        var interval = seconds / 31536000;
-    
-        if (interval > 1) {
-            return Math.floor(interval) + " years";
-        }
-        interval = seconds / 2592000;
-        if (interval > 1) {
-            return Math.floor(interval) + " months";
-        }
-        interval = seconds / 86400;
-        if (interval > 1) {
-            return Math.floor(interval) + " days";
-        }
-        interval = seconds / 3600;
-        if (interval > 1) {
-            return Math.floor(interval) + " hours";
-        }
-        interval = seconds / 60;
-        if (interval > 1) {
-            return Math.floor(interval) + " minutes";
-        }
-        return Math.floor(seconds) + " seconds";
+// })
+
+function timeSince(date) {
+    var seconds = Math.floor((new Date() - date) / 1000);
+    var interval = seconds / 31536000;
+
+    if (interval > 1) {
+        return Math.floor(interval) + " years";
     }
-    var aDay = 24 * 60 * 60 * 1000;
-    
-    
-    
-    
-    document.body.onload = function () {
-        if (getCookie("name") != null) {
-            let classComm = document.getElementsByClassName("lien")
-            classComm[0].style.display = "none"
-            classComm[1].style.display = "none"
-        }
+    interval = seconds / 2592000;
+    if (interval > 1) {
+        return Math.floor(interval) + " months";
     }
+    interval = seconds / 86400;
+    if (interval > 1) {
+        return Math.floor(interval) + " days";
+    }
+    interval = seconds / 3600;
+    if (interval > 1) {
+        return Math.floor(interval) + " hours";
+    }
+    interval = seconds / 60;
+    if (interval > 1) {
+        return Math.floor(interval) + " minutes";
+    }
+    return Math.floor(seconds) + " seconds";
+}
+var aDay = 24 * 60 * 60 * 1000;
+
+
+
+
+document.body.onload = function () {
+    if (getCookie("name") != null) {
+        let classComm = document.getElementsByClassName("lien")
+        classComm[0].style.display = "none"
+        classComm[1].style.display = "none"
+    }
+}
 
 
 const btn = document.querySelector('.btn');

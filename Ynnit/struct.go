@@ -44,7 +44,7 @@ type Post struct {
 	UsersName     string `json: "NameUser"`
 	Like          int    `json: "likeCount"`
 	NumberComment int    `json: "commentCount"`
-	Warn          int    `json: "warn"`
+	Warn          []Warn `json: "warn"`
 }
 type Comment struct {
 	Id        int    `json: "id"`

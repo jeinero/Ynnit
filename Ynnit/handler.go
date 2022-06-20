@@ -105,6 +105,16 @@ func UserHandler(w http.ResponseWriter, r *http.Request) {
 
 func PostsHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
+	var temptab []Post
+	for _, post := range AllApi.PostsAll {
+		for _, warn := range AllApi.WarnPost {
+			if post.Id == warn.Link {
+				post.Warn = append(post.Warn, warn)
+			}
+		}
+		temptab = append(temptab, post)
+	}
+	AllApi.PostsAll = temptab
 	json.NewEncoder(w).Encode(AllApi.PostsAll)
 }
 
@@ -241,7 +251,6 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	var newPost Post
 	body, _ := ioutil.ReadAll(r.Body)
-	fmt.Println(string(body))
 	json.Unmarshal(body, &newPost)
 	goodOrFalse := InsertIntoPost(AllApi.db, newPost.CommuLink, newPost.Title, newPost.Content, newPost.UsersName, newPost.Date)
 	if !goodOrFalse {
@@ -309,7 +318,6 @@ func NewcommunityHandler(w http.ResponseWriter, r *http.Request) {
 	var Newcommunauter Communauter
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &Newcommunauter)
-	fmt.Println(string(body))
 	if InsertIntoCommunauter(AllApi.db, Newcommunauter.Name, Newcommunauter.Desc, Newcommunauter.Date, Newcommunauter.Tags) {
 		w.Write([]byte("{\"msg\": \"Success\"}"))
 	} else {
@@ -456,7 +464,6 @@ func AddDislikePost(w http.ResponseWriter, r *http.Request) {
 	}
 	var newLike like
 	body, _ := ioutil.ReadAll(r.Body)
-	fmt.Println(string(body))
 	json.Unmarshal(body, &newLike)
 	goodOrFalse := InsertIntoDisLikePost(AllApi.db, newLike.UsersId, newLike.PostLink)
 	w.Write([]byte("{\"msg\": \"Success\"}"))
@@ -571,8 +578,18 @@ func AddWarnPost(w http.ResponseWriter, r *http.Request) {
 	var warn Warn
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &warn)
-	fmt.Println(string(body))
 	goodOrFalse := InsertIntoWarnPost(AllApi.db, warn.Content, warn.Link)
+	w.Write([]byte("{\"msg\": \"Success\"}"))
+	if !goodOrFalse {
+		w.Write([]byte("{\"error\": \"Sorry\"}"))
+	}
+}
+
+func Addtags(w http.ResponseWriter, r *http.Request) {
+	var tag Tags
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &tag)
+	goodOrFalse := InsertIntoCategorie(AllApi.db, tag.Name)
 	w.Write([]byte("{\"msg\": \"Success\"}"))
 	if !goodOrFalse {
 		w.Write([]byte("{\"error\": \"Sorry\"}"))
@@ -590,7 +607,7 @@ func Handler() {
 	// InsertIntoCategorie(AllApi.db, "Food")
 	// Changeleveluser(AllApi.db, "admin", "Administrators")
 	// InsertIntoUser(db, "jeinero", "jenei@gmail.com", "ImRio6988", "guest", "test", "test")
-	// InsertIntoCategorie(AllApi.db, "Shitpost")
+	// InsertIntoCategorie(AllApi.db, "z")
 	// InsertIntoUser(db, "qsdlqsd", "jeazenei@yahoo.fr", "ImRio6988")
 	// InsertIntoCommunauter(db, "InfoFams", "DESC")
 	// InsertIntoPost(db, 1, "Golang Basic", "Golang suck lmao", "Zupz", 1)
@@ -623,6 +640,8 @@ func Handler() {
 	r.HandleFunc("/apicommunauters/{id}", CommunauterHandler)
 
 	r.HandleFunc("/apitags", tagsHandler)
+
+	r.HandleFunc("/addtags", Addtags)
 
 	r.HandleFunc("/apicomments", CommentsHandler)
 	r.HandleFunc("/apicomments/{id}", CommentHandler)

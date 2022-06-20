@@ -17,7 +17,6 @@ async function getApi(url) {
 }
 window.onload = newCard(post)
 function newCard(posts) {
-  console.log(posts)
   posts.forEach(element => {
     fetch("/apicommunauters/" + element.CommuLink)
       .then(resp => resp.json())
@@ -115,7 +114,6 @@ function newCard(posts) {
         }
         if (dislikeTab != null) {
           dislikeTab.forEach(elem => {
-            console.log(elem, newcard.id)
             if (elem.PostLink == newcard.id) {
               dislike.style.color = "red"
             }
@@ -201,18 +199,46 @@ function newCard(posts) {
           }
         }
 
+        let modal = document.getElementById("myModal");
+
+        let span = document.getElementsByClassName("close")[0];
+
+        let submit = document.getElementById("send")
+
         secondoptionbuttondropdown.onclick = function addLike(e) {
           event.stopPropagation(e)
-          fetch("/addWarnPost", {
-            method: "POST",
-            headers: {
-              "content-type": "application/json"
-            },
-            body: JSON.stringify({
-              Content: "needToAddAlgo",
-              Link: parseInt(element.Id)
-            })
-          })
+
+          modal.style.display = "block";
+
+          span.onclick = function () {
+            modal.style.display = "none";
+          }
+
+          window.onclick = function (event) {
+            if (event.target == modal) {
+              modal.style.display = "none";
+            }
+          }
+          submit.onclick = function addLike() {
+            let content = document.getElementById("details")
+            if (content.value.length > 0) {
+              fetch("/addWarnPost", {
+                method: "POST",
+                headers: {
+                  "content-type": "application/json"
+                },
+                body: JSON.stringify({
+                  Content: content.value,
+                  Link: parseInt(element.Id)
+                })
+              })
+              content.value = ""
+              document.getElementById("error").innerText = ""
+              modal.style.display = "none";
+            } else {
+              document.getElementById("error").innerText = "enter details"
+            }
+          }
         }
 
 
@@ -304,24 +330,24 @@ function getCookie(name) {
 }
 
 const sortComment = document.getElementById("filtercomment")
-sortComment.onclick = function() {
-  post.sort((a,b) => {
+sortComment.onclick = function () {
+  post.sort((a, b) => {
     return b.NumberComment - a.NumberComment
   })
   deleteCards()
   newCard(post)
 }
 const filterdate = document.getElementById("filterdate")
-filterdate.onclick = function() {
-  post.sort((a,b) => {
+filterdate.onclick = function () {
+  post.sort((a, b) => {
     return b.date - a.date
   })
   deleteCards()
   newCard(post)
 }
 const filterlike = document.getElementById("filterlike")
-filterlike.onclick = function() {
-  post.sort((a,b) => {
+filterlike.onclick = function () {
+  post.sort((a, b) => {
     return b.Like - a.Like
   })
   deleteCards()
@@ -351,10 +377,10 @@ btn.addEventListener('click', () => {
 
 
 
-document.body.onload = function() {
+document.body.onload = function () {
   if (getCookie("name") != null) {
-          let classComm = document.getElementsByClassName("lien")
-          classComm[0].style.display = "none"
-          classComm[1].style.display = "none"
-          }
+    let classComm = document.getElementsByClassName("lien")
+    classComm[0].style.display = "none"
+    classComm[1].style.display = "none"
+  }
 }

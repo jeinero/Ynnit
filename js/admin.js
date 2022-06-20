@@ -22,7 +22,7 @@ const loadDataUser = data => {
     let tabTab = [...document.getElementsByClassName("tablinks")]
 
     tabTab.forEach(element => {
-        element.onclick  = function() {
+        element.onclick = function () {
             let tab = element.innerText
             let button = element
             Tab(tab, button)
@@ -32,7 +32,7 @@ const loadDataUser = data => {
 
     array(data)
 
-    document.getElementById("site-search").oninput  = function() {Search(this.value, data)}
+    document.getElementById("site-search").oninput = function () { Search(this.value, data) }
 
     let tabbutton = [...document.getElementsByClassName("changelevel")]
 
@@ -40,7 +40,7 @@ const loadDataUser = data => {
     tabbutton.forEach(element => {
         let name = document.getElementsByClassName("name")[index].innerText
         let valu = document.getElementsByClassName("select")[index]
-        element.onclick = function(){
+        element.onclick = function () {
             changelevel(valu.value, name)
         }
         index = index + 1
@@ -50,20 +50,20 @@ const loadDataUser = data => {
 
 function Tab(tab, button) {
     var i, tabcontent, tablinks;
-  
+
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = "none";
+        tabcontent[i].style.display = "none";
     }
-  
+
     tablinks = document.getElementsByClassName("tablinks");
     for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" active", "");
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
-  
+
     document.getElementById(tab).style.display = "block";
     button.className += " active";
-  }
+}
 
 function array(api) {
     let tbody = document.createElement("tbody");
@@ -137,27 +137,195 @@ function Search(value, api) {
 
 function changelevel(value, names) {
     fetch("/changelevel", {
-        method: "POST", 
+        method: "POST",
         headers: {
-            "content-type": "application/json" 
+            "content-type": "application/json"
         },
         body: JSON.stringify({
             name: names,
             UsersLevel: value
         })
     })
-    .then(async (res) => {
-        if (!res.ok)
-            throw await res.json()
-        return res.json()
-    })
-    .then((data) => {
-        location.href = "/admin"
-    }).catch((err) => {
-        // document.getElementById("error").innerText = err.error
-    })
+        .then(async (res) => {
+            if (!res.ok)
+                throw await res.json()
+            return res.json()
+        })
+        .then((data) => {
+            location.href = "/admin"
+        }).catch((err) => {
+            // document.getElementById("error").innerText = err.error
+        })
 }
 
- fetch("/apiusers")
-.then(resp => resp.json())
-.then(loadDataUser)
+fetch("/apiusers")
+    .then(resp => resp.json())
+    .then(loadDataUser)
+
+let theadreport = document.createElement("thead");
+
+let trreport = document.createElement("tr");
+
+let thUsername = document.createElement("th");
+thUsername.innerText = "Name User Report"
+trreport.appendChild(thUsername);
+
+let thDetails = document.createElement("th");
+thDetails.innerText = "Comment Report"
+trreport.appendChild(thDetails);
+
+let thPost = document.createElement("th");
+thPost.innerText = "Post report"
+trreport.appendChild(thPost);
+
+theadreport.appendChild(trreport);
+tableReport.appendChild(theadreport);
+
+const loadDataReport = data => {
+
+    let tabTab = [...document.getElementsByClassName("tablinks")]
+
+    tabTab.forEach(element => {
+        element.onclick = function () {
+            let tab = element.innerText
+            let button = element
+            Tab(tab, button)
+        }
+    })
+
+
+    arrayreport(data)
+}
+
+
+function arrayreport(api) {
+    let tbodyreport = document.createElement("tbody");
+
+    api.forEach(element => {
+
+        let treport = document.createElement("tr");
+
+        let tduser = document.createElement("td");
+        tduser.className = "user"
+        tduser.innerText = element.UsersName
+        treport.appendChild(tduser);
+
+
+        let tdcommentreport = document.createElement("td");
+        element.Warn.forEach(element => {
+            tdcommentreport.innerText = element.Content
+        });
+        treport.appendChild(tdcommentreport);
+
+        let tdpost = document.createElement("td");
+        tdpost.innerText = element.Content
+        treport.appendChild(tdpost);
+
+        tbodyreport.appendChild(treport);
+        tableReport.appendChild(tbodyreport);
+
+    });
+}
+
+
+
+fetch("/apiposts")
+    .then(resp => resp.json())
+    .then(loadDataReport)
+
+
+let theadtags = document.createElement("thead");
+
+let trtags = document.createElement("tr");
+
+let thTags = document.createElement("th");
+thTags.innerText = "Tags"
+trtags.appendChild(thTags);
+
+theadtags.appendChild(trtags);
+tableTags.appendChild(theadtags);
+
+
+
+const loadDataTags = data => {
+
+    let tabTab = [...document.getElementsByClassName("tablinks")]
+
+    tabTab.forEach(element => {
+        element.onclick = function () {
+            let tab = element.innerText
+            let button = element
+            Tab(tab, button)
+        }
+    })
+
+
+    arraytags(data)
+
+    document.getElementById("search-tags").oninput = function () { Searchtags(this.value, data) }
+
+    document.getElementById("add").onclick = function () { AddTags(document.getElementById("addtags").value) }
+
+}
+
+function arraytags(api) {
+    let tbodytags = document.createElement("tbody");
+
+    api.forEach(element => {
+
+        let trtags = document.createElement("tr");
+
+        let tdtags = document.createElement("td");
+        tdtags.className = "tagsname"
+        tdtags.innerText = element.Name
+        trtags.appendChild(tdtags);
+
+        tbodytags.appendChild(trtags);
+        tableTags.appendChild(tbodytags);
+
+    });
+}
+
+function Searchtags(value, api) {
+    let tabSearch = []
+    api.forEach(element => {
+        if (element.Name.toLowerCase().includes(value.toLowerCase())) {
+            tabSearch.push(element)
+        }
+    });
+    document.getElementsByTagName("tbody")[2].remove();
+    arraytags(tabSearch)
+}
+
+function AddTags(name) {
+    if (name.length >= 1) {
+        fetch("/addtags", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({
+                Name: name,
+            })
+        })
+            .then(async (res) => {
+                if (!res.ok)
+                    throw await res.json()
+                return res.json()
+            })
+            .then((data) => {
+                location.href = "/admin"
+            }).catch((err) => {
+                // document.getElementById("error").innerText = err.error
+            })
+        document.getElementById("addtags").value = ""
+        document.getElementById("error").innerText = ""
+    } else {
+        document.getElementById("error").innerText = "enter valide name"
+    }
+}
+
+
+fetch("/apitags")
+    .then(resp => resp.json())
+    .then(loadDataTags)
