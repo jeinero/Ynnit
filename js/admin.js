@@ -178,6 +178,10 @@ let thPost = document.createElement("th");
 thPost.innerText = "Post report"
 trreport.appendChild(thPost);
 
+let thComfirm = document.createElement("th");
+thComfirm.innerText = "Comfirm"
+trreport.appendChild(thComfirm);
+
 theadreport.appendChild(trreport);
 tableReport.appendChild(theadreport);
 
@@ -195,39 +199,127 @@ const loadDataReport = data => {
 
 
     arrayreport(data)
+
+    let buttonyes = [...document.getElementsByClassName("yes")]
+    let buttonno = [...document.getElementsByClassName("no")]
+
+    buttonyes.forEach(element => {
+        element.onclick = function () { ConfirmYes(element) }
+    })
+
+    buttonno.forEach(element => {
+        element.onclick = function () { ConfirmNo(element) }
+    })
+
 }
+
 
 
 function arrayreport(api) {
     let tbodyreport = document.createElement("tbody");
 
     api.forEach(element => {
-
-        let treport = document.createElement("tr");
-
-        let tduser = document.createElement("td");
-        tduser.className = "user"
-        tduser.innerText = element.UsersName
-        treport.appendChild(tduser);
+        if (element.Warn != null) {
 
 
-        let tdcommentreport = document.createElement("td");
-        element.Warn.forEach(element => {
-            tdcommentreport.innerText = element.Content
-        });
-        treport.appendChild(tdcommentreport);
+            let treport = document.createElement("tr");
+            treport.id = element.Id
 
-        let tdpost = document.createElement("td");
-        tdpost.innerText = element.Content
-        treport.appendChild(tdpost);
+            let tduser = document.createElement("td");
+            tduser.className = "user"
+            tduser.innerText = element.UsersName
+            treport.appendChild(tduser);
 
-        tbodyreport.appendChild(treport);
-        tableReport.appendChild(tbodyreport);
+            let tdcommentreport = document.createElement("td");
+            element.Warn.forEach(element => {
+                tdcommentreport.innerText = element.Content
+            });
+            treport.appendChild(tdcommentreport);
+
+            let tdpost = document.createElement("td");
+            tdpost.innerText = element.Content
+            treport.appendChild(tdpost);
+
+            let tdcomfirm = document.createElement("td");
+            let tdyes = document.createElement("button");
+            let tdno = document.createElement("button");
+            tdyes.innerText = "yes"
+            tdyes.className = "yes"
+            tdyes.id = element.Id
+
+            tdno.innerText = "no"
+            tdno.className = "no"
+            tdno.id = element.Id
+
+            treport.appendChild(tdcomfirm);
+            tdcomfirm.appendChild(tdyes)
+            tdcomfirm.appendChild(tdno)
+
+
+            tbodyreport.appendChild(treport);
+            tableReport.appendChild(tbodyreport);
+        }
 
     });
 }
 
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
 
+let id = getCookie("id")
+
+function ConfirmYes(value) {
+    fetch("/addWarnUser", {
+        method: "POST",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: JSON.stringify({
+            Content: "",
+            Link: parseInt(id)
+        })
+    })
+        .then(async (res) => {
+            if (!res.ok)
+                throw await res.json()
+            return res.json()
+        })
+        .then((data) => {
+        }).catch((err) => {
+            // document.getElementById("error").innerText = err.error
+        })
+    ConfirmNo(value)
+}
+
+function ConfirmNo(value) {
+    fetch("/delWarnPost", {
+        method: "POST",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: JSON.stringify({
+            Id: parseInt(value.id)
+        })
+    })
+        .then(async (res) => {
+            if (!res.ok)
+                throw await res.json()
+            return res.json()
+        })
+        .then((data) => {
+            location.href = "/admin"
+        }).catch((err) => {
+            // document.getElementById("error").innerText = err.error
+        })
+}
 
 fetch("/apiposts")
     .then(resp => resp.json())
@@ -329,3 +421,98 @@ function AddTags(name) {
 fetch("/apitags")
     .then(resp => resp.json())
     .then(loadDataTags)
+
+
+
+let theadflags = document.createElement("thead");
+
+let trflags = document.createElement("tr");
+
+let thUser = document.createElement("th");
+thUser.innerText = "User"
+trflags.appendChild(thUser);
+
+let thFlags = document.createElement("th");
+thFlags.innerText = "Flags"
+trflags.appendChild(thFlags);
+
+let thdel = document.createElement("th");
+thdel.innerText = "del user"
+trflags.appendChild(thdel);
+
+theadflags.appendChild(trflags);
+tableFlags.appendChild(theadflags);
+
+const loadDataFlags = data => {
+    arrayflags(data)
+
+    document.getElementById("deluser").onclick = function () { deluser() }
+
+}
+
+function arrayflags(api) {
+    let tbodyflags = document.createElement("tbody");
+
+    api.forEach(element => {
+        if (element.Warns != null) {
+
+            let trflags = document.createElement("tr");
+
+            let tduser = document.createElement("td");
+            tduser.innerText = element.Name
+            trflags.appendChild(tduser);
+
+            let tdflags = document.createElement("td");
+            let count = 0
+            element.Warns.forEach(element => {
+                let i = 1
+               count = count + i
+            })
+
+            tdflags.innerText = count
+            trflags.appendChild(tdflags);
+
+            let tddelete = document.createElement("td");
+            let tddel = document.createElement("button");
+            tddel.innerText = "del user"
+            tddel.id = 'deluser'
+
+            trflags.appendChild(tddelete);
+            tddelete.appendChild(tddel)
+
+            tbodyflags.appendChild(trflags);
+            tableFlags.appendChild(tbodyflags);
+        }
+    })
+}
+
+let ids = getCookie("id")
+let names = getCookie("name")
+
+function deluser () {
+    fetch("/checkdelete", {
+        method: "POST",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: JSON.stringify({
+            id: parseInt(ids),
+            name: names
+        })
+    })
+        .then(async (res) => {
+            if (!res.ok)
+                throw await res.json()
+            return res.json()
+        })
+        .then((data) => {
+            location.href = "/admin"
+        }).catch((err) => {
+            // document.getElementById("error").innerText = err.error
+        })
+}
+
+
+fetch("/apiusers")
+    .then(resp => resp.json())
+    .then(loadDataFlags)

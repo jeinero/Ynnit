@@ -630,6 +630,15 @@ func InsertIntoWarnPost(db *sql.DB, Content string, Link int) bool {
 	return true
 }
 
+func DelIntoWarnPost(db *sql.DB, id int) bool {
+	_, err := db.Exec(`DELETE FROM warnPost WHERE what = ?`, id)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+	return true
+}
+
 func countWarn(db *sql.DB, table string, tableRow string, whereID int) int {
 	var count int
 	err := db.QueryRow("SELECT COUNT(*) FROM "+table+" WHERE "+tableRow+" = ?", whereID).Scan(&count)

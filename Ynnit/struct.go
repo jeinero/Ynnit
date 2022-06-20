@@ -27,6 +27,7 @@ type User struct {
 	UsersLevel string `json: "usersLevel"`
 	Warn       int    `json: "warn"`
 	Date       string `json: "date"`
+	Warns      []Warn `json: "warn"`
 }
 type Communauter struct {
 	Id   int    `json: "id"`

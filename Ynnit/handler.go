@@ -62,6 +62,16 @@ func ApiAllHandler(w http.ResponseWriter, r *http.Request) {
 
 func UsersHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
+	var temptab []User
+	for _, user := range AllApi.UsersAll {
+		for _, warn := range AllApi.WarnUser {
+			if user.Id == warn.Link {
+				user.Warns = append(user.Warns, warn)
+			}
+		}
+		temptab = append(temptab, user)
+	}
+	AllApi.UsersAll = temptab
 	json.NewEncoder(w).Encode(AllApi.UsersAll)
 }
 
@@ -585,6 +595,28 @@ func AddWarnPost(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func DelWarnPost(w http.ResponseWriter, r *http.Request) {
+	var warn Warn
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &warn)
+	goodOrFalse := DelIntoWarnPost(AllApi.db, warn.Id)
+	w.Write([]byte("{\"msg\": \"Success\"}"))
+	if !goodOrFalse {
+		w.Write([]byte("{\"error\": \"Sorry\"}"))
+	}
+}
+
+func AddWarnUser(w http.ResponseWriter, r *http.Request) {
+	var warn Warn
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &warn)
+	goodOrFalse := InsertIntoWarnUser(AllApi.db, warn.Content, warn.Link)
+	w.Write([]byte("{\"msg\": \"Success\"}"))
+	if !goodOrFalse {
+		w.Write([]byte("{\"error\": \"Sorry\"}"))
+	}
+}
+
 func Addtags(w http.ResponseWriter, r *http.Request) {
 	var tag Tags
 	body, _ := ioutil.ReadAll(r.Body)
@@ -706,6 +738,9 @@ func Handler() {
 	r.HandleFunc("/logout", Logout)
 
 	r.HandleFunc("/addWarnPost", AddWarnPost)
+	r.HandleFunc("/delWarnPost", DelWarnPost)
+
+	r.HandleFunc("/addWarnUser", AddWarnUser)
 
 	r.HandleFunc("/viewcommunity", ViewCommunity)
 	go reloadApi()
@@ -726,5 +761,5 @@ func reloadApi() {
 	AllApi.LikeAllComment = DbtoStructLikeComment(AllApi.db)
 	AllApi.DislikeALlComment = DbtoStructDisLikeComment(AllApi.db)
 	AllApi.WarnPost = DbtoStructWarnPost(AllApi.db)
-
+	AllApi.WarnUser = DbtoStructWarnUser(AllApi.db)
 }
