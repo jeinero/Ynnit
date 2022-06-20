@@ -1,14 +1,14 @@
-document.getElementById("logout").onclick = function () {
-    location.href = "/logout"
-}
+// document.getElementById("logout").onclick = function () {
+//     location.href = "/logout"
+// }
 
-document.getElementById("home").onclick = function(){
-    location.href = "/"
-}
+// document.getElementById("home").onclick = function(){
+//     location.href = "/"
+// }
 
-document.getElementById("admin").onclick = function(){
-  location.href = "/admin"
-}
+// document.getElementById("admin").onclick = function(){
+//   location.href = "/admin"
+// }
 
 // document.getElementById("delete").onclick = function(){
 //     location.href = "/delete"
@@ -29,20 +29,27 @@ let id = getCookie("id")
 let statu = getCookie("status")
 
 if (statu == "Administrators") {
-    let buttonadmin = document.createElement("button")
-    buttonadmin.id = "buttonadmin"
-    buttonadmin.innerText = "admin"
-    document.body.append(buttonadmin)
-    document.getElementById("buttonadmin").onclick = function () {
-        location.href = "/admin"
-    }
+    // let buttonadmin = document.createElement("button")
+    // buttonadmin.id = "buttonadmin"
+    // buttonadmin.innerText = "admin"
+    // document.body.append(buttonadmin)
+    // document.getElementById("buttonadmin").onclick = function () {
+    //     location.href = "/admin"
+    // }
+    console.log("je suis admin!")
+    const adminbutton = document.getElementById("adminbutton")
+    adminbutton.style.display = "flex"
+    
+} else {
+  adminbutton.style.display = "none"
+
 }
 
 
 
 
 const viewtext = document.getElementById('viewtext')
-const title = document.getElementById('tiletext')
+const title = document.getElementById('titletext')
 
 const divcomment = document.getElementById("latestcomments")
 const divpost = document.getElementById("latestposts")
@@ -66,10 +73,10 @@ const loadDataUser = data => {
     rank.innerText = data.User.UsersLevel
     viewtext.append(rank)
 
-    const titlename = document.createElement("div")
-    title.classList = "titlename"
-    titlename.innerText = data.User.Name
-    title.append(titlename)
+    // const titlename = document.createElement("div")
+    // title.classList = "titlename"
+    // titlename.innerText = data.User.Name
+    // title.append(titlename)
 
 
 
@@ -209,22 +216,24 @@ fetch("/apiusers/" + id)
 // MODALS:
 
 const modal = document.getElementById("modal-changedesc");
+const bigcard = document.getElementById("comments")
+const bigcard2 = document.getElementById("posts")
+
 const btn = document.getElementById("changedesc");
 const span = document.getElementById("close-changedesc");
 
 btn.onclick = function() {
   modal.style.display = "block";
+  bigcard.style.display = "none";
+  bigcard2.style.display = "none";
 }
 
 span.onclick = function() {
   modal.style.display = "none";
+  bigcard.style.display = "flex";
+  bigcard2.style.display = "flex";
 }
 
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
 
 
 const modalPass = document.getElementById("modal-changepass");
@@ -233,17 +242,16 @@ const spanPass = document.getElementById("close-pass");
 
 btnPass.onclick = function() {
   modalPass.style.display = "block";
+  bigcard.style.display = "none";
+  bigcard2.style.display = "none";
 }
 
 spanPass.onclick = function() {
   modalPass.style.display = "none";
+  bigcard.style.display = "flex";
+  bigcard2.style.display = "flex";
 }
 
-window.onclick = function(event) {
-  if (event.target == modalPass) {
-    modalPass.style.display = "none";
-  }
-}
 
 
 const modalEmail = document.getElementById("modal-email");
@@ -252,17 +260,16 @@ const spanEmail = document.getElementById("close-email");
 
 btnEmail.onclick = function() {
   modalEmail.style.display = "block";
+  bigcard.style.display = "none";
+  bigcard2.style.display = "none";
 }
 
 spanEmail.onclick = function() {
   modalEmail.style.display = "none";
+  bigcard.style.display = "flex";
+  bigcard2.style.display = "flex";
 }
 
-window.onclick = function(event) {
-  if (event.target == modalEmail) {
-    modalEmail.style.display = "none";
-  }
-}
 
 
 // const modalPicture = document.getElementById("modal-picture");
@@ -277,11 +284,7 @@ window.onclick = function(event) {
 //   modalPicture.style.display = "none";
 // }
 
-// window.onclick = function(event) {
-//   if (event.target == modalPicture) {
-//     modalPicture.style.display = "none";
-//   }
-// }
+
 
 const modalDelte = document.getElementById("modal-delete");
 const btnDelete = document.getElementById("deleteaccount");
@@ -289,14 +292,12 @@ const spanDelete = document.getElementById("close-delete");
 
 btnDelete.onclick = function() {
   modalDelte.style.display = "block";
+  bigcard.style.display = "none";
+  bigcard2.style.display = "none";
 }
 
 spanDelete.onclick = function() {
   modalDelte.style.display = "none";
-}
-
-window.onclick = function(event) {
-  if (event.target == modalDelte) {
-    modalDelte.style.display = "none";
-  }
+  bigcard.style.display = "flex";
+  bigcard2.style.display = "flex";
 }

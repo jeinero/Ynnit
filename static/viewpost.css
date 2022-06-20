@@ -264,6 +264,53 @@ textarea {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+.dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover,
+.dropbtn:focus {
+    background-color: #2980B9;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    bottom: 50px;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {
+    background-color: #ddd;
+}
+
+.show {
+    display: block;
+}
+>>>>>>> 6b1911a9ec9f5267036214c2b4f22549c6f0adde
 .btn {
     height: 60px;
     width: 60px;
@@ -345,6 +392,7 @@ textarea {
     width: auto;
     justify-content: center;
   }
+<<<<<<< HEAD
 =======
 
 .dropbtn {
@@ -391,3 +439,5 @@ textarea {
     display: block;
 }
 >>>>>>> 91642fe092d8402886f1c9545616afcb890c5bc5
+=======
+>>>>>>> 6b1911a9ec9f5267036214c2b4f22549c6f0adde

@@ -98,10 +98,14 @@ fetch("/apiposts/" + id)
         viewpost.appendChild(divbottom)
 
         data.Comments.forEach(element => {
+            console.log(element)
             const divcom = document.createElement('div')
             divcom.id = element.Id
             divcom.className = "comm"
             viewcommentaire.appendChild(divcom)
+            const post = document.createElement('div')
+            post.classList = 'post'
+            viewpost.appendChild(post)
 
             const divtop2 = document.createElement('div')
             divtop2.classList = 'divtop2'
@@ -272,6 +276,11 @@ fetch("/apiposts/" + id)
             secondoptionbuttondropdown.onclick = function addLike(e) {
                 event.stopPropagation(e)
             }
+           
+
+
+
+        })
 
             if (getCookie("status") != "Users" && getCookie("id") != null) {
                 divcom.append(divdropdownbutton)
@@ -279,7 +288,7 @@ fetch("/apiposts/" + id)
 
         })
 
-    })
+    // })
 
     function timeSince(date) {
         var seconds = Math.floor((new Date() - date) / 1000);
