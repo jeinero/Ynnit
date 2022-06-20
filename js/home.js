@@ -69,6 +69,10 @@ function newCard(posts) {
           if (dislike.style.color == "red") {
             likeInt += 1
             like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
+            dislikeInt -=1
+
+            dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+            
             like.style.color = "rgb(49, 172, 49)"
             dislike.style.color = "#000"
           } else {
@@ -98,6 +102,7 @@ function newCard(posts) {
           })
         }
         const dislike = document.createElement('a')
+        let dislikeInt = element.DisLike
         dislike.classList = 'dislike'
         dislike.onclick = function addLike(e) {
           fetch("/addDislikepost", {
@@ -115,14 +120,25 @@ function newCard(posts) {
             })
           if (like.style.color === "rgb(49, 172, 49)") {
             likeInt -= 1
+            dislikeInt +=1
+
               like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
+              dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+
             like.style.color = "#000"
             dislike.style.color = "red"
           } else {
             if (dislike.style.color === "red") {
               dislike.style.color = "#000"
+              dislikeInt -=1
+
+              dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+
             } else {
+              dislikeInt +=1
               dislike.style.color = "red"
+              dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+
             }
           }
           event.stopPropagation(e)
@@ -135,7 +151,7 @@ function newCard(posts) {
             }
           })
         }
-        dislike.innerHTML = ` nb&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+        dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
 
         const divdropdownbutton = document.createElement('div')
         divdropdownbutton.className = 'dropdown'
