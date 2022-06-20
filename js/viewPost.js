@@ -212,23 +212,23 @@ fetch("/apiposts/" + id)
            
 
 
-            const divbuttondropdown = document.createElement('div')
-            divbuttondropdown.id = 'myDropdown'
-            divbuttondropdown.className = 'dropdown-content'
-            divdropdownbutton.append(divbuttondropdown)
+            // const divbuttondropdown = document.createElement('div')
+            // divbuttondropdown.id = 'myDropdown'
+            // divbuttondropdown.className = 'dropdown-content'
+            // divdropdownbutton.append(divbuttondropdown)
 
-            const firstoptionbuttondropdown = document.createElement('a')
-            firstoptionbuttondropdown.innerText = "Delete comm"
-            divbuttondropdown.append(firstoptionbuttondropdown)
+            // const firstoptionbuttondropdown = document.createElement('a')
+            // firstoptionbuttondropdown.innerText = "Delete comm"
+            // divbuttondropdown.append(firstoptionbuttondropdown)
 
-            const secondoptionbuttondropdown = document.createElement('a')
-            secondoptionbuttondropdown.innerText = "Report User"
-            divbuttondropdown.append(secondoptionbuttondropdown)
+            // const secondoptionbuttondropdown = document.createElement('a')
+            // secondoptionbuttondropdown.innerText = "Report User"
+            // divbuttondropdown.append(secondoptionbuttondropdown)
 
-            buttondropdown.onclick = function addLike(e) {
-                event.stopPropagation(e)
-                divbuttondropdown.classList.toggle("show");
-            }
+            // buttondropdown.onclick = function addLike(e) {
+            //     event.stopPropagation(e)
+            //     divbuttondropdown.classList.toggle("show");
+            // }
 
             window.onclick = function (event) {
                 if (!event.target.matches('.dropbtn')) {
@@ -243,33 +243,33 @@ fetch("/apiposts/" + id)
                 }
             }
 
-            firstoptionbuttondropdown.onclick = async function addLike(e) {
-                event.stopPropagation(e)
-                let idcom = divcom.id
-                fetch("/deletecomme", {
-                    method: "POST",
-                    headers: {
-                        "content-type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        id: parseInt(idcom)
-                    })
-                })
-                    .then(async (res) => {
-                        if (!res.ok)
-                            throw await res.json()
-                        return res.json()
-                    })
-                    .then((data) => {
-                        location.href = "/viewpost?id="+id
-                    }).catch((err) => {
-                        // document.getElementById("error").innerText = err.error
-                    })
-            }
+            // firstoptionbuttondropdown.onclick = async function addLike(e) {
+            //     event.stopPropagation(e)
+            //     let idcom = divcom.id
+            //     fetch("/deletecomme", {
+            //         method: "POST",
+            //         headers: {
+            //             "content-type": "application/json"
+            //         },
+            //         body: JSON.stringify({
+            //             id: parseInt(idcom)
+            //         })
+            //     })
+            //         .then(async (res) => {
+            //             if (!res.ok)
+            //                 throw await res.json()
+            //             return res.json()
+            //         })
+            //         .then((data) => {
+            //             location.href = "/viewpost?id="+id
+            //         }).catch((err) => {
+            //             // document.getElementById("error").innerText = err.error
+            //         })
+            // }
 
-            secondoptionbuttondropdown.onclick = function addLike(e) {
-                event.stopPropagation(e)
-            }
+            // secondoptionbuttondropdown.onclick = function addLike(e) {
+            //     event.stopPropagation(e)
+            // }
            
 
 

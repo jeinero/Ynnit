@@ -231,7 +231,7 @@ function newCard(posts) {
 
         const comments = document.createElement('div')
         let textcomment = ""
-        if (element.NumberComment<=1) {
+        if (element.NumberComment <= 1) {
           textcomment = " comment"
         } else {
           textcomment = " comments"
@@ -310,24 +310,24 @@ function getCookie(name) {
 }
 
 const sortComment = document.getElementById("filtercomment")
-sortComment.onclick = function() {
-  post.sort((a,b) => {
+sortComment.onclick = function () {
+  post.sort((a, b) => {
     return b.NumberComment - a.NumberComment
   })
   deleteCards()
   newCard(post)
 }
 const filterdate = document.getElementById("filterdate")
-filterdate.onclick = function() {
-  post.sort((a,b) => {
+filterdate.onclick = function () {
+  post.sort((a, b) => {
     return b.date - a.date
   })
   deleteCards()
   newCard(post)
 }
 const filterlike = document.getElementById("filterlike")
-filterlike.onclick = function() {
-  post.sort((a,b) => {
+filterlike.onclick = function () {
+  post.sort((a, b) => {
     return b.Like - a.Like
   })
   deleteCards()
@@ -357,10 +357,10 @@ btn.addEventListener('click', () => {
 
 
 
-document.body.onload = function() {
+document.body.onload = function () {
   if (getCookie("name") != null) {
-          let classComm = document.getElementsByClassName("lien")
-          classComm[0].style.display = "none"
-          classComm[1].style.display = "none"
-          }
+    let classComm = document.getElementsByClassName("lien")
+    classComm[0].style.display = "none"
+    classComm[1].style.display = "none"
+  }
 }
