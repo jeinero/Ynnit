@@ -4,7 +4,7 @@
 body {
     margin: 0px;
     background-image: url("https://static.vecteezy.com/system/resources/previews/001/409/192/original/abstract-geometric-banner-free-vector.jpg");
-    background-size:cover;  
+    background-size: cover;
 }
 
 /* header */
@@ -14,8 +14,8 @@ header {
     top: 0;
     height: 75px;
     width: 100%;
-    background: rgb(47,101,125);
-    background: linear-gradient(90deg, rgba(47,101,125,1) 0%, rgba(79,158,191,1) 20%, rgba(82,161,194,1) 22%, rgba(118,197,230,1) 50%, rgba(212,241,255,1) 76%, rgba(219,236,243,1) 100%);
+    background: rgb(47, 101, 125);
+    background: linear-gradient(90deg, rgba(47, 101, 125, 1) 0%, rgba(79, 158, 191, 1) 20%, rgba(82, 161, 194, 1) 22%, rgba(118, 197, 230, 1) 50%, rgba(212, 241, 255, 1) 76%, rgba(219, 236, 243, 1) 100%);
     text-decoration: none;
     font-family: 'Noto Sans', sans-serif;
     border-bottom: 2px solid;
@@ -56,12 +56,12 @@ header {
 }
 
 .searchhead::placeholder {
-    color:rgb(47,101,125);
+    color: rgb(47, 101, 125);
 }
 
 .searchhead::-webkit-calendar-picker-indicator {
     display: none;
-  }
+}
 
 .searchhead {
     background: transparent;
@@ -98,19 +98,20 @@ header {
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     transition: all 1s ease;
     border: 0.5px solid black;
-    }
-    
-    .lien:hover {
-        color: white;
-        text-shadow: 1px 1px 1px black;
-        transition: all 1s ease;
-    }
-    .lien:active {
-        box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
-            inset 2px 2px 3px rgba(0, 0, 0, .6);
-    }
-    
-    .user {
+}
+
+.lien:hover {
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    transition: all 1s ease;
+}
+
+.lien:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+        inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
+
+.user {
     display: flex;
     width: 45px;
     height: 40px;
@@ -121,35 +122,35 @@ header {
     text-decoration: none;
     color: black;
     transition: all 1s ease;
-    }
-    
-    .user:hover {
-        color: black;
-        text-shadow: 1px 1px 1px black;
-        transition: all 1s ease;
-    }
+}
+
+.user:hover {
+    color: black;
+    text-shadow: 1px 1px 1px black;
+    transition: all 1s ease;
+}
 
 /* header fin */
 
 /* div haut */
 #container {
-        display: flex;
-        flex-direction: column;
-        width: auto;
-        height: 100%;
-        padding: 1%;
-        align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: 100%;
+    padding: 1%;
+    align-items: center;
 }
 
 #commu {
     display: flex;
     flex-direction: column;
-   width: 80%;
-   height: 100%;
-   border: 1px solid black;
-   font-family: 'Noto Sans', sans-serif;
-   font-size: 25px;
-   border-radius: 10px;
+    width: 80%;
+    height: 100%;
+    border: 1px solid black;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 25px;
+    border-radius: 10px;
 }
 
 #contenthaut {
@@ -178,7 +179,7 @@ header {
     width: auto;
     height: 50%;
     align-items: center;
-    flex-direction: column;   
+    flex-direction: column;
     text-decoration: underline;
 }
 
@@ -189,7 +190,7 @@ header {
     height: 50%;
     flex-direction: column;
     border-left: 1px solid black;
-   
+
 }
 
 #date {
@@ -243,7 +244,7 @@ header {
     height: 50%;
     flex-direction: column;
     border-top: 1px solid black;
-    
+
 }
 
 #desc {
@@ -277,7 +278,7 @@ header {
     height: auto;
     font-family: 'Noto Sans', sans-serif;
     padding: 2%;
-    
+
 }
 
 #title {
@@ -295,15 +296,15 @@ header {
     padding: 1%;
     justify-content: space-between;
     width: 80%;
-    height : 400px;
+    height: 400px;
     border: 1px solid black;
     border-radius: 20px;
 }
 
 input {
-display: flex;
-justify-content: center;
-text-align: center;
+    display: flex;
+    justify-content: center;
+    text-align: center;
 }
 
 textarea {
@@ -321,12 +322,13 @@ textarea {
     width: auto;
     align-items: center;
 }
+
 #btn {
-        height: auto;
-        width: 150px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    height: auto;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #post {
@@ -352,7 +354,7 @@ a:-webkit-any-link {
 }
 
 .avatar {
-    width : 70px;
+    width: 70px;
     height: 70px;
 }
 
@@ -361,7 +363,8 @@ a:-webkit-any-link {
     border-radius: var(--btn-corner);
     padding: 1%;
     width: 100%;
-    border: 5px double rgb(19, 140, 206);;
+    border: 5px double rgb(19, 140, 206);
+    ;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -375,8 +378,8 @@ a:-webkit-any-link {
 
 .card:hover {
     border-radius: 40px;
-    box-shadow: 10px 10px rgba(0,0,0,.25);
-  }
+    box-shadow: 10px 10px rgba(0, 0, 0, .25);
+}
 
 .divhaut {
     display: flex;
@@ -387,7 +390,7 @@ a:-webkit-any-link {
     padding-bottom: 1%;
 }
 
-.userpseudo{
+.userpseudo {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -430,7 +433,7 @@ a:-webkit-any-link {
     border: 2px dotted black;
     border-radius: var(--btn-corner);
     height: auto;
-    padding:1%;
+    padding: 1%;
     width: auto;
     align-items: center;
     font-size: 22px;
@@ -486,7 +489,7 @@ a:-webkit-any-link {
     font-size: 25px;
     width: 25%;
     height: 100%;
-    text-shadow: 1px 1px 1px #000;    
+    text-shadow: 1px 1px 1px #000;
 }
 
 .tags {
@@ -496,7 +499,7 @@ a:-webkit-any-link {
     font-size: 20px;
     width: 20%;
     height: 100%;
-    text-decoration: underline; 
+    text-decoration: underline;
 }
 
 
@@ -546,7 +549,7 @@ a:-webkit-any-link {
     bottom: 50px;
     background-color: #f1f1f1;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 

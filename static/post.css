@@ -2,8 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
 
 body {
-  margin: 0px;
+    margin: 0px;
 }
+
 /* header */
 header {
     position: relative;
@@ -11,8 +12,8 @@ header {
     top: 0;
     height: 75px;
     width: 100%;
-    background: rgb(47,101,125);
-    background: linear-gradient(90deg, rgba(47,101,125,1) 0%, rgba(79,158,191,1) 20%, rgba(82,161,194,1) 22%, rgba(118,197,230,1) 50%, rgba(212,241,255,1) 76%, rgba(219,236,243,1) 100%);
+    background: rgb(47, 101, 125);
+    background: linear-gradient(90deg, rgba(47, 101, 125, 1) 0%, rgba(79, 158, 191, 1) 20%, rgba(82, 161, 194, 1) 22%, rgba(118, 197, 230, 1) 50%, rgba(212, 241, 255, 1) 76%, rgba(219, 236, 243, 1) 100%);
     text-decoration: none;
     font-family: 'Noto Sans', sans-serif;
     border-bottom: 2px solid;
@@ -60,12 +61,12 @@ header {
 }
 
 .searchhead::placeholder {
-    color:rgb(47,101,125);
+    color: rgb(47, 101, 125);
 }
 
 .searchhead::-webkit-calendar-picker-indicator {
     display: none;
-  }
+}
 
 .searchhead {
     background: transparent;
@@ -102,19 +103,20 @@ header {
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     transition: all 1s ease;
     border: 0.5px solid black;
-    }
-    
-    .lien:hover {
-        color: white;
-        text-shadow: 1px 1px 1px black;
-        transition: all 1s ease;
-    }
-    .lien:active {
-        box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
-            inset 2px 2px 3px rgba(0, 0, 0, .6);
-    }
-    
-    .user {
+}
+
+.lien:hover {
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    transition: all 1s ease;
+}
+
+.lien:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+        inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
+
+.user {
     display: flex;
     width: 45px;
     height: 40px;
@@ -125,13 +127,13 @@ header {
     text-decoration: none;
     color: black;
     transition: all 1s ease;
-    }
-    
-    .user:hover {
-        color: black;
-        text-shadow: 1px 1px 1px black;
-        transition: all 1s ease;
-    }
+}
+
+.user:hover {
+    color: black;
+    text-shadow: 1px 1px 1px black;
+    transition: all 1s ease;
+}
 
 /* header fin */
 
@@ -144,7 +146,8 @@ header {
     width: 1000px;
     flex-direction: column;
     position: absolute;
-    top: 50%; left: 50%;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
     font-family: 'Noto Sans', sans-serif;
     font-size: 20px;
@@ -161,7 +164,7 @@ p {
     display: flex;
     text-align: center;
     border-radius: 10px;
-    border: 2px solid rgb(47,101,125);
+    border: 2px solid rgb(47, 101, 125);
     padding: 1%;
     font-family: 'Noto Sans', sans-serif;
 }
@@ -170,7 +173,7 @@ p {
     display: flex;
     text-align: center;
     border-radius: 10px;
-    border: 2px solid rgb(47,101,125);
+    border: 2px solid rgb(47, 101, 125);
     padding: 1%;
     font-family: 'Noto Sans', sans-serif;
 }
@@ -182,7 +185,7 @@ p {
     flex-direction: column;
     align-items: center;
     height: 100%;
-    
+
 }
 
 #titre {
@@ -220,18 +223,19 @@ textarea {
     width: 150px;
 }
 
-#btn{
-  
-    background:rgb(89, 197, 255);
+#btn {
+
+    background: rgb(89, 197, 255);
     transition: all 1s ease;
     border-radius: 10px;
     font-size: 20px;
-  }
-  #btn:hover {
-  
+}
+
+#btn:hover {
+
     color: white;
     text-shadow: 1px 1px 1px black;
     transition: all 1s ease;
     box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
-    inset 2px 2px 3px rgba(0, 0, 0, .6);
-  }
+        inset 2px 2px 3px rgba(0, 0, 0, .6);
+}

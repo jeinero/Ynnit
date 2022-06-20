@@ -2,21 +2,21 @@ let linkCat = ""
 
 
 var currentDate = new Date(),
-day = currentDate.getDate(),
-month = currentDate.getMonth() + 1,
-year = currentDate.getFullYear();
-const dates = ( year + "-" + day + "-" + month)
+    day = currentDate.getDate(),
+    month = currentDate.getMonth() + 1,
+    year = currentDate.getFullYear();
+const dates = (year + "-" + day + "-" + month)
 
 
 document.getElementById("btn").onclick = function () {
-    if (document.getElementById("titre").value.length >= 1 ) {
-        if (getCookie("name") != null ){
+    if (document.getElementById("titre").value.length >= 1) {
+        if (getCookie("name") != null) {
             if (linkCat != "") {
-                create() 
+                create()
             } else {
                 document.getElementById("error").innerText = "Please choose a category"
             }
-         } else {
+        } else {
             document.getElementById("error").innerText = "You need to get registered, please log in"
         }
     } else {
@@ -65,16 +65,16 @@ function create() {
 
 document.body.onload = function () {
     if (getCookie("name") != null) {
-      let classComm = document.getElementsByClassName("lien")
-      classComm[0].style.display = "none"
-      classComm[1].style.display = "none"
+        let classComm = document.getElementsByClassName("lien")
+        classComm[0].style.display = "none"
+        classComm[1].style.display = "none"
     }
-  }
-  if (getCookie("name") != null) {
+}
+if (getCookie("name") != null) {
     let classComm = document.getElementsByClassName("lien")
     classComm[0].style.display = "none"
     classComm[1].style.display = "none"
-  }
+}
 
 const selector = document.getElementsByClassName("selectcat")[0]
 

@@ -16,16 +16,18 @@
     border-radius: 10px;
     font-weight: bold;
     font-size: medium;
-    background: #d1d1d1;    
+    background: #d1d1d1;
     box-shadow: inset -17px 17px 33px #555555;
-    border:#131313 solid 1px; 
+    border: #131313 solid 1px;
 }
+
 .button-max2:hover {
     background: #d6d6d6;
 }
+
 /*--------CONTENU DES BOUTONS-------*/
 #content-button {
     display: flex;
     gap: 5px;
-    padding-left:10px;
+    padding-left: 10px;
 }

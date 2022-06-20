@@ -198,7 +198,6 @@ func CommentsHandler(w http.ResponseWriter, r *http.Request) {
 	var temptab []Comment
 	for _, comment := range AllApi.CommentsAll {
 		for _, users := range AllApi.UsersAll {
-			fmt.Println(comment.UsersName, users.Name)
 			if comment.UsersName == users.Name {
 
 				comment.Photo = users.Photo

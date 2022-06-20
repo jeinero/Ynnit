@@ -1,8 +1,8 @@
-document.getElementById("pasdelete").onclick = function(){
+document.getElementById("pasdelete").onclick = function () {
     location.href = "/profile"
 };
 
-document.getElementById("delete").onclick = function(){
+document.getElementById("delete").onclick = function () {
     del()
 };
 

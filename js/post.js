@@ -8,7 +8,7 @@ document.getElementById("btn").onclick = function () {
             } else {
                 document.getElementById("error").innerText = "Please choose a community"
             }
-         } else {
+        } else {
             document.getElementById("error").innerText = "You need to get registered, please log in"
         }
     } else {

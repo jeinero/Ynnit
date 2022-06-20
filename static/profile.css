@@ -11,7 +11,7 @@
 body {
     margin: 0px;
     background-image: url("https://static.vecteezy.com/system/resources/previews/001/409/192/original/abstract-geometric-banner-free-vector.jpg");
-    background-size:cover;   
+    background-size: cover;
 }
 
 .logo {
@@ -44,7 +44,7 @@ body {
     font-size: 40px;
     font-family: 'Dosis', sans-serif;
     background: #ffa500;
-    background: linear-gradient(90deg,#ffa500 0%, #00daff 80%);
+    background: linear-gradient(90deg, #ffa500 0%, #00daff 80%);
 
 }
 
@@ -69,7 +69,7 @@ body {
     justify-content: flex-end;
 }
 
-.square_btn{
+.square_btn {
     font-family: 'Noto Sans', sans-serif;
     width: 150px;
     height: 40px;
@@ -118,7 +118,7 @@ body {
     width: auto;
     padding: 1%;
     border-radius: 20px;
-    box-shadow: 0px 0px 11px 9px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 11px 9px rgba(0, 0, 0, 0.75);
 
 }
 
@@ -130,12 +130,13 @@ body {
     flex-wrap: wrap;
     height: auto;
     width: auto;
-    
+
     padding: 1%;
     border-radius: 20px;
-    box-shadow: 0px 0px 11px 9px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 11px 9px rgba(0, 0, 0, 0.75);
 
 }
+
 .divhaut {
     display: flex;
     flex-direction: row;
@@ -160,7 +161,7 @@ body {
 
 .account {
     display: flex;
-    width:  30%;
+    width: 30%;
     height: 100%;
     justify-content: center;
     border: 2px solid black;
@@ -168,11 +169,12 @@ body {
     flex-direction: column;
     margin-top: 30px;
     /* box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px; */
-    box-shadow: -9px 10px 7px 1px rgba(0,0,0,0.51);
-    -webkit-box-shadow: -9px 10px 7px 1px rgba(0,0,0,0.51);
-    -moz-box-shadow: -9px 10px 7px 1px rgba(0,0,0,0.51);
+    box-shadow: -9px 10px 7px 1px rgba(0, 0, 0, 0.51);
+    -webkit-box-shadow: -9px 10px 7px 1px rgba(0, 0, 0, 0.51);
+    -moz-box-shadow: -9px 10px 7px 1px rgba(0, 0, 0, 0.51);
     padding: 1%;
 }
+
 .profilepicture {
     display: flex;
     justify-content: center;
@@ -226,7 +228,7 @@ body {
     flex-direction: column;
 }
 
-.editaccount{
+.editaccount {
     display: flex;
     width: 100%;
     justify-content: center;
@@ -282,50 +284,59 @@ body {
 
 
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 8; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 8;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
-  
-  /* Modal Content */
-  .modal-content {
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
     background-color: #fefefe;
     z-index: 8;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
     width: 40%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
     animation-duration: 0.4s
-  }
+}
 
 
-  
-  /* The Close Button */
-  .close {
+
+/* The Close Button */
+.close {
     color: #aaaaaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
+}
+
+.close:hover,
+.close:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
-  }
+}
 
 textarea {
     resize: none;
@@ -333,21 +344,35 @@ textarea {
 
 /* Annimation pour la modal */
 @-webkit-keyframes animatetop {
-    from {top:-300px; opacity:0} 
-    to {top:0; opacity:1}
-  }
-  
-  @keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
-  }
-  
+    from {
+        top: -300px;
+        opacity: 0
+    }
 
-  .button-28 {
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+
+.button-28 {
     border: 2px solid #1A1A1A;
     border-radius: 15px;
     color: #3B3B3B;
-    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-size: 16px;
     font-weight: 600;
     margin: 2px;
@@ -356,28 +381,28 @@ textarea {
     user-select: none;
     touch-action: manipulation;
     width: 100%;
-  }
-  
-  .button-28:disabled {
+}
+
+.button-28:disabled {
     pointer-events: none;
-  }
-  
-  .button-28:hover {
+}
+
+.button-28:hover {
     color: #fff;
     background-color: #1A1A1A;
     box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
     transform: translateY(-2px);
-  }
-  
-  .button-28:active {
+}
+
+.button-28:active {
     box-shadow: none;
     transform: translateY(0);
-  }
+}
 
 
 
 
-  .divtop {
+.divtop {
     display: flex;
     width: 100%;
     height: 100px;
@@ -413,7 +438,7 @@ textarea {
 
 .card:hover {
     border-radius: 40px;
-  }
+}
 
 .title {
     display: flex;
@@ -464,8 +489,8 @@ header {
     top: 0;
     height: 75px;
     width: 100%;
-    background: rgb(47,101,125);
-    background: linear-gradient(90deg, rgba(47,101,125,1) 0%, rgba(79,158,191,1) 20%, rgba(82,161,194,1) 22%, rgba(118,197,230,1) 50%, rgba(212,241,255,1) 76%, rgba(219,236,243,1) 100%);
+    background: rgb(47, 101, 125);
+    background: linear-gradient(90deg, rgba(47, 101, 125, 1) 0%, rgba(79, 158, 191, 1) 20%, rgba(82, 161, 194, 1) 22%, rgba(118, 197, 230, 1) 50%, rgba(212, 241, 255, 1) 76%, rgba(219, 236, 243, 1) 100%);
     text-decoration: none;
     font-family: 'Noto Sans', sans-serif;
     border-bottom: 2px solid;
@@ -513,12 +538,12 @@ header {
 }
 
 .searchhead::placeholder {
-    color:rgb(47,101,125);
+    color: rgb(47, 101, 125);
 }
 
 .searchhead::-webkit-calendar-picker-indicator {
     display: none;
-  }
+}
 
 .searchhead {
     background: transparent;
@@ -555,19 +580,20 @@ header {
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     transition: all 1s ease;
     border: 0.5px solid black;
-    }
-    
-    .lien:hover {
-        color: white;
-        text-shadow: 1px 1px 1px black;
-        transition: all 1s ease;
-    }
-    .lien:active {
-        box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
-            inset 2px 2px 3px rgba(0, 0, 0, .6);
-    }
-    
-    .user {
+}
+
+.lien:hover {
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    transition: all 1s ease;
+}
+
+.lien:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+        inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
+
+.user {
     display: flex;
     width: 45px;
     height: 40px;
@@ -578,13 +604,13 @@ header {
     text-decoration: none;
     color: black;
     transition: all 1s ease;
-    }
-    
-    .user:hover {
-        color: black;
-        text-shadow: 1px 1px 1px black;
-        transition: all 1s ease;
-    }
+}
+
+.user:hover {
+    color: black;
+    text-shadow: 1px 1px 1px black;
+    transition: all 1s ease;
+}
 
 /* header fin */
 
@@ -592,11 +618,11 @@ input[type="file"] {
     display: none;
 }
 
-.custom-file-upload{
+.custom-file-upload {
     border: 2px solid #1A1A1A;
     border-radius: 15px;
     color: #3B3B3B;
-    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-size: 16px;
     font-weight: 600;
     margin: 2px;
@@ -605,20 +631,20 @@ input[type="file"] {
     user-select: none;
     touch-action: manipulation;
     width: 100%;
-  }
-  
-  .custom-file-upload:disabled {
+}
+
+.custom-file-upload:disabled {
     pointer-events: none;
-  }
-  
-  .custom-file-upload:hover {
+}
+
+.custom-file-upload:hover {
     color: #fff;
     background-color: #1A1A1A;
     box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
     transform: translateY(-2px);
-  }
-  
-  .custom-file-upload:active {
+}
+
+.custom-file-upload:active {
     box-shadow: none;
     transform: translateY(0);
-  }
+}

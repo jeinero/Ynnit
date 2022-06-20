@@ -1,48 +1,50 @@
 <!DOCTYPE html>
 <html>
-    <header>
-        <title>Ynnit</title>
-        <meta charset="utf-8"/>
-        <link rel="stylesheet" href="/css/changeemail.css">
-        <link rel="stylesheet" href="/css/font-button.css">
+<header>
+    <title>Ynnit</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/css/changeemail.css">
+    <link rel="stylesheet" href="/css/font-button.css">
 
-    </header>
+</header>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&display=swap');
 </style>
-    <body>
-        <div id="content-button">
-            <button class="button" onclick = "changeColor('white');" >Mode Clair</button>
-            <button class="button" onclick = "returnChangeColor('rgb(64, 64, 64)');" >Mode foncé</button> 
-        </div>
 
-        <div id="flex-content">
-            <div id="content-center">
-                <div id="flex-title">
-                    <h1 id="flex-title-image">
-                        <img src="./css/connected.png"><br/>
-                        Change Your Email  :
-                    </h1>
+<body>
+    <div id="content-button">
+        <button class="button" onclick="changeColor('white');">Mode Clair</button>
+        <button class="button" onclick="returnChangeColor('rgb(64, 64, 64)');">Mode foncé</button>
+    </div>
+
+    <div id="flex-content">
+        <div id="content-center">
+            <div id="flex-title">
+                <h1 id="flex-title-image">
+                    <img src="./css/connected.png"><br />
+                    Change Your Email :
+                </h1>
+            </div>
+            <div id="content">
+                <label id="title">New email : </label>
+                <input type="email" id="email1" class="email" name="email" placeholder="john.doe@example.com" required>
+
+                <label id="title">Confirm new email : </label>
+                <input type="email" id="email2" name="email2" placeholder="john.doe@example.com" required>
+                <div id="center">
+                    <button id="button" type="submit">Change</button>
                 </div>
-                <div id="content">
-                        <label id="title">New email : </label>
-                        <input type="email" id="email1" class="email" name="email" placeholder="john.doe@example.com" required>
-        
-                        <label id="title">Confirm new email : </label>
-                        <input type="email" id="email2" name="email2" placeholder="john.doe@example.com" required>
-                    <div id="center">
-                        <button id="button" type="submit">Change</button>
-                    </div>
-                </div>
-                
-                <p id="error" style="color: red"></p>
             </div>
 
+            <p id="error" style="color: red"></p>
         </div>
-        
-        <script type="module" src='/js/font-button.js'></script>
-        <script type="module" src='/js/changeemail.js'></script>
-    </body>
+
+    </div>
+
+    <script type="module" src='/js/font-button.js'></script>
+    <script type="module" src='/js/changeemail.js'></script>
+</body>
+
 </html>
 
 <!-- <!DOCTYPE html>

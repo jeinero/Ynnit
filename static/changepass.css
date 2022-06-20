@@ -1,81 +1,90 @@
     @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&display=swap');
 
-/*--------------POLICE--------------*/
-body {
-    font-family: 'Tiro Devanagari Sanskrit', serif;
-}
-#title-pass{
-    display: flex;
-    justify-content: center;
-    font-size: x-large;
-    font-weight: bold;
-}
-#flex-title {
-    font-family: 'Tiro Devanagari Sanskrit', serif;
-    text-align: center;
-    font-weight: bold;
-    font-size: large;
-}
-/*-------------BUTTON PAGE CONNECT ET JOINUS----------------------------------------------*/
-#button {
-    font-size: medium;
-    height: 25px;
-    width: 30%;
-}
-#button:hover {
-    background: #d6d6d6;
-}
-/*---------------LES INPUT DE CHAQUE ; Mail, Nom, Password-------------------------------*/
+    /*--------------POLICE--------------*/
+    body {
+        font-family: 'Tiro Devanagari Sanskrit', serif;
+    }
 
-.changepass {
-    background-color: rgb(222, 222, 222);
-    border-radius: 10px;
-    font-weight: bold;
-    height: 40px;
-    font-size: x-large;
-}
+    #title-pass {
+        display: flex;
+        justify-content: center;
+        font-size: x-large;
+        font-weight: bold;
+    }
 
-/*-------------------------TAILLE IMAGE DE JOINUS--------------------------*/
+    #flex-title {
+        font-family: 'Tiro Devanagari Sanskrit', serif;
+        text-align: center;
+        font-weight: bold;
+        font-size: large;
+    }
 
-#flex-title-image > img {
-    width: 40%;
-}
-button > img {
-    width: 11%;
-}
+    /*-------------BUTTON PAGE CONNECT ET JOINUS----------------------------------------------*/
+    #button {
+        font-size: medium;
+        height: 25px;
+        width: 30%;
+    }
 
-/*------------------------------Taille des flexs Ect-------------------------------*/
-                    #flex-content{
-                        margin-top: 45px;
-                        display: flex;
-                        justify-content: center;
-                        font-size: x-large;
-                    }
-                    #content-center{
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        padding: 15px;
-                        border:solid black 3px;
-                        border-radius: 40px;
-                    }
-                    #content{
-                        display: flex;
-                        flex-direction: column;
-                        margin-top: 10px;
-                        gap: 12px;
-                        border: solid 4px black;
-                        padding: 8px;
-                        border-radius: 15px;
-                    }
-                    /*------flex pour centrer le haut/bas ------*/
+    #button:hover {
+        background: #d6d6d6;
+    }
 
-                    #center{
-                        display: flex;
-                        justify-content: center;
-                    }
-                    #flex-title {
-                        display: flex;
-                        justify-content: center;                        
-                    }
+    /*---------------LES INPUT DE CHAQUE ; Mail, Nom, Password-------------------------------*/
 
+    .changepass {
+        background-color: rgb(222, 222, 222);
+        border-radius: 10px;
+        font-weight: bold;
+        height: 40px;
+        font-size: x-large;
+    }
+
+    /*-------------------------TAILLE IMAGE DE JOINUS--------------------------*/
+
+    #flex-title-image>img {
+        width: 40%;
+    }
+
+    button>img {
+        width: 11%;
+    }
+
+    /*------------------------------Taille des flexs Ect-------------------------------*/
+    #flex-content {
+        margin-top: 45px;
+        display: flex;
+        justify-content: center;
+        font-size: x-large;
+    }
+
+    #content-center {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 15px;
+        border: solid black 3px;
+        border-radius: 40px;
+    }
+
+    #content {
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+        gap: 12px;
+        border: solid 4px black;
+        padding: 8px;
+        border-radius: 15px;
+    }
+
+    /*------flex pour centrer le haut/bas ------*/
+
+    #center {
+        display: flex;
+        justify-content: center;
+    }
+
+    #flex-title {
+        display: flex;
+        justify-content: center;
+    }

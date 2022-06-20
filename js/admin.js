@@ -466,7 +466,7 @@ function arrayflags(api) {
             let count = 0
             element.Warns.forEach(element => {
                 let i = 1
-               count = count + i
+                count = count + i
             })
 
             tdflags.innerText = count
@@ -489,7 +489,7 @@ function arrayflags(api) {
 let ids = getCookie("id")
 let names = getCookie("name")
 
-function deluser () {
+function deluser() {
     fetch("/checkdelete", {
         method: "POST",
         headers: {

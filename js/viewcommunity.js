@@ -1,202 +1,227 @@
 const url2 = new URL(window.location.href)
 let id = url2.searchParams.get('id')
-let commu = await(getApi("/apicommunauters/" + id)) 
+let commu = await(getApi("/apicommunauters/" + id))
 let likeTab = undefined
 let dislikeTab = undefined
 var currentDate = new Date()
 if (getCookie("id") != null) {
-        likeTab = await getApi('/apilike/' + getCookie("id"))
-        dislikeTab = await getApi('/apidislike/' + getCookie("id"))
-      }
+  likeTab = await getApi('/apilike/' + getCookie("id"))
+  dislikeTab = await getApi('/apidislike/' + getCookie("id"))
+}
 
 
 
 
 async function getApi(url) {
-        return fetch(url)
-          .then((response) => response.json())
-          .then(data => { return data })
-      }
-window.onload = function() {
-        newCard(commu)
+  return fetch(url)
+    .then((response) => response.json())
+    .then(data => { return data })
+}
+window.onload = function () {
+  newCard(commu)
 }
 newCard(commu)
 
 
 function newCard(commu) {
-  console.log(commu)
-        document.getElementById("name").innerText = commu.Communauter.Name
-        document.getElementById("cat").innerText = commu.Communauter.Tags
-        document.getElementById("date").innerText = commu.Communauter.Date
-        document.getElementById("desc").innerText = commu.Communauter.Desc
+  document.getElementById("name").innerText = commu.Communauter.Name
+  document.getElementById("cat").innerText = commu.Communauter.Tags
+  document.getElementById("date").innerText = commu.Communauter.Date
+  document.getElementById("desc").innerText = commu.Communauter.Desc
   commu.Post.forEach(element => {
-      
-        const newcard = document.createElement('div')
-       newcard.id = element.Id
-        newcard.classList = "card"
 
-        const divhaut = document.createElement('div')
-        divhaut.classList = 'divhaut'
+    const newcard = document.createElement('div')
+    newcard.id = element.Id
+    newcard.classList = "card"
 
-        const title = document.createElement('div')
-        title.classList = 'title'
-        title.innerHTML = element.Title
+    const divhaut = document.createElement('div')
+    divhaut.classList = 'divhaut'
 
-        const date = document.createElement('div')
-        date.classList = 'date'
-        date.innerHTML = timeSince(element.Date)
+    const title = document.createElement('div')
+    title.classList = 'title'
+    title.innerHTML = element.Title
 
-        const community = document.createElement('div')
-        community.classList = 'community'
-        community.innerHTML = `<a href='/viewcommunity?id=${commu.id}'>${commu.Communauter.Name}</a>`
+    const date = document.createElement('div')
+    date.classList = 'date'
+    date.innerHTML = timeSince(element.Date)
 
-        const tags = document.createElement('div')
-        tags.classList = 'tags'
-        tags.innerHTML = element.Tags
+    const community = document.createElement('div')
+    community.classList = 'community'
+    community.innerHTML = `<a href='/viewcommunity?id=${commu.id}'>${commu.Communauter.Name}</a>`
 
-        const content = document.createElement('div')
-        content.classList = 'content'
-        content.innerHTML = element.Content
+    const tags = document.createElement('div')
+    tags.classList = 'tags'
+    tags.innerHTML = element.Tags
 
-        const divbas = document.createElement('div')
-        divbas.classList = 'divbas'
+    const content = document.createElement('div')
+    content.classList = 'content'
+    content.innerHTML = element.Content
 
-        const like = document.createElement('a')
-        like.classList = 'like'
-        like.id = "like"
-        let likeInt = element.Like
-        like.onclick = function addLike(e) {
-          fetch("/addLikepost", {
-            method: "POST",
-            headers: {
-              "content-type": "application/json"
-            },
-            body: JSON.stringify({
-              PostLink: parseInt(newcard.id),
-              UsersId: parseInt(getCookie("id")),
-            })
-          })
-            .catch((err) => {
-              document.getElementById("error").innerText = err.error
-            })
-          if (dislike.style.color == "red") {
-            likeInt += 1
-            like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
-            dislikeInt -=1
+    const divbas = document.createElement('div')
+    divbas.classList = 'divbas'
 
-            dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
-            
-            like.style.color = "rgb(49, 172, 49)"
-            dislike.style.color = "#000"
-          } else {
-            if (like.style.color == "rgb(49, 172, 49)") {
-              like.style.color = "#000"
-              likeInt -= 1
-              like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
-
-
-            } else {
-              like.style.color = "rgb(49, 172, 49)"
-              likeInt += 1
-              like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
-
-            }
-          }
-          event.stopPropagation(e)
-        }
+    const like = document.createElement('a')
+    like.classList = 'like'
+    like.id = "like"
+    let likeInt = element.Like
+    like.onclick = function addLike(e) {
+      fetch("/addLikepost", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify({
+          PostLink: parseInt(newcard.id),
+          UsersId: parseInt(getCookie("id")),
+        })
+      })
+        .catch((err) => {
+          document.getElementById("error").innerText = err.error
+        })
+      if (dislike.style.color == "red") {
+        likeInt += 1
         like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
-        if (likeTab != null) {
-          likeTab.forEach(elem => {
-            if (elem.PostLink == newcard.id) {
-              like.style.color = "rgb(49, 172, 49)"
-            }
-          })
-        }
-        const dislike = document.createElement('a')
-        let dislikeInt = element.DisLike
-        dislike.classList = 'dislike'
-        dislike.onclick = function addLike(e) {
-          fetch("/addDislikepost", {
-            method: "POST",
-            headers: {
-              "content-type": "application/json"
-            },
-            body: JSON.stringify({
-              PostLink: parseInt(newcard.id),
-              UsersId: parseInt(getCookie("id")),
-            })
-          })
-            .catch((err) => {
-              document.getElementById("error").innerText = err.error
-            })
-          if (like.style.color === "rgb(49, 172, 49)") {
-            likeInt -= 1
-            dislikeInt +=1
+        dislikeInt -= 1
 
-              like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
-              dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
-
-            like.style.color = "#000"
-            dislike.style.color = "red"
-          } else {
-            if (dislike.style.color === "red") {
-              dislike.style.color = "#000"
-              dislikeInt -=1
-
-              dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
-
-            } else {
-              dislikeInt +=1
-              dislike.style.color = "red"
-              dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
-
-            }
-          }
-          event.stopPropagation(e)
-        }
-        if (dislikeTab != null) {
-          dislikeTab.forEach(elem => {
-            if (elem.PostLink == newcard.id) {
-              dislike.style.color = "red"
-            }
-          })
-        }
         dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
 
-        const divdropdownbutton = document.createElement('div')
-        divdropdownbutton.className = 'dropdown'
+        like.style.color = "rgb(49, 172, 49)"
+        dislike.style.color = "#000"
+      } else {
+        if (like.style.color == "rgb(49, 172, 49)") {
+          like.style.color = "#000"
+          likeInt -= 1
+          like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
 
-        const buttondropdown = document.createElement('button')
-        buttondropdown.className = 'dropbtn'
-        buttondropdown.innerText = '!'
-        divdropdownbutton.append(buttondropdown)
 
-        const divbuttondropdown = document.createElement('div')
-        divbuttondropdown.id = 'myDropdown'
-        divbuttondropdown.className = 'dropdown-content'
-        divdropdownbutton.append(divbuttondropdown)
+        } else {
+          like.style.color = "rgb(49, 172, 49)"
+          likeInt += 1
+          like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
 
-        const firstoptionbuttondropdown = document.createElement('a')
-        firstoptionbuttondropdown.innerText = "Delete post"
-        divbuttondropdown.append(firstoptionbuttondropdown)
-
-        const secondoptionbuttondropdown = document.createElement('a')
-        secondoptionbuttondropdown.innerText = "Report Post"
-        divbuttondropdown.append(secondoptionbuttondropdown)
-
-        buttondropdown.onclick = function addLike(e) {
-          event.stopPropagation(e)
-          divbuttondropdown.classList.toggle("show");
         }
+      }
+      event.stopPropagation(e)
+    }
+    like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
+    if (likeTab != null) {
+      likeTab.forEach(elem => {
+        if (elem.PostLink == newcard.id) {
+          like.style.color = "rgb(49, 172, 49)"
+        }
+      })
+    }
+    const dislike = document.createElement('a')
+    let dislikeInt = element.DisLike
+    dislike.classList = 'dislike'
+    dislike.onclick = function addLike(e) {
+      fetch("/addDislikepost", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify({
+          PostLink: parseInt(newcard.id),
+          UsersId: parseInt(getCookie("id")),
+        })
+      })
+        .catch((err) => {
+          document.getElementById("error").innerText = err.error
+        })
+      if (like.style.color === "rgb(49, 172, 49)") {
+        likeInt -= 1
+        dislikeInt += 1
 
-        function delpost() {
-          fetch("/deletepost", {
+        like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
+        dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+
+        like.style.color = "#000"
+        dislike.style.color = "red"
+      } else {
+        if (dislike.style.color === "red") {
+          dislike.style.color = "#000"
+          dislikeInt -= 1
+
+          dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+
+        } else {
+          dislikeInt += 1
+          dislike.style.color = "red"
+          dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+
+        }
+      }
+      event.stopPropagation(e)
+    }
+    if (dislikeTab != null) {
+      dislikeTab.forEach(elem => {
+        if (elem.PostLink == newcard.id) {
+          dislike.style.color = "red"
+        }
+      })
+    }
+    dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+
+    const divdropdownbutton = document.createElement('div')
+    divdropdownbutton.className = 'dropdown'
+
+    const buttondropdown = document.createElement('button')
+    buttondropdown.className = 'dropbtn'
+    buttondropdown.innerText = '!'
+    divdropdownbutton.append(buttondropdown)
+
+    const divbuttondropdown = document.createElement('div')
+    divbuttondropdown.id = 'myDropdown'
+    divbuttondropdown.className = 'dropdown-content'
+    divdropdownbutton.append(divbuttondropdown)
+
+    const firstoptionbuttondropdown = document.createElement('a')
+    firstoptionbuttondropdown.innerText = "Delete post"
+    divbuttondropdown.append(firstoptionbuttondropdown)
+
+    const secondoptionbuttondropdown = document.createElement('a')
+    secondoptionbuttondropdown.innerText = "Report Post"
+    divbuttondropdown.append(secondoptionbuttondropdown)
+
+    buttondropdown.onclick = function addLike(e) {
+      event.stopPropagation(e)
+      divbuttondropdown.classList.toggle("show");
+    }
+
+    function delpost() {
+      fetch("/deletepost", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify({
+          id: parseInt(newcard.id)
+        })
+      })
+        .then(async (res) => {
+          if (!res.ok)
+            throw await res.json()
+          return res.json()
+        })
+        .then((data) => {
+          location.href = "/"
+        }).catch((err) => {
+          // document.getElementById("error").innerText = err.error
+        })
+    }
+
+    firstoptionbuttondropdown.onclick = async function addLike(e) {
+      event.stopPropagation(e)
+      let Commentpost = await getApi('/apiposts/' + parseInt(newcard.id))
+      if (Commentpost.Comments != null) {
+        Commentpost.Comments.forEach(element => {
+          fetch("/deletecomme", {
             method: "POST",
             headers: {
               "content-type": "application/json"
             },
             body: JSON.stringify({
-              id: parseInt(newcard.id)
+              id: parseInt(element.Id)
             })
           })
             .then(async (res) => {
@@ -205,171 +230,144 @@ function newCard(commu) {
               return res.json()
             })
             .then((data) => {
-              location.href = "/"
             }).catch((err) => {
               // document.getElementById("error").innerText = err.error
             })
-        }
+        })
+        delpost()
+      } else {
+        delpost()
+      }
+    }
 
-        firstoptionbuttondropdown.onclick = async function addLike(e) {
-          event.stopPropagation(e)
-          let Commentpost = await getApi('/apiposts/' + parseInt(newcard.id))
-          if (Commentpost.Comments != null) {
-            Commentpost.Comments.forEach(element => {
-              fetch("/deletecomme", {
-                method: "POST",
-                headers: {
-                  "content-type": "application/json"
-                },
-                body: JSON.stringify({
-                  id: parseInt(element.Id)
-                })
-              })
-                .then(async (res) => {
-                  if (!res.ok)
-                    throw await res.json()
-                  return res.json()
-                })
-                .then((data) => {
-                }).catch((err) => {
-                  // document.getElementById("error").innerText = err.error
-                })
+    let modal = document.getElementById("myModal");
+
+    let span = document.getElementsByClassName("close")[0];
+
+    let submit = document.getElementById("send")
+
+    secondoptionbuttondropdown.onclick = function addLike(e) {
+      event.stopPropagation(e)
+
+      modal.style.display = "block";
+
+      span.onclick = function () {
+        modal.style.display = "none";
+      }
+
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+      submit.onclick = function addLike() {
+        let content = document.getElementById("details")
+        if (content.value.length > 0) {
+          fetch("/addWarnPost", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json"
+            },
+            body: JSON.stringify({
+              Content: content.value,
+              Link: parseInt(element.Id)
             })
-            delpost()
-          } else {
-            delpost()
-          }
-        }
-
-        let modal = document.getElementById("myModal");
-
-        let span = document.getElementsByClassName("close")[0];
-
-        let submit = document.getElementById("send")
-
-        secondoptionbuttondropdown.onclick = function addLike(e) {
-          event.stopPropagation(e)
-
-          modal.style.display = "block";
-
-          span.onclick = function () {
-            modal.style.display = "none";
-          }
-
-          window.onclick = function (event) {
-            if (event.target == modal) {
-              modal.style.display = "none";
-            }
-          }
-          submit.onclick = function addLike() {
-            let content = document.getElementById("details")
-            if (content.value.length > 0) {
-              fetch("/addWarnPost", {
-                method: "POST",
-                headers: {
-                  "content-type": "application/json"
-                },
-                body: JSON.stringify({
-                  Content: content.value,
-                  Link: parseInt(element.Id)
-                })
-              })
-              content.value = ""
-              document.getElementById("error").innerText = ""
-              modal.style.display = "none";
-            } else {
-              document.getElementById("error").innerText = "enter details"
-            }
-          }
-        }
-
-
-        window.onclick = function (event) {
-          if (!event.target.matches('.dropbtn')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            var i;
-            for (i = 0; i < dropdowns.length; i++) {
-              var openDropdown = dropdowns[i];
-              if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-              }
-            }
-          }
-        }
-
-        const comments = document.createElement('div')
-        let textcomment = ""
-        if (element.NumberComment <= 1) {
-          textcomment = " comment"
+          })
+          content.value = ""
+          document.getElementById("error").innerText = ""
+          modal.style.display = "none";
         } else {
-          textcomment = " comments"
+          document.getElementById("error").innerText = "enter details"
         }
-        comments.classList = 'comments'
-        comments.innerHTML = element.NumberComment + textcomment
+      }
+    }
 
-        const avatar = document.createElement('img')
-            avatar.classList = 'avatar'
-            avatar.src = element.Photo
 
-        const userpseudo = document.createElement('div')
-        userpseudo.classList = 'userpseudo'
-        userpseudo.innerHTML = element.UsersName
-
-        divhaut.append(avatar)
-        divhaut.append(userpseudo)
-        divhaut.append(title)
-        divhaut.append(date)
-        divbas.append(like)
-        divbas.append(dislike)
-        divbas.append(comments)
-        divbas.append(community)
-        divbas.append(tags)
-        newcard.appendChild(divhaut)
-        newcard.append(content)
-        newcard.appendChild(divbas)
-        if (getCookie("status") != "Users" && getCookie("id") != null) {
-          divbas.append(divdropdownbutton)
+    window.onclick = function (event) {
+      if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
         }
-        const integrate = document.querySelector('.bigcard')
-        integrate.appendChild(newcard)
-        document.getElementById(element.Id).onclick = function () {
-          location.href = "/viewpost?id=" + element.Id
-        }
-        //   document.getElementById("like").onclick = function() {
-        //     alert("I am an alert box!");
-        // } 
+      }
+    }
+
+    const comments = document.createElement('div')
+    let textcomment = ""
+    if (element.NumberComment <= 1) {
+      textcomment = " comment"
+    } else {
+      textcomment = " comments"
+    }
+    comments.classList = 'comments'
+    comments.innerHTML = element.NumberComment + textcomment
+
+    const avatar = document.createElement('img')
+    avatar.classList = 'avatar'
+    avatar.src = element.Photo
+
+    const userpseudo = document.createElement('div')
+    userpseudo.classList = 'userpseudo'
+    userpseudo.innerHTML = element.UsersName
+
+    divhaut.append(avatar)
+    divhaut.append(userpseudo)
+    divhaut.append(title)
+    divhaut.append(date)
+    divbas.append(like)
+    divbas.append(dislike)
+    divbas.append(comments)
+    divbas.append(community)
+    divbas.append(tags)
+    newcard.appendChild(divhaut)
+    newcard.append(content)
+    newcard.appendChild(divbas)
+    if (getCookie("status") != "Users" && getCookie("id") != null) {
+      divbas.append(divdropdownbutton)
+    }
+    const integrate = document.querySelector('.bigcard')
+    integrate.appendChild(newcard)
+    document.getElementById(element.Id).onclick = function () {
+      location.href = "/viewpost?id=" + element.Id
+    }
+    //   document.getElementById("like").onclick = function() {
+    //     alert("I am an alert box!");
+    // } 
   })
 }
 var currentDate = new Date(),
-day = currentDate.getDate(),
-month = currentDate.getMonth() + 1,
-year = currentDate.getFullYear();
-const dates = ( year + "-" + day + "-" + month)
+  day = currentDate.getDate(),
+  month = currentDate.getMonth() + 1,
+  year = currentDate.getFullYear();
+const dates = (year + "-" + day + "-" + month)
 const btnPost = document.getElementById("btn")
-btnPost.onclick = function() {
-        console.log("marche?")
-        fetch("/post", {
-            method: "POST",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify({
-                date : currentDate.getTime(),
-                commuLink: parseInt(id),
-                usersname : getCookie("name"),
-                title: document.getElementById("titre").value,
-                content: document.getElementById("content").value
-            })
-        })
-        .catch((err) => {
-            document.getElementById("error").innerText = err.error
-    
-            })
-        .then(data => {
-                //     window.location.assign("/");
-        })
-        location.reload().href = "/viewcommunity?id=" + id
-    }
+btnPost.onclick = function () {
+  fetch("/post", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json"
+    },
+    body: JSON.stringify({
+      date: currentDate.getTime(),
+      commuLink: parseInt(id),
+      usersname: getCookie("name"),
+      title: document.getElementById("titre").value,
+      content: document.getElementById("content").value
+    })
+  })
+    .catch((err) => {
+      document.getElementById("error").innerText = err.error
+
+    })
+    .then(data => {
+      //     window.location.assign("/");
+    })
+  location.reload().href = "/viewcommunity?id=" + id
+}
 function timeSince(date) {
   let seconds = Math.floor((new Date() - date) / 1000);
   let interval = seconds / 31536000;
@@ -420,7 +418,7 @@ btn.addEventListener('click', () => {
     behavior: "smooth"
   })
 
-})   
+})
 
 document.body.onload = function () {
   if (getCookie("name") != null) {

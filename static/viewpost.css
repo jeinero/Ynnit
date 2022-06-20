@@ -1,7 +1,7 @@
 body {
     margin: 0px;
     background-image: url("https://static.vecteezy.com/system/resources/previews/001/409/192/original/abstract-geometric-banner-free-vector.jpg");
-    background-size:cover;  
+    background-size: cover;
 }
 
 /* header */
@@ -11,8 +11,8 @@ header {
     top: 0;
     height: 75px;
     width: 100%;
-    background: rgb(47,101,125);
-    background: linear-gradient(90deg, rgba(47,101,125,1) 0%, rgba(79,158,191,1) 20%, rgba(82,161,194,1) 22%, rgba(118,197,230,1) 50%, rgba(212,241,255,1) 76%, rgba(219,236,243,1) 100%);
+    background: rgb(47, 101, 125);
+    background: linear-gradient(90deg, rgba(47, 101, 125, 1) 0%, rgba(79, 158, 191, 1) 20%, rgba(82, 161, 194, 1) 22%, rgba(118, 197, 230, 1) 50%, rgba(212, 241, 255, 1) 76%, rgba(219, 236, 243, 1) 100%);
     text-decoration: none;
     font-family: 'Noto Sans', sans-serif;
     border-bottom: 2px solid;
@@ -60,12 +60,12 @@ header {
 }
 
 .searchhead::placeholder {
-    color:rgb(47,101,125);
+    color: rgb(47, 101, 125);
 }
 
 .searchhead::-webkit-calendar-picker-indicator {
     display: none;
-  }
+}
 
 .searchhead {
     background: transparent;
@@ -102,19 +102,20 @@ header {
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     transition: all 1s ease;
     border: 0.5px solid black;
-    }
-    
-    .lien:hover {
-        color: white;
-        text-shadow: 1px 1px 1px black;
-        transition: all 1s ease;
-    }
-    .lien:active {
-        box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
-            inset 2px 2px 3px rgba(0, 0, 0, .6);
-    }
-    
-    .user {
+}
+
+.lien:hover {
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    transition: all 1s ease;
+}
+
+.lien:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+        inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
+
+.user {
     display: flex;
     width: 45px;
     height: 40px;
@@ -125,13 +126,13 @@ header {
     text-decoration: none;
     color: black;
     transition: all 1s ease;
-    }
-    
-    .user:hover {
-        color: black;
-        text-shadow: 1px 1px 1px black;
-        transition: all 1s ease;
-    }
+}
+
+.user:hover {
+    color: black;
+    text-shadow: 1px 1px 1px black;
+    transition: all 1s ease;
+}
 
 /* header fin */
 .choose {
@@ -145,12 +146,12 @@ header {
     font-family: 'Noto Sans', sans-serif;
     text-transform: uppercase;
     background-image: url("https://files.123freevectors.com/wp-content/original/132302-blue-and-white-lines-stripes-and-shapes-background-vector.jpg");
-    background-size:cover;   
-    
+    background-size: cover;
+
 }
 
 .avatar {
-    width : 70px;
+    width: 70px;
     height: 70px;
 }
 
@@ -167,9 +168,10 @@ header {
     box-shadow: 0px 8px 50px 0px grey;
     background-color: white;
 }
-#viewcommentaire{
+
+#viewcommentaire {
     display: flex;
- align-items: center;
+    align-items: center;
     flex-direction: column;
 }
 
@@ -179,12 +181,12 @@ header {
     display: flex;
     width: 100%;
     height: auto;
-    border:1px solid black;
+    border: 1px solid black;
     padding: 1%;
     margin-bottom: 1%;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     background-image: url("https://files.123freevectors.com/wp-content/original/132302-blue-and-white-lines-stripes-and-shapes-background-vector.jpg");
-    background-size: cover;  
+    background-size: cover;
     border-radius: 20px;
 }
 
@@ -197,6 +199,7 @@ header {
     font-size: 40px;
     align-items: center;
 }
+
 .divtop {
     display: flex;
     width: 100%;
@@ -211,7 +214,8 @@ header {
     align-items: center;
     margin-bottom: 1%;
 }
-.divcontent{
+
+.divcontent {
     justify-content: center;
     height: auto;
     width: auto;
@@ -243,6 +247,7 @@ header {
     border: 2px dotted black;
     border-radius: 40px;
 }
+
 .contents {
     display: flex;
     width: auto;
@@ -252,7 +257,7 @@ header {
     margin-bottom: 1%;
 }
 
-.divbottom{
+.divbottom {
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -266,7 +271,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: auto;   
+    width: auto;
     height: 100%;
     border: 2px solid black;
     border-radius: 40px;
@@ -281,7 +286,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: auto;   
+    width: auto;
     height: 100%;
     border: 2px solid black;
     border-radius: 40px;
@@ -319,7 +324,7 @@ header {
     width: auto;
     padding: 1%;
     border: 5px double rgb(19, 140, 206);
- 
+
 
 }
 
@@ -348,30 +353,33 @@ textarea {
     width: 150px;
 }
 
-#btn2{
-    background:rgb(19, 140, 206);
+#btn2 {
+    background: rgb(19, 140, 206);
     transition: all 1s ease;
     border-radius: 10px;
 }
-#btn3{
-    background:rgb(19, 140, 206);
+
+#btn3 {
+    background: rgb(19, 140, 206);
     transition: all 1s ease;
     border-radius: 10px;
 }
+
 #btn2:hover {
     color: white;
     text-shadow: 1px 1px 1px black;
     transition: all 1s ease;
     box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
-    inset 2px 2px 3px rgba(0, 0, 0, .6);
-  
+        inset 2px 2px 3px rgba(0, 0, 0, .6);
+
 }
+
 #btn3:hover {
 
     color: white;
     text-shadow: 1px 1px 1px black;
     transition: all 1s ease;
-   
+
     box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
         inset 2px 2px 3px rgba(0, 0, 0, .6);
 }
@@ -403,7 +411,7 @@ textarea {
     bottom: 50px;
     background-color: #f1f1f1;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 
@@ -421,10 +429,11 @@ textarea {
 .show {
     display: block;
 }
+
 .btn {
     height: 60px;
     width: 60px;
-    background:rgb(19, 140, 206);
+    background: rgb(19, 140, 206);
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -437,51 +446,60 @@ textarea {
 }
 
 
-.couleur{
+.couleur {
     filter: invert(1);
 }
 
 
 /* The Modal (background) */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
-  
-  /* Modal Content */
-  .modal-content {
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
-  }
-  
-  /* The Close Button */
-  .close {
+}
+
+/* The Close Button */
+.close {
     color: #aaaaaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
+}
+
+.close:hover,
+.close:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
-  }
+}
 
-  #myBtn{
+#myBtn {
     height: 60px;
     width: 60px;
     background: rgb(19, 140, 206);
@@ -494,15 +512,15 @@ textarea {
     bottom: 20px;
     cursor: pointer;
     border: 5px double black;
-  }
+}
 
-  #content{
+#content {
     display: flex;
     height: auto;
     width: auto;
     justify-content: center;
 
-  }
+}
 
 .dropbtn {
     background-color: #3498DB;
@@ -529,7 +547,7 @@ textarea {
     bottom: 50px;
     background-color: #f1f1f1;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 

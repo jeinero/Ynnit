@@ -117,7 +117,6 @@ fetch("/apiposts/" + id)
 
             const avatar = document.createElement('img')
             avatar.classList = 'avatar'
-            console.log(element)
             avatar.src = element.Photo
             divtop2.appendChild(avatar)
 
@@ -146,7 +145,6 @@ fetch("/apiposts/" + id)
             divbottom2.appendChild(like)
             let likeInt = element.Like
             like.onclick = function addLike(e) {
-                console.log(element.Id)
                 fetch("/addLikecomment", {
                     method: "POST",
                     headers: {
@@ -193,7 +191,6 @@ fetch("/apiposts/" + id)
             dislike.classList = 'dislike'
             dislike.id = "dislike"
             divbottom2.appendChild(dislike)
-            console.log(element.DisLike)
             let dislikeInt = element.DisLike
             dislike.onclick = function addLike(e) {
                 fetch("/addDislikecomment", {
@@ -232,7 +229,6 @@ fetch("/apiposts/" + id)
             }
             if (dislikeTab != null) {
                 dislikeTab.forEach(elem => {
-                    console.log("lol")
                     if (elem.CommentLink == element.Id) {
                         dislike.style.color = "red"
                     }
@@ -242,7 +238,7 @@ fetch("/apiposts/" + id)
 
             const divdropdownbutton = document.createElement('div')
             divdropdownbutton.className = 'dropdown'
-    
+
             const buttondropdown = document.createElement('button')
             buttondropdown.className = 'dropbtn'
             buttondropdown.innerText = '!'

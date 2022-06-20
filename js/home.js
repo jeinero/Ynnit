@@ -44,7 +44,6 @@ function newCard(posts) {
 
         const tags = document.createElement('div')
         tags.classList = 'tags'
-        console.log(element)
         tags.innerHTML = data.Communauter.Tags
 
         const content = document.createElement('div')
@@ -75,10 +74,10 @@ function newCard(posts) {
           if (dislike.style.color == "red") {
             likeInt += 1
             like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
-            dislikeInt -=1
+            dislikeInt -= 1
 
             dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
-            
+
             like.style.color = "rgb(49, 172, 49)"
             dislike.style.color = "#000"
           } else {
@@ -124,22 +123,22 @@ function newCard(posts) {
             })
           if (like.style.color === "rgb(49, 172, 49)") {
             likeInt -= 1
-            dislikeInt +=1
+            dislikeInt += 1
 
-              like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
-              dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+            like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
+            dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
 
             like.style.color = "#000"
             dislike.style.color = "red"
           } else {
             if (dislike.style.color === "red") {
               dislike.style.color = "#000"
-              dislikeInt -=1
+              dislikeInt -= 1
 
               dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
 
             } else {
-              dislikeInt +=1
+              dislikeInt += 1
               dislike.style.color = "red"
               dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
 
@@ -321,9 +320,9 @@ function newCard(posts) {
         newcard.appendChild(divhaut)
         newcard.append(content)
         newcard.appendChild(divbas)
-        
-      
-        
+
+
+
         if (getCookie("status") != "Users" && getCookie("id") != null) {
           divbas.append(divdropdownbutton)
         }
@@ -423,7 +422,7 @@ btn.addEventListener('click', () => {
     behavior: "smooth"
   })
 
-})    
+})
 
 
 
@@ -438,8 +437,7 @@ document.body.onload = function () {
 
 
 const searchEl = document.getElementById("search")
-console.log(searchEl)
-searchEl.oninput = function() {
+searchEl.oninput = function () {
   let temptab = post.filter(obj => {
     if (obj.Content.toLowerCase().includes(searchEl.value.toLowerCase()) || (obj.Title.toLowerCase().includes(searchEl.value.toLowerCase()))) {
       return obj
