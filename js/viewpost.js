@@ -220,26 +220,32 @@ fetch("/apiposts/" + id)
             }
             dislike.innerHTML = `<i class="fa fa-thumbs-down" aria-hidden="true"></i>`
 
-           
+            const divdropdownbutton = document.createElement('div')
+            divdropdownbutton.className = 'dropdown'
+    
+            const buttondropdown = document.createElement('button')
+            buttondropdown.className = 'dropbtn'
+            buttondropdown.innerText = '!'
+            divdropdownbutton.append(buttondropdown)
 
 
-            // const divbuttondropdown = document.createElement('div')
-            // divbuttondropdown.id = 'myDropdown'
-            // divbuttondropdown.className = 'dropdown-content'
-            // divdropdownbutton.append(divbuttondropdown)
+            const divbuttondropdown = document.createElement('div')
+            divbuttondropdown.id = 'myDropdown'
+            divbuttondropdown.className = 'dropdown-content'
+            divdropdownbutton.append(divbuttondropdown)
 
-            // const firstoptionbuttondropdown = document.createElement('a')
-            // firstoptionbuttondropdown.innerText = "Delete comm"
-            // divbuttondropdown.append(firstoptionbuttondropdown)
+            const firstoptionbuttondropdown = document.createElement('a')
+            firstoptionbuttondropdown.innerText = "Delete comm"
+            divbuttondropdown.append(firstoptionbuttondropdown)
 
             // const secondoptionbuttondropdown = document.createElement('a')
             // secondoptionbuttondropdown.innerText = "Report User"
             // divbuttondropdown.append(secondoptionbuttondropdown)
 
-            // buttondropdown.onclick = function addLike(e) {
-            //     event.stopPropagation(e)
-            //     divbuttondropdown.classList.toggle("show");
-            // }
+            buttondropdown.onclick = function addLike(e) {
+                event.stopPropagation(e)
+                divbuttondropdown.classList.toggle("show");
+            }
 
             window.onclick = function (event) {
                 if (!event.target.matches('.dropbtn')) {
@@ -278,9 +284,9 @@ fetch("/apiposts/" + id)
                     })
             }
 
-            secondoptionbuttondropdown.onclick = function addLike(e) {
-                event.stopPropagation(e)
-            }
+            // secondoptionbuttondropdown.onclick = function addLike(e) {
+            //     event.stopPropagation(e)
+            // }
 
             if (getCookie("status") != "Users" && getCookie("id") != null) {
                 divbottom2.append(divdropdownbutton)

@@ -669,7 +669,7 @@ func Handler() {
 	// InsertIntoCategorie(AllApi.db, "Informatique")
 	// InsertIntoCategorie(AllApi.db, "France")
 	// InsertIntoCategorie(AllApi.db, "Food")
-	// Changeleveluser(AllApi.db, "Admin", "Administrators")
+	// Changeleveluser(AllApi.db, "admin", "Administrators")
 	// InsertIntoUser(db, "jeinero", "jenei@gmail.com", "ImRio6988", "guest", "test", "test")
 	// InsertIntoCategorie(AllApi.db, "Shitpost")
 	// InsertIntoCategorie(AllApi.db, "testtags")
