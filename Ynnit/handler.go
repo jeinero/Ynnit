@@ -526,7 +526,9 @@ func AddLikeComment(w http.ResponseWriter, r *http.Request) {
 	}
 	var newLike like
 	body, _ := ioutil.ReadAll(r.Body)
+	fmt.Println(string(body))
 	json.Unmarshal(body, &newLike)
+	fmt.Println(newLike)
 	goodOrFalse := InsertIntoLikeComment(AllApi.db, newLike.UsersId, newLike.CommentLink)
 	w.Write([]byte("{\"msg\": \"Success\"}"))
 	if !goodOrFalse {
