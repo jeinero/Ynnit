@@ -60,12 +60,14 @@ header {
 }
 
 .searchheader:hover {
+    color: white;
     transition: all 1s ease;
-    text-shadow: 1px 1px 1px black;
+    text-shadow: 2px 2px 2px black;
 }
 
 .searchhead::placeholder {
     color: white;
+    
 }
 
 
