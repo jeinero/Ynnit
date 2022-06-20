@@ -26,6 +26,8 @@ function getCookie(name) {
     }
     return null;
 }
+var currentDate = new Date()
+
 
 function create() {
     fetch("/newcommunity", {
@@ -34,6 +36,7 @@ function create() {
             "content-type": "application/json"
         },
         body: JSON.stringify({
+            Date: dates,
             Name: document.getElementById("titre").value,
             Desc: document.getElementById("content").value,
             Tags: linkCat

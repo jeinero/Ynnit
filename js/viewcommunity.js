@@ -3,6 +3,7 @@ let id = url2.searchParams.get('id')
 let commu = await(getApi("/apicommunauters/" + id)) 
 let likeTab = undefined
 let dislikeTab = undefined
+var currentDate = new Date()
 if (getCookie("id") != null) {
         likeTab = await getApi('/apilike/' + getCookie("id"))
         dislikeTab = await getApi('/apidislike/' + getCookie("id"))
@@ -19,6 +20,8 @@ async function getApi(url) {
 window.onload = function() {
         newCard(commu)
 }
+newCard(commu)
+
 
 function newCard(commu) {
         document.getElementById("name").innerText = commu.Communauter.Name
@@ -264,6 +267,31 @@ function newCard(commu) {
   })
 }
 
+const btnPost = document.getElementById("btn")
+btnPost.onclick = function() {
+        console.log("marche?")
+        fetch("/post", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({
+                date : currentDate.getTime(),
+                commuLink: parseInt(id),
+                usersname : getCookie("name"),
+                title: document.getElementById("titre").value,
+                content: document.getElementById("content").value
+            })
+        })
+        .catch((err) => {
+            document.getElementById("error").innerText = err.error
+    
+            })
+        .then(data => {
+                //     window.location.assign("/");
+        })
+        location.reload().href = "/viewcommunity?id=" + id
+    }
 function timeSince(date) {
   let seconds = Math.floor((new Date() - date) / 1000);
   let interval = seconds / 31536000;
