@@ -430,7 +430,6 @@ func DbtoStructDisLikePost(db *sql.DB) []DisLike {
 		if err != nil {
 			fmt.Println(err)
 		}
-		fmt.Println(2)
 		temptab = append(temptab, u)
 	}
 	return temptab
@@ -448,7 +447,6 @@ func DbtoStructPost(db *sql.DB) []Post {
 		u.Like = countLike(db, "likedpost", "postLike", u.Id)
 		u.DisLike = countLike(db, "dislikedpost", "postLike", u.Id)
 		u.NumberComment = countComment(db, u.Id)
-		u.Warn = countWarn(db, "warnPost", "what", u.Id)
 		temptab = append(temptab, u)
 	}
 	return temptab

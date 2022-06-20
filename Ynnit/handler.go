@@ -105,6 +105,16 @@ func UserHandler(w http.ResponseWriter, r *http.Request) {
 
 func PostsHandler(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
+	var temptab []Post
+	for _, post := range AllApi.PostsAll {
+		for _, warn := range AllApi.WarnPost {
+			if post.Id == warn.Link {
+				post.Warn = append(post.Warn, warn)
+			}
+		}
+		temptab = append(temptab, post)
+	}
+	AllApi.PostsAll = temptab
 	json.NewEncoder(w).Encode(AllApi.PostsAll)
 }
 
