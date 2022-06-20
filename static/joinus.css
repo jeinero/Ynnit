@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
-
 body {
   /* margin: 0px; */
   background-image: url("https://files.123freevectors.com/wp-content/original/132302-blue-and-white-lines-stripes-and-shapes-background-vector.jpg");
   background-size: cover;
+  font-family: 'Noto Sans', sans-serif;
 }
 .container{
   display: flex;
@@ -15,56 +15,47 @@ body {
 }
 
 .select{
-  font-family: 'Noto Sans', sans-serif;
   padding: 1%;
   display: flex;
   flex-direction: column;
   width: auto;
   height: auto;
-  border: double 2px rgb(19, 140, 206);
+  border:  1px solid rgb(19, 140, 206);
   box-shadow: 6px 6px 6px 3px rgba(0, 0, 0, 0.2);
   justify-content: center;
   align-items: center;
   border-radius: 40px;
-  
-}
-#name {
-  background-color: rgb(222, 222, 222);
-  border-radius: 10px;
-  font-weight: bold;
-  width: 95%;
-  height: 100%;
-  font-size: x-large;
-  box-shadow: 6px 6px 6px 3px rgba(0, 0, 0, 0.2);
-}
-#pwd2 {
-  background-color: rgb(222, 222, 222);
-  border-radius: 10px;
-  font-weight: bold;
-  width: 95%;
-  height: 100%;
-  box-shadow: 6px 6px 6px 3px rgba(0, 0, 0, 0.2);
-   font-size: x-large;
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-#email {
-  background-color: rgb(222, 222, 222);
+label{
+  font-size: 25px;
+}
+
+input{
+  padding: 0.3rem 0.5rem;
+  border-radius: 40px;    
+  text-align: center;
   border-radius: 10px;
   font-weight: bold;
   width: 95%;
   height: 100%;
-  font-size: x-large;
-  box-shadow: 6px 6px 6px 3px rgba(0, 0, 0, 0.2);
+  font-size: 25px;
+  background:rgb(19, 140, 206);
+  box-shadow: 6px 6px 6px 3px rgba(0, 0, 0, 0.2);  
 }
-#pwd {
-  background-color: rgb(222, 222, 222);
-  border-radius: 10px;
-  font-weight: bold;
-  width: 95%;
-  height: 100%;
-  font-size: x-large;
-  box-shadow: 6px 6px 6px 3px rgba(0, 0, 0, 0.2);
+
+input:focus{
+    border: 3px solid yellow;
+  
 }
+
+.no-outline:focus {
+  outline: none;
+}
+
 #btn{
   background:rgb(19, 140, 206);
   transition: all 1s ease;
