@@ -95,14 +95,18 @@ const loadDataUser = data => {
         const newcard = document.createElement('div')
         newcard.id = element.Id
         newcard.classList = "card"
-        // newcard.href = "/viewpost?id="+element.Id
+        newcard.href = "/viewpost?id="+element.Id
 
         const divhaut = document.createElement('div')
         divhaut.classList = 'divhaut'
 
-        // const title = document.createElement('div')
-        // title.classList = 'title'
-        // title.innerHTML = "On post "+TitlePost+'"'
+        // // const title = document.createElement('div')
+        // // title.classList = 'title'
+        // // title.innerHTML = "On post "+TitlePost+'"'
+        // titleofpost.classList = 'title'
+
+        // titleofpost.innerHTML = 'On post "'+element.Post.Title+'"'
+
 
         const date = document.createElement('div')
         date.classList = 'date'
