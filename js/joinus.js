@@ -3,7 +3,7 @@ document.getElementById("btn").onclick = function(){
         document.getElementById("error").innerText = ""
         joinus()
     } else {
-        document.getElementById("error").innerText = "enter a valide email and name and a password of at least 8 characters"
+        document.getElementById("error").innerText = "Enter a valide Name/Email and a Password of at least 8 characters"
     }
 };
 

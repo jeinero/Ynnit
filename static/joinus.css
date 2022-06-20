@@ -1,17 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
 body {
-  /* margin: 0px; */
-  background-image: url("https://files.123freevectors.com/wp-content/original/132302-blue-and-white-lines-stripes-and-shapes-background-vector.jpg");
+  background-image: url("https://static.vecteezy.com/system/resources/previews/001/409/192/original/abstract-geometric-banner-free-vector.jpg");
+
   background-size: cover;
+  font-family: 'Noto Sans', sans-serif;
+  background-repeat: no-repeat;
+  background-attachment:fixed;
   font-family: 'Noto Sans', sans-serif;
 }
 .container{
   display: flex;
   width: auto;
-  height: 500px;
+  height: auto;
   justify-content: center;
   align-items: center; 
+ 
 }
 
 .select{
@@ -28,6 +32,7 @@ body {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
+  background-color: white;
 }
 
 label{
@@ -40,10 +45,8 @@ input{
   text-align: center;
   border-radius: 10px;
   font-weight: bold;
-  width: 95%;
-  height: 100%;
   font-size: 25px;
-  background:rgb(19, 140, 206);
+  background:rgb(89, 197, 255);
   box-shadow: 6px 6px 6px 3px rgba(0, 0, 0, 0.2);  
 }
 
@@ -57,7 +60,7 @@ input:focus{
 }
 
 #btn{
-  background:rgb(19, 140, 206);
+  background:rgb(89, 197, 255);
   transition: all 1s ease;
   border-radius: 10px;
   width: 110px;
@@ -65,8 +68,6 @@ input:focus{
   font-size: 25px;
 }
 #btn:hover {
- 
-
   color: white;
   text-shadow: 1px 1px 1px black;
   transition: all 1s ease;

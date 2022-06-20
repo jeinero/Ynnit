@@ -7,8 +7,8 @@
   
 body {
     margin: 0px;
-    background: rgb(8,160,174);
-    background: linear-gradient(90deg, rgba(8,160,174,1) 0%, rgba(78,186,198,1) 15%, rgba(255,255,255,1) 50%, rgba(68,182,195,1) 85%, rgba(8,160,174,1) 100%);
+    background-image: url("https://static.vecteezy.com/system/resources/previews/001/409/192/original/abstract-geometric-banner-free-vector.jpg");
+    background-size:cover;  
 }
 
 /* header */
@@ -18,11 +18,12 @@ header {
     top: 0;
     height: 75px;
     width: 100%;
-    background: linear-gradient(90deg, rgba(8,160,174,1) 4%, rgba(78,186,198,1) 15%, rgba(104,227,245,1) 29%, rgba(74,248,247,1) 58%, rgba(235,238,229,1) 86%, rgba(255,255,255,1) 95%);
+    background: rgb(47,101,125);
+    background: linear-gradient(90deg, rgba(47,101,125,1) 0%, rgba(79,158,191,1) 20%, rgba(82,161,194,1) 22%, rgba(118,197,230,1) 50%, rgba(212,241,255,1) 76%, rgba(219,236,243,1) 100%);
     text-decoration: none;
     font-family: 'Noto Sans', sans-serif;
-    border-bottom: 1px solid;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    border-bottom: 2px solid;
+    box-shadow: 2px 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .container {
@@ -57,20 +58,21 @@ header {
     width: 100%;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     transition: all 1s ease;
-    border: 0.5px solid black;
+    background-color: white;
 }
 
 .searchheader:hover {
-    color: white;
     transition: all 1s ease;
     text-shadow: 2px 2px 2px black;
 }
 
 .searchhead::placeholder {
-    color: white;
-    
+    color:rgb(47,101,125);
 }
 
+.searchhead::-webkit-calendar-picker-indicator {
+    display: none;
+  }
 
 .searchhead {
     background: transparent;
@@ -138,47 +140,45 @@ header {
         transition: all 1s ease;
     }
 
+/* header fin */
+
 .choose {
     display: flex;
     width: 50%;
-    height: 200px;
+    height: 250px;
     justify-content: space-around;
     border-radius: 40px;
     padding: 1%;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     font-family: 'Noto Sans', sans-serif;
     text-transform: uppercase;
-    background-image: url("https://files.123freevectors.com/wp-content/original/132302-blue-and-white-lines-stripes-and-shapes-background-vector.jpg");
-    background-size:cover;   
-    border: 1px solid black; 
-    
 }
-/* header fin */
+
 .Filter1 {
     display: flex;
     width: 40%;
     border-radius: var(--btn-corner);
     align-items: center;
     justify-content: center;
-    background-color: rgb(255, 255, 255);
+    background-color: none;
     flex-direction: column;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    padding: 1%;
 }
 
 .Filter1top{
 display: flex;
-height: 25%;
+height: 20%;
 width: 100%;
 font-size: 25px;
 justify-content: center;
 align-items: center;
-text-transform: uppercase;
 text-decoration: underline;
+padding: 1%;
 }
 
 .Filter1bottom {
     display: flex;
-    height: 75%;
+    height: 80%;
     width: auto;
     flex-direction: column;
     justify-content: space-around;
@@ -196,11 +196,10 @@ input[type="radio"].radio1    {
   }
   input[type="radio"].radio1:checked + label {
     border: 1px solid #000;
-    color: black;
+    color: rgb(47,101,125);
     font-size: 17px;
+    background-color: white;
   }
-
-  
 
 .Filter2 {
     display: flex;
@@ -208,13 +207,14 @@ input[type="radio"].radio1    {
     align-items: center;
     flex-direction: column;
     border-radius: var(--btn-corner);
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    padding: 1%;
     font-size: 20px;
 }
 
 .createpost {
     display: flex;
-    border-bottom: 1px solid black;
+    box-shadow: 0 4px 15px 0 rgba(23, 168, 108, 0.75);
     height: 50%;
     width: 100%;
     border-top-left-radius: 15px;
@@ -223,22 +223,25 @@ input[type="radio"].radio1    {
     justify-content: center;
     text-decoration: none;
     background-color: white;
+    cursor: pointer;
+    background-image: linear-gradient(to right, #0ba360, #3cba92, #30dd8a, #2bb673);
+    background-size: 300% 100%;
+    transition: all .4s ease-in-out;
 }
 
 a.createpost {
     height: 100%;
     border: none;
-    color: black;
+    color: rgb(47,101,125);
 }
 
 .createpost:hover {
-    background-color: black;
-    color: white;
+        background-position: 100% 0;
+        transition: all .4s ease-in-out;
 }
 
 .createcommunity {
     display: flex;
-    border-top: 1px solid black;
     height: 50%;
     width: 100%;
     border-bottom-left-radius: 15px;
@@ -247,20 +250,23 @@ a.createpost {
     justify-content: center;
     background-color: white;
     text-decoration: none;
-    font-size: 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
+    background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+    background-size: 300% 100%;
+    transition: all .4s ease-in-out;
 }
 
 a.createcommunity {
     height: 100%;
     border: none;
-    color: black;
+    color: rgb(47,101,125);
 }
 
 .createcommunity:hover {
-    background-color: black;
-    color: white;
+    background-position: 100% 0;
+        transition: all .4s ease-in-out;
 }
-
 
 .bigcard {
     margin: 1% 10%;
@@ -269,8 +275,8 @@ a.createcommunity {
     height: 100%;
     padding: 1%;
     border-radius: var(--btn-corner);
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;   
-    border: 1px solid black; 
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+ 
 }
 
 .card {
@@ -308,8 +314,8 @@ a.createcommunity {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    width: 30%;
-    height: 100%;
+    width: 40%;
+    height: auto;
     font-size: 30px;
 }
 
@@ -318,7 +324,7 @@ a.createcommunity {
     justify-content: center;
     align-items: center;
     font-size: 25px;
-    width: 55%;
+    width: 40%;
     height: 100%;
     text-shadow: 1px 1px 1px #000;    
 }
@@ -333,7 +339,7 @@ a:-webkit-any-link {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    width: 15%;
+    width: 20%;
     height: 100%;
     font-size: 20px;
 }
@@ -371,7 +377,7 @@ a:-webkit-any-link {
     color: #000;
     justify-content: center;
     align-items: center;
-    width: auto;
+    width: 10%;
     height: 100%;
 }
 
@@ -383,7 +389,7 @@ a:-webkit-any-link {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: auto;
+    width: 10%;
     height: 100%;
 }
 
@@ -391,28 +397,23 @@ a:-webkit-any-link {
     color: red !important;
 }
 
-.modal {
-    background-color: #00529F;
-    position: absolute;
-    z-index: 8;
-    top: 50%;
-    left: 50%;
-    margin-top: -50px;
-    margin-left: -50px;
-    width: 200px;
-    height: 300px;
-    display: none;
-}
-
 .comments {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 80%;
+    width: 60%;
     height: 100%;
     font-size: 20px;
 }
 
+.userpseudo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    height: 100%;
+    font-size: 20px;
+}
 
 .btn {
     height: 60px;
@@ -476,4 +477,17 @@ a:-webkit-any-link {
 
 .show {
     display: block;
+}
+
+.modal {
+    background-color: #00529F;
+    position: absolute;
+    z-index: 8;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    width: 200px;
+    height: 300px;
+    display: none;
 }
