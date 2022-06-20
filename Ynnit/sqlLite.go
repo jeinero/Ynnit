@@ -85,6 +85,18 @@ func InitDatabase(database string) *sql.DB {
 			id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 			name TEXT NOT NULL UNIQUE
 		);
+		CREATE TABLE IF NOT EXISTS warnUser (
+			id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+			text TEXT NOT NULL,
+			who INTEGER NOT NULL,
+			FOREIGN KEY (who) REFERENCES user(id) 
+		);
+		CREATE TABLE IF NOT EXISTS warnPost (
+			id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+			text TEXT NOT NULL,
+			what INTEGER NOT NULL,
+			FOREIGN KEY (what) REFERENCES post(id)
+		);
 		`
 	_, err = db.Exec(sqlStmt)
 	if err != nil {
@@ -166,15 +178,6 @@ func Changeleveluser(db *sql.DB, name string, level string) bool {
 	}
 	return true
 }
-
-// func UpdateNameUser(db *sql.DB, id int, name string) bool {
-// 	_, err := db.Exec(`UPDATE user SET name = '?' WHERE id = ?`, name, id)
-// 	if err != nil {
-// 		fmt.Println(err)
-// 		return false
-// 	}
-// 	return true
-// }
 
 func UpdateDescUser(db *sql.DB, id int, descnew string) bool {
 	_, err := db.Exec(`UPDATE user SET desc = ? WHERE id = ?`, descnew, id)
@@ -444,6 +447,7 @@ func DbtoStructPost(db *sql.DB) []Post {
 		}
 		u.Like = countLike(db, "likedpost", "postLike", u.Id)
 		u.NumberComment = countComment(db, u.Id)
+		u.Warn = countWarn(db, "warnPost", "what", u.Id)
 		temptab = append(temptab, u)
 	}
 	return temptab
@@ -582,4 +586,58 @@ func DbtoStructDisLikeComment(db *sql.DB) []DisLike {
 		temptab = append(temptab, u)
 	}
 	return temptab
+}
+
+func DbtoStructWarnUser(db *sql.DB) []Warn {
+	rowsUsers, _ := db.Query("SELECT * FROM warnUser")
+	var temptab []Warn
+
+	for rowsUsers.Next() {
+		var u Warn
+		err := rowsUsers.Scan(&u.Id, &u.Content, &u.Link)
+		if err != nil {
+			fmt.Println(err)
+		}
+		temptab = append(temptab, u)
+	}
+	return temptab
+}
+func InsertIntoWarnUser(db *sql.DB, Content string, Link int) bool {
+	_, err := db.Exec(`INSERT INTO warnUser (text, who) VALUES (?,?)`, Content, Link)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+	return true
+}
+func DbtoStructWarnPost(db *sql.DB) []Warn {
+	rowsUsers, _ := db.Query("SELECT * FROM warnPost")
+	var temptab []Warn
+
+	for rowsUsers.Next() {
+		var u Warn
+		err := rowsUsers.Scan(&u.Id, &u.Content, &u.Link)
+		if err != nil {
+			fmt.Println(err)
+		}
+		temptab = append(temptab, u)
+	}
+	return temptab
+}
+func InsertIntoWarnPost(db *sql.DB, Content string, Link int) bool {
+	_, err := db.Exec(`INSERT INTO warnPost (text, what) VALUES (?,?)`, Content, Link)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+	return true
+}
+
+func countWarn(db *sql.DB, table string, tableRow string, whereID int) int {
+	var count int
+	err := db.QueryRow("SELECT COUNT(*) FROM "+table+" WHERE "+tableRow+" = ?", whereID).Scan(&count)
+	if err != nil {
+		fmt.Println(err)
+	}
+	return count
 }
