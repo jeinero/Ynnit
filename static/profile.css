@@ -457,17 +457,28 @@ textarea {
 }
 
 
+/* header */
 header {
     position: relative;
     display: flex;
     top: 0;
     height: 75px;
     width: 100%;
-    background: linear-gradient(90deg, rgba(8,160,174,1) 4%, rgba(78,186,198,1) 15%, rgba(104,227,245,1) 29%, rgba(74,248,247,1) 58%, rgba(235,238,229,1) 86%, rgba(255,255,255,1) 95%);
+    background: rgb(47,101,125);
+    background: linear-gradient(90deg, rgba(47,101,125,1) 0%, rgba(79,158,191,1) 20%, rgba(82,161,194,1) 22%, rgba(118,197,230,1) 50%, rgba(212,241,255,1) 76%, rgba(219,236,243,1) 100%);
     text-decoration: none;
     font-family: 'Noto Sans', sans-serif;
-    border-bottom: 1px solid;
-    box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%);
+    border-bottom: 2px solid;
+    box-shadow: 2px 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.container {
+    display: flex;
+    width: auto;
+    height: auto;
+    justify-content: center;
+    padding: 1%;
+    align-items: center;
 }
 
 .logo {
@@ -486,25 +497,28 @@ header {
     align-items: center;
 }
 
-.Log {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 800px;
-    height: auto;
-    margin-left: 10%;
-    text-transform: uppercase;
-}
-
 .searchheader {
     display: flex;
     justify-content: center;
     border-radius: 10px;
     width: 100%;
-    box-shadow: rgb(0 0 0 / 25%) 0px 14px 28px, rgb(0 0 0 / 22%) 0px 10px 10px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     transition: all 1s ease;
-    border: 0.5px solid black;
+    background-color: white;
 }
+
+.searchheader:hover {
+    transition: all 1s ease;
+    text-shadow: 2px 2px 2px black;
+}
+
+.searchhead::placeholder {
+    color:rgb(47,101,125);
+}
+
+.searchhead::-webkit-calendar-picker-indicator {
+    display: none;
+  }
 
 .searchhead {
     background: transparent;
@@ -518,6 +532,16 @@ header {
     font-family: 'Noto Sans', sans-serif;
 }
 
+.Log {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 800px;
+    height: auto;
+    margin-left: 10%;
+    text-transform: uppercase;
+}
+
 .lien {
     display: flex;
     width: 150px;
@@ -528,12 +552,22 @@ header {
     border-radius: 10px;
     justify-content: center;
     text-decoration: none;
-    box-shadow: rgb(0 0 0 / 25%) 0px 14px 28px, rgb(0 0 0 / 22%) 0px 10px 10px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     transition: all 1s ease;
     border: 0.5px solid black;
-}
-
-.user {
+    }
+    
+    .lien:hover {
+        color: white;
+        text-shadow: 1px 1px 1px black;
+        transition: all 1s ease;
+    }
+    .lien:active {
+        box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+            inset 2px 2px 3px rgba(0, 0, 0, .6);
+    }
+    
+    .user {
     display: flex;
     width: 45px;
     height: 40px;
@@ -544,4 +578,47 @@ header {
     text-decoration: none;
     color: black;
     transition: all 1s ease;
+    }
+    
+    .user:hover {
+        color: black;
+        text-shadow: 1px 1px 1px black;
+        transition: all 1s ease;
+    }
+
+/* header fin */
+
+input[type="file"] {
+    display: none;
 }
+
+.custom-file-upload{
+    border: 2px solid #1A1A1A;
+    border-radius: 15px;
+    color: #3B3B3B;
+    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 16px;
+    font-weight: 600;
+    margin: 2px;
+    padding: 16px 24px;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    touch-action: manipulation;
+    width: 100%;
+  }
+  
+  .custom-file-upload:disabled {
+    pointer-events: none;
+  }
+  
+  .custom-file-upload:hover {
+    color: #fff;
+    background-color: #1A1A1A;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+  }
+  
+  .custom-file-upload:active {
+    box-shadow: none;
+    transform: translateY(0);
+  }
