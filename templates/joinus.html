@@ -1,49 +1,45 @@
 <!DOCTYPE html>
 <html>
 <header>
-    <title>Ynnit</title>
+    <title>Join us</title>
     <meta charset="utf-8" />
+
+    <link rel="icon" type="image/png" sizes="16x16" href="https://cdn.discordapp.com/attachments/887611590873088011/981110067531243570/YnnitLogo.png">
+
     <link rel="stylesheet" href="/css/joinus.css">
-    <link rel="stylesheet" href="/css/font-button.css">
 </header>
 
 <body>
-    <button class="button" onclick="changeColor('white');">Mode Clair</button>
-    <button class="button" onclick="returnChangeColor('rgb(64, 64, 64)');">Mode foncé   </button>
+
     <div class="container">
 
         <div class="select">
 
-            <label for="name">Name:</label>
-            <input type="name" id="name" name="name" placeholder="BocMacFrite" required><br><br>
+            <label for="name">Name :</label>
+            <input class="no-outline" id="name" maxlength="15" placeholder="Choose an username" >
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="john.doe@example.com" required><br><br>
+            <label for="email">Email :</label>
+            <input class="no-outline" id="email" placeholder="Enter an email" >
 
-            <label for="pwd">Password:</label>
-            <input type="password" id="pwd" name="pwd" minlength="8" autocomplete="on" placeholder="Enter password"
-                required><br><br>
+            <label for="pwd">Password :</label>
+            <input type="password" class="no-outline" id="pwd" autocomplete="on" placeholder="Enter password">
 
-            <label for="pwd2">Password:</label>
-            <input type="password" id="pwd2" name="pwd2" minlength="8" autocomplete="on" placeholder="Enter password"
-                required><br><br>
+            <label for="pwd2">Repeat password :</label>
+            <input type="password" class="no-outline" id="pwd2" autocomplete="on"placeholder="Repeat password" >
 
-            <button id="button" type="submit">Join Us</button>
+            <button id="btn" type="submit">Join Us</button>
             <p id="error" style="color: red"></p>
 
+            <script src="https://accounts.google.com/gsi/client" async defer></script>
+    
+            <script type="module" src='/js/joinusgoogle.js'></script>
+    
+            <p id="google">Or connect via Google :</p>
+            <div id="buttonDiv"></div>
         </div>
 
-        <script src="https://accounts.google.com/gsi/client" async defer></script>
-
-        <script type="module" src='/js/joinusgoogle.js'></script>
-
-
-        <div id="buttonDiv"></div>
-
-
-        <script type="text/javascript" src="/js/font-button.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/2.0.2/sha.js"></script>
-        <script type="module" src='/js/joinus.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/2.0.2/sha.js"></script>
+    <script type="module" src='/js/joinus.js'></script>
 </body>
 
 </html>

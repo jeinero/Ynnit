@@ -24,9 +24,10 @@ newCard(commu)
 
 
 function newCard(commu) {
+  console.log(commu)
         document.getElementById("name").innerText = commu.Communauter.Name
-        document.getElementById("date").innerText = commu.Communauter.date
-        document.getElementById("desc").innerText = commu.Communauter.desc
+        document.getElementById("date").innerText = commu.Communauter.Date
+        document.getElementById("desc").innerText = commu.Communauter.Desc
   commu.Post.forEach(element => {
         const newcard = document.createElement('div')
         newcard.id = element.Id
@@ -266,7 +267,11 @@ function newCard(commu) {
         // } 
   })
 }
-
+var currentDate = new Date(),
+day = currentDate.getDate(),
+month = currentDate.getMonth() + 1,
+year = currentDate.getFullYear();
+const dates = ( year + "-" + day + "-" + month)
 const btnPost = document.getElementById("btn")
 btnPost.onclick = function() {
         console.log("marche?")
@@ -320,8 +325,6 @@ function timeSince(date) {
 var aDay = 24 * 60 * 60 * 1000;
 
 
-
-
 function getCookie(name) {
   let nameEQ = name + "=";
   let ca = document.cookie.split(';');
@@ -331,4 +334,18 @@ function getCookie(name) {
     if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
   }
   return null;
+}
+
+
+document.body.onload = function () {
+  if (getCookie("name") != null) {
+    let classComm = document.getElementsByClassName("lien")
+    classComm[0].style.display = "none"
+    classComm[1].style.display = "none"
+  }
+}
+if (getCookie("name") != null) {
+  let classComm = document.getElementsByClassName("lien")
+  classComm[0].style.display = "none"
+  classComm[1].style.display = "none"
 }

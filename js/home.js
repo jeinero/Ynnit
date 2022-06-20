@@ -48,9 +48,10 @@ function newCard(posts) {
         const divbas = document.createElement('div')
         divbas.classList = 'divbas'
 
-        const like = document.createElement('button')
+        const like = document.createElement('a')
         like.classList = 'like'
         like.id = "like"
+        let likeInt = element.Like
         like.onclick = function addLike(e) {
           fetch("/addLikepost", {
             method: "POST",
@@ -66,13 +67,26 @@ function newCard(posts) {
               document.getElementById("error").innerText = err.error
             })
           if (dislike.style.color == "red") {
+            likeInt += 1
+            like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
+            dislikeInt -=1
+
+            dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+            
             like.style.color = "rgb(49, 172, 49)"
             dislike.style.color = "#000"
           } else {
             if (like.style.color == "rgb(49, 172, 49)") {
               like.style.color = "#000"
+              likeInt -= 1
+              like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
+
+
             } else {
               like.style.color = "rgb(49, 172, 49)"
+              likeInt += 1
+              like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
+
             }
           }
           event.stopPropagation(e)
@@ -85,7 +99,8 @@ function newCard(posts) {
             }
           })
         }
-        const dislike = document.createElement('button')
+        const dislike = document.createElement('a')
+        let dislikeInt = element.DisLike
         dislike.classList = 'dislike'
         dislike.onclick = function addLike(e) {
           fetch("/addDislikepost", {
@@ -102,13 +117,26 @@ function newCard(posts) {
               document.getElementById("error").innerText = err.error
             })
           if (like.style.color === "rgb(49, 172, 49)") {
+            likeInt -= 1
+            dislikeInt +=1
+
+              like.innerHTML = `${likeInt} &nbsp; <i class="fa fa-thumbs-up" aria-hidden="true"></i>`
+              dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+
             like.style.color = "#000"
             dislike.style.color = "red"
           } else {
             if (dislike.style.color === "red") {
               dislike.style.color = "#000"
+              dislikeInt -=1
+
+              dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+
             } else {
+              dislikeInt +=1
               dislike.style.color = "red"
+              dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+
             }
           }
           event.stopPropagation(e)
@@ -120,7 +148,7 @@ function newCard(posts) {
             }
           })
         }
-        dislike.innerHTML = `<i class="fa fa-thumbs-down" aria-hidden="true"></i>`
+        dislike.innerHTML = ` ${dislikeInt}&nbsp; <i class="fa fa-thumbs-down" aria-hidden="true"></i>`
 
         const divdropdownbutton = document.createElement('div')
         divdropdownbutton.className = 'dropdown'
@@ -229,8 +257,16 @@ function newCard(posts) {
         }
 
         const comments = document.createElement('div')
+        let textcomment = ""
+        if (element.NumberComment <= 1) {
+          textcomment = " comment"
+        } else {
+          textcomment = " comments"
+        }
         comments.classList = 'comments'
-        comments.innerHTML = element.NumberComment + " commentaires"
+        comments.innerHTML = element.NumberComment + textcomment
+
+      
 
         const userpseudo = document.createElement('div')
         userpseudo.classList = 'userpseudo'
@@ -303,24 +339,24 @@ function getCookie(name) {
 }
 
 const sortComment = document.getElementById("filtercomment")
-sortComment.onclick = function() {
-  post.sort((a,b) => {
+sortComment.onclick = function () {
+  post.sort((a, b) => {
     return b.NumberComment - a.NumberComment
   })
   deleteCards()
   newCard(post)
 }
 const filterdate = document.getElementById("filterdate")
-filterdate.onclick = function() {
-  post.sort((a,b) => {
+filterdate.onclick = function () {
+  post.sort((a, b) => {
     return b.date - a.date
   })
   deleteCards()
   newCard(post)
 }
 const filterlike = document.getElementById("filterlike")
-filterlike.onclick = function() {
-  post.sort((a,b) => {
+filterlike.onclick = function () {
+  post.sort((a, b) => {
     return b.Like - a.Like
   })
   deleteCards()
@@ -345,17 +381,17 @@ btn.addEventListener('click', () => {
     behavior: "smooth"
   })
 
-})
+})    
 
 
 
 
-document.body.onload = function() {
+document.body.onload = function () {
   if (getCookie("name") != null) {
-          let classComm = document.getElementsByClassName("lien")
-          classComm[0].style.display = "none"
-          classComm[1].style.display = "none"
-          }
+    let classComm = document.getElementsByClassName("lien")
+    classComm[0].style.display = "none"
+    classComm[1].style.display = "none"
+  }
 }
 
 
@@ -369,4 +405,9 @@ searchEl.oninput = function() {
   })
   deleteCards()
   newCard(temptab)
+}
+if (getCookie("name") != null) {
+  let classComm = document.getElementsByClassName("lien")
+  classComm[0].style.display = "none"
+  classComm[1].style.display = "none"
 }

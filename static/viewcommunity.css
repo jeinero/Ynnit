@@ -9,16 +9,18 @@ body {
     background-size: cover;
 }
 
+/* header */
 header {
     position: relative;
     display: flex;
     top: 0;
     height: 75px;
     width: 100%;
-    background: linear-gradient(90deg, rgba(238, 50, 78, 1) 0%, rgba(254, 190, 16, 1) 100%);
+    background: linear-gradient(90deg, rgba(8,160,174,1) 4%, rgba(78,186,198,1) 15%, rgba(104,227,245,1) 29%, rgba(74,248,247,1) 58%, rgba(235,238,229,1) 86%, rgba(255,255,255,1) 95%);
     text-decoration: none;
     font-family: 'Noto Sans', sans-serif;
-
+    border-bottom: 1px solid;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 .container {
@@ -49,11 +51,24 @@ header {
 .searchheader {
     display: flex;
     justify-content: center;
-    background: white;
     border-radius: 10px;
     width: 100%;
-    color: black;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    transition: all 1s ease;
+    border: 0.5px solid black;
 }
+
+.searchheader:hover {
+    color: white;
+    transition: all 1s ease;
+    text-shadow: 2px 2px 2px black;
+}
+
+.searchhead::placeholder {
+    color: white;
+    
+}
+
 
 .searchhead {
     background: transparent;
@@ -65,7 +80,6 @@ header {
     align-items: center;
     text-align: center;
     font-family: 'Noto Sans', sans-serif;
-    text-transform: uppercase;
 }
 
 .Log {
@@ -75,6 +89,7 @@ header {
     width: 800px;
     height: auto;
     margin-left: 10%;
+    text-transform: uppercase;
 }
 
 .lien {
@@ -84,17 +99,19 @@ header {
     font-size: 25px;
     align-items: center;
     color: black;
-    text-shadow: 1px 1px 1px #000;
     border-radius: 10px;
-    border: 2px solid black;
     justify-content: center;
     text-decoration: none;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    transition: all 1s ease;
+    border: 0.5px solid black;
     }
     
     .lien:hover {
-        background-color: rgba(255, 0, 0, 1);
+        color: white;
+        text-shadow: 1px 1px 1px black;
+        transition: all 1s ease;
     }
-    
     .lien:active {
         box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
             inset 2px 2px 3px rgba(0, 0, 0, .6);
@@ -104,20 +121,37 @@ header {
     display: flex;
     width: 45px;
     height: 40px;
-    font-size: 25px;
+    font-size: 35px;
     align-items: center;
-    text-shadow: 1px 1px 1px #000;
     border-radius: 10px;
-    border: 2px solid black;
     justify-content: center;
     text-decoration: none;
     color: black;
+    transition: all 1s ease;
     }
     
     .user:hover {
-        background-color: black;
-        color: white;
+        color: black;
+        text-shadow: 1px 1px 1px black;
+        transition: all 1s ease;
     }
+
+.choose {
+    display: flex;
+    width: 50%;
+    height: 200px;
+    justify-content: space-around;
+    border-radius: 40px;
+    padding: 1%;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    font-family: 'Noto Sans', sans-serif;
+    text-transform: uppercase;
+    background-image: url("https://files.123freevectors.com/wp-content/original/132302-blue-and-white-lines-stripes-and-shapes-background-vector.jpg");
+    background-size:cover;   
+    
+}
+/* header fin */
+
 #container {
     height: 100vh;
     display: flex;

@@ -1,4 +1,4 @@
-document.getElementById("button").onclick = function(){
+document.getElementById("btn").onclick = function(){
     if (document.getElementById("name").value.length >=1 && document.getElementById("pwd").value.length >= 8 && /^[^\s@]+@[^\s@]+.[^\s@]+$/.test(document.getElementById("email").value)) {
         document.getElementById("error").innerText = ""
         joinus()

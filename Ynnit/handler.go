@@ -218,6 +218,11 @@ func ViewCommunity(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	http.ServeFile(w, r, "./templates/viewcommunity.html")
 }
+func Viewcommunity(w http.ResponseWriter, r *http.Request) {
+	reloadApi()
+	http.ServeFile(w, r, "./templates/viewcommunity.html")
+
+}
 func Comments(w http.ResponseWriter, r *http.Request) {
 	var newComments Comment
 
@@ -235,6 +240,7 @@ func Newuser(w http.ResponseWriter, r *http.Request) {
 	var newUser User
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &newUser)
+	sendMail(newUser.Email, newUser.Name, newUser.Id)
 	if InsertIntoUser(AllApi.db, newUser.Name, newUser.Email, newUser.Password, "You can change the desc", "Users", newUser.Date) {
 		w.Write([]byte("{\"msg\": \"Success\"}"))
 	} else {
@@ -251,7 +257,6 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 	reloadApi()
 	var newPost Post
 	body, _ := ioutil.ReadAll(r.Body)
-	fmt.Println(string(body))
 	json.Unmarshal(body, &newPost)
 	goodOrFalse := InsertIntoPost(AllApi.db, newPost.CommuLink, newPost.Title, newPost.Content, newPost.UsersName, newPost.Date)
 	if !goodOrFalse {
@@ -319,7 +324,6 @@ func NewcommunityHandler(w http.ResponseWriter, r *http.Request) {
 	var Newcommunauter Communauter
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &Newcommunauter)
-	fmt.Println(string(body))
 	if InsertIntoCommunauter(AllApi.db, Newcommunauter.Name, Newcommunauter.Desc, Newcommunauter.Date, Newcommunauter.Tags) {
 		w.Write([]byte("{\"msg\": \"Success\"}"))
 	} else {
@@ -466,7 +470,6 @@ func AddDislikePost(w http.ResponseWriter, r *http.Request) {
 	}
 	var newLike like
 	body, _ := ioutil.ReadAll(r.Body)
-	fmt.Println(string(body))
 	json.Unmarshal(body, &newLike)
 	goodOrFalse := InsertIntoDisLikePost(AllApi.db, newLike.UsersId, newLike.PostLink)
 	w.Write([]byte("{\"msg\": \"Success\"}"))
@@ -536,9 +539,7 @@ func AddLikeComment(w http.ResponseWriter, r *http.Request) {
 	}
 	var newLike like
 	body, _ := ioutil.ReadAll(r.Body)
-	fmt.Println(string(body))
 	json.Unmarshal(body, &newLike)
-	fmt.Println(newLike)
 	goodOrFalse := InsertIntoLikeComment(AllApi.db, newLike.UsersId, newLike.CommentLink)
 	w.Write([]byte("{\"msg\": \"Success\"}"))
 	if !goodOrFalse {
@@ -583,8 +584,23 @@ func AddWarnPost(w http.ResponseWriter, r *http.Request) {
 	var warn Warn
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &warn)
-	fmt.Println(string(body))
 	goodOrFalse := InsertIntoWarnPost(AllApi.db, warn.Content, warn.Link)
+	w.Write([]byte("{\"msg\": \"Success\"}"))
+	if !goodOrFalse {
+		w.Write([]byte("{\"error\": \"Sorry\"}"))
+	}
+}
+
+func UpdatePhoto(w http.ResponseWriter, r *http.Request) {
+	type photo struct {
+		ID   int
+		Blop string
+	}
+	var pp photo
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &pp)
+	goodOrFalse := UpdatePPUser(AllApi.db, pp.ID, pp.Blop)
+
 	w.Write([]byte("{\"msg\": \"Success\"}"))
 	if !goodOrFalse {
 		w.Write([]byte("{\"error\": \"Sorry\"}"))
@@ -600,9 +616,9 @@ func Handler() {
 	// InsertIntoCategorie(AllApi.db, "Informatique")
 	// InsertIntoCategorie(AllApi.db, "France")
 	// InsertIntoCategorie(AllApi.db, "Food")
-	Changeleveluser(AllApi.db, "Zupz", "Administrators")
+	Changeleveluser(AllApi.db, "Admin", "Administrators")
 	// InsertIntoUser(db, "jeinero", "jenei@gmail.com", "ImRio6988", "guest", "test", "test")
-	InsertIntoCategorie(AllApi.db, "Shitpost")
+	// InsertIntoCategorie(AllApi.db, "Shitpost")
 	// InsertIntoUser(db, "qsdlqsd", "jeazenei@yahoo.fr", "ImRio6988")
 	// InsertIntoCommunauter(db, "InfoFams", "DESC")
 	// InsertIntoPost(db, 1, "Golang Basic", "Golang suck lmao", "Zupz", 1)
@@ -676,6 +692,8 @@ func Handler() {
 	r.HandleFunc("/delete", Delete)
 	r.HandleFunc("/checkdelete", Checkdelete)
 
+	r.HandleFunc("/updatePP", UpdatePhoto)
+
 	r.HandleFunc("/community", CommunityHandler)
 	r.HandleFunc("/newcommunity", NewcommunityHandler)
 
@@ -685,6 +703,7 @@ func Handler() {
 	r.HandleFunc("/viewpost", ViewPost)
 	r.HandleFunc("/comment", Comments)
 
+	r.HandleFunc("/viewcommunity", Viewcommunity)
 	r.HandleFunc("/addLikepost", AddLikePost)
 	r.HandleFunc("/addDislikepost", AddDislikePost)
 

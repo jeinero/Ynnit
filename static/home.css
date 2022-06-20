@@ -7,10 +7,11 @@
   
 body {
     margin: 0px;
-    background-image: url("https://i.pinimg.com/originals/5c/e6/b9/5ce6b97ce3bde0864188a5d89604da1c.jpg");
-    background-size:cover;   
+    background: rgb(8,160,174);
+    background: linear-gradient(90deg, rgba(8,160,174,1) 0%, rgba(78,186,198,1) 15%, rgba(255,255,255,1) 50%, rgba(68,182,195,1) 85%, rgba(8,160,174,1) 100%);
 }
 
+/* header */
 header {
     position: relative;
     display: flex;
@@ -60,12 +61,14 @@ header {
 }
 
 .searchheader:hover {
+    color: white;
     transition: all 1s ease;
-    text-shadow: 1px 1px 1px black;
+    text-shadow: 2px 2px 2px black;
 }
 
 .searchhead::placeholder {
     color: white;
+    
 }
 
 
@@ -137,88 +140,75 @@ header {
 
 .choose {
     display: flex;
-    width: 100%;
+    width: 50%;
     height: 200px;
-    justify-content: space-between;
+    justify-content: space-around;
     border-radius: 40px;
     padding: 1%;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     font-family: 'Noto Sans', sans-serif;
     text-transform: uppercase;
+    background-image: url("https://files.123freevectors.com/wp-content/original/132302-blue-and-white-lines-stripes-and-shapes-background-vector.jpg");
+    background-size:cover;   
+    border: 1px solid black; 
+    
 }
-
+/* header fin */
 .Filter1 {
     display: flex;
-    border: 5px double rgba(254,190,16,1);
-    width: 20%;
+    width: 40%;
     border-radius: var(--btn-corner);
     align-items: center;
     justify-content: center;
     background-color: rgb(255, 255, 255);
     flex-direction: column;
-   
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
 
 .Filter1top{
 display: flex;
-height: 30%;
+height: 25%;
 width: 100%;
+font-size: 25px;
 justify-content: center;
 align-items: center;
 text-transform: uppercase;
+text-decoration: underline;
 }
 
 .Filter1bottom {
     display: flex;
-    height: 70%;
+    height: 75%;
     width: auto;
     flex-direction: column;
-    
+    justify-content: space-around;
+    font-size: 15px;
+    padding: 1%;
 }
-.radio {
-    margin-top: -1px;
-    vertical-align: middle;
+
+input[type="radio"].radio1    {
+    display: none;
   }
+  input[type="radio"].radio1 + label {
+    padding: 0.3rem 0.5rem;
+    border: 1px dashed black;
+    border-radius: 40px;    
+  }
+  input[type="radio"].radio1:checked + label {
+    border: 1px solid #000;
+    color: black;
+    font-size: 17px;
+  }
+
+  
 
 .Filter2 {
     display: flex;
     width: 40%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-}
-
-.searchhead2 {
-    background: none;
-    border: none;
-    outline: none;
-    color: black;
-    font-size: 20px;
-    width: 100%;
-    align-items: center;
-    text-align: center;
-    font-family: 'IBM Plex Sans', sans-serif;
-    text-transform: uppercase;
-}
-
-.formheader2 {
-    display: flex;
-    justify-content: center;
-    background: white;
-    border-radius: var(--btn-corner);
-    width: 100%;
-    height: 50px;
-    color: black;
-    border: 5px double rgba(238, 50, 78, 1);
-}
-
-.Filter3 {
-    display: flex;
-    width: 30%;
     align-items: center;
     flex-direction: column;
     border-radius: var(--btn-corner);
-    border: 5px double #FEBE10;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     font-size: 20px;
 }
 
@@ -257,13 +247,13 @@ a.createpost {
     justify-content: center;
     background-color: white;
     text-decoration: none;
+    font-size: 15px;
 }
 
 a.createcommunity {
     height: 100%;
     border: none;
     color: black;
-
 }
 
 .createcommunity:hover {
@@ -280,6 +270,7 @@ a.createcommunity {
     padding: 1%;
     border-radius: var(--btn-corner);
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;   
+    border: 1px solid black; 
 }
 
 .card {
@@ -319,14 +310,23 @@ a.createcommunity {
     align-items: center;
     width: 30%;
     height: 100%;
+    font-size: 30px;
 }
 
 .community {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 25px;
     width: 55%;
     height: 100%;
+    text-shadow: 1px 1px 1px #000;    
+}
+
+a:-webkit-any-link {
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
 }
 
 .date {
@@ -335,6 +335,7 @@ a.createcommunity {
     align-items: center;
     width: 15%;
     height: 100%;
+    font-size: 20px;
 }
 
 .divmiddle {
@@ -372,8 +373,6 @@ a.createcommunity {
     align-items: center;
     width: auto;
     height: 100%;
-    border: 2px solid black;
-    border-radius: 20px;
 }
 
 .like:hover {
@@ -386,10 +385,12 @@ a.createcommunity {
     align-items: center;
     width: auto;
     height: 100%;
-    border: 2px solid black;
-    border-radius: 40px;
-    z-index: 10;
 }
+
+.dislike:hover {
+    color: red !important;
+}
+
 .modal {
     background-color: #00529F;
     position: absolute;
@@ -402,9 +403,6 @@ a.createcommunity {
     height: 300px;
     display: none;
 }
-.dislike:hover {
-    color: red !important;
-}
 
 .comments {
     display: flex;
@@ -412,13 +410,14 @@ a.createcommunity {
     align-items: center;
     width: 80%;
     height: 100%;
+    font-size: 20px;
 }
 
 
 .btn {
     height: 60px;
     width: 60px;
-    background: rgba(238, 50, 78, 1);
+    background: rgb(19, 140, 206);
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -434,10 +433,6 @@ a.createcommunity {
 .couleur {
     filter: invert(1);
 }
-
-
-
-
 
 .dropbtn {
     background-color: #3498DB;
